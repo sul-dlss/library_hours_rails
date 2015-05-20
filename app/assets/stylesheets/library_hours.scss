@@ -1,0 +1,11 @@
+// Import all individual stylesheets here
+@import 'base';
+@import 'layout';
+
+@import 'top-navbar';
+@import 'sul-footer';
+
+.closed,
+.open-24h {
+  color: $gray-light;
+}

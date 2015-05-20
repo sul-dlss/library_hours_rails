@@ -1,0 +1,23 @@
+<%= bootstrap_form_for([@location.library, @location]) do |f| %>
+  <% if @location.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@location.errors.count, "error") %> prohibited this location from being saved:</h2>
+
+      <ul>
+      <% @location.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <%= f.text_field :name %>
+  <%= f.text_field :slug %>
+  <%= f.fields_for :node_mapping do |n| %>
+    <%= n.text_field :node_id %>
+  <% end %>
+
+  <div class="actions">
+    <%= f.primary %>
+  </div>
+<% end %>

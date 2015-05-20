@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="description" content="Stanford University Libraries' application to request materials" />
+    <!-- Mobile viewport optimization h5bp.com/ad -->
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!-- Mobile IE allows us to activate ClearType technology for smoothing fonts for easy reading -->
+    <!--[if IEMobile]> <meta http-equiv="cleartype" content="on"> <![endif]-->
+
+    <title><%= LibraryHours::Application.config.application_name %></title>
+    <%= favicon_link_tag 'favicon.ico' %>
+    <%= stylesheet_link_tag "application", media: "all" %>
+    <link href="https://www.stanford.edu/su-identity/css/su-identity.css" rel="stylesheet">
+    <%= stylesheet_link_tag "https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" %>
+    <%= javascript_include_tag "application" %>
+    <!--[if lte IE 8]> <%= javascript_include_tag 'flot/excanvas.min' %> <![endif]-->
+    <%= csrf_meta_tags %>
+    <%= content_for(:head) %>
+    <!--[if lt IE 9]> <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script> <![endif]-->
+    <!--[if IE 8]> <link rel="stylesheet" type="text/css" href="https://www.stanford.edu/su-identity/css/ie/ie8.css" /> <![endif]-->
+    <!--[if IE 7]> <link rel="stylesheet" type="text/css" href="https://www.stanford.edu/su-identity/css/ie/ie7.css" /> <![endif]-->
+  </head>
+
+  <body>
+    <div id="su-wrap"> <!-- #su-wrap start -->
+      <div id="su-content"> <!-- #su-content start -->
+        <div id="outer-container" class="container-fluid">
+          <%= render 'shared/top_navbar' %>
+          <section id="main-container" role="main">
+            <%= render 'shared/flashes' %>
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%= render 'shared/sul_footer' %>
+  </body>
+</html>

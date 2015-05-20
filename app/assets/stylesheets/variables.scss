@@ -1,0 +1,9 @@
+@import 'sul-variables';
+
+$gray-base: #000;
+$gray-dark: lighten($gray-base, 20%);
+$link-color: $gray-dark;
+
+$brand-primary: $cardinal-red;
+$pagination-active-bg: #696969;
+$pagination-active-border: #696969;

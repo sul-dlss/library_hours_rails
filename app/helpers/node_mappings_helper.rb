@@ -1,0 +1,2 @@
+module NodeMappingsHelper
+end

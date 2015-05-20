@@ -1,0 +1,56 @@
+// Colors
+$beige-10-percent: #f2f1eb;
+$beige-30-percent: #e3dfd5;
+$black: #000;
+$cardinal-red: #8c1515;
+$gray: #3f3c30;
+$gray-ccc: #ccc;
+$gray-41-percent: #696969;
+$grayish-yellow: #d5d5d3;
+$light-grayish-orange: #f0eeea;
+$light-grayish-yellow: #f7f7f4;
+$lighter-grayish-yellow: #fbfbf9;
+$pantone-401: #b6b1a9;
+$mostly-pure-orange: #eaab00;
+$white: #fff;
+$dark-cyan: #009b76;
+
+// Mappings
+$sul-admin-h3-color: $gray-41-percent;
+$sul-admin-table-row-even-color: $light-grayish-yellow;
+$sul-admin-table-row-odd-color: $light-grayish-orange;
+$sul-body-bg-color: $lighter-grayish-yellow;
+$sul-footer-bg-color: $beige-10-percent;
+$sul-h1-font-color: $gray;
+$sul-h2-font-color: $cardinal-red;
+$sul-h2-border-color: $beige-30-percent;
+$sul-h2-font-color: $cardinal-red;
+$sul-focus-outline: $mostly-pure-orange;
+$sul-link-color: $gray;
+$sul-link-border-color: $pantone-401;
+$sul-navbar-brand-color: $cardinal-red;
+$sul-request-form-separator-h2-bg: $lighter-grayish-yellow;
+$sul-request-form-scan-border-color: $grayish-yellow;
+$sul-topnav-bg-color: $cardinal-red;
+$sul-topnavbar-link-color: $cardinal-red;
+
+// Sizes
+$font-size-base: 14px;
+$body-line-height: 1.428571429;
+
+// Buttons
+$btn-cardinal-color: $white;
+$btn-cardinal-bg: $cardinal-red;
+$btn-cardinal-border: darken($btn-cardinal-bg, 9.8%);
+
+$btn-beige-color: $black;
+$btn-beige-bg: $beige-30-percent;
+$btn-beige-border: darken($btn-beige-bg, 9.8%);
+
+$btn-scan-color: $white;
+$btn-scan-bg: $dark-cyan;
+$btn-scan-border: darken($btn-scan-bg, 9.8%);
+
+// Item Selector
+$item-selector-border-color: $beige-30-percent;
+$public-note-border-color: $gray-ccc;

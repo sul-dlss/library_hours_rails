@@ -1,0 +1,4 @@
+@mixin focus-outline {
+  outline: 5px auto $sul-focus-outline !important;
+  outline-offset: -2px;
+}

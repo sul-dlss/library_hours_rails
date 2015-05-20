@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+<%= render 'range' %>
+<% @libraries.each do |library| %>
+  <div class="row" itemscope itemtype="http://schema.org/Place">
+    <div class="col-xs-12 col-md-3">
+      <h1 itemprop="name"><%= link_to library.name, library %></h1>
+    </div>
+
+    <div class="col-xs-12 col-md-9">
+      <%= render partial: 'location_hours', locals: { locations: library.locations } %>
+    </div>
+  </div>
+<% end %>
+
+<%= link_to 'New Library', new_library_path %>

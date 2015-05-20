@@ -1,0 +1,91 @@
+a {
+  border-bottom: 1px dotted $sul-link-border-color;
+
+  &.disabled {
+    color: $gray-ccc;
+    cursor: not-allowed;
+    text-decoration: none;
+  }
+
+  &:focus {
+    @include focus-outline;
+  }
+
+  &:focus,
+  &:hover {
+    border-bottom: 1px dotted $sul-link-border-color;
+    color: $black;
+    text-decoration: none;
+  }
+}
+
+body {
+  background-color: $sul-body-bg-color;
+  color: $black;
+  font-family: 'Source Sans Pro', 'Arial Unicode MS', Helvetica, sans-serif;
+  font-size: $font-size-base;
+  line-height: $body-line-height;
+}
+
+h1,
+h2 {
+  font-weight: 300;
+}
+
+h1 {
+  color: $sul-h1-font-color;
+  font-size: 2.3em;
+  letter-spacing: -0.05em;
+  padding: 10px 0;
+}
+
+h2 {
+  color: $sul-h2-font-color;
+  font-size: 1.6em;
+  letter-spacing: 0;
+  line-height: 1.2em;
+  margin: 0.5em 0;
+}
+
+h3 {
+  font-weight: 400;
+  line-height: 1.3em;
+  margin: 0 0 0.4em;
+}
+
+dl {
+  margin-bottom: 15px;
+}
+
+dt {
+  color: $gray-41-percent;
+  font-size: 0.9em;
+  font-weight: normal;
+  padding-right: 1em;
+  padding-top: 0.15em;
+  text-transform: uppercase !important;
+  width: 12em;
+}
+
+dd {
+  margin-bottom: 0.5em;
+  margin-left: 2em;
+  max-width: 45em;
+}
+
+label {
+  font-weight: normal;
+}
+
+button:focus,
+embed:focus,
+input:focus,
+object:focus,
+select:focus,
+textarea:focus {
+  @include focus-outline;
+}
+
+#main-container {
+  padding-bottom: $form-group-margin-bottom;
+}

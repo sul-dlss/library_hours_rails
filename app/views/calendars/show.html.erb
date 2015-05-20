@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Dtstart:</strong>
+  <%= @calendar.dtstart %>
+</p>
+
+<p>
+  <strong>Dtend:</strong>
+  <%= @calendar.dtend %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @calendar.location %>
+</p>
+
+<p>
+  <strong>Summary:</strong>
+  <%= @calendar.summary %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @calendar.description %>
+</p>
+
+<%= link_to 'Edit', edit_calendar_path(@calendar) %> |
+<%= link_to 'Back', calendars_path %>

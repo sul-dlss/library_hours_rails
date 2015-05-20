@@ -1,0 +1,53 @@
+<%= bootstrap_nested_form_for(@library) do |f| %>
+  <% if @library.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@library.errors.count, "error") %> prohibited this library from being saved:</h2>
+
+      <ul>
+      <% @library.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.text_field :name %>
+  <%= f.text_field :slug %>
+  <%= f.fields_for :node_mapping do |n| %>
+    <%= n.text_field :node_id %>
+  <% end %>
+
+  <h2>Locations</h2>
+  <table id="locations" class="table">
+    <thead>
+      <tr>
+        <th>Name</th><th>Slug</th><th>Drupal Node ID</th><th></th>
+      </tr>
+    </thead>
+    <tbody id="locations-body">
+      <%= f.fields_for :locations do |l| %>
+        <tr>
+          <td>
+            <%= l.text_field :name, hide_label: true %>
+          </td>
+          <td>
+            <%= l.text_field :slug, hide_label: true %>
+          </td>
+          <td>
+            <%= l.fields_for :node_mapping do |n| %>
+              <%= n.text_field :node_id, hide_label: true %>
+            <% end %>
+          </td>
+          <td>
+            <%= l.link_to_remove "Remove" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <p><%= f.link_to_add "Add a location", :locations, data: { target: '#locations-body'} %></p>
+
+  <div class="actions">
+    <%= f.primary %>
+  </div>
+<% end %>

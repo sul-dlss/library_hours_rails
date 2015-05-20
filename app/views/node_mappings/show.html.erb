@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Node:</strong>
+  <%= @node_mapping.node_id %>
+</p>
+
+<p>
+  <strong>Mapped:</strong>
+  <%= @node_mapping.mapped_id %>
+</p>
+
+<p>
+  <strong>Mapped type:</strong>
+  <%= @node_mapping.mapped_type %>
+</p>
+
+<%= link_to 'Edit', edit_node_mapping_path(@node_mapping) %> |
+<%= link_to 'Back', node_mappings_path %>
