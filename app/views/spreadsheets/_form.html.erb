@@ -1,0 +1,22 @@
+<%= form_for(@spreadsheet, class: 'form-horizontal') do |f| %>
+  <% if @spreadsheet.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@spreadsheet.errors.count, "error") %> prohibited this spreadsheet from being saved:</h2>
+
+      <ul>
+      <% @spreadsheet.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :attachment, class: 'control-label' %>
+    <%= f.attachment_field :attachment, class: 'form-control' %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit class: 'btn btn-primary' %>
+  </div>
+<% end %>

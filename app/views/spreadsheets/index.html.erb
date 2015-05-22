@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Spreadsheets</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Attachment</th>
+      <th>Attachment filename</th>
+      <th>Attachment content type</th>
+      <th>Attachment size</th>
+      <th>Status</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @spreadsheets.each do |spreadsheet| %>
+      <tr>
+        <td><%= spreadsheet.attachment_id %></td>
+        <td><%= spreadsheet.attachment_filename %></td>
+        <td><%= spreadsheet.attachment_content_type %></td>
+        <td><%= spreadsheet.attachment_size %></td>
+        <td><%= spreadsheet.status %></td>
+        <td><%= link_to 'Show', spreadsheet %></td>
+        <td><%= link_to 'Edit', edit_spreadsheet_path(spreadsheet) %></td>
+        <td><%= link_to 'Destroy', spreadsheet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Spreadsheet', new_spreadsheet_path %>

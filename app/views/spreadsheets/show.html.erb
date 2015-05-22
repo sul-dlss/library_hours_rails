@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Attachment:</strong>
+  <%= @spreadsheet.attachment_id %>
+</p>
+
+<p>
+  <strong>Attachment filename:</strong>
+  <%= @spreadsheet.attachment_filename %>
+</p>
+
+<p>
+  <strong>Attachment content type:</strong>
+  <%= @spreadsheet.attachment_content_type %>
+</p>
+
+<p>
+  <strong>Attachment size:</strong>
+  <%= @spreadsheet.attachment_size %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @spreadsheet.status %>
+</p>
+
+<%= link_to 'Import', import_spreadsheet_path(@spreadsheet), method: :post %>
+
+<%= link_to 'Edit', edit_spreadsheet_path(@spreadsheet) %> |
+<%= link_to 'Back', spreadsheets_path %>

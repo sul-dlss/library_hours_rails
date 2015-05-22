@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   root to: 'libraries#index'
   resources :node_mappings
+  resources :spreadsheets do
+    member do
+      post :import
+    end
+  end
   resources :libraries do
     resources :locations do
       member do
