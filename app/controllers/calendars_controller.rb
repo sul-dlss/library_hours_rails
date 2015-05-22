@@ -1,5 +1,5 @@
 class CalendarsController < ApplicationController
-  before_action :set_calendar, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /calendars
   # GET /calendars.json
@@ -62,11 +62,6 @@ class CalendarsController < ApplicationController
   end
 
   private
-
-  # Use callbacks to share common setup or constraints between actions.
-  def set_calendar
-    @calendar = Calendar.find(params[:id])
-  end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def calendar_params

@@ -6,5 +6,4 @@
 
 <%= render partial: 'libraries/location_hours', locals: { locations: [@location] } %>
 
-<%= link_to 'Edit', edit_library_location_path(@location.library, @location) %> |
-<%= link_to 'Back', libraries_path %>
+<%= link_to 'Edit', edit_library_location_path(@location.library, @location) if can? :edit, @location %>

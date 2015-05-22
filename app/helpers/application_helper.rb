@@ -1,8 +1,4 @@
 module ApplicationHelper
-  def current_user
-    User.from_request(request) if request.env['REMOTE_USER']
-  end
-
   def render_short_time(dt)
     if dt.min == 0
       l(dt, format: :hours_only).strip

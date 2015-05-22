@@ -2,6 +2,8 @@
 #  Controller for handling login/logout and redirecting with flash messages.
 ###
 class AuthorizationController < ApplicationController
+  skip_authorization_check only: [:login, :logout]
+
   def login
     flash[:success] = 'You have been successfully logged in.'
     redirect_to params[:referrer] || :back

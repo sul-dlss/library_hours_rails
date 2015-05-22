@@ -1,5 +1,5 @@
 class NodeMappingsController < ApplicationController
-  before_action :set_node_mapping, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /node_mappings
   # GET /node_mappings.json
@@ -62,11 +62,6 @@ class NodeMappingsController < ApplicationController
   end
 
   private
-
-  # Use callbacks to share common setup or constraints between actions.
-  def set_node_mapping
-    @node_mapping = NodeMapping.find(params[:id])
-  end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def node_mapping_params
