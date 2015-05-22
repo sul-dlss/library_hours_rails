@@ -45,6 +45,8 @@ group :development, :test do
   gem 'factory_girl_rails'
 
   gem 'capistrano'
+  gem 'capistrano-rails'
+  gem 'capistrano-passenger'
   gem 'lyberteam-capistrano-devel'
 end
 
@@ -54,7 +56,9 @@ gem 'hurley'
 gem 'nokogiri'
 gem 'friendly_id'
 gem 'bootstrap_form', github: 'bootstrap-ruby/rails-bootstrap-forms'
+gem 'bootstrap-editable-rails'
 gem 'nested_form'
 gem 'refile', require: 'refile/rails'
 gem 'cancancan'
 gem 'rails_config'
+gem 'dotenv'

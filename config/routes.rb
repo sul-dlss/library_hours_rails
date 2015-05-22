@@ -11,9 +11,14 @@ Rails.application.routes.draw do
       member do
         get :hours
       end
+
       resources :calendars
     end
   end
+
+  # shim route for bootstrap-editable-form
+  # see https://github.com/bootstrap-ruby/bootstrap-editable-rails/blob/7217779426f9253dcbc59b8b229537cf369b0f90/app/assets/javascripts/bootstrap-editable-rails.js.coffee#L29
+  put 'libraries/:library_id/locations/:location_id/calendars' => 'calendars#create'
 
   get 'drupal/hours_:month' => 'libraries#hours_drupal'
   get 'api/v1/library/:library_id/location/:id/hours/for/:when' => 'locations#hours_v1'

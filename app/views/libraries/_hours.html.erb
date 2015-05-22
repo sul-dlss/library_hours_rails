@@ -1,0 +1,9 @@
+<% if hours.closed? %>
+  <span class="closed">closed</span>
+<% elsif hours.open_24h? %>
+  <span class="open-24h">open 24h</span>
+<% elsif hours %>
+  <time itemprop="opens" datetime="<%= hours.dtstart.localtime %>"><%= render_short_time(hours.dtstart.localtime) %></time>-<time itemprop="closes" datetime="<%= hours.dtend.localtime %>"><%= render_short_time(hours.dtend.localtime) %></time>
+<% else %>
+  n/a
+<% end %>

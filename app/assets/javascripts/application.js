@@ -14,4 +14,11 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require jquery_nested_form
+//= require bootstrap-sprockets
+//= require bootstrap-editable
+//= require bootstrap-editable-rails
 //= require_tree .
+
+$(function() {
+  $('.editable').editable();
+});

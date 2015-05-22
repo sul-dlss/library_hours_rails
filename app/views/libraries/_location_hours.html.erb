@@ -18,12 +18,22 @@
             <span itemprop="validFrom" content="<%= l e %>" aria-hidden="true"></span>
             <span itemprop="validThrough" content="<%= l e %>" aria-hidden="true"></span>
             <% Array.wrap(days[e]).each do |d|  %>
-              <% if d.closed? %>
-                <span class="closed">closed</span>
-              <% elsif d.open_24h? %>
-                <span class="open-24h">open 24h</span>
+              <% if can? :edit, d %>
+                <%= link_to '#', class: 'editable', data: { type: 'text', resource: 'date', name: 'time', url: library_location_calendar_path(d.library, d.location, d) } do %>
+                  <%= render_hours(d) %>
+                <% end %>
               <% else %>
-                <time itemprop="opens" datetime="<%= d.dtstart.localtime %>"><%= render_short_time(d.dtstart.localtime) %></time>-<time itemprop="closes" datetime="<%= d.dtend.localtime %>"><%= render_short_time(d.dtend.localtime) %></time>
+                <%= render_hours(d) %>
+              <% end %>
+            <% end %>
+
+            <% if Array.wrap(days[e]).blank? %>
+              <% if can? :create, Calendar %>
+                <%= link_to '#', class: 'editable', data: { type: 'text', resource: 'date', name: 'time', url: library_location_calendars_path(l.library, l, day: e) } do %>
+                  n/a
+                <% end %>
+              <% else %>
+                n/a
               <% end %>
             <% end %>
           </td>

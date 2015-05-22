@@ -10,8 +10,36 @@ class Calendar < ActiveRecord::Base
     where('dtstart BETWEEN ? AND ?', t.to_time.midnight, t.to_time.end_of_day)
   end)
 
+  def update_hours(combo)
+    case combo
+    when 'closed'
+      closed!
+    when 'open 24h'
+      self.dtstart = dtstart.midnight
+      self.dtend = dtstart.end_of_day
+    when /-/
+      range_begin, range_end = combo.split('-')
+      range_begin += 'm' unless range_begin.ends_with? 'm'
+      range_end += 'm' unless range_end.ends_with? 'm'
+
+      begin_time = Time.parse(range_begin)
+      end_time = Time.parse(range_end)
+
+      self.dtstart = Time.parse(dtstart.strftime('%F') + begin_time.strftime('T%T'))
+      self.dtend = Time.parse(dtstart.strftime('%F') + end_time.strftime('T%T'))
+
+      self.dtend += 1.day if dtend < dtstart
+    end
+  end
+
   def date
     dtstart.to_date
+  end
+
+  def closed!
+    self.closed = true
+    self.dtstart = dtstart.midnight
+    self.dtend = dtstart
   end
 
   def open?
