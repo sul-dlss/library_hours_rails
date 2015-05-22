@@ -5,3 +5,27 @@
 @import 'library_hours';
 
 @import 'bootstrap-editable';
+
+.compact-alerts {
+  .alert {
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0; 
+    margin-bottom: 0;
+    border-bottom: none;
+    border-top: none;
+    border-radius: 0;
+
+    &:first-child {
+      padding-top: $alert-padding;
+      border-radius-top-left: $alert-border-radius;
+      border-radius-top-right: $alert-border-radius;
+    }
+    
+    &:last-child {
+      padding-bottom: $alert-padding;
+      border-radius-bottom-left: $alert-border-radius;
+      border-radius-bottom-right: $alert-border-radius;
+    }
+  }
+}

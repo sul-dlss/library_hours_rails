@@ -1,31 +1,41 @@
-<p id="notice"><%= notice %></p>
+<h1>Validate Spreadsheet</h1>
 
 <p>
   <strong>Attachment:</strong>
-  <%= @spreadsheet.attachment_id %>
+  <%= link_to @spreadsheet.attachment_filename, @spreadsheet.attachment_id %> (<%= @spreadsheet.attachment_content_type %>; <%= number_to_human_size @spreadsheet.attachment_size %>)
 </p>
 
 <p>
-  <strong>Attachment filename:</strong>
-  <%= @spreadsheet.attachment_filename %>
+  <strong>Locations:</strong>
+  <ul class="list-unstyled compact-alerts">
+    <% @spreadsheet.locations.each do |slug, l| %>
+      <% if l %>
+        <li class="alert alert-success"><%= slug %> : <%= link_to l.library.name, l.library %> / <%= link_to l.name, [l.library, l] %></li>
+      <% else %>
+        <li class="alert alert-danger"><%= slug %> : unable to find library</li>
+      <% end %>
+    <% end %>
+  </ul>
 </p>
 
 <p>
-  <strong>Attachment content type:</strong>
-  <%= @spreadsheet.attachment_content_type %>
+  <strong>Dates range:</strong>
+
+  <ul class="list-unstyled alert <%= @spreadsheet.continuous? ? 'alert-success' : 'alert-danger' %>">
+    <% @spreadsheet.dates.each do |range| %>
+      <li>From <%= range.begin %> through <%= range.end %></li>
+    <% end %>
+  </ul>
 </p>
 
 <p>
-  <strong>Attachment size:</strong>
-  <%= @spreadsheet.attachment_size %>
+  <strong>Bad or missing data:</strong>
+    <% c = @spreadsheet.empty_cells %>
+    <ul class="list-unstyled alert <%= c.empty? ? 'alert-success' : 'alert-danger' %>">
+      <% c.each do |(date, location, open_close, value)| %>
+        <li><%= date %>: <%= location %> (<%= open_close %>): <%= value.present? ? "\"#{value}\"" : '(blank)' %></li>
+      <% end %>
+    </ul>
 </p>
 
-<p>
-  <strong>Status:</strong>
-  <%= @spreadsheet.status %>
-</p>
-
-<%= link_to 'Import', import_spreadsheet_path(@spreadsheet), method: :post %>
-
-<%= link_to 'Edit', edit_spreadsheet_path(@spreadsheet) %> |
-<%= link_to 'Back', spreadsheets_path %>
+<%= link_to 'Import', import_spreadsheet_path(@spreadsheet), method: :post, class: 'btn btn-primary' %>
