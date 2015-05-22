@@ -19,141 +19,144 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe SpreadsheetsController, type: :controller do
+  before do
+    allow(controller).to receive(:current_user).and_return(user)
+  end
+
+  describe 'with an anonymous user' do
+    let(:user) { nil }
+    let(:spreadsheet) { Spreadsheet.create! attachment_id: '123' }
+
+    it 'should deny access to #index' do
+      expect { get :index }.to raise_error CanCan::AccessDenied
+    end
+
+    it 'should deny access to #show' do
+      expect { get :show, id: spreadsheet }.to raise_error CanCan::AccessDenied
+    end
+
+    it 'should deny access to #new' do
+      expect { get :new }.to raise_error CanCan::AccessDenied
+    end
+
+    it 'should deny access to #edit' do
+      expect { get :edit, id: spreadsheet }.to raise_error CanCan::AccessDenied
+    end
+
+    it 'should deny access to #update' do
+      expect { post :update, id: spreadsheet }.to raise_error CanCan::AccessDenied
+    end
+
+    it 'should deny access to #destroy' do
+      expect { delete :destroy, id: spreadsheet }.to raise_error CanCan::AccessDenied
+    end
+  end
+
+  let(:tempfile) do
+    f = Tempfile.new('xyz')
+    f.write('a,b,c')
+    f
+  end
+
+  after do
+    tempfile.close
+    tempfile.unlink
+  end
 
   # This should return the minimal set of attributes required to create a valid
   # Spreadsheet. As you add validations to Spreadsheet, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
+  let(:valid_attributes) do
+    { attachment: Rack::Test::UploadedFile.new(tempfile.path, 'text/plain') }
+  end
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
+  let(:invalid_attributes) do
+    { x: 1 }
+  end
+
+  let(:user) { build(:superadmin_user) }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # SpreadsheetsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  describe "GET #index" do
-    it "assigns all spreadsheets as @spreadsheets" do
+  describe 'GET #index' do
+    it 'assigns all spreadsheets as @spreadsheets' do
       spreadsheet = Spreadsheet.create! valid_attributes
       get :index, {}, valid_session
       expect(assigns(:spreadsheets)).to eq([spreadsheet])
     end
   end
 
-  describe "GET #show" do
-    it "assigns the requested spreadsheet as @spreadsheet" do
+  describe 'GET #show' do
+    it 'assigns the requested spreadsheet as @spreadsheet' do
       spreadsheet = Spreadsheet.create! valid_attributes
-      get :show, {:id => spreadsheet.to_param}, valid_session
+      get :show, { id: spreadsheet.to_param }, valid_session
       expect(assigns(:spreadsheet)).to eq(spreadsheet)
     end
   end
 
-  describe "GET #new" do
-    it "assigns a new spreadsheet as @spreadsheet" do
+  describe 'GET #new' do
+    it 'assigns a new spreadsheet as @spreadsheet' do
       get :new, {}, valid_session
       expect(assigns(:spreadsheet)).to be_a_new(Spreadsheet)
     end
   end
 
-  describe "GET #edit" do
-    it "assigns the requested spreadsheet as @spreadsheet" do
+  describe 'GET #edit' do
+    it 'assigns the requested spreadsheet as @spreadsheet' do
       spreadsheet = Spreadsheet.create! valid_attributes
-      get :edit, {:id => spreadsheet.to_param}, valid_session
+      get :edit, { id: spreadsheet.to_param }, valid_session
       expect(assigns(:spreadsheet)).to eq(spreadsheet)
     end
   end
 
-  describe "POST #create" do
-    context "with valid params" do
-      it "creates a new Spreadsheet" do
-        expect {
-          post :create, {:spreadsheet => valid_attributes}, valid_session
-        }.to change(Spreadsheet, :count).by(1)
+  describe 'POST #create' do
+    context 'with valid params' do
+      it 'creates a new Spreadsheet' do
+        expect do
+          post :create, { spreadsheet: valid_attributes }, valid_session
+        end.to change(Spreadsheet, :count).by(1)
       end
 
-      it "assigns a newly created spreadsheet as @spreadsheet" do
-        post :create, {:spreadsheet => valid_attributes}, valid_session
+      it 'assigns a newly created spreadsheet as @spreadsheet' do
+        post :create, { spreadsheet: valid_attributes }, valid_session
         expect(assigns(:spreadsheet)).to be_a(Spreadsheet)
         expect(assigns(:spreadsheet)).to be_persisted
       end
 
-      it "redirects to the created spreadsheet" do
-        post :create, {:spreadsheet => valid_attributes}, valid_session
+      it 'redirects to the created spreadsheet' do
+        post :create, { spreadsheet: valid_attributes }, valid_session
         expect(response).to redirect_to(Spreadsheet.last)
       end
     end
 
-    context "with invalid params" do
-      it "assigns a newly created but unsaved spreadsheet as @spreadsheet" do
-        post :create, {:spreadsheet => invalid_attributes}, valid_session
+    context 'with invalid params' do
+      it 'assigns a newly created but unsaved spreadsheet as @spreadsheet' do
+        post :create, { spreadsheet: invalid_attributes }, valid_session
         expect(assigns(:spreadsheet)).to be_a_new(Spreadsheet)
       end
 
       it "re-renders the 'new' template" do
-        post :create, {:spreadsheet => invalid_attributes}, valid_session
-        expect(response).to render_template("new")
+        post :create, { spreadsheet: invalid_attributes }, valid_session
+        expect(response).to render_template('new')
       end
     end
   end
 
-  describe "PUT #update" do
-    context "with valid params" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
-
-      it "updates the requested spreadsheet" do
-        spreadsheet = Spreadsheet.create! valid_attributes
-        put :update, {:id => spreadsheet.to_param, :spreadsheet => new_attributes}, valid_session
-        spreadsheet.reload
-        skip("Add assertions for updated state")
-      end
-
-      it "assigns the requested spreadsheet as @spreadsheet" do
-        spreadsheet = Spreadsheet.create! valid_attributes
-        put :update, {:id => spreadsheet.to_param, :spreadsheet => valid_attributes}, valid_session
-        expect(assigns(:spreadsheet)).to eq(spreadsheet)
-      end
-
-      it "redirects to the spreadsheet" do
-        spreadsheet = Spreadsheet.create! valid_attributes
-        put :update, {:id => spreadsheet.to_param, :spreadsheet => valid_attributes}, valid_session
-        expect(response).to redirect_to(spreadsheet)
-      end
-    end
-
-    context "with invalid params" do
-      it "assigns the spreadsheet as @spreadsheet" do
-        spreadsheet = Spreadsheet.create! valid_attributes
-        put :update, {:id => spreadsheet.to_param, :spreadsheet => invalid_attributes}, valid_session
-        expect(assigns(:spreadsheet)).to eq(spreadsheet)
-      end
-
-      it "re-renders the 'edit' template" do
-        spreadsheet = Spreadsheet.create! valid_attributes
-        put :update, {:id => spreadsheet.to_param, :spreadsheet => invalid_attributes}, valid_session
-        expect(response).to render_template("edit")
-      end
-    end
-  end
-
-  describe "DELETE #destroy" do
-    it "destroys the requested spreadsheet" do
+  describe 'DELETE #destroy' do
+    it 'destroys the requested spreadsheet' do
       spreadsheet = Spreadsheet.create! valid_attributes
-      expect {
-        delete :destroy, {:id => spreadsheet.to_param}, valid_session
-      }.to change(Spreadsheet, :count).by(-1)
+      expect do
+        delete :destroy, { id: spreadsheet.to_param }, valid_session
+      end.to change(Spreadsheet, :count).by(-1)
     end
 
-    it "redirects to the spreadsheets list" do
+    it 'redirects to the spreadsheets list' do
       spreadsheet = Spreadsheet.create! valid_attributes
-      delete :destroy, {:id => spreadsheet.to_param}, valid_session
+      delete :destroy, { id: spreadsheet.to_param }, valid_session
       expect(response).to redirect_to(spreadsheets_url)
     end
   end
-
 end

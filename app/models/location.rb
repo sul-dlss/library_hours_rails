@@ -4,15 +4,8 @@ class Location < ActiveRecord::Base
   has_many :calendars
   accepts_nested_attributes_for :node_mapping
 
+  validates :name, presence: true
+
   extend FriendlyId
   friendly_id :name, use: [:slugged, :finders, :scoped, :history], scope: :library
-
-  def hours(range)
-    range.step(1.day).map do |_d|
-    end
-  end
-
-  def today
-    @today ||= calendars.in_range(Time.now..Time.now).first
-  end
 end

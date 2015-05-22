@@ -20,7 +20,7 @@ class Calendar < ActiveRecord::Base
 
   def open_24h?
     dtstart.localtime == dtstart.localtime.midnight &&
-      dtend.localtime == (dtstart.localtime.midnight + 1.day).midnight
+      dtend.localtime == dtstart.localtime.end_of_day
   end
 
   def self.week(str)

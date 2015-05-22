@@ -8,7 +8,7 @@
 
     <div class="header-links">
       <% if current_user %>
-        <%= link_to "#{current_user.uid}: Logout", logout_path(referrer: root_path) %>
+        <%= link_to "#{current_user.id}: Logout", logout_path(referrer: root_path) %>
         <%= link_to "Manage Data", spreadsheets_path if can? :manage, Spreadsheet %>
       <% else %>
         <%= link_to "Login", login_path(referrer: request.original_url) %>

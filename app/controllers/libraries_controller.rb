@@ -22,7 +22,6 @@ class LibrariesController < ApplicationController
 
   # GET /libraries/new
   def new
-    @library = Library.new
   end
 
   # GET /libraries/1/edit
@@ -32,8 +31,6 @@ class LibrariesController < ApplicationController
   # POST /libraries
   # POST /libraries.json
   def create
-    @library = Library.new(library_params)
-
     respond_to do |format|
       if @library.save
         format.html { redirect_to @library, notice: 'Library was successfully created.' }

@@ -53,9 +53,9 @@ class LegacySpreadsheetParser
       else
         c.dtstart = Time.parse("#{date} #{open}")
 
-        # whenever we say 11:59PM, we mean midnight
+        # whenever we say 11:59PM, we mean the very end of the day
         if close =~ /^11:59\s*(PM|pm)$/
-          c.dtend = (Time.parse(date) + 1.day).midnight
+          c.dtend = Time.parse(date).end_of_day
         else
           c.dtend = Time.parse("#{date} #{close}")
         end

@@ -1,11 +1,11 @@
 class User
   include ActiveModel::Model
-  attr_accessor :uid, :ldap_group_string
+  attr_accessor :id, :ldap_group_string
 
   def self.from_env(env)
     return unless env['REMOTE_USER']
 
-    User.new(uid: env['REMOTE_USER'], ldap_group_string: env['WEBAUTH_LDAPPRIVGROUP'])
+    User.new(id: env['REMOTE_USER'], ldap_group_string: env['WEBAUTH_LDAPPRIVGROUP'])
   end
 
   def superadmin?

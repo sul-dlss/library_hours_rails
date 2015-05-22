@@ -1,11 +1,12 @@
 class LocationsController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource :library
+  load_and_authorize_resource through: :library
 
   before_action :set_range, only: [:show]
   # GET /locations
   # GET /locations.json
   def index
-    @locations = Location.all
+    redirect_to library_path(@library)
   end
 
   # GET /locations/1
@@ -28,7 +29,6 @@ class LocationsController < ApplicationController
 
   # GET /locations/new
   def new
-    @location = Location.new
   end
 
   # GET /locations/1/edit
@@ -38,11 +38,9 @@ class LocationsController < ApplicationController
   # POST /locations
   # POST /locations.json
   def create
-    @location = Location.new(location_params)
-
     respond_to do |format|
       if @location.save
-        format.html { redirect_to @location, notice: 'Location was successfully created.' }
+        format.html { redirect_to [@location.library, @location], notice: 'Location was successfully created.' }
         format.json { render :show, status: :created, location: @location }
       else
         format.html { render :new }
@@ -56,7 +54,7 @@ class LocationsController < ApplicationController
   def update
     respond_to do |format|
       if @location.update(location_params)
-        format.html { redirect_to @location, notice: 'Location was successfully updated.' }
+        format.html { redirect_to [@location.library, @location], notice: 'Location was successfully updated.' }
         format.json { render :show, status: :ok, location: @location }
       else
         format.html { render :edit }
@@ -70,7 +68,7 @@ class LocationsController < ApplicationController
   def destroy
     @location.destroy
     respond_to do |format|
-      format.html { redirect_to locations_url, notice: 'Location was successfully destroyed.' }
+      format.html { redirect_to library_url(@location.library), notice: 'Location was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

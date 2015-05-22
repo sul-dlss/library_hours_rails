@@ -6,16 +6,12 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   check_authorization
 
-  rescue_from CanCan::AccessDenied do |exception|
-    redirect_to root_url, alert: exception.message
-  end
-
   def current_user
-    if Rails.env.development?
-      User.from_env(request.env.merge(ENV))
-    else
-      User.from_request(request)
-    end
+    @current_user ||= if Rails.env.development?
+                        User.from_env(request.env.merge(ENV))
+                      else
+                        User.from_env(request.env)
+                      end
   end
 
   def set_range
