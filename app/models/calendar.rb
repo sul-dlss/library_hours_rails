@@ -15,21 +15,17 @@ class Calendar < ActiveRecord::Base
     when 'closed'
       closed!
     when 'open 24h'
-      self.dtstart = dtstart.midnight
-      self.dtend = dtstart.end_of_day
+      open_24h!
     when /-/
-      range_begin, range_end = combo.split('-')
-      range_begin += 'm' unless range_begin.ends_with? 'm'
-      range_end += 'm' unless range_end.ends_with? 'm'
-
-      begin_time = Time.parse(range_begin)
-      end_time = Time.parse(range_end)
-
-      self.dtstart = Time.parse(dtstart.strftime('%F') + begin_time.strftime('T%T'))
-      self.dtend = Time.parse(dtstart.strftime('%F') + end_time.strftime('T%T'))
-
-      self.dtend += 1.day if dtend < dtstart
+      update_range(parse_time_range(combo))
     end
+  end
+
+  def parse_time_range(combo)
+    range_begin, range_end = combo.split('-')
+    range_begin += 'm' if range_begin =~ (/[ap]$/)
+    range_end += 'm' if range_end =~ (/[ap]$/)
+    Time.parse(range_begin)..Time.parse(range_end)
   end
 
   def date
@@ -38,8 +34,23 @@ class Calendar < ActiveRecord::Base
 
   def closed!
     self.closed = true
-    self.dtstart = dtstart.midnight
+
+    self.dtstart = dtstart.localtime.midnight
     self.dtend = dtstart
+  end
+
+  def open_24h!
+    self.closed = false
+    self.dtstart = dtstart.localtime.midnight
+    self.dtend = dtstart.localtime.end_of_day
+  end
+
+  def update_range(range)
+    self.closed = false
+    self.dtstart = Time.parse(dtstart.localtime.strftime('%F') + range.begin.strftime('T%T'))
+    self.dtend = Time.parse(dtstart.localtime.strftime('%F') + range.end.strftime('T%T'))
+
+    self.dtend += 1.day if dtend < dtstart
   end
 
   def open?

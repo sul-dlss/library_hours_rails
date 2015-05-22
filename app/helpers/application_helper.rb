@@ -20,10 +20,14 @@ module ApplicationHelper
     when hours.nil?
       content_tag :span, 'n/a'
     else
-      start = time_tag(hours.dtstart.localtime, itemprop: 'opens')
-      ends = time_tag(hours.dtend.localtime, itemprop: 'closes')
-      "#{start}-#{ends}".html_safe
+      render_hour_range(hours)
     end
+  end
+
+  def render_hour_range(hours)
+    start = time_tag(hours.dtstart.localtime, itemprop: 'opens')
+    ends = time_tag(hours.dtend.localtime, itemprop: 'closes')
+    "#{start}-#{ends}".html_safe
   end
 
   def time_tag(dt, attr = {})

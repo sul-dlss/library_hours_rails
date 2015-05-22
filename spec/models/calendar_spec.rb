@@ -31,4 +31,48 @@ RSpec.describe Calendar, type: :model do
       expect(described_class.week('2015W05')).to eq Date.parse('2015-01-25')...Date.parse('2015-02-01')
     end
   end
+
+  describe '#closed!' do
+    subject { described_class.new(dtstart: Time.now) }
+
+    it 'marks an event as being closed' do
+      expect { subject.closed! }.to change(subject, :open?).to(false)
+      expect(subject.dtstart).to eq subject.dtend
+    end
+  end
+
+  describe '#open_24h!' do
+    subject { described_class.new(dtstart: Time.now) }
+
+    it 'sets the begin and end times to the whole day' do
+      subject.open_24h!
+      expect(subject.dtstart).to eq Time.now.midnight
+      expect(subject.dtend).to eq Time.now.end_of_day
+    end
+  end
+
+  describe '#update_range!' do
+    subject { described_class.new(dtstart: Time.now) }
+
+    it 'sets the begin and end times to the given range' do
+      subject.update_range(Time.now.midnight..Time.now.noon)
+      expect(subject.dtstart).to eq Time.now.midnight
+      expect(subject.dtend).to eq Time.now.noon
+    end
+  end
+
+  describe '#update_hours' do
+    subject { described_class.new(dtstart: Time.now) }
+
+    it 'parses user input into hour ranges' do
+      expect { subject.update_hours('closed') }.to change(subject, :open?).to(false)
+      expect { subject.update_hours('open 24h') }.to change(subject, :open_24h?).to(true)
+    end
+
+    it 'parses abbreviated times' do
+      subject.update_hours('12a-12p')
+      expect(subject.dtstart).to eq Time.now.midnight
+      expect(subject.dtend).to eq Time.now.noon
+    end
+  end
 end
