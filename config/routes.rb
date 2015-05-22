@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'drupal/hours_:month' => 'libraries#hours_drupal'
   get 'api/v1/library/:library_id/location/:id/hours/for/:when' => 'locations#hours_v1'
 
   # Authorization routes

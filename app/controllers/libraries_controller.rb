@@ -7,7 +7,6 @@ class LibrariesController < ApplicationController
   # GET /libraries.json
   # GET /libraries.drupal_xml
   def index
-    @libraries = Library.all
     respond_to do |format|
       format.html
       format.json
@@ -18,6 +17,13 @@ class LibrariesController < ApplicationController
   # GET /libraries/1
   # GET /libraries/1.json
   def show
+  end
+
+  def hours_drupal
+    month = Time.parse(params[:month])
+    month += 1.year if month < Time.now.beginning_of_month
+
+    @range = month..month.end_of_month
   end
 
   # GET /libraries/new
