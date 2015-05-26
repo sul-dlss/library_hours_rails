@@ -51,6 +51,11 @@ group :development, :test do
   gem 'lyberteam-capistrano-devel'
 end
 
+group :production do
+  gem 'therubyracer'
+  gem 'mysql2'
+end
+
 gem 'roo'
 gem 'bootstrap-sass'
 gem 'hurley'
@@ -66,4 +71,3 @@ gem 'dotenv'
 gem 'whenever'
 gem 'squash_ruby', require: 'squash/ruby'
 gem 'squash_rails', '1.3.3', require: 'squash/rails'
-gem 'therubyracer'

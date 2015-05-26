@@ -137,6 +137,7 @@ GEM
     minitest (5.6.1)
     multi_json (1.11.0)
     multipart-post (2.0.0)
+    mysql2 (0.3.18)
     nested_form (0.3.2)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
@@ -282,6 +283,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   lyberteam-capistrano-devel
+  mysql2
   nested_form
   nokogiri
   rails (= 4.2.1)
