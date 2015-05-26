@@ -1,20 +1,20 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th></th>
+      <th class="location-name"></th>
       <% @range.to_a.each do |d| %>
-        <th><%= render_short_date d %></th>
+        <th class="hours"><%= render_short_date d %></th>
       <% end %>
     </tr>
   </thead>
   <tbody>
     <% locations.select { |x| x.calendars.any? }.each do |l| %>
       <tr>
-        <td><%= link_to l.name, library_location_path(l.library, l) %></td>
+        <td class="location-name"><%= link_to l.name, library_location_path(l.library, l) %></td>
         <% days = l.calendars.in_range(@range).group_by(&:date) %>
 
         <% @range.to_a.each do |e| %>
-          <td itemprop="openingHoursSpecification" itemscope itemtype="http://schema.org/OpeningHoursSpecification">
+          <td class="hours" itemprop="openingHoursSpecification" itemscope itemtype="http://schema.org/OpeningHoursSpecification">
             <span itemprop="validFrom" content="<%= l e %>" aria-hidden="true"></span>
             <span itemprop="validThrough" content="<%= l e %>" aria-hidden="true"></span>
             <% Array.wrap(days[e]).each do |d|  %>

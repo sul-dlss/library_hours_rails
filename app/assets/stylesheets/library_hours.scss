@@ -9,3 +9,13 @@
 .open-24h {
   color: $gray-light;
 }
+
+td.location-name,
+th.location-name {
+  width: 200px;
+}
+
+td.hours,
+th.hours {
+  width: 100px;
+}
