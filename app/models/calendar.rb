@@ -50,7 +50,10 @@ class Calendar < ActiveRecord::Base
     self.dtstart = Time.parse(dtstart.localtime.strftime('%F') + range.begin.strftime('T%T'))
     self.dtend = Time.parse(dtstart.localtime.strftime('%F') + range.end.strftime('T%T'))
 
-    self.dtend += 1.day if dtend < dtstart
+    if c.dtend < c.dtstart
+      next_date = dtstart.to_date + 1.day
+      c.dtend = Time.parse("#{next_date} #{close}")
+    end
   end
 
   def open?

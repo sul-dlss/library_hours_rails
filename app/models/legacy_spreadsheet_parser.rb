@@ -97,7 +97,10 @@
           c.dtend = Time.parse("#{date} #{close}")
         end
 
-        c.dtend = c.dtend + 1.day if c.dtend < c.dtstart
+        if c.dtend < c.dtstart
+          next_date = Date.parse(date) + 1.day
+          c.dtend = Time.parse("#{next_date} #{close}")
+        end
       end
       c.summary = type
       c.description = note
