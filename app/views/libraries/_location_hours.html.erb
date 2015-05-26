@@ -18,6 +18,7 @@
             <span itemprop="validFrom" content="<%= l e %>" aria-hidden="true"></span>
             <span itemprop="validThrough" content="<%= l e %>" aria-hidden="true"></span>
             <% Array.wrap(days[e]).each do |d|  %>
+            <span data-toggle="tooltip" data-placement="left" title="<%= [d.summary, d.description].reject(&:blank?).compact.join(" / ") %>">
               <% if can? :edit, d %>
                 <%= link_to '#', class: 'editable', data: { type: 'text', resource: 'date', name: 'time', url: library_location_calendar_path(d.library, d.location, d) } do %>
                   <%= render_hours(d) %>
@@ -35,6 +36,7 @@
               <% else %>
                 n/a
               <% end %>
+              </span>
             <% end %>
           </td>
         <% end %>
