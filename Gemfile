@@ -46,6 +46,7 @@ group :development, :test do
 
   gem 'capistrano'
   gem 'capistrano-rails'
+  gem 'capistrano-rvm'
   gem 'capistrano-passenger'
   gem 'lyberteam-capistrano-devel'
 end
