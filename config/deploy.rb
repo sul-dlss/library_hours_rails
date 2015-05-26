@@ -2,7 +2,7 @@
 lock '3.4.0'
 
 set :application, 'library_hours'
-set :repo_url, 'git@github.com:sul-dlss/library_hours_rails.git'
+set :repo_url, 'https://github.com/sul-dlss/library_hours_rails.git'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -33,6 +33,8 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', '
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
+
+before 'deploy:publishing', 'squash:write_revision'
 
 namespace :deploy do
   after :restart, :clear_cache do
