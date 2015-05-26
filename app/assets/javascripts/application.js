@@ -19,6 +19,8 @@
 //= require bootstrap-editable-rails
 //= require_tree .
 
-$(function() {
+
+$(document).on("ready page:load", function() {
   $('.editable').editable();
+  $('[data-toggle="tooltip"]').tooltip();
 });
