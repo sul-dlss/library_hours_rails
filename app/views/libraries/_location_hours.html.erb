@@ -29,7 +29,7 @@
             <% end %>
 
             <% if Array.wrap(days[e]).blank? %>
-              <% if can? :create, Calendar %>
+              <% if can? :manage, l.library %>
                 <%= link_to '#', class: 'editable', data: { type: 'text', resource: 'date', name: 'time', url: library_location_calendars_path(l.library, l, day: e) } do %>
                   n/a
                 <% end %>

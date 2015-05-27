@@ -1,9 +1,9 @@
 <p id="notice"><%= notice %></p>
 
+<h1><%= link_to @location.library.name, @location.library %> / <%= @location.name %></h1>
+
+
 <%= render 'libraries/range' %>
-<h1><%= @location.library.name %> / <%= @location.name %></h1>
-
-
 <%= render partial: 'libraries/location_hours', locals: { locations: [@location] } %>
 
 <%= link_to 'Edit', edit_library_location_path(@location.library, @location) if can? :edit, @location %>
