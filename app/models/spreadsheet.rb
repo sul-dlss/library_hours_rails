@@ -8,7 +8,18 @@ class Spreadsheet < ActiveRecord::Base
   end
 
   def locations
-    Hash[*parser.locations.map { |l| [l, (Location.find(l) if Location.exists?(l))] }.flatten]
+    Hash[*parser.locations.map { |l| [l, find_location(l)] }.flatten]
+  end
+
+  def find_location(location)
+    if location =~ '/'
+      lib, loc = location.split('/', 2).map(&:strip)
+      c.location = Library.find(lib).locations.find(loc)
+    else
+      c.location = Location.find(location)
+    end
+  rescue
+    nil
   end
 
   def continuous?

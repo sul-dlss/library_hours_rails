@@ -11,12 +11,18 @@ class LibrariesController < ApplicationController
       format.html
       format.json
       format.drupal_xml
+      format.csv { LegacySpreadsheetParser.generate(@libraries) }
     end
   end
 
   # GET /libraries/1
   # GET /libraries/1.json
   def show
+    respond_to do |format|
+      format.html
+      format.json
+      format.csv { LegacySpreadsheetParser.generate(@library) }
+    end
   end
 
   def hours_drupal

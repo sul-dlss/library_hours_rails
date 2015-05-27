@@ -21,7 +21,22 @@
       end
     end
   end
-  
+
+  def self.generate(libraries, date_range = nil)
+    locations = Array(libraries).map(&:locations).flatten.reject { |x| x.calendars.none? }
+    date_range ||= Time.now.to_date..(Time.now + 1.year).to_date
+    CSV.generate do |csv|
+      csv << ['library hours']
+      csv << ['', '', '', ''] + locations.map { |l| ["#{l.library.slug} / #{l.slug}", '']}.flatten
+      csv << ['Date', 'Day', 'Type', 'Notes'] + locations.map { ['Open', 'Close'] }.flatten
+
+      date_range.each do |d|
+        c = Calendar.for_date(d).first
+        csv << [d, d.strftime('%A'), c.summary, c.description] + locations.map { |l| c = l.calendars.for_date(d).first; c ? [c.dtstart.localtime.strftime('%I:%M %p'), c.dtend.localtime.strftime('%I:%M %p')] : ['', ''] }.flatten
+      end
+    end
+  end
+
   # rubocop:disable Metrics/MethodLength
   def date_ranges
     @date_ranges ||= begin
@@ -82,7 +97,12 @@
     close = row[i + 1]
 
     Calendar.new do |c|
-      c.location = Location.find(location)
+      if location =~ %r{/}
+        lib, loc = location.split('/', 2).map(&:strip)
+        c.location = Library.find(lib).locations.find(loc)
+      else
+        c.location = Location.find(location)
+      end
       if open == 'closed'
         c.dtstart = Time.parse("#{date} #{open}").midnight
         c.dtend = c.dtstart
