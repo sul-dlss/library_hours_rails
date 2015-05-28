@@ -1,0 +1,20 @@
+<%= bootstrap_form_for([@term_hour.library, @term_hour.location, @term_hour]) do |f| %>
+  <% if @term_hour.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@term_hour.errors.count, "error") %> prohibited this term_hour from being saved:</h2>
+
+      <ul>
+      <% @term_hour.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.select :term_id, Term.missing_for_location(@term_hour.location).map { |t| ["#{t.name} #{t.year}", t.id] }, include_blank: true %>
+  <%= f.text_area :data %>
+
+  <div class="actions">
+    <%= f.primary %>
+  </div>
+<% end %>

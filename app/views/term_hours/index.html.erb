@@ -1,0 +1,8 @@
+<h1>Listing Term Hours for <%= @location.library.name %> / <%= @location.name %></h1>
+
+<% @term_hours.group_by(&:year).each do |year, term_hours| %>
+  <h2><%= year %></h2>
+  <%= render term_hours %>
+<% end %>
+
+<%= link_to 'New Term hours', new_library_location_term_hour_path(@location.library, @location) %>

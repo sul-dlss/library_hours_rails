@@ -20,8 +20,11 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
-
+  activerecord:
+    attributes:
+      term:
+        dtstart: "Start Date"
+        dtend: "End Date"
 
   time:
     am: 'a'

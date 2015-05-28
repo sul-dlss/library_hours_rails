@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150522032031) do
+ActiveRecord::Schema.define(version: 20150527220242) do
 
   create_table "calendars", force: :cascade do |t|
     t.datetime "dtstart"
@@ -72,6 +72,25 @@ ActiveRecord::Schema.define(version: 20150522032031) do
     t.string   "status"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+  end
+
+  create_table "term_hours", force: :cascade do |t|
+    t.integer  "term_id"
+    t.integer  "location_id"
+    t.text     "data"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "term_hours", ["location_id"], name: "index_term_hours_on_location_id"
+  add_index "term_hours", ["term_id"], name: "index_term_hours_on_term_id"
+
+  create_table "terms", force: :cascade do |t|
+    t.datetime "dtstart"
+    t.datetime "dtend"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
