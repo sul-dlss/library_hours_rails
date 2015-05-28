@@ -12,4 +12,4 @@
   </div>
 <% end %>
 
-<%= link_to 'New Library', new_library_path %>
+<%= link_to 'New Library', new_library_path if can? :create, Library %>
