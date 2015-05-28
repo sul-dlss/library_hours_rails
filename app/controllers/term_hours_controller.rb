@@ -1,11 +1,12 @@
 class TermHoursController < ApplicationController
   load_and_authorize_resource :library
-  load_and_authorize_resource :location, through: :library
-  load_and_authorize_resource through: :location
+  load_and_authorize_resource :location, through: :library, except: [:index]
+  load_and_authorize_resource through: :location, except: [:index]
 
   # GET /term_hours
   # GET /term_hours.json
   def index
+    authorize! :manage, @library
   end
 
   # GET /term_hours/1
@@ -25,10 +26,11 @@ class TermHoursController < ApplicationController
   # POST /term_hours
   # POST /term_hours.json
   def create
+    @term_hour.term = Term.find(params[:term])
     respond_to do |format|
       if @term_hour.save
         format.html { redirect_to library_location_term_hours_path(@library, @location), notice: 'Term hour was successfully created.' }
-        format.json { render :show, status: :created, location: @term_hour }
+        format.json { head :no_content }
       else
         format.html { render :new }
         format.json { render json: @term_hour.errors, status: :unprocessable_entity }
@@ -42,7 +44,7 @@ class TermHoursController < ApplicationController
     respond_to do |format|
       if @term_hour.update(term_hour_params)
         format.html { redirect_to library_location_term_hours_path(@library, @location), notice: 'Term hour was successfully updated.' }
-        format.json { render :show, status: :ok, location: @term_hour }
+        format.json { head :no_content }
       else
         format.html { render :edit }
         format.json { render json: @term_hour.errors, status: :unprocessable_entity }
@@ -64,6 +66,6 @@ class TermHoursController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def term_hour_params
-    params.require(:term_hour).permit(:term_id, :data)
+    params.require(:term_hour).permit(:term_id, :sunday, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday)
   end
 end

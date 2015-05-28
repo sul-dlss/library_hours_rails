@@ -12,7 +12,10 @@
   <% end %>
 
   <%= f.select :term_id, Term.missing_for_location(@term_hour.location).map { |t| ["#{t.name} #{t.year}", t.id] }, include_blank: true %>
-  <%= f.text_area :data %>
+
+  <% f.object.class.stored_attributes[:data].each do |a| %>
+    <%= f.text_field a %>
+  <% end %>
 
   <div class="actions">
     <%= f.primary %>

@@ -3,7 +3,7 @@ class TermHour < ActiveRecord::Base
   belongs_to :location
   validates :term, :location, presence: true
 
-  serialize :data
+  store :data, accessors: [:sunday, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday], coder: JSON
 
   delegate :year, to: :term
   delegate :library, to: :location

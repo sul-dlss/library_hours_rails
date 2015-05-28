@@ -23,4 +23,12 @@
 $(document).on("ready page:load", function() {
   $('.editable').editable();
   $('[data-toggle="tooltip"]').tooltip();
+
+  //automatically show next editable
+  $('.term-hours .editable').on('save', function(){
+      var that = this;
+      setTimeout(function() {
+          $(that).closest('td').next().find('.editable').editable('show');
+      }, 200);
+  });
 });
