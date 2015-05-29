@@ -1,0 +1,3 @@
+class MissingCalendar < Calendar
+
+end

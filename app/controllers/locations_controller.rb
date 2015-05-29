@@ -19,12 +19,12 @@ class LocationsController < ApplicationController
     @range ||= Time.parse(params[:when]).to_date..Time.parse(params[:when]).to_date if params[:when]
     @range ||= Calendar.week(params[:week]) if params[:week]
     @range ||= Time.now.to_date..Time.now.to_date
-    @hours = @location.calendars.in_range(@range)
+    @hours = @location.hours(@range)
   end
 
   def hours_v1
     @when = params[:when] == 'today' ? Time.now : Time.parse(params[:when])
-    @hours = @location.calendars.for_date(@when)
+    @hours = @location.hours(@when.beginning_of_day..@when.end_of_day)
   end
 
   # GET /locations/new

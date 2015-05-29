@@ -17,7 +17,7 @@ module ApplicationHelper
       content_tag :span, 'closed', class: 'closed'
     when hours.open_24h?
       content_tag :span, 'open 24h', class: 'open-24h'
-    when hours.nil?
+    when hours.nil?, hours.is_a?(MissingCalendar)
       content_tag :span, 'n/a'
     else
       render_hour_range(hours)

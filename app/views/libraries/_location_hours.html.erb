@@ -11,32 +11,21 @@
     <% locations.select { |x| x.calendars.any? }.each do |l| %>
       <tr>
         <td class="location-name"><%= link_to l.name, library_location_path(l.library, l) %></td>
-        <% days = l.calendars.in_range(@range).group_by(&:date) %>
-
-        <% @range.to_a.each do |e| %>
+    
+        <% l.hours(@range).each do |calendars| %>
           <td class="hours" itemprop="openingHoursSpecification" itemscope itemtype="http://schema.org/OpeningHoursSpecification">
-            <span itemprop="validFrom" content="<%= l e %>" aria-hidden="true"></span>
-            <span itemprop="validThrough" content="<%= l e %>" aria-hidden="true"></span>
-            <% Array.wrap(days[e]).each do |d|  %>
+            <span itemprop="validFrom" content="<%= l calendars.first.date %>" aria-hidden="true"></span>
+            <span itemprop="validThrough" content="<%= l calendars.first.date %>" aria-hidden="true"></span>
+            <% calendars.each do |d|  %>
             <span data-toggle="tooltip" data-placement="left" title="<%= [d.summary, d.description].reject(&:blank?).compact.join(" / ") %>">
               <% if can? :edit, d %>
-                <%= link_to '#', class: 'editable', data: { type: 'text', resource: 'date', name: 'time', url: library_location_calendar_path(d.library, d.location, d) } do %>
+                <%= link_to '#', class: 'editable', data: { type: 'text', resource: 'date', name: 'time', url: d.persisted? ? library_location_calendar_path(d.library, d.location, d) : library_location_calendars_path(l.library, l, day: d.date)} do %>
                   <%= render_hours(d) %>
                 <% end %>
               <% else %>
                 <%= render_hours(d) %>
               <% end %>
-            <% end %>
-
-            <% if Array.wrap(days[e]).blank? %>
-              <% if can? :manage, l.library %>
-                <%= link_to '#', class: 'editable', data: { type: 'text', resource: 'date', name: 'time', url: library_location_calendars_path(l.library, l, day: e) } do %>
-                  n/a
-                <% end %>
-              <% else %>
-                n/a
-              <% end %>
-              </span>
+            </span>
             <% end %>
           </td>
         <% end %>

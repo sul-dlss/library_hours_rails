@@ -2,7 +2,7 @@ xml.instruct!
 xml.libraryHours do
   @libraries.each do |library|
     library.locations.each do |location|
-      location.calendars.in_range(@range).each do |cal|
+      location.hours(@range).each do |cal|
         xml.entry do
           xml.id "#{library.to_param}-#{location.to_param}-#{cal.dtstart.strftime('%Y-%m-%d')}"
           xml.libraryNodeId library.node_mapping.node_id

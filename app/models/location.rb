@@ -9,4 +9,12 @@ class Location < ActiveRecord::Base
 
   extend FriendlyId
   friendly_id :name, use: [:slugged, :finders, :scoped, :history], scope: :library
+
+  def default_hours(range)
+    term_hours.for_range(range)
+  end
+
+  def hours(range)
+    @hours ||= Hours.new(self, range)
+  end
 end
