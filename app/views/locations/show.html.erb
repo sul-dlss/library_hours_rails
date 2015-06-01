@@ -1,9 +1,15 @@
 <p id="notice"><%= notice %></p>
 
 <h1><%= link_to @location.library.name, @location.library %> / <%= @location.name %></h1>
+<%= link_to 'Edit', edit_library_location_path(@location.library, @location), class: 'btn btn-default' if can? :edit, @location %>
 
+<h2>Hours</h2>
+<div class="row">
+  <div class="col-xs-12 col-md-9">
+    <%= link_to 'Edit normal hours', library_term_hours_path(@location.library), class: 'btn btn-info' if can? :edit, @location %>
+  </div>
+</div>
 
 <%= render 'libraries/range' %>
 <%= render partial: 'libraries/location_hours', locals: { locations: [@location] } %>
 
-<%= link_to 'Edit', edit_library_location_path(@location.library, @location) if can? :edit, @location %>
