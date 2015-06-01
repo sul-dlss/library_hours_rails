@@ -29,7 +29,7 @@ class LibrariesController < ApplicationController
     month = Time.parse(params[:month])
     month += 1.year if month < Time.now.beginning_of_month
 
-    @range = month..month.end_of_month
+    @range = month.to_date..month.end_of_month.to_date
   end
 
   # GET /libraries/new

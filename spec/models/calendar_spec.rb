@@ -75,4 +75,18 @@ RSpec.describe Calendar, type: :model do
       expect(subject.dtend).to eq Time.now.noon
     end
   end
+
+  describe '#dtend_drupal' do
+    subject { described_class.new(dtstart: Time.now.localtime) }
+
+    it 'passes through same-day dtends unchanged' do
+      subject.dtend = subject.dtstart.end_of_day
+      expect(subject.dtend_drupal).to eq subject.dtend
+    end
+
+    it 'moves next-day dtends into the current day' do
+      subject.dtend = subject.dtstart.beginning_of_day + 26.hours
+      expect(subject.dtend_drupal).to eq subject.dtstart.beginning_of_day + 2.hours
+    end
+  end
 end
