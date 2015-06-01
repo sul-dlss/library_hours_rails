@@ -30,6 +30,10 @@ class LibrariesController < ApplicationController
     month += 1.year if month < Time.now.beginning_of_month
 
     @range = month.to_date..month.end_of_month.to_date
+
+    respond_to do |format|
+      format.xml
+    end
   end
 
   # GET /libraries/new

@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   put 'libraries/:library_id/locations/:location_id/calendars' => 'calendars#create'
   put 'libraries/:library_id/locations/:location_id/term_hours' => 'term_hours#create'
 
-  get 'drupal/hours_:month' => 'libraries#hours_drupal'
+  get 'drupal/hours_:month' => 'libraries#hours_drupal', as: :drupal_hours
   get 'api/v1/library/:library_id/location/:id/hours/for/:when' => 'locations#hours_v1'
 
   # Authorization routes
