@@ -10,7 +10,7 @@ RSpec.describe 'TermHours', type: :request do
 
   describe 'GET /term_hours' do
     it 'works! (now write some real specs)' do
-      get library_location_term_hours_path(library, location)
+      get library_term_hours_path(library)
       expect(response).to have_http_status(200)
     end
   end

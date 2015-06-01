@@ -6,7 +6,7 @@ RSpec.describe 'term_hours/index', type: :view do
 
   before(:each) do
     assign(:term, term)
-    assign(:location, location)
+    assign(:library, location.library)
     assign(:term_hours, [
       TermHour.create!(
         term: term,

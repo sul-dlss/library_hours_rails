@@ -13,9 +13,10 @@ RSpec.describe 'term_hours/new', type: :view do
     render
 
     assert_select 'form[action=?][method=?]', library_location_term_hours_path(@term_hour.library, @term_hour.location), 'post' do
-      assert_select 'select#term_hour_term_id[name=?]', 'term_hour[term_id]'
-
-      assert_select 'textarea#term_hour_data[name=?]', 'term_hour[data]'
+      assert_select 'input#term_hour_sunday[name=?]', 'term_hour[sunday]'
+      assert_select 'input#term_hour_monday[name=?]', 'term_hour[monday]'
+      assert_select 'input#term_hour_tuesday[name=?]', 'term_hour[tuesday]'
+      assert_select 'input#term_hour_wednesday[name=?]', 'term_hour[wednesday]'
     end
   end
 end

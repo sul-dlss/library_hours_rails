@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe TermHoursController, type: :routing do
   describe 'routing' do
     it 'routes to #index' do
-      expect(get: '/libraries/x/locations/y/term_hours').to route_to('term_hours#index', library_id: 'x', location_id: 'y')
+      expect(get: '/libraries/x/term_hours').to route_to('term_hours#index', library_id: 'x')
     end
 
     it 'routes to #new' do
