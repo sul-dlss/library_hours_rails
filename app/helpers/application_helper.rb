@@ -33,4 +33,8 @@ module ApplicationHelper
   def time_tag(dt, attr = {})
     content_tag :time, render_short_time(dt), attr.merge(datetime: dt)
   end
+
+  def terms_by_year
+    Term.current_and_upcoming.group_by(&:year)
+  end
 end
