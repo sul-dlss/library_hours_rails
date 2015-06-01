@@ -7,4 +7,6 @@ class TermHour < ActiveRecord::Base
 
   delegate :year, to: :term
   delegate :library, to: :location
+
+  validates :sunday, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday, calendar_range: true
 end

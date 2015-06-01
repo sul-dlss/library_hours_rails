@@ -10,6 +10,26 @@ class Calendar < ActiveRecord::Base
     where('dtstart BETWEEN ? AND ?', t.to_time.midnight, t.to_time.end_of_day)
   end)
 
+  def self.valid_range?(range)
+    case range
+    when 'closed'
+      true
+    when 'open 24h'
+      true
+    when /-/
+      parse_time_range(range).is_a? Range
+    end
+  rescue
+    false
+  end
+
+  def self.parse_time_range(combo)
+    range_begin, range_end = combo.split('-')
+    range_begin += 'm' if range_begin =~ (/[ap]$/)
+    range_end += 'm' if range_end =~ (/[ap]$/)
+    Time.parse(range_begin)..Time.parse(range_end)
+  end
+
   def update_hours(combo)
     case combo
     when 'closed'
@@ -17,15 +37,8 @@ class Calendar < ActiveRecord::Base
     when 'open 24h'
       open_24h!
     when /-/
-      update_range(parse_time_range(combo))
+      update_range(Calendar.parse_time_range(combo))
     end
-  end
-
-  def parse_time_range(combo)
-    range_begin, range_end = combo.split('-')
-    range_begin += 'm' if range_begin =~ (/[ap]$/)
-    range_end += 'm' if range_end =~ (/[ap]$/)
-    Time.parse(range_begin)..Time.parse(range_end)
   end
 
   def date
