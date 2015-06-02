@@ -60,8 +60,8 @@ class Hours
 
     return MissingCalendar.new(dtstart: date, dtend: date) unless r && r.present?
 
-    Calendar.new.tap do |c|
-      c.update_hours(r, date)
+    Calendar.new(dtstart: date).tap do |c|
+      c.update_hours(r)
     end
   end
 end

@@ -1,7 +1,7 @@
 xml.instruct!
 xml.libraryHours do
   @libraries.each do |library|
-    library.locations.each do |location|
+    library.locations.with_hours.each do |location|
       location.hours(@range).each do |cals|
         cals.each do |cal|
           xml.entry do
@@ -10,7 +10,7 @@ xml.libraryHours do
             xml.locationNodeId location.node_mapping.node_id
             xml.opensAt cal.dtstart.to_i
             xml.closesAt cal.dtend_drupal.to_i
-            xml.status cal.closed? ? '0' : '1'
+            xml.status cal.status_drupal
             xml.librarySlug library.slug
             xml.locationSlug location.slug
           end
