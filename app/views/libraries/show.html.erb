@@ -2,13 +2,16 @@
 
 
 <h1><%= @library.name %></h1>
-<%= link_to 'Edit', edit_library_path(@library), class: 'btn btn-default' if can? :edit, @library %>
-
+<% if current_user.superadmin? %>
+<%= link_to 'Edit library', edit_library_path(@library), class: 'btn btn-default' if can? :edit, @library %>
+<%= link_to 'Edit hours', library_term_hours_path(@library), class: 'btn btn-default' if can? :edit, @library %>
+<% else %>
+<%= link_to 'Edit', library_term_hours_path(@library), class: 'btn btn-default' if can? :edit, @library %>
+<% end %>
 <h2>Locations</h2>
 
 <div class="row">
   <div class="col-xs-12 col-md-9">
-    <%= link_to 'Edit normal hours', library_term_hours_path(@library), class: 'btn btn-info' if can? :edit, @library %>
 
     <%= link_to 'Download CSV', library_url(@library, format: 'csv'), class: 'btn btn-default pull-right' if can? :manage, @library %>
   </div>

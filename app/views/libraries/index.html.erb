@@ -1,4 +1,4 @@
-<%= render 'import' if can? :manage, Spreadsheet %>
+<%= render 'admin' if can? :manage, Spreadsheet %>
 <%= render 'range' %>
 <% @libraries.each do |library| %>
   <div class="row" itemscope itemtype="http://schema.org/Place">

@@ -95,4 +95,15 @@ class Calendar < ActiveRecord::Base
 
     start...(start + 7.days)
   end
+
+  def status_drupal
+    case
+    when cal.closed?
+      0
+    when cal.open24h?
+      2
+    else
+      1
+    end
+  end
 end
