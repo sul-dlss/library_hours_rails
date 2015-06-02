@@ -21,22 +21,18 @@
   <table id="locations" class="table">
     <thead>
       <tr>
-        <th>Name</th><th>Slug</th><th>Drupal Node ID</th><th></th>
+        <th>Name</th><th>Keeps Hours</th><th></th>
       </tr>
     </thead>
     <tbody id="locations-body">
       <%= f.fields_for :locations do |l| %>
         <tr>
           <td>
+            <%= l.hidden_field :id %>
             <%= l.text_field :name, hide_label: true %>
           </td>
           <td>
-            <%= l.text_field :slug, hide_label: true %>
-          </td>
-          <td>
-            <%= l.fields_for :node_mapping do |n| %>
-              <%= n.text_field :node_id, hide_label: true %>
-            <% end %>
+            <%= l.check_box :keeps_hours, hide_label: true %>
           </td>
           <td>
             <%= l.link_to_remove "Remove" %>

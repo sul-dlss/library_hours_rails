@@ -12,7 +12,7 @@
     </tr>
   </thead>
   <tbody>
-    <% locations.select { |x| x.calendars.any? }.each do |l| %>
+    <% locations.with_hours.each do |l| %>
       <% term_hour = l.term_hours.where(term: term).first || l.term_hours.build(term: term) %>
       <tr>
         <td class="location-name"><%= link_to l.name, library_location_path(l.library, l) %></td>

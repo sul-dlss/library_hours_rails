@@ -49,9 +49,10 @@ ActiveRecord::Schema.define(version: 20150527220242) do
   create_table "locations", force: :cascade do |t|
     t.string   "name"
     t.string   "slug"
+    t.boolean  "keeps_hours", default: false
     t.integer  "library_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   add_index "locations", ["library_id"], name: "index_locations_on_library_id"

@@ -18,12 +18,13 @@
   </div>
 </div>
 
-<% locations_without_hours = @library.locations.select { |x| x.calendars.none? } %>
-<% if locations_without_hours.any? %>
-<h2>Other locations</h2>
-<ul class="list-unstyled">
-  <% locations_without_hours.each do |l| %>
-    <li><%= link_to l.name, library_location_path(@library, l) %></li>
+<% if current_user.superadmin? %>
+  <% if @library.locations.without_hours.any? %>
+  <h2>Other locations</h2>
+  <ul class="list-unstyled">
+    <% @library.locations.without_hours.each do |l| %>
+      <li><%= link_to l.name, library_location_path(@library, l) %></li>
+    <% end %>
+    </ul>
   <% end %>
-  </ul>
 <% end %>

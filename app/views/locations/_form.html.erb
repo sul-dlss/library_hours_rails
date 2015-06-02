@@ -16,6 +16,7 @@
   <%= f.fields_for :node_mapping do |n| %>
     <%= n.text_field :node_id %>
   <% end %>
+  <%= f.check_box :keeps_hours %>
 
   <div class="actions">
     <%= f.primary %>

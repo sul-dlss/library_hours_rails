@@ -5,6 +5,9 @@ class Location < ActiveRecord::Base
   has_many :term_hours
   accepts_nested_attributes_for :node_mapping
 
+  scope :with_hours, ->() { where(keeps_hours: true) }
+  scope :without_hours, ->() { where(keeps_hours: false) }
+
   validates :name, presence: true
 
   extend FriendlyId

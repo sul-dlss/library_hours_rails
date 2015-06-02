@@ -8,7 +8,7 @@
     </tr>
   </thead>
   <tbody>
-    <% locations.select { |x| x.calendars.any? }.each do |l| %>
+    <% ((locations.with_hours if locations.respond_to? :with_hours) || locations).each do |l| %>
       <tr>
         <td class="location-name"><%= link_to l.name, library_location_path(l.library, l) %></td>
     
