@@ -15,6 +15,10 @@ class ApplicationController < ActionController::Base
   end
 
   def set_range
+    if params[:date]
+      redirect_to week: Time.parse(params[:date]).strftime('%YW%V'), date: nil
+    end
+
     @range = Time.parse(params[:from]).to_date..Time.parse(params[:to]).to_date if params[:from] && params[:to]
     @range ||= Time.parse(params[:when]).to_date..Time.parse(params[:when]).to_date if params[:when]
     @range ||= Calendar.week(params[:week]) if params[:week]

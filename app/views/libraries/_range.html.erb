@@ -1,8 +1,10 @@
 <div class="row">
   <div class="col-md-2 pull-right">
     Jump to:
-    <input type="date" class="form-control" />
-
+    <form method="GET">
+      <input name="date" type="date" class="form-control" id="jump-date" data-href="<%= url_for(params.merge(week: "%YW%V")) %>"/>
+      <input type="submit" class="hidden"/>
+    </form>
     <!-- Single button -->
     <div class="btn-group">
       <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">

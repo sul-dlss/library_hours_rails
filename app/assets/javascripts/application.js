@@ -35,4 +35,8 @@ $(document).on("ready page:load", function() {
   $('.weekly-hours .editable').on('save', function() {
     $(this).closest('td').addClass('exceptions');
   });
+
+  $('#jump-date').on('blur', function() {
+    $(this).closest('form').submit();
+  });
 });
