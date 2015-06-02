@@ -35,6 +35,6 @@ module ApplicationHelper
   end
 
   def terms_by_year
-    Term.current_and_upcoming.group_by(&:year)
+    Term.current_and_upcoming.quarters_and_intersessions.group_by(&:year)
   end
 end

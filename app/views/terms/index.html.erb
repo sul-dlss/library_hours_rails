@@ -1,6 +1,14 @@
 <h1>Listing Terms</h1>
 
-<% @terms.group_by(&:year).each do |year, terms| %>
+<h2>Quarters and Intersessions</h2>
+<% @terms.quarters_and_intersessions.group_by(&:year).each do |year, terms| %>
+  <h2><%= year %></h2>
+
+  <%= render terms.sort_by(&:dtstart) %>
+<% end %>
+
+<h2>Holidays</h2>
+<% @terms.holidays.group_by(&:year).each do |year, terms| %>
   <h2><%= year %></h2>
 
   <%= render terms.sort_by(&:dtstart) %>

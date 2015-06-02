@@ -2,10 +2,12 @@ require 'rails_helper'
 
 RSpec.describe 'terms/index', type: :view do
   let(:term) { create(:term) }
+  let(:terms) do
+    double(quarters_and_intersessions: [term], holidays: [])
+  end
+
   before(:each) do
-    assign(:terms, [
-      term
-    ])
+    assign(:terms, terms)
     allow(view).to receive(:can?).and_return(true)
   end
 

@@ -90,8 +90,9 @@ ActiveRecord::Schema.define(version: 20150527220242) do
     t.datetime "dtstart"
     t.datetime "dtend"
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.boolean  "holiday",    default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
 end
