@@ -86,3 +86,38 @@ end
   location = Location.find(location_id)
   FriendlyId::Slug.find_or_create_by slug: old_slug, sluggable: location
 end
+
+[
+  { term: 'Fall 2014',   quarter: 'Fall',   start_date: Date.new(2014, 1, 1), end_date: Date.new(2014, 12, 12) },
+
+  { term: 'Winter 2015', quarter: 'Winter', end_date: Date.new(2015, 3, 20) },
+  { term: 'Spring 2015', quarter: 'Spring', end_date: Date.new(2015, 6, 10) },
+  { term: 'Summer 2015', quarter: 'Summer', end_date: Date.new(2015, 8, 15) },
+  { term: 'Fall 2015',   quarter: 'Fall',   end_date: Date.new(2015, 12, 11) },
+
+  { term: 'Winter 2016', quarter: 'Winter', end_date: Date.new(2016, 3, 18) },
+  { term: 'Spring 2016', quarter: 'Spring', end_date: Date.new(2016, 6, 8) },
+  { term: 'Summer 2016', quarter: 'Summer', end_date: Date.new(2016, 8, 13) },
+  { term: 'Fall 2016',   quarter: 'Fall',   end_date: Date.new(2016, 12, 16) },
+
+  { term: 'Winter 2017', quarter: 'Winter', end_date: Date.new(2017, 3, 24) },
+  { term: 'Spring 2017', quarter: 'Spring', end_date: Date.new(2017, 6, 14) },
+  { term: 'Summer 2017', quarter: 'Summer', end_date: Date.new(2017, 8, 19) },
+  { term: 'Fall 2017',   quarter: 'Fall',   end_date: Date.new(2017, 12, 15) },
+
+  { term: 'Winter 2018', quarter: 'Winter', end_date: Date.new(2018, 3, 23) },
+  { term: 'Spring 2018', quarter: 'Spring', end_date: Date.new(2018, 6, 13) },
+  { term: 'Summer 2018', quarter: 'Summer', end_date: Date.new(2018, 8, 18) },
+  { term: 'Fall 2018',   quarter: 'Fall',   end_date: Date.new(2018, 12, 14) },
+
+  { term: 'Winter 2019', quarter: 'Winter', end_date: Date.new(2019, 3, 22) },
+  { term: 'Spring 2019', quarter: 'Spring', end_date: Date.new(2019, 6, 12) },
+  { term: 'Summer 2019', quarter: 'Summer', end_date: Date.new(2019, 8, 17) },
+  { term: 'Fall 2019',   quarter: 'Fall',   end_date: Date.new(2019, 12, 13) },
+
+  { term: 'Winter 2020', quarter: 'Winter', end_date: Date.new(2020, 3, 20) },
+  { term: 'Spring 2020', quarter: 'Spring', end_date: Date.new(2020, 6, 10) },
+  { term: 'Summer 2020', quarter: 'Summer', end_date: Date.new(2020, 8, 15) }
+].each do |t|
+  Term.create(name: t[:quarter], dtstart: t[:start_date] || Term.last.dtend + 1.day, dtend: t[:end_date])
+end
