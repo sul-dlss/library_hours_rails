@@ -31,4 +31,8 @@ $(document).on("ready page:load", function() {
           $(that).closest('td').next().find('.editable').editable('show');
       }, 200);
   });
+
+  $('.weekly-hours .editable').on('save', function() {
+    $(this).closest('td').addClass('exceptions');
+  });
 });

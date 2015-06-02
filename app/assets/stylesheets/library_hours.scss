@@ -19,3 +19,7 @@ td.hours,
 th.hours {
   width: 100px;
 }
+
+td.exceptions {
+  background-color: $alert-danger-bg;
+}

@@ -1,4 +1,4 @@
-<table class="table table-striped">
+<table class="table table-striped weekly-hours">
   <thead>
     <tr>
       <th class="location-name"></th>
@@ -13,7 +13,7 @@
         <td class="location-name"><%= link_to l.name, library_location_path(l.library, l) %></td>
     
         <% l.hours(@range).each do |calendars| %>
-          <td class="hours" itemprop="openingHoursSpecification" itemscope itemtype="http://schema.org/OpeningHoursSpecification">
+          <td class="hours <%= 'exceptions' if calendars.any?(&:persisted?) %>" itemprop="openingHoursSpecification" itemscope itemtype="http://schema.org/OpeningHoursSpecification">
             <span itemprop="validFrom" content="<%= l calendars.first.date %>" aria-hidden="true"></span>
             <span itemprop="validThrough" content="<%= l calendars.first.date %>" aria-hidden="true"></span>
             <% calendars.each do |d|  %>
