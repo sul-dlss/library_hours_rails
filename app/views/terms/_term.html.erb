@@ -1,1 +1,1 @@
-<h3><%= term.name %> <small><%= l term.dtstart.localtime.to_date %> - <%= l term.dtend.localtime.to_date %></small></h3>
+<h3><%= link_to term.name, [:edit, term] %> <small><%= l term.dtstart.localtime.to_date %> - <%= l term.dtend.localtime.to_date %></small></h3>
