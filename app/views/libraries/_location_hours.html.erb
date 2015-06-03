@@ -3,7 +3,7 @@
     <tr>
       <th class="location-name"></th>
       <% @range.to_a.each do |d| %>
-        <th class="hours"><%= render_short_date d %></th>
+        <th class="hours <%= 'holiday' if Term.holiday? d %> "><%= render_short_date d %></th>
       <% end %>
     </tr>
   </thead>

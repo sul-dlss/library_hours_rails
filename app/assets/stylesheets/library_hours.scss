@@ -20,7 +20,8 @@ th.hours {
   width: 100px;
 }
 
-td.exceptions {
+td.exceptions,
+th.holiday {
   background-color: $alert-danger-bg;
 }
 

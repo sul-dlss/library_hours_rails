@@ -14,4 +14,8 @@ class Term < ActiveRecord::Base
   end
 
   delegate :year, to: :dtstart
+
+  def self.holiday?(dt)
+    Term.holidays.where('dtstart <= ? AND dtend >= ?', dt.to_time.midnight, dt.to_time.midnight).any?
+  end
 end
