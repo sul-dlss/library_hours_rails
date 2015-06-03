@@ -7,6 +7,7 @@ class LibrariesController < ApplicationController
   # GET /libraries.json
   # GET /libraries.drupal_xml
   def index
+    @libraries = @libraries.select { |x| x.locations.any?(&:keeps_hours) }
     respond_to do |format|
       format.html
       format.json

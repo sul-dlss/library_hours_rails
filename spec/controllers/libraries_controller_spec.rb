@@ -55,6 +55,7 @@ RSpec.describe LibrariesController, type: :controller do
   describe 'GET #index' do
     it 'assigns all libraries as @libraries' do
       library = Library.create! valid_attributes
+      library.locations << create(:location, keeps_hours: true)
       get :index, {}, valid_session
       expect(assigns(:libraries)).to eq([library])
     end
