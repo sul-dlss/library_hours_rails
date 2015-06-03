@@ -33,6 +33,7 @@ class SpreadsheetsController < ApplicationController
   # POST /spreadsheets
   # POST /spreadsheets.json
   def create
+    params['spreadsheet']['attachment'].rewind
     @spreadsheet = Spreadsheet.new(spreadsheet_params)
 
     respond_to do |format|
