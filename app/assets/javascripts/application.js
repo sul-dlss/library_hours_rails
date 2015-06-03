@@ -37,6 +37,8 @@ $(document).on("ready page:load", function() {
   });
 
   $('#jump-date').on('blur', function() {
-    $(this).closest('form').submit();
+    if ($(this).val() !== "") {
+      $(this).closest('form').submit();
+    }
   });
 });

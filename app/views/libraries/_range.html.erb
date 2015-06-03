@@ -1,21 +1,32 @@
 <div class="row">
   <div class="col-md-2 pull-right">
-    Jump to:
-    <form method="GET">
-      <input name="date" type="date" class="form-control" id="jump-date" data-href="<%= url_for(params.merge(week: "%YW%V")) %>"/>
-      <input type="submit" class="hidden"/>
-    </form>
-    <!-- Single button -->
-    <div class="btn-group">
-      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-        Quarters + Holidays <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu" role="menu">
-        <% Term.current_and_upcoming.each do |t| %>
-        <li><%= link_to t.name + " (#{t.dtstart.strftime('%Y')})", params.merge(week: t.dtstart.strftime("%YW%V"))%></li>
-        <% end %>
-      </ul>
-    </div>
+        <form method="GET" class="form form-horizontal">
+          <div class="form-group">
+          <label for="jump-date" class="control-label">Jump to:</label>
+          <input name="date" type="date" class="form-control" id="jump-date" data-href="<%= url_for(params.merge(week: "%YW%V")) %>"/>
+          </div>
+          <div class="form-group">
+            <div class="btn-group pull-right" id="jump-term-group">
+              <button id="jump-term" type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                Quarters + Holidays <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                <% if can? :create, Term %>
+                  <li><%= link_to 'Manage Terms', terms_path %></li>
+                <% end %>
+                <% Term.current_and_upcoming.each do |t| %>
+                <li><%= link_to params.merge(week: t.dtstart.strftime("%GW%V")) do %>
+                  <%= t.name + " (#{t.dtstart.strftime('%Y')})" %>
+                  <small><%= l t.dtstart.to_date, format: :short %>-<%= l t.dtend.to_date, format: :short %></small>
+                <% end %>
+                </li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+          <input type="submit" class="hidden"/>
+        </form>
+      </div>
   </div>
 </div>
 

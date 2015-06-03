@@ -23,3 +23,14 @@ th.hours {
 td.exceptions {
   background-color: $alert-danger-bg;
 }
+
+#jump-term,
+#jump-term-group {
+  width: 100%;
+
+  .dropdown-menu {
+    height: 250px;
+    overflow-y: auto;
+    width: 100%;
+  }
+}
