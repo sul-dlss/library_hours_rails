@@ -18,6 +18,7 @@ class Location < ActiveRecord::Base
   end
 
   def hours(range)
-    @hours ||= Hours.new(self, range)
+    @hours ||= {}
+    @hours[range] ||= Hours.new(self, range)
   end
 end

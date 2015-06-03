@@ -1,0 +1,11 @@
+<form class="form" action="<%= libraries_path(format: 'csv') %>" method="GET">
+  <div class="form-group">
+    <label class="control-label">Libraries</label>
+    <%= select_tag 'ids', options_from_collection_for_select(Library.all, :id, :name), multiple: true, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+
+    <%= date_field_tag 'from' %> to <%= date_field_tag 'to' %> 
+  </div>
+  <input value="Download" type="submit" class="btn btn-primary" />
+</form>

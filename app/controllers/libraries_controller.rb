@@ -11,7 +11,7 @@ class LibrariesController < ApplicationController
       format.html
       format.json
       format.drupal_xml
-      format.csv { LegacySpreadsheetParser.generate(@libraries) }
+      format.csv { render text: LegacySpreadsheetParser.generate(@libraries.select { |x| params[:ids].blank? || params[:ids].include?(x.id.to_s) }, @range) }
     end
   end
 
@@ -21,8 +21,11 @@ class LibrariesController < ApplicationController
     respond_to do |format|
       format.html
       format.json
-      format.csv { LegacySpreadsheetParser.generate(@library) }
     end
+  end
+
+  def spreadsheet
+
   end
 
   def hours_drupal

@@ -11,6 +11,10 @@ Rails.application.routes.draw do
   end
 
   resources :libraries do
+    collection do
+      get :spreadsheet
+    end
+
     # we want to be able to view and do in-place-edits across the library's
     # locations, but create and modify individual hours at the location level (below)
     resources :term_hours, only: :index

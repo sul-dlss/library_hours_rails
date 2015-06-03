@@ -23,7 +23,7 @@
   end
 
   def self.generate(libraries, date_range = nil)
-    locations = Array(libraries).map(&:locations).flatten.reject { |x| x.calendars.none? }
+    locations = Array(libraries).map(&:locations).flatten.select { |x| x.keeps_hours }
     date_range ||= Time.zone.now.to_date..(Time.zone.now + 1.year).to_date
     CSV.generate do |csv|
       csv << ['library hours']
@@ -31,8 +31,22 @@
       csv << ['Date', 'Day', 'Type', 'Notes'] + locations.map { ['Open', 'Close'] }.flatten
 
       date_range.each do |d|
-        c = Calendar.for_date(d).first
-        csv << [d, d.strftime('%A'), c.summary, c.description] + locations.map { |l| c = l.calendars.for_date(d).first; c ? [c.dtstart.localtime.strftime('%I:%M %p'), c.dtend.localtime.strftime('%I:%M %p')] : ['', ''] }.flatten
+        c = Calendar.for_date(d).first || Calendar.new
+
+        row = [d, d.strftime('%A'), c.summary, c.description]
+        location_hours = locations.map do |l|
+          c = l.hours(date_range)[d].first
+          case
+          when c.nil?, c.is_a?(MissingCalendar)
+            [nil, nil]
+          when c.closed?
+            ['closed', nil]
+          else
+            [c.dtstart.localtime.strftime('%I:%M %p'), c.dtend.localtime.strftime('%I:%M %p')]
+          end
+        end
+
+        csv << row + location_hours.flatten
       end
     end
   end

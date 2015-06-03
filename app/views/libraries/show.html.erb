@@ -10,12 +10,6 @@
 <% end %>
 <h2>Locations</h2>
 
-<div class="row">
-  <div class="col-xs-12 col-md-9">
-    <%= link_to 'Download CSV', library_url(@library, format: 'csv'), class: 'btn btn-default pull-right' if can? :manage, @library %>
-  </div>
-</div>
-
 <%= render 'range' %>
 <%= render partial: 'location_hours', locals: { locations: @library.locations } %>
 
