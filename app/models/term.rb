@@ -26,11 +26,11 @@ class Term < ActiveRecord::Base
   delegate :year, to: :dtstart
 
   def terms_cannot_overlap
-    if Term.where(holiday: false).where('? BETWEEN dtstart AND dtend', dtstart).any?
+    if Term.where(holiday: false).where('? BETWEEN dtstart AND dtend', dtstart).where.not(id: id).any?
       errors.add(:dtstart, "can't overlap with other terms")
     end
 
-    if Term.where(holiday: false).where('? BETWEEN dtstart AND dtend', dtend).any?
+    if Term.where(holiday: false).where('? BETWEEN dtstart AND dtend', dtend).where.not(id: id).any?
       errors.add(:dtend, "can't overlap with other terms")
     end
   end
