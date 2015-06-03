@@ -28,6 +28,12 @@ class TermHoursController < ApplicationController
   # POST /term_hours.json
   def create
     @term_hour.term = Term.find(params.require(:term))
+
+    if TermHour.exists?(term: @term_hour.term, location: @term_hour.location)
+      @term_hour = TermHour.find_by(term: @term_hour.term, location: @term_hour.location)
+      return update
+    end
+
     respond_to do |format|
       if @term_hour.save
         format.html { redirect_to library_location_term_hours_path(@library, @location), notice: 'Term hour was successfully created.' }
