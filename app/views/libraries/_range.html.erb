@@ -25,7 +25,7 @@
                 <% if can? :create, Term %>
                   <li><%= link_to 'Manage Terms', terms_path %></li>
                 <% end %>
-                <% Term.current_and_upcoming.each do |t| %>
+                <% Term.current_and_upcoming(2.years).each do |t| %>
                 <li><%= link_to params.merge(week: t.dtstart.strftime("%GW%V")) do %>
                   <%= t.name + " (#{t.dtstart.strftime('%Y')})" %>
                   <small><%= l t.dtstart.to_date, format: :short %>-<%= l t.dtend.to_date, format: :short %></small>

@@ -1,6 +1,6 @@
 <h1>Listing Term Hours for <%= @library.name %></h1>
 
-<% terms_by_year.each do |year, terms| %>
+<% @terms.each do |year, terms| %>
   <h2><%= year %></h2>
   <% terms.each do |term| %>
     <h3><%= term.name %> <small><%= l term.dtstart.localtime.to_date %> - <%= l term.dtend.localtime.to_date %></small></h3>

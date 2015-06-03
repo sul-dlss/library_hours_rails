@@ -7,6 +7,7 @@ class TermHoursController < ApplicationController
   # GET /term_hours.json
   def index
     authorize! :manage, @library
+    @terms = Term.current_and_upcoming(1.year).quarters_and_intersessions.group_by(&:year)
   end
 
   # GET /term_hours/1

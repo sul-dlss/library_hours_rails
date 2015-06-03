@@ -11,7 +11,7 @@ class Term < ActiveRecord::Base
   scope :quarters_and_intersessions, ->() { where(holiday: false) }
   scope :holidays, ->() { where(holiday: true) }
 
-  scope :current_and_upcoming, ->() { where('dtstart >= ?', Time.zone.now.beginning_of_year) }
+  scope :current_and_upcoming, ->(range) { where('dtstart >= ? AND dtstart <= ?', Time.zone.now.beginning_of_year, (Time.zone.now + range).end_of_year) }
   scope :for_date, (lambda do |dt|
     where('dtstart <= ? AND dtend >= ?', dt.to_time.midnight, dt.to_time.midnight)
   end)
