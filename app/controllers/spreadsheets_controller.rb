@@ -33,7 +33,7 @@ class SpreadsheetsController < ApplicationController
   # POST /spreadsheets
   # POST /spreadsheets.json
   def create
-    params['spreadsheet']['attachment'].rewind
+    params['spreadsheet']['attachment'].rewind if params['spreadsheet'] && params['spreadsheet']['attachment']
     @spreadsheet = Spreadsheet.new(spreadsheet_params)
 
     respond_to do |format|
