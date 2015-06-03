@@ -20,7 +20,11 @@ th.hours {
   width: 100px;
 }
 
-td.exceptions,
+td.exceptions {
+  @extend .alert-info;
+}
+
+td.holiday,
 th.holiday {
   @extend .alert-danger;
 }

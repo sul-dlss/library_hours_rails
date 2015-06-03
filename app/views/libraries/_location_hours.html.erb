@@ -18,7 +18,7 @@
         <td class="location-name"><%= link_to l.name, library_location_path(l.library, l) %></td>
     
         <% l.hours(@range).each do |calendars| %>
-          <td class="hours <%= 'exceptions' if calendars.any?(&:persisted?) %>" itemprop="openingHoursSpecification" itemscope itemtype="http://schema.org/OpeningHoursSpecification">
+          <td class="hours <%= 'exceptions' if calendars.any?(&:persisted?) %> <%= 'holiday' if Term.holiday? calendars.first.date %>" itemprop="openingHoursSpecification" itemscope itemtype="http://schema.org/OpeningHoursSpecification">
             <span itemprop="validFrom" content="<%= l calendars.first.date %>" aria-hidden="true"></span>
             <span itemprop="validThrough" content="<%= l calendars.first.date %>" aria-hidden="true"></span>
             <% calendars.each do |d|  %>
