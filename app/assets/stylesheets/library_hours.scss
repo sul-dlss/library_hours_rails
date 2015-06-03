@@ -5,6 +5,14 @@
 @import 'top-navbar';
 @import 'sul-footer';
 
+.date-range {
+  h2 {
+    display: inline-block;
+    padding-left: 3ch;
+    padding-right: 3ch;
+    margin-top: 3.5em;
+  }
+}
 .closed,
 .open-24h {
   color: $gray-light;

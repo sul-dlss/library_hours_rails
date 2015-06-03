@@ -1,9 +1,15 @@
-<div class="row">
+<div class="row date-range">
+  <nav class="col-md-6 col-md-push-3">
+    <%= link_to "&larr; Previous".html_safe, params.merge(week: (@range.begin - 1.week + 1.day).strftime("%GW%V")) %>
+    <h2><%= l(@range.begin, format: :long) %> – <%= l(@range.end, format: :long) %></h2>
+    <%= link_to "Next &rarr;".html_safe, params.merge(week: (@range.begin + 1.week + 1.day).strftime("%GW%V")) %>
+  </nav>
+
   <div class="col-md-2 pull-right">
         <form method="GET" class="form form-horizontal">
           <div class="form-group">
           <label for="jump-date" class="control-label">Jump to:</label>
-          <input name="date" type="date" class="form-control" id="jump-date" data-href="<%= url_for(params.merge(week: "%YW%V")) %>"/>
+          <input name="date" type="date" class="form-control" id="jump-date" data-href="<%= url_for(params.merge(week: "%GW%V")) %>"/>
           </div>
           <div class="form-group">
             <div class="btn-group pull-right" id="jump-term-group">
@@ -29,11 +35,3 @@
       </div>
   </div>
 </div>
-
-<nav>
-  <ul class="pager">
-    <li class="previous"><%= link_to "&larr; Previous".html_safe, params.merge(week: (@range.begin - 1.week + 1.day).strftime("%YW%V")) %></li>
-    <li><%= l(@range.begin, format: :long) %> – <%= l(@range.end, format: :long) %></li>
-    <li class="next"><%= link_to "Next &rarr;".html_safe, params.merge(week: (@range.begin + 1.week + 1.day).strftime("%YW%V")) %></li>
-  </ul>
-</nav>

@@ -8,7 +8,6 @@
 <% else %>
 <%= link_to 'Edit', library_term_hours_path(@library), class: 'btn btn-default' if can? :edit, @library %>
 <% end %>
-<h2>Locations</h2>
 
 <%= render 'range' %>
 <%= render partial: 'location_hours', locals: { locations: @library.locations } %>
