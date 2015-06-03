@@ -22,7 +22,7 @@ th.hours {
 
 td.exceptions,
 th.holiday {
-  background-color: $alert-danger-bg;
+  @extend .alert-danger;
 }
 
 #jump-term,
