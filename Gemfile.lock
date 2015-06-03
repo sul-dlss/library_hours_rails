@@ -120,6 +120,7 @@ GEM
       domain_name (~> 0.5)
     hurley (0.1)
     i18n (0.7.0)
+    is_it_working (1.0.11)
     jbuilder (2.2.16)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
@@ -289,6 +290,7 @@ DEPENDENCIES
   factory_girl_rails
   friendly_id
   hurley
+  is_it_working
   jbuilder (~> 2.0)
   jquery-rails
   lyberteam-capistrano-devel
