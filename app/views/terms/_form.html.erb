@@ -12,8 +12,8 @@
   <% end %>
   
   <%= f.text_field :name %>
-  <%= f.text_field :dtstart, type: 'date' %>
-  <%= f.text_field :dtend, type: 'date' %>
+  <%= f.text_field :dtstart, type: 'date', value: (f.object.dtstart || Time.now).to_date %>
+  <%= f.text_field :dtend, type: 'date', value: (f.object.dtend || Time.now).to_date %>
   <%= f.check_box :holiday %>
 
   <div class="actions">

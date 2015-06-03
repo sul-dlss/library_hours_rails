@@ -16,12 +16,24 @@ class Term < ActiveRecord::Base
     where('dtstart <= ? AND dtend >= ?', dt.to_time.midnight, dt.to_time.midnight)
   end)
 
+  validate :terms_cannot_overlap, unless: :holiday?
+
   def self.missing_for_location(location)
     blacklisted_term_ids = location.term_hours.pluck(:term_id)
     Term.all.reject { |t| blacklisted_term_ids.include? t.id }
   end
 
   delegate :year, to: :dtstart
+
+  def terms_cannot_overlap
+    if Term.where(holiday: false).where('? BETWEEN dtstart AND dtend', dtstart).any?
+      errors.add(:dtstart, "can't overlap with other terms")
+    end
+
+    if Term.where(holiday: false).where('? BETWEEN dtstart AND dtend', dtend).any?
+      errors.add(:dtend, "can't overlap with other terms")
+    end
+  end
 
   def self.holiday?(dt)
     Term.holidays.for_date(dt).any?
