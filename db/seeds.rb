@@ -119,5 +119,18 @@ end
   { term: 'Spring 2020', quarter: 'Spring', end_date: Date.new(2020, 6, 10) },
   { term: 'Summer 2020', quarter: 'Summer', end_date: Date.new(2020, 8, 15) }
 ].each do |t|
-  Term.create(name: t[:quarter], dtstart: t[:start_date] || Term.last.dtend + 1.day, dtend: t[:end_date])
+  Term.find_or_create_by(name: t[:quarter], dtstart: t[:start_date] || Term.last.dtend + 1.day, dtend: t[:end_date])
+end
+
+[
+  { name: 'Martin Luther King, Jr. Day', dtstart: Date.new(2015, 1, 19) },
+  { name: "Presidents' Day", dtstart: Date.new(2015, 2, 16) },
+  { name: 'Memorial Day', dtstart: Date.new(2015, 5, 25) },
+  { name: 'Independence Day', dtstart: Date.new(2015, 7, 3), dtend: Date.new(2015, 7, 4) },
+  { name: 'Labor Day', dtstart: Date.new(2015, 9, 7) },
+  { name: 'Thanksgiving Holiday', dtstart: Date.new(2015, 11, 26), dtend: Date.new(2015, 11, 27) },
+  { name: 'Winter Holiday', dtstart: Date.new(2015, 12, 24), dtend: Date.new(2015, 12, 25) },
+  { name: "New Year's Day", dtstart: Date.new(2016, 1, 1) }
+].each do |t|
+  Term.find_or_create_by(t.reverse_merge(dtend: t[:dtstart], holiday: true))
 end

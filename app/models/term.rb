@@ -12,6 +12,9 @@ class Term < ActiveRecord::Base
   scope :holidays, ->() { where(holiday: true) }
 
   scope :current_and_upcoming, ->() { where('dtstart >= ?', Time.zone.now.beginning_of_year) }
+  scope :for_date, (lambda do |dt|
+    where('dtstart <= ? AND dtend >= ?', dt.to_time.midnight, dt.to_time.midnight)
+  end)
 
   def self.missing_for_location(location)
     blacklisted_term_ids = location.term_hours.pluck(:term_id)
@@ -21,6 +24,6 @@ class Term < ActiveRecord::Base
   delegate :year, to: :dtstart
 
   def self.holiday?(dt)
-    Term.holidays.where('dtstart <= ? AND dtend >= ?', dt.to_time.midnight, dt.to_time.midnight).any?
+    Term.holidays.for_date(dt).any?
   end
 end
