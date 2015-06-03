@@ -93,7 +93,7 @@ class Calendar < ActiveRecord::Base
   def self.week(str)
     start = DateTime.strptime(str, '%GW%V').to_time.midnight.to_date
 
-    start...(start + 7.days)
+    start..(start + 6.days)
   end
 
   def status_drupal
