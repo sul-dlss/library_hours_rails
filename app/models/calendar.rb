@@ -27,7 +27,7 @@ class Calendar < ActiveRecord::Base
     range_begin, range_end = combo.split('-')
     range_begin += 'm' if range_begin =~ (/[ap]$/)
     range_end += 'm' if range_end =~ (/[ap]$/)
-    Time.parse(range_begin)..Time.parse(range_end)
+    Time.zone.parse(range_begin)..Time.zone.parse(range_end)
   end
 
   def update_hours(combo)
@@ -48,24 +48,25 @@ class Calendar < ActiveRecord::Base
   def closed!
     self.closed = true
 
-    self.dtstart = dtstart.localtime.midnight
+    self.dtstart = dtstart.midnight
     self.dtend = dtstart
   end
 
   def open_24h!
     self.closed = false
-    self.dtstart = dtstart.localtime.midnight
-    self.dtend = dtstart.localtime.end_of_day
+    self.dtstart = dtstart.midnight
+    self.dtend = dtstart.end_of_day
   end
 
   def update_range(range)
     self.closed = false
-    self.dtstart = Time.parse(dtstart.localtime.strftime('%F') + range.begin.strftime('T%T'))
-    self.dtend = Time.parse(dtstart.localtime.strftime('%F') + range.end.strftime('T%T'))
+    self.dtstart = Time.zone.parse(dtstart.strftime('%F') + range.begin.strftime('T%T'))
+    self.dtend = Time.zone.parse(dtstart.strftime('%F') + range.end.strftime('T%T'))
 
     if dtend < dtstart
       next_date = dtstart.to_date + 1.day
-      self.dtend = Time.parse("#{next_date}" + range.end.strftime('T%T'))
+      # Parse the time again, just in case daylight saving happened.
+      self.dtend = Time.zone.parse("#{next_date}" + range.end.strftime('T%T'))
     end
   end
 
@@ -86,12 +87,12 @@ class Calendar < ActiveRecord::Base
   end
 
   def open_24h?
-    dtstart.localtime == dtstart.localtime.midnight &&
-      dtend.localtime > dtstart.localtime.end_of_day - 1.second
+    dtstart == dtstart.midnight &&
+      dtend >= dtstart.end_of_day - 1.second
   end
 
   def self.week(str)
-    start = DateTime.strptime(str, '%GW%V').to_time.midnight.to_date
+    start = DateTime.strptime(str, '%GW%V').to_date - 1.day
 
     start..(start + 6.days)
   end

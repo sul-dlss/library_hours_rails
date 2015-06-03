@@ -4,7 +4,7 @@ class CalendarsController < ApplicationController
   load_and_authorize_resource through: :location
 
   def create
-    @calendar.dtstart = Time.parse(params[:day])
+    @calendar.dtstart = Time.zone.parse(params[:day])
     @calendar.update_hours(date_params[:time])
 
     respond_to do |format|

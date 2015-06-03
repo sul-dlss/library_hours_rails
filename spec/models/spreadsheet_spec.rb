@@ -23,8 +23,8 @@ Date,Day,Type,Notes,Open,Closed
       expect(event.date).to eq Date.parse('2015-05-22')
       expect(event.summary).to eq 'Regular'
       expect(event.description).to eq 'Day'
-      expect(event.dtstart).to eq Time.parse('2015-05-22T08:00:00')
-      expect(event.dtend).to eq Time.parse('2015-05-22T21:00:00')
+      expect(event.dtstart).to eq Time.zone.parse('2015-05-22T08:00:00')
+      expect(event.dtend).to eq Time.zone.parse('2015-05-22T21:00:00')
     end
   end
 end

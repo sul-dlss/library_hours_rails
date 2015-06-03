@@ -1,12 +1,17 @@
 class Term < ActiveRecord::Base
   validates :name, presence: true
 
+  before_save do
+    self.dtstart &&= dtstart.beginning_of_day
+    self.dtend &&= dtend.end_of_day
+  end
+
   default_scope { order(dtstart: 'asc') }
 
   scope :quarters_and_intersessions, ->() { where(holiday: false) }
   scope :holidays, ->() { where(holiday: true) }
 
-  scope :current_and_upcoming, ->() { where('dtstart >= ?', Time.now.beginning_of_year) }
+  scope :current_and_upcoming, ->() { where('dtstart >= ?', Time.zone.now.beginning_of_year) }
 
   def self.missing_for_location(location)
     blacklisted_term_ids = location.term_hours.pluck(:term_id)

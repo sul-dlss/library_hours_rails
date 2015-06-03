@@ -62,7 +62,7 @@ RSpec.describe LibrariesController, type: :controller do
     describe '@range' do
       it 'defaults to the current week' do
         get :index, {}, valid_session
-        expect(assigns(:range)).to eq(Date.today.beginning_of_week(:sunday)...(Date.today.end_of_week(:sunday) + 1.day))
+        expect(assigns(:range)).to eq(Time.zone.today.beginning_of_week(:sunday).to_date..(Time.zone.today.end_of_week(:sunday).to_date))
       end
 
       it 'assigns using the given week' do
@@ -91,7 +91,7 @@ RSpec.describe LibrariesController, type: :controller do
 
     it 'assigns the current range to @range' do
       get :index, {}, valid_session
-      expect(assigns(:range)).to eq(Date.today.beginning_of_week(:sunday)...(Date.today.end_of_week(:sunday) + 1.day))
+      expect(assigns(:range)).to eq(Time.zone.today.beginning_of_week(:sunday)..(Time.zone.today.end_of_week(:sunday)))
     end
   end
 

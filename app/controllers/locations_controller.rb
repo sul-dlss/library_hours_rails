@@ -15,15 +15,15 @@ class LocationsController < ApplicationController
   end
 
   def hours
-    @range = Time.parse(params[:from]).to_date..Time.parse(params[:to]).to_date if params[:from] && params[:to]
-    @range ||= Time.parse(params[:when]).to_date..Time.parse(params[:when]).to_date if params[:when]
+    @range = Time.zone.parse(params[:from]).to_date..Time.zone.parse(params[:to]).to_date if params[:from] && params[:to]
+    @range ||= Time.zone.parse(params[:when]).to_date..Time.zone.parse(params[:when]).to_date if params[:when]
     @range ||= Calendar.week(params[:week]) if params[:week]
-    @range ||= Time.now.to_date..Time.now.to_date
+    @range ||= Time.zone.now.to_date..Time.zone.now.end_of_day.to_date
     @hours = @location.hours(@range)
   end
 
   def hours_v1
-    @when = params[:when] == 'today' ? Time.now : Time.parse(params[:when])
+    @when = params[:when] == 'today' ? Time.zone.now : Time.zone.parse(params[:when])
     @hours = @location.hours(@when.beginning_of_day..@when.end_of_day)
   end
 

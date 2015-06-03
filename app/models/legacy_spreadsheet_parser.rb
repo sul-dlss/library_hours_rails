@@ -24,7 +24,7 @@
 
   def self.generate(libraries, date_range = nil)
     locations = Array(libraries).map(&:locations).flatten.reject { |x| x.calendars.none? }
-    date_range ||= Time.now.to_date..(Time.now + 1.year).to_date
+    date_range ||= Time.zone.now.to_date..(Time.zone.now + 1.year).to_date
     CSV.generate do |csv|
       csv << ['library hours']
       csv << ['', '', '', ''] + locations.map { |l| ["#{l.library.slug} / #{l.slug}", '']}.flatten
@@ -104,22 +104,22 @@
         c.location = Location.find(location)
       end
       if open == 'closed'
-        c.dtstart = Time.parse("#{date} #{open}").midnight
+        c.dtstart = Time.zone.parse("#{date} #{open}").midnight
         c.dtend = c.dtstart
         c.closed = true
       else
-        c.dtstart = Time.parse("#{date} #{open}")
+        c.dtstart = Time.zone.parse("#{date} #{open}")
 
         # whenever we say 11:59PM, we mean the very end of the day
         if close =~ /^11:59\s*(PM|pm)$/
-          c.dtend = Time.parse(date).end_of_day
+          c.dtend = Time.zone.parse(date).end_of_day
         else
-          c.dtend = Time.parse("#{date} #{close}")
+          c.dtend = Time.zone.parse("#{date} #{close}")
         end
 
         if c.dtend < c.dtstart
           next_date = Date.parse(date) + 1.day
-          c.dtend = Time.parse("#{next_date} #{close}")
+          c.dtend = Time.zone.parse("#{next_date} #{close}")
         end
       end
       c.summary = type
@@ -137,7 +137,7 @@
       row.each_with_index.map do |cell, col_idx|
         next unless (locations_row[col_idx] || locations_row[col_idx - 1]).present?
         next if cell.blank? && (data[row_idx][col_idx - 1]) == 'closed'
-        next if cell == 'closed' || (Time.parse(cell) rescue nil)
+        next if cell == 'closed' || (Time.zone.parse(cell) rescue nil)
 
         [data[row_idx][0], locations_row[col_idx] || locations_row[col_idx - 1], headers_row[col_idx], cell]
       end.compact

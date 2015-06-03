@@ -33,7 +33,7 @@
 <nav>
   <ul class="pager">
     <li class="previous"><%= link_to "&larr; Previous".html_safe, params.merge(week: (@range.begin - 1.week + 1.day).strftime("%YW%V")) %></li>
-    <li><%= l(@range.begin, format: :long) %>-<%= l(@range.end, format: :long) %></li>
+    <li><%= l(@range.begin, format: :long) %> – <%= l(@range.end, format: :long) %></li>
     <li class="next"><%= link_to "Next &rarr;".html_safe, params.merge(week: (@range.begin + 1.week + 1.day).strftime("%YW%V")) %></li>
   </ul>
 </nav>
