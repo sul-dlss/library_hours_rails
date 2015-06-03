@@ -12,13 +12,13 @@ class Spreadsheet < ActiveRecord::Base
   end
 
   def find_location(location)
-    if location =~ '/'
+    if location =~ %r{/}
       lib, loc = location.split('/', 2).map(&:strip)
-      c.location = Library.find(lib).locations.find(loc)
+      Library.find(lib).locations.find(loc)
     else
-      c.location = Location.find(location)
+      Location.find(location)
     end
-  rescue
+  rescue ActiveRecord::RecordNotFound
     nil
   end
 
