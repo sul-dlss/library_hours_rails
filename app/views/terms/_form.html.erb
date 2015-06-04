@@ -14,7 +14,11 @@
   <%= f.text_field :name %>
   <%= f.text_field :dtstart, type: 'date', value: (f.object.dtstart || Time.now).to_date %>
   <%= f.text_field :dtend, type: 'date', value: (f.object.dtend || Time.now).to_date %>
-  <%= f.check_box :holiday %>
+
+  <%= f.form_group :holiday, label: { text: "Type" } do %>
+    <%= f.radio_button :holiday, false, label: "Quarter or Intersession" %>
+    <%= f.radio_button :holiday, true, label: "Holiday" %>
+  <% end %>
 
   <div class="actions">
     <%= f.primary %>
