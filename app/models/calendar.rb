@@ -99,9 +99,9 @@ class Calendar < ActiveRecord::Base
 
   def status_drupal
     case
-    when cal.closed?
+    when closed?
       0
-    when cal.open24h?
+    when open_24h?
       2
     else
       1

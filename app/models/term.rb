@@ -17,12 +17,6 @@ class Term < ActiveRecord::Base
   end)
 
   validate :terms_cannot_overlap, unless: :holiday?
-
-  def self.missing_for_location(location)
-    blacklisted_term_ids = location.term_hours.pluck(:term_id)
-    Term.all.reject { |t| blacklisted_term_ids.include? t.id }
-  end
-
   delegate :year, to: :dtstart
 
   def terms_cannot_overlap

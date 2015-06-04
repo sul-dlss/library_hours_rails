@@ -51,13 +51,19 @@ RSpec.describe Calendar, type: :model do
     end
   end
 
-  describe '#update_range!' do
+  describe '#update_range' do
     subject { described_class.new(dtstart: Time.zone.now) }
 
     it 'sets the begin and end times to the given range' do
       subject.update_range(Time.zone.now.midnight..Time.zone.now.noon)
       expect(subject.dtstart).to eq Time.zone.now.midnight
       expect(subject.dtend).to eq Time.zone.now.noon
+    end
+
+    it 'sets the end hours to the next day if the end time is before the begin time' do
+      subject.update_range(Time.zone.now.noon..Time.zone.now.midnight)
+      expect(subject.dtstart).to eq Time.zone.now.noon
+      expect(subject.dtend).to eq Time.zone.now.midnight + 1.day
     end
   end
 
@@ -73,6 +79,25 @@ RSpec.describe Calendar, type: :model do
       subject.update_hours('12a-12p')
       expect(subject.dtstart).to eq Time.zone.now.midnight
       expect(subject.dtend).to eq Time.zone.now.noon
+    end
+  end
+
+  describe '#status_drupal' do
+    subject { described_class.new(dtstart: Time.zone.now.localtime) }
+
+    it 'is 0 when the location is closed' do
+      subject.closed = true
+      expect(subject.status_drupal).to eq 0
+    end
+
+    it 'is 1 when the location is open' do
+      expect(subject.status_drupal).to eq 1
+    end
+
+    it 'is 2 when the location is open 24 hours' do
+      subject.dtstart = subject.dtstart.beginning_of_day
+      subject.dtend = subject.dtstart.end_of_day
+      expect(subject.status_drupal).to eq 2
     end
   end
 

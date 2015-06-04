@@ -4,4 +4,8 @@ FactoryGirl.define do
     dtend '2015-05-27 15:01:15'
     name 'MyString'
   end
+
+  factory :holiday, parent: :term do
+    holiday true
+  end
 end
