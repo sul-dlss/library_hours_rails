@@ -1,28 +1,51 @@
-== README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+[![Build Status](https://travis-ci.org/sul-dlss/library_hours_rails.svg?branch=master)](https://travis-ci.org/sul-dlss/library_hours_rails) [![Coverage Status](https://coveralls.io/repos/sul-dlss/library_hours_rails/badge.png)](https://coveralls.io/r/sul-dlss/library_hours_rails) [![Dependency Status](https://gemnasium.com/sul-dlss/library_hours_rails.svg)](https://gemnasium.com/sul-dlss/library_hours_rails) [![Gem Version](https://badge.fury.io/rb/library_hours_rails.svg)](http://badge.fury.io/rb/library_hours_rails)
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+# Library Hours
+
+This application allows stakeholders to create and maintain library and location hours for the Stanford University Libraries.
+
+Libraries may have many locations within the building, and each may keep separate hours.
+
+Library hours can be created in bulk by setting normal business hours for each quarter, intersession, or other term and add exceptions to e.g. holidays. Library hours can also be imported from a batch upload spreadsheet.
+
+## Requirements
+
+* Ruby 2
+
+## Installation
+
+```
+$ git clone https://github.com/sul-dlss/library_hours_rails.git
+$ cd library_hours_rails
+$ bundle install
+$ rake db:migrate
+$ rails server
+```
+
+## Configuration
+
+This project uses `rails_config` to manage environment-specific configuration. Default configuration is available in `config/settings.yml` and includes:
+
+- `super_admin_groups`, groups who are able to modify library and location data
+- `site_admin_groups`, groups who are able to modify library hours data
+
+## Loading initial hours
+
+You can import libraries and locations from the libraries.stanford.edu website and initial Stanford quarter, intersession and holiday data using the `db:seed` rake task:
+
+```
+$ rake db:seed # load libraries and locations from libraries.stanford.edu
+```
+
+Initial library hours can be seeded using a CSV export from the library hours website. After importing the CSV spreadsheet, you also need to mark relevant locations as "keeping hours", e.g.:
+
+```ruby
+Location.select { |x| x.calendars.any? }.each { |x| x.update(keeps_hours: true) }
+```
+
+## Running the tests
+
+```
+$ rake
+```
