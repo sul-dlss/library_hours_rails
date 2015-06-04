@@ -45,6 +45,9 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'capybara'
 
+  # Poltergeist is a capybara driver to run integration tests using PhantomJS
+  gem 'poltergeist'
+
   gem 'capistrano'
   gem 'capistrano-rails'
   gem 'capistrano-rvm'
