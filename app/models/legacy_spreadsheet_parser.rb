@@ -1,4 +1,5 @@
-  class LegacySpreadsheetParser
+require 'csv'
+class LegacySpreadsheetParser
   attr_reader :io
 
   def initialize(io)
