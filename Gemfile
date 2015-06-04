@@ -48,6 +48,8 @@ group :development, :test do
   # Poltergeist is a capybara driver to run integration tests using PhantomJS
   gem 'poltergeist'
 
+  gem 'simplecov', require: false
+
   gem 'capistrano'
   gem 'capistrano-rails'
   gem 'capistrano-rvm'
