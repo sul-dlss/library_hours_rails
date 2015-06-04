@@ -57,7 +57,6 @@ group :production do
   gem 'mysql2'
 end
 
-gem 'roo'
 gem 'bootstrap-sass'
 gem 'hurley'
 gem 'nokogiri'
