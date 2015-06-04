@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/sul-dlss/library_hours_rails.svg?branch=master)](https://travis-ci.org/sul-dlss/library_hours_rails) [![Coverage Status](https://coveralls.io/repos/sul-dlss/library_hours_rails/badge.png)](https://coveralls.io/r/sul-dlss/library_hours_rails) [![Dependency Status](https://gemnasium.com/sul-dlss/library_hours_rails.svg)](https://gemnasium.com/sul-dlss/library_hours_rails) [![Gem Version](https://badge.fury.io/rb/library_hours_rails.svg)](http://badge.fury.io/rb/library_hours_rails)
+[![Build Status](https://travis-ci.org/sul-dlss/library_hours_rails.svg?branch=master)](https://travis-ci.org/sul-dlss/library_hours_rails) [![Coverage Status](https://coveralls.io/repos/sul-dlss/library_hours_rails/badge.png)](https://coveralls.io/r/sul-dlss/library_hours_rails) [![Dependency Status](https://gemnasium.com/sul-dlss/library_hours_rails.svg)](https://gemnasium.com/sul-dlss/library_hours_rails)
 
 
 # Library Hours
@@ -8,6 +8,15 @@ This application allows stakeholders to create and maintain library and location
 Libraries may have many locations within the building, and each may keep separate hours.
 
 Library hours can be created in bulk by setting normal business hours for each quarter, intersession, or other term and add exceptions to e.g. holidays. Library hours can also be imported from a batch upload spreadsheet.
+
+This application also provides API access to those hours for downstream consumers, including:
+
+- legacy JSON API, with routes like: `api/v1/library/:library_id/location/:id/hours/for/:when`
+- legacy drupal API, with routes like:
+`drupal/hours_:month`
+- JSON-API style API, with routes like:
+`library/:library_id/location/:id/hours.json`
+
 
 ## Requirements
 
