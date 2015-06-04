@@ -7,7 +7,7 @@
           <% if Term.holiday? d %>
             <div><small><%= Term.holidays.for_date(d).first.name %></small></div>
           <% end %>
-          <%= render_short_date d %>
+          <%= l(d, format: :very_short) %>
         </th>
       <% end %>
     </tr>
