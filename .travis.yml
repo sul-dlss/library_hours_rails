@@ -10,3 +10,6 @@ env:
 
 sudo: false
 language: ruby
+
+before_install:
+- export TZ=America/Los_Angeles
