@@ -2,7 +2,7 @@
 
 
 <h1><%= @library.name %></h1>
-<% if current_user.superadmin? %>
+<% if current_user && current_user.superadmin? %>
 <%= link_to 'Edit library', edit_library_path(@library), class: 'btn btn-default' if can? :edit, @library %>
 <%= link_to 'Edit hours', library_term_hours_path(@library), class: 'btn btn-default' if can? :edit, @library %>
 <% else %>
@@ -12,7 +12,7 @@
 <%= render 'range' %>
 <%= render partial: 'location_hours', locals: { locations: @library.locations } %>
 
-<% if current_user.superadmin? %>
+<% if current_user && current_user.superadmin? %>
   <% if @library.locations.without_hours.any? %>
   <h2>Other locations</h2>
   <ul class="list-unstyled">
