@@ -3,7 +3,7 @@ xml.libraryHours do
   @libraries.each do |library|
     library.locations.with_hours.each do |location|
       location.hours(@range).each do |cals|
-        cals.each do |cal|
+        cals.reject { |cal| cal.is_a? MissingCalendar }.each do |cal|
           xml.entry do
             xml.id "#{library.to_param}-#{location.to_param}-#{cal.dtstart.strftime('%Y-%m-%d')}"
             xml.libraryNodeId library.node_mapping.node_id
