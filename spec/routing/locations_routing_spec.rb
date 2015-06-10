@@ -29,5 +29,17 @@ RSpec.describe LocationsController, type: :routing do
     it 'routes to #destroy' do
       expect(delete: '/libraries/1/locations/1').to route_to('locations#destroy', id: '1', library_id: '1')
     end
+
+    it 'routes to #hours' do
+      expect(get: '/libraries/1/locations/1/hours').to route_to('locations#hours', id: '1', library_id: '1')
+    end
+
+    it 'routes to #hours_v1' do
+      expect(get: '/api/v1/library/1/location/1/hours/for/today').to route_to('locations#hours_v1',
+                                                                              library_id: '1',
+                                                                              id: '1',
+                                                                              when: 'today'
+                                                                             )
+    end
   end
 end

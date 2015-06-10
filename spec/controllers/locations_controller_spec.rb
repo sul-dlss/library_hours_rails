@@ -28,6 +28,33 @@ RSpec.describe LocationsController, type: :controller do
     it 'should deny access to #destroy' do
       expect { delete :destroy, id: location, library_id: location.library }.to raise_error CanCan::AccessDenied
     end
+
+    describe 'GET #hours_v1' do
+      it 'assigns @when' do
+        get :hours_v1, format: :json, when: 'today', id: location, library_id: location.library
+        expect(assigns(:when)).to eq Time.zone.now.beginning_of_day
+      end
+
+      it 'assigns the hours for the location' do
+        get :hours_v1, format: :json, when: 'today', id: location, library_id: location.library
+        expect(assigns(:hours).first.first).to be_a MissingCalendar
+        expect(assigns(:hours).first.first.dtstart).to eq Time.zone.now.beginning_of_day
+      end
+    end
+
+    describe 'GET #hours' do
+      it 'assigns @range from explicit dates' do
+        get :hours, format: :json, from: Time.zone.now.beginning_of_week.to_s, to: Time.zone.now.end_of_week.to_s, id: location, library_id: location.library
+        expect(assigns(:range).begin).to eq Time.zone.now.beginning_of_week.to_date
+        expect(assigns(:range).end).to eq Time.zone.now.end_of_week.to_date
+      end
+
+      it 'assigns the hours for the location' do
+        get :hours, format: :json, id: location, library_id: location.library
+        expect(assigns(:hours).first.first).to be_a MissingCalendar
+        expect(assigns(:hours).first.first.dtstart).to eq Time.zone.now.beginning_of_day
+      end
+    end
   end
 
   let(:user) { build(:superadmin_user) }
