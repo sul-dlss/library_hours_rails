@@ -26,12 +26,20 @@ class LibrariesController < ApplicationController
   end
 
   def spreadsheet
-
   end
 
   def hours_drupal
-    month = Time.zone.parse(params[:month]).beginning_of_month
-    month += 1.year if month < Time.zone.now.beginning_of_month
+    month = Time.zone.parse(params[:month])
+
+    # when the month is in the past (and the current week is wholely in the current month), use the following year
+    if month < Time.zone.now.beginning_of_week(:sunday).beginning_of_month
+      month += 1.year
+    end
+
+    # when it is January, if we request December's hours and the current week starts in December, use the previous year
+    if params[:month] == 'december' && Time.zone.now.beginning_of_week(:sunday) < Time.zone.now.beginning_of_year
+      month -= 1.year
+    end
 
     @range = month.to_date..month.end_of_month.to_date
 
