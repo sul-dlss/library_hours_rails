@@ -1,2 +1,5 @@
 super_admin_groups:
   - super-admin
+
+site_admin_groups:
+  - site-admin

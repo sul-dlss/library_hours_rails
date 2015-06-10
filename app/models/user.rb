@@ -15,7 +15,7 @@ class User
 
   def site_admin?
     admin_groups = Settings.site_admin_groups || []
-    (ldap_groups & admin_groups).present?
+    superadmin? || (ldap_groups & admin_groups).present?
   end
 
   def ldap_groups
