@@ -11,11 +11,11 @@ json.data do
     json.name @location.name
     json.hours do
       json.array! @hours do |c|
-        json.opens_at c.dtstart.localtime
-        json.closes_at c.dtend.localtime
-        json.type c.summary.to_s
-        json.notes c.description.to_s
-        json.open c.open?
+        json.opens_at c.first.dtstart.localtime
+        json.closes_at c.first.dtend.localtime
+        json.type c.first.summary.to_s
+        json.notes c.first.description.to_s
+        json.open c.first.open?
       end
     end
   end
