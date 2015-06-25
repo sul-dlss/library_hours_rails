@@ -1,4 +1,6 @@
-json.array! @hours do |c|
+json.array! @hours do |hours|
+  c = hours.first
+
   json.id c.id
   json.day c.dtstart.to_date
   json.weekday c.dtstart.strftime('%A')
