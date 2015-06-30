@@ -49,7 +49,9 @@ group :development, :test do
   gem 'poltergeist'
 
   gem 'simplecov', require: false
+end
 
+group :deployment do
   gem 'capistrano'
   gem 'capistrano-rails'
   gem 'capistrano-rvm'
