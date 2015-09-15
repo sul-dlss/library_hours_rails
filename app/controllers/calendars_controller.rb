@@ -5,6 +5,11 @@ class CalendarsController < ApplicationController
 
   def create
     @calendar.dtstart = Time.zone.parse(params[:day])
+
+    unless Calendar.valid_range? date_params[:time]
+      render status: :bad_request, plain: "#{date_params[:time]} is not a valid time" and return
+    end
+
     @calendar.update_hours(date_params[:time])
 
     respond_to do |format|
@@ -17,6 +22,10 @@ class CalendarsController < ApplicationController
   end
 
   def update
+    unless Calendar.valid_range? date_params[:time]
+      render status: :bad_request, plain: "#{date_params[:time]} is not a valid time" and return
+    end
+
     @calendar.update_hours(date_params[:time])
 
     respond_to do |format|
