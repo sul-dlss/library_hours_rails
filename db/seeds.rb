@@ -87,6 +87,29 @@ end
   FriendlyId::Slug.find_or_create_by slug: old_slug, sluggable: location
 end
 
+{
+  'falconer' => 'Biology Library (Falconer)',
+  'swain' => 'Chemistry & Chemical Engineering Library (Swain)',
+  'classics-library' => 'Classics Library',
+  'branner' => 'Earth Sciences Library & Map Collections (Branner)',
+  'eal' => 'East Asia Library',
+  'cubberley' => 'Education Library (Cubberley)',
+  'englib' => 'Engineering Library (Terman)',
+  'hila' => 'Hoover Institution Archives',
+  'hoover' => 'Hoover Institution Library',
+  'hopkins' =>  'Marine Biology Library (Harold A. Miller) at Hopkins Marine Station',
+  'mathstat' => 'Mathematics & Statistics Library',
+  'lane' => 'Medical Library (Lane)',
+  'spc' => 'Special Collections & University Archives',
+  'sal' => 'Stanford Auxiliary Library 1&2 (SAL1&2)',
+  'sal3' => 'Stanford Auxiliary Library 3 (SAL3)',
+  'newark' => 'Stanford Auxiliary Library, off-campus Newark',
+  'philosophy' => 'Tanner Philosophy Library'
+}.each do |library_slug, old_slug|
+  library = Library.find(library_slug)
+  FriendlyId::Slug.find_or_create_by slug: old_slug, sluggable: library
+end
+
 [
   { term: 'Fall 2014',   quarter: 'Fall',   start_date: Date.new(2014, 1, 1), end_date: Date.new(2014, 12, 12) },
 
