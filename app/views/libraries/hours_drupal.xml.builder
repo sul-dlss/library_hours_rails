@@ -2,6 +2,8 @@ xml.instruct!
 xml.libraryHours do
   @libraries.each do |library|
     library.locations.with_hours.each do |location|
+      next unless location.node_mapping
+
       location.hours(@range).each do |cals|
         cals.reject { |cal| cal.is_a? MissingCalendar }.each do |cal|
           xml.entry do
