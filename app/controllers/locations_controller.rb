@@ -1,5 +1,6 @@
 class LocationsController < ApplicationController
   load_and_authorize_resource :library
+  before_filter :find_location_by_legacy_slug, only: :hours_v1
   load_and_authorize_resource through: :library
 
   before_action :set_range, only: [:show]
@@ -22,6 +23,12 @@ class LocationsController < ApplicationController
   def hours_v1
     @when = (params[:when] == 'today' ? Time.zone.now : Time.zone.parse(params[:when])).beginning_of_day
     @hours = @location.hours(@when.to_date..@when.end_of_day.to_date)
+
+    request.format = :json
+
+    respond_to do |format|
+      format.json
+    end
   end
 
   # GET /locations/new
@@ -75,5 +82,9 @@ class LocationsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def location_params
     params.require(:location).permit(:name, :slug, :library_id, :keeps_hours)
+  end
+
+  def find_location_by_legacy_slug
+    @location ||= @library.locations.friendly.find(params[:id])
   end
 end
