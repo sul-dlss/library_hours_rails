@@ -149,7 +149,7 @@ GEM
     minitest (5.8.0)
     multi_json (1.11.2)
     multipart-post (2.0.0)
-    mysql2 (0.4.0)
+    mysql2 (0.3.20)
     nested_form (0.3.2)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
@@ -307,7 +307,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   lyberteam-capistrano-devel
-  mysql2
+  mysql2 (~> 0.3.13)
   nested_form
   nokogiri
   poltergeist
