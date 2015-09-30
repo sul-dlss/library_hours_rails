@@ -82,7 +82,7 @@ class LegacySpreadsheetParser
   end
 
   def dates
-    @dates ||= data.map(&:first).map { |x| Date.parse(x) }
+    @dates ||= data.map(&:first).reject(&:blank?).map { |x| Date.parse(x) }
   end
 
   def locations
