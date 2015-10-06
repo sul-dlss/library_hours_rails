@@ -80,6 +80,11 @@ RSpec.describe LibrariesController, type: :controller do
         get :index, { from: '2015-02-03', to: '2015-03-02' }, valid_session
         expect(assigns(:range)).to eq(Date.parse('2015-02-03')..Date.parse('2015-03-02'))
       end
+
+      it 'assigns using from' do
+        get :index, { from: '2015-02-03' }, valid_session
+        expect(assigns(:range)).to eq(Date.parse('2015-02-03')..Date.parse('2015-02-03'))
+      end
     end
   end
 

@@ -23,6 +23,7 @@ class ApplicationController < ActionController::Base
     end
 
     @range = Time.zone.parse(params[:from]).to_date..Time.zone.parse(params[:to]).to_date if params[:from] && params[:to]
+    @range ||= Time.zone.parse(params[:from]).to_date..Time.zone.parse(params[:from]).to_date if params[:from]
     @range ||= Time.zone.parse(params[:when]).to_date..Time.zone.parse(params[:when]).to_date if params[:when]
     @range ||= Calendar.week(params[:week]) if params[:week]
 
