@@ -4,6 +4,11 @@ class LocationsController < ApplicationController
   load_and_authorize_resource through: :library
 
   before_action :set_range, only: [:show]
+
+  before_action only: [:open, :hours] do
+    set_range(default: Time.zone.now.to_date..Time.zone.now.end_of_day.to_date)
+  end
+
   # GET /locations
   # GET /locations.json
   def index
@@ -15,8 +20,11 @@ class LocationsController < ApplicationController
   def show
   end
 
+  def open
+    @hours = @location.hours(@range)
+  end
+
   def hours
-    set_range(default: Time.zone.now.to_date..Time.zone.now.end_of_day.to_date)
     @hours = @location.hours(@range)
   end
 
