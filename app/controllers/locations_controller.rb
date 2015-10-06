@@ -16,7 +16,7 @@ class LocationsController < ApplicationController
   end
 
   def hours
-    @range = set_range(Time.zone.now.to_date..Time.zone.now.end_of_day.to_date)
+    set_range(default: Time.zone.now.to_date..Time.zone.now.end_of_day.to_date)
     @hours = @location.hours(@range)
   end
 

@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
                       end
   end
 
-  def set_range(default = nil)
+  def set_range(default: nil)
     if params[:date]
       redirect_to week: Time.zone.parse(params[:date]).strftime('%GW%V'), date: nil
     end

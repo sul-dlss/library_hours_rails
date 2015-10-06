@@ -11,10 +11,12 @@ class LegacySpreadsheetParser
       next if location.blank?
 
       data.each do |row|
-        next unless Location.exists?(location)
         cal = hours(location, row)
 
-        next unless cal
+        unless cal
+          Rails.logger.info "No hours found for location #{location}"
+          next
+        end
 
         cal.location.calendars.in_range(cal.dtstart..cal.dtstart.end_of_day).delete_all
 
@@ -111,13 +113,18 @@ class LegacySpreadsheetParser
     open = row[i]
     close = row[i + 1]
 
-    Calendar.new do |c|
-      if location =~ %r{/}
-        lib, loc = location.split('/', 2).map(&:strip)
-        c.location = Library.find(lib).locations.find(loc)
-      else
-        c.location = Location.find(location)
+    cal = Calendar.new do |c|
+      begin
+        if location =~ %r{/}
+          lib, loc = location.split('/', 2).map(&:strip)
+          c.location = Library.find(lib).locations.find(loc)
+        else
+          c.location = Location.find(location)
+        end
+      rescue ActiveRecord::RecordNotFound
+        nil
       end
+
       if open == 'closed'
         c.dtstart = Time.zone.parse("#{date} #{open}").midnight
         c.dtend = c.dtstart
@@ -140,6 +147,8 @@ class LegacySpreadsheetParser
       c.summary = type
       c.description = note
     end
+
+    cal if cal.location
   end
   # rubocop:enable Metrics/MethodLength
 
