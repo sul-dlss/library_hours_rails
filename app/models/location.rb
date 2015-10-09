@@ -22,12 +22,18 @@ class Location < ActiveRecord::Base
     @hours[range] ||= Hours.new(self, range)
   end
 
-  def next_open_hours(range_start)
-    day = ((range_start + 1.day).to_date..(range_start + 1.year).to_date).step(7).each do |r|
-      open_day = hours(r..(r + 7)).detect { |h| h.any?(&:open?) }
-      break open_day if open_day
+  def business_days(range_start, business_days = 1)
+    business_days_counter = 0
+
+    (range_start.to_date..(range_start + 1.year).to_date).step(7).each do |r|
+      open_days = hours(r..(r + 6))
+
+      open_days.each do |d|
+        business_days_counter += 1 if d.any?(&:open?)
+        return d.first if business_days_counter >= business_days
+      end
     end
 
-    day.first
+    nil
   end
 end

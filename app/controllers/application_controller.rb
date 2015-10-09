@@ -23,6 +23,11 @@ class ApplicationController < ActionController::Base
     end
 
     @range = Time.zone.parse(params[:from]).to_date..Time.zone.parse(params[:to]).to_date if params[:from] && params[:to]
+    @range ||= begin
+      range_start = Time.zone.parse(params[:from])
+      range_end = @location.business_days(range_start, params[:business_days].to_i).date
+      range_start.to_date..range_end if range_end
+    end if params[:from] && params[:business_days] && instance_variable_defined?(:@location)
     @range ||= Time.zone.parse(params[:from]).to_date..Time.zone.parse(params[:from]).to_date if params[:from]
     @range ||= Time.zone.parse(params[:when]).to_date..Time.zone.parse(params[:when]).to_date if params[:when]
     @range ||= Calendar.week(params[:week]) if params[:week]
