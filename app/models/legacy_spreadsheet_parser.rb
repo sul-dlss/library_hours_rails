@@ -110,8 +110,10 @@ class LegacySpreadsheetParser
     note = row[3]
 
     i = location_index(location)
-    open = row[i]
-    close = row[i + 1]
+    open = row[i].strip
+    close = row[i + 1].strip
+
+    return if open.empty?
 
     cal = Calendar.new do |c|
       begin
