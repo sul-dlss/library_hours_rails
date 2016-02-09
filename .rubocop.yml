@@ -2,8 +2,11 @@ inherit_from:
   - .rubocop_todo.yml
 
 AllCops:
-  RunRailsCops: true
   Exclude:
     - 'bin/*'
     - 'config/**/*'
     - 'db/**/*'
+  TargetRubyVersion: 2.2
+
+Rails:
+  Enabled: true
