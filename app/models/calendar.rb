@@ -1,6 +1,11 @@
 class Calendar < ActiveRecord::Base
-  belongs_to :location
+  belongs_to :location, required: true
   has_one :library, through: :location
+  validates :dtstart, :dtend, presence: true
+
+  validate :no_parse_errors
+
+  attr_reader :dtstart_unparsed, :dtend_unparsed
 
   scope :in_range, (lambda do |range|
     where('dtstart BETWEEN ? AND ?', range.begin.to_time.midnight, range.end.to_time.end_of_day)
@@ -45,11 +50,47 @@ class Calendar < ActiveRecord::Base
     dtstart.to_date
   end
 
-  def closed!
+  def closed!(date)
     self.closed = true
 
-    self.dtstart = dtstart.midnight
+    self.dtstart_unparsed = date
+    self.dtstart = dtstart.midnight if dtstart
     self.dtend = dtstart
+  end
+
+  def dtstart_unparsed=(value)
+    @dtstart_unparsed = value
+    self.dtstart = Time.zone.parse(value)
+  rescue => e
+    parse_errors << "Unable to parse dtstart #{value}: #{e}"
+  end
+
+  def dtend_unparsed=(value)
+    @dtend_unparsed = value
+    parsed_val = if value =~ /^11:59\s*(PM|pm)$/
+                   Time.zone.parse(value).end_of_day
+                 else
+                   Time.zone.parse(value)
+                 end
+    if dtstart.present? && parsed_val < dtstart
+      next_date = parsed_val.to_date + 1.day
+      parsed_val = Time.zone.parse("#{next_date} #{parsed_val.strftime('%H:%M:%S')}")
+    end
+
+    self.dtend = parsed_val
+  rescue => e
+    parse_errors << "Unable to parse dtend #{value}: #{e}"
+  end
+
+  def parse_errors
+    @parse_errors ||= []
+  end
+
+  def no_parse_errors
+    return if parse_errors.blank?
+    parse_errors.each do |e|
+      errors.add(:parse_errors, e)
+    end
   end
 
   def open_24h!

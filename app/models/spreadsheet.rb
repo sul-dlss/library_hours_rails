@@ -3,6 +3,8 @@ class Spreadsheet < ActiveRecord::Base
 
   validates :attachment, presence: true
 
+  delegate :bad_data, to: :parser
+
   def import
     parser.process!
   end
@@ -24,10 +26,6 @@ class Spreadsheet < ActiveRecord::Base
 
   def continuous?
     dates.length == 1
-  end
-
-  def empty_cells
-    parser.empty_cells
   end
 
   def dates

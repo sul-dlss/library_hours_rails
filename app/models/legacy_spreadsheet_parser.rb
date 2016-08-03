@@ -6,22 +6,29 @@ class LegacySpreadsheetParser
     @io = io
   end
 
-  def process!
+  def hours
+    return to_enum(:hours) unless block_given?
+
     locations.each do |location|
       next if location.blank?
 
       data.each do |row|
-        cal = hours(location, row)
-
-        unless cal
-          Rails.logger.info "No hours found for location #{location}"
-          next
-        end
-
-        cal.location.calendars.in_range(cal.dtstart..cal.dtstart.end_of_day).delete_all
-
-        cal.save
+        cal = parse_hours(location, row)
+        yield cal
       end
+    end
+  end
+
+  def process!
+    hours.each do |cal|
+      unless cal.valid?
+        Rails.logger.info "Bad hours found for #{cal.inspect}: #{cal.errors.messages}"
+        next
+      end
+
+      cal.location.calendars.in_range(cal.dtstart..cal.dtstart.end_of_day).delete_all
+
+      cal.save
     end
   end
 
@@ -84,7 +91,7 @@ class LegacySpreadsheetParser
   end
 
   def dates
-    @dates ||= data.map(&:first).reject(&:blank?).map { |x| Date.parse(x) }
+    @dates ||= data.map(&:first).reject(&:blank?).map { |x| Date.parse(x) rescue nil }.compact
   end
 
   def locations
@@ -104,73 +111,58 @@ class LegacySpreadsheetParser
   end
 
   # rubocop:disable Metrics/MethodLength
-  def hours(location, row)
+  def parse_hours(location, row)
     date = row[0]
     type = row[2]
     note = row[3]
 
     i = location_index(location)
-    open = row[i].strip
-    close = row[i + 1].strip
-
-    return if open.empty?
+    open = row[i].try(:strip)
+    close = row[i + 1].try(:strip)
 
     cal = Calendar.new do |c|
-      begin
-        if location =~ %r{/}
-          lib, loc = location.split('/', 2).map(&:strip)
-          c.location = Library.find(lib).locations.find(loc)
-        else
-          c.location = Location.find(location)
-        end
-      rescue ActiveRecord::RecordNotFound
-        nil
-      end
-
-      if open == 'closed'
-        c.dtstart = Time.zone.parse("#{date} #{open}").midnight
-        c.dtend = c.dtstart
-        c.closed = true
-      else
-        c.dtstart = Time.zone.parse("#{date} #{open}")
-
-        # whenever we say 11:59PM, we mean the very end of the day
-        if close =~ /^11:59\s*(PM|pm)$/
-          c.dtend = Time.zone.parse(date).end_of_day
-        else
-          c.dtend = Time.zone.parse("#{date} #{close}")
-        end
-
-        if c.dtend < c.dtstart
-          next_date = Date.parse(date) + 1.day
-          c.dtend = Time.zone.parse("#{next_date} #{close}")
-        end
-      end
+      c.location = fetch_location(location)
       c.summary = type
       c.description = note
+
+      if open == 'closed'
+        c.closed!(date)
+      else
+        c.dtstart_unparsed = "#{date} #{open}"
+        c.dtend_unparsed = "#{date} #{close}"
+      end
     end
 
-    cal if cal.location
+    cal
   end
   # rubocop:enable Metrics/MethodLength
+
+  def fetch_location(location)
+    @locations_cache = {}
+
+    @locations_cache[location] ||= if location =~ %r{/}
+                                     lib, loc = location.split('/', 2).map(&:strip)
+                                     Library.find(lib).locations.find(loc)
+                                   else
+                                     Location.find(location)
+                                   end
+  rescue ActiveRecord::RecordNotFound
+    nil
+  end
 
   def data
     csv[3..csv.length]
   end
 
-  def empty_cells
-    data.each_with_index.map do |row, row_idx|
-      row.each_with_index.map do |cell, col_idx|
-        next unless (locations_row[col_idx] || locations_row[col_idx - 1]).present?
-        next if cell.blank? && (data[row_idx][col_idx - 1]) == 'closed'
-        next if cell == 'closed' || (Time.zone.parse(cell) rescue nil)
+  def bad_data
+    return to_enum(:bad_data) unless block_given?
 
-        [data[row_idx][0], locations_row[col_idx] || locations_row[col_idx - 1], headers_row[col_idx], cell]
-      end.compact
-    end.compact.flatten(1)
+    hours.each do |cal|
+      yield cal unless cal.valid?
+    end
   end
 
   def csv
-    @csv ||= CSV.parse(io.read)
+    @csv ||= CSV.parse(io.read.gsub(/\s*$/, ''))
   end
 end

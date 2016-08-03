@@ -30,10 +30,10 @@
 
 <p>
   <strong>Bad or missing data:</strong>
-    <% c = @spreadsheet.empty_cells %>
-    <ul class="list-unstyled alert <%= c.empty? ? 'alert-success' : 'alert-danger' %>">
-      <% c.each do |(date, location, open_close, value)| %>
-        <li><%= date %>: <%= location %> (<%= open_close %>): <%= value.present? ? "\"#{value}\"" : '(blank)' %></li>
+    <% c = @spreadsheet.bad_data.reject { |cal| cal.location.blank? } %>
+    <ul class="list-unstyled alert <%= c.none? ? 'alert-success' : 'alert-danger' %>">
+      <% c.each do |cal| %>
+        <li><%= cal.dtstart_unparsed %>: <%= "#{cal.library.try(:slug)} / #{cal.location.try(:slug)}" %> <%= cal.errors.messages %></li>
       <% end %>
     </ul>
 </p>
