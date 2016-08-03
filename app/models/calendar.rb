@@ -53,11 +53,12 @@ class Calendar < ActiveRecord::Base
   def closed!(date = nil)
     self.closed = true
 
-    if date
+    if date.present?
       self.dtstart_unparsed = date
       self.dtstart = dtstart.midnight if dtstart
-      self.dtend = dtstart
     end
+
+    self.dtend = dtstart
   end
 
   def dtstart_unparsed=(value)
