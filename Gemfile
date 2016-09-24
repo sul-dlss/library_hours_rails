@@ -54,9 +54,8 @@ end
 group :deployment do
   gem 'capistrano'
   gem 'capistrano-rails'
-  gem 'capistrano-rvm'
   gem 'capistrano-passenger'
-  gem 'lyberteam-capistrano-devel'
+  gem 'dlss-capistrano'
 end
 
 group :production do
@@ -68,7 +67,7 @@ gem 'bootstrap-sass'
 gem 'hurley'
 gem 'nokogiri'
 gem 'friendly_id'
-gem 'bootstrap_form', git: 'https://github.com/bootstrap-ruby/rails-bootstrap-forms.git'
+gem 'bootstrap_form'
 gem 'bootstrap-editable-rails'
 gem 'nested_form'
 gem 'refile', require: 'refile/rails'

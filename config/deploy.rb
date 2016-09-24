@@ -1,6 +1,3 @@
-# config valid only for current version of Capistrano
-lock '3.6.0'
-
 set :application, 'library_hours'
 set :repo_url, 'https://github.com/sul-dlss/library_hours_rails.git'
 
