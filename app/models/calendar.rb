@@ -70,11 +70,8 @@ class Calendar < ActiveRecord::Base
 
   def dtend_unparsed=(value)
     @dtend_unparsed = value
-    parsed_val = if value =~ /^11:59\s*(PM|pm)$/
-                   Time.zone.parse(value).end_of_day
-                 else
-                   Time.zone.parse(value)
-                 end
+    parsed_val = Time.zone.parse(value)
+
     if dtstart.present? && parsed_val < dtstart
       next_date = parsed_val.to_date + 1.day
       parsed_val = Time.zone.parse("#{next_date} #{parsed_val.strftime('%H:%M:%S')}")
@@ -132,7 +129,7 @@ class Calendar < ActiveRecord::Base
 
   def open_24h?
     dtstart == dtstart.midnight &&
-      dtend >= dtstart.end_of_day - 1.second
+      dtend >= dtstart.end_of_day - 1.minute
   end
 
   def self.week(str)
