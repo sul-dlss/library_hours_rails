@@ -11,6 +11,12 @@ a:hover, a:focus {
   text-decoration: none;
 }
 
+li > a {
+  &:hover, &:focus {
+    border-bottom: 0;
+  }
+}
+
 h4 {
   font-weight: 400;
 }
@@ -54,4 +60,14 @@ textarea:focus {
 
 .location-and-access:before {
   padding-right: 1ch;
+}
+
+.dropdown-menu {
+  h4 {
+    padding: 3px 20px;
+  }
+
+  .divider:last-child {
+    display: none;
+  }
 }

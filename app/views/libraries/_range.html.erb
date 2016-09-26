@@ -11,7 +11,7 @@
 
   <div class="col-md-5 col-sm-12 col-xm-12">
     <form method="GET" class="form form-horizontal row">
-      <div class="col-md-8 col-sm-6">
+      <div class="col-md-7 col-sm-6">
       <label for="jump-date" class="control-label sr-only">Jump to:</label>
       <div class="input-group">
         <input value="<%= Time.zone.today %>" name="date" type="date" class="form-control" id="jump-date" data-href="<%= url_for(params.merge(week: "%GW%V")) %>"/>
@@ -20,23 +20,27 @@
         </span>
       </div>
     </div>
-      <div class="btn-group col-md-3 col-sm-6" id="jump-term-group">
+      <div class="btn-group col-md-5 col-sm-6" id="jump-term-group">
+        <h3 class="sr-only">Jump to quarters &amp; holidays</h3>
         <button id="jump-term" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-          Quarters + Holidays <span class="caret"></span>
+          Quarters &amp; holidays <span class="caret"></span>
         </button>
-        <ul class="dropdown-menu" role="menu">
+        <ul class="dropdown-menu dropdown-menu-right" role="menu">
           <% if can? :create, Term %>
             <li><%= link_to 'Manage Terms', terms_path %></li>
           <% end %>
           <% Term.current_and_upcoming(2.years).group_by(&:year).each do |year, terms| %>
-          <li><strong><%= year %></strong></li>
-          <% terms.each do |t| %>
-            <li><%= link_to params.merge(week: t.dtstart.strftime("%GW%V")) do %>
-              <%= t.name %>
-              <small><%= l t.dtstart.to_date, format: :short %><%= "-" + l(t.dtend.to_date, format: :short) unless t.dtstart.to_date == t.dtend.to_date %></small>
-            <% end %>
+            <li>
+              <h4><%= year %></h4>
             </li>
-            <% end %>
+            <% terms.each do |t| %>
+              <li><%= link_to params.merge(week: t.dtstart.strftime("%GW%V")) do %>
+                <%= t.name %>
+                <small><%= l t.dtstart.to_date, format: :short %><%= "-" + l(t.dtend.to_date, format: :short) unless t.dtstart.to_date == t.dtend.to_date %></small>
+              <% end %>
+              </li>
+              <% end %>
+            <li role="separator" class="divider"></li>
           <% end %>
         </ul>
       </div>
