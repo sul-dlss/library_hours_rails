@@ -1,0 +1,56 @@
+@mixin brandbar-vertical-align($element-height) {
+  margin-top: (($brandbar-height - $element-height) / 2);
+  margin-bottom: (($brandbar-height - $element-height) / 2);
+}
+
+#topnav-container {
+  min-height: $brandbar-height;
+
+  .navbar-brand {
+    @extend .text-hide;
+
+    background: transparent image-url("sul-logo.png") no-repeat center left;
+    height: $brandbar-height;
+    margin-left: 0;
+    width: 297px;
+
+    @media (max-width: $screen-xs-max) {
+      margin-left: 15px;
+    }
+  }
+
+  .navbar-nav {
+    @media (min-width: $grid-float-breakpoint) {
+      > li {
+        > a {
+          padding-bottom: $brandbar-padding-vertical;
+          padding-top: $brandbar-padding-vertical;
+        }
+      }
+    }
+  }
+
+  .navbar-toggle {
+    @include brandbar-vertical-align(34px);
+  }
+
+  .navbar-form {
+    @include brandbar-vertical-align($input-height-base);
+  }
+
+  .navbar-btn {
+    @include brandbar-vertical-align($input-height-base);
+
+    &.btn-sm {
+      @include brandbar-vertical-align($input-height-small);
+    }
+
+    &.btn-xs {
+      @include brandbar-vertical-align(22);
+    }
+  }
+
+  .navbar-text {
+    @include brandbar-vertical-align($line-height-computed);
+  }
+}

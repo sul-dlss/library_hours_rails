@@ -37,3 +37,13 @@ $well-bg: $color-beige-10;
 $well-border: $color-beige-20;
 $breadcrumb-bg: inherit;
 $breadcrumb-padding-horizontal: 0;
+
+$navbar-inverse-bg: $brand-primary;
+$navbar-inverse-border: $color-dark-red;
+$navbar-inverse-color: lighten($gray-base, 86%);
+$navbar-inverse-link-color: lighten($gray-base, 86%);
+
+@import "bootstrap/variables";
+
+$brandbar-height: 35px;
+$brandbar-padding-vertical: (($brandbar-height - $line-height-computed) / 2);

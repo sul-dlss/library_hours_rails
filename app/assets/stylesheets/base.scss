@@ -1,19 +1,23 @@
-a {
-  &.disabled {
-    color: #ccc;
-    cursor: not-allowed;
+#main-container {
+  a {
+    &.disabled {
+      color: #ccc;
+      cursor: not-allowed;
+      text-decoration: none;
+    }
+  }
+
+  a:hover, a:focus {
+    border-bottom: 1px dotted $sul-link-color-border;
     text-decoration: none;
   }
-}
 
-a:hover, a:focus {
-  border-bottom: 1px dotted $sul-link-color-border;
-  text-decoration: none;
-}
-
-li > a {
-  &:hover, &:focus {
-    border-bottom: 0;
+  li {
+    a {
+      &:hover, &:focus {
+        border-bottom: 0;
+      }
+    }
   }
 }
 
