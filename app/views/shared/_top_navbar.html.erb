@@ -1,21 +1,24 @@
-<div id="topnav-container">
-  <header id="topnav" class="header-logo" role="banner">
-    <%= link_to 'http://library.stanford.edu' do %>
-      <%= content_tag :span, "Stanford University Libraries", class: "sr-only" %>
-      <%= image_tag "sul-logo.png", class: "hidden-xs", alt: "", height: 25 %>
-      <%= image_tag "sul-logo-small.png", class: "visible-xs", alt: "", height: 25 %>
-    <% end %>
-
-    <div class="header-links">
-      <% if current_user %>
-        <%= link_to "#{current_user.id}: Logout", logout_path(referrer: root_path) %>
-      <% else %>
-        <%= link_to "Login", login_path(referrer: request.original_url) %>
+<nav id="topnav-container" class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <%= link_to 'http://library.stanford.edu', class: 'navbar-brand' do %>
+        <%= content_tag :span, "Stanford University Libraries", class: "sr-only" %>
+        <%= image_tag "sul-logo.png", class: "hidden-xs", alt: "", height: 25 %>
+        <%= image_tag "sul-logo-small.png", class: "visible-xs", alt: "", height: 25 %>
       <% end %>
     </div>
 
-  </header>
-</div>
+    <ul class="nav navbar-nav navbar-right">
+      <% if current_user %>
+        <li><%= link_to "#{current_user.id}: Logout", logout_path(referrer: root_path) %></li>
 
-<div class="topnav-divider">
-</div>
+        <% if can? :manage, Spreadsheet %>
+          <li><%= link_to 'Export Hours', spreadsheet_libraries_url %></li>
+          <li><%= link_to 'Import Hours', new_spreadsheet_url %></li>
+        <% end %>
+      <% else %>
+        <li><%= link_to "Login", login_path(referrer: request.original_url) %></li>
+      <% end %>
+    </ul>
+  </div>
+</header>

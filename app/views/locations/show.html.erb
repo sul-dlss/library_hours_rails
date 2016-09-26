@@ -1,6 +1,9 @@
+<% breadcrumb @location %>
+
 <p id="notice"><%= notice %></p>
 
-<h1><%= link_to @location.library.name, @location.library %> / <%= @location.name %></h1>
+<h1><%= @location.name %> hours</h1>
+<%= link_to 'Location & Access', "https://library.stanford.edu/node/#{@location.node_id}", class: 'sul-i-arrow-left-3 location-and-access' %>
 <%= link_to 'Edit', edit_library_location_path(@location.library, @location), class: 'btn btn-default' if can? :edit, @location %>
 
 <h2>Hours</h2>

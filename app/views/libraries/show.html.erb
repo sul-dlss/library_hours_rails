@@ -1,7 +1,9 @@
+<% breadcrumb @library %>
+
 <p id="notice"><%= notice %></p>
 
 
-<h1><%= @library.name %></h1>
+<h1><%= @library.name %> hours</h1>
 <% if current_user && current_user.superadmin? %>
 <%= link_to 'Edit library', edit_library_path(@library), class: 'btn btn-default' if can? :edit, @library %>
 <%= link_to 'Edit hours', library_term_hours_path(@library), class: 'btn btn-default' if can? :edit, @library %>
