@@ -7,15 +7,28 @@
 
 .date-range {
   h2 {
+    color: $link-color;
     display: inline-block;
-    padding-left: 3ch;
-    padding-right: 3ch;
-    margin-top: 3.5em;
+    margin: 0 3ch;
+    padding-top: 0.5em;
+  }
+  
+  padding-bottom: 5px;
+  padding-top: 5px;
+  
+  
+  @media (max-width: 768px) {
+    .date-pagination {
+      margin-bottom: 1em;
+    }
   }
 }
-.closed,
+.closed {
+  color: #dd2121;
+}
+
 .open-24h {
-  color: $gray-light;
+  color: #009b76;
 }
 
 td.location-name,
@@ -35,17 +48,6 @@ td.exceptions {
 td.holiday,
 th.holiday {
   @extend .alert-danger;
-}
-
-#jump-term,
-#jump-term-group {
-  width: 100%;
-
-  .dropdown-menu {
-    height: 250px;
-    overflow-y: auto;
-    width: 100%;
-  }
 }
 
 th small {

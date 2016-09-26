@@ -64,6 +64,7 @@ group :production do
 end
 
 gem 'bootstrap-sass'
+gem 'sul_styles'
 gem 'hurley'
 gem 'nokogiri'
 gem 'friendly_id'

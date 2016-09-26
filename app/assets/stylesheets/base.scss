@@ -1,55 +1,18 @@
 a {
-
   &.disabled {
-    color: $gray-ccc;
+    color: #ccc;
     cursor: not-allowed;
     text-decoration: none;
   }
-
-  &:focus {
-    @include focus-outline;
-  }
-
-  &:focus,
-  &:hover {
-    border-bottom: 1px dotted $sul-link-border-color;
-    color: $black;
-    text-decoration: none;
-  }
 }
 
-body {
-  background-color: $sul-body-bg-color;
-  color: $black;
-  font-family: 'Source Sans Pro', 'Arial Unicode MS', Helvetica, sans-serif;
-  font-size: $font-size-base;
-  line-height: $body-line-height;
+a:hover, a:focus {
+  border-bottom: 1px dotted $sul-link-color-border;
+  text-decoration: none;
 }
 
-h1,
-h2 {
-  font-weight: 300;
-}
-
-h1 {
-  color: $sul-h1-font-color;
-  font-size: 2.3em;
-  letter-spacing: -0.05em;
-  padding: 10px 0;
-}
-
-h2 {
-  color: $sul-h2-font-color;
-  font-size: 1.6em;
-  letter-spacing: 0;
-  line-height: 1.2em;
-  margin: 0.5em 0;
-}
-
-h3 {
+h4 {
   font-weight: 400;
-  line-height: 1.3em;
-  margin: 0 0 0.4em;
 }
 
 dl {
