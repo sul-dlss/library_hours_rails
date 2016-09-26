@@ -6,7 +6,6 @@
 <%= link_to 'Location & Access', "https://library.stanford.edu/node/#{@location.node_id}", class: 'sul-i-arrow-left-3 location-and-access' %>
 <%= link_to 'Edit', edit_library_location_path(@location.library, @location), class: 'btn btn-default' if can? :edit, @location %>
 
-<h2>Hours</h2>
 <div class="row">
   <div class="col-xs-12 col-md-9">
     <%= link_to 'Edit normal hours', library_term_hours_path(@location.library), class: 'btn btn-info' if can? :edit, @location %>
