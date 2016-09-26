@@ -19,6 +19,13 @@
       <% else %>
         <li><%= link_to "Login", login_path(referrer: request.original_url) %></li>
       <% end %>
+      <li>
+        <%= link_to 'Feedback', feedback_path, data: { toggle: 'collapse', target: '#feedback-form' } %>
+      </li>
     </ul>
   </div>
 </header>
+
+<div id="feedback-form" class="feedback-form-container collapse">
+  <%= render "shared/feedback_forms/form" %>
+</div>

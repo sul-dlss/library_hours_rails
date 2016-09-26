@@ -29,6 +29,9 @@ Rails.application.routes.draw do
     end
   end
 
+  resource :feedback_form, path: "feedback", only: [:new, :create]
+  get "feedback" => "feedback_forms#new"
+
   # shim route for bootstrap-editable-form
   # see https://github.com/bootstrap-ruby/bootstrap-editable-rails/blob/7217779426f9253dcbc59b8b229537cf369b0f90/app/assets/javascripts/bootstrap-editable-rails.js.coffee#L29
   put 'libraries/:library_id/locations/:location_id/calendars' => 'calendars#create'
