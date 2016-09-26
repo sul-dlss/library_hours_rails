@@ -1,4 +1,8 @@
 @import 'bootstrap-sprockets';
+@import 'sul-styles';
+@import 'sul-icons-rails';
+@import 'sul-icons-aliases';
+@import 'sul-icons/helpers';
 @import 'variables';
 @import 'bootstrap';
 @import 'library_hours_mixins';

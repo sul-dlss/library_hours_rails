@@ -1,2 +1,3 @@
 super_admin_groups: []
 site_admin_groups: []
+EMAIL_TO: libweb-feedback@lists.stanford.edu

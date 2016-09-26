@@ -43,4 +43,5 @@ en:
     - F
     - Sa
     formats:
+      short: "%b %d, %Y"
       very_short: "%a %d"

@@ -1,55 +1,28 @@
-a {
+#main-container {
+  a {
+    &.disabled {
+      color: #ccc;
+      cursor: not-allowed;
+      text-decoration: none;
+    }
+  }
 
-  &.disabled {
-    color: $gray-ccc;
-    cursor: not-allowed;
+  a:hover, a:focus {
+    border-bottom: 1px dotted $sul-link-color-border;
     text-decoration: none;
   }
 
-  &:focus {
-    @include focus-outline;
-  }
-
-  &:focus,
-  &:hover {
-    border-bottom: 1px dotted $sul-link-border-color;
-    color: $black;
-    text-decoration: none;
+  li {
+    a {
+      &:hover, &:focus {
+        border-bottom: 0;
+      }
+    }
   }
 }
 
-body {
-  background-color: $sul-body-bg-color;
-  color: $black;
-  font-family: 'Source Sans Pro', 'Arial Unicode MS', Helvetica, sans-serif;
-  font-size: $font-size-base;
-  line-height: $body-line-height;
-}
-
-h1,
-h2 {
-  font-weight: 300;
-}
-
-h1 {
-  color: $sul-h1-font-color;
-  font-size: 2.3em;
-  letter-spacing: -0.05em;
-  padding: 10px 0;
-}
-
-h2 {
-  color: $sul-h2-font-color;
-  font-size: 1.6em;
-  letter-spacing: 0;
-  line-height: 1.2em;
-  margin: 0.5em 0;
-}
-
-h3 {
+h4 {
   font-weight: 400;
-  line-height: 1.3em;
-  margin: 0 0 0.4em;
 }
 
 dl {
@@ -87,4 +60,18 @@ textarea:focus {
 
 #main-container {
   padding-bottom: $form-group-margin-bottom;
+}
+
+.location-and-access:before {
+  padding-right: 1ch;
+}
+
+.dropdown-menu {
+  h4 {
+    padding: 3px 20px;
+  }
+
+  .divider:last-child {
+    display: none;
+  }
 }

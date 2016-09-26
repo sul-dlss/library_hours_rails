@@ -1,9 +1,49 @@
-@import 'sul-variables';
-
 $gray-base: #000;
 $gray-dark: lighten($gray-base, 20%);
 $link-color: $gray-dark;
 
-$brand-primary: $cardinal-red;
+$brand-primary: $color-cardinal-red;
 $pagination-active-bg: #696969;
 $pagination-active-border: #696969;
+
+$font-size-base: 15px;
+$line-height-base: 1.5;
+
+$btn-default-color: $color-gray;
+$btn-default-bg: $color-beige-10;
+$btn-default-border: $color-beige-30;
+
+$link-color: #a26624;
+$link-hover-color: #a26624;
+$link-hover-decoration: none;
+$sul-link-color-border: #a26624;
+
+$font-size-h1: floor(($font-size-base * 2.986));
+$font-size-h2: floor(($font-size-base * 2.074));
+$font-size-h3: floor(($font-size-base * 1.728));
+$font-size-h4: floor(($font-size-base * 1.2));
+$headings-font-weight: 100;
+
+$body-bg: $color-beige-05;
+$font-family-sans-serif: 'Source Sans Pro', 'Arial Unicode MS', Helvetica, sans-serif;
+$txt-color: $gray-base;
+
+$gray-41-percent: #696969;
+$sul-focus-outline: #eaab00;
+
+$navbar-default-link-color: $color-cardinal-red;
+
+$well-bg: $color-beige-10;
+$well-border: $color-beige-20;
+$breadcrumb-bg: inherit;
+$breadcrumb-padding-horizontal: 0;
+
+$navbar-inverse-bg: $brand-primary;
+$navbar-inverse-border: $color-dark-red;
+$navbar-inverse-color: lighten($gray-base, 86%);
+$navbar-inverse-link-color: lighten($gray-base, 86%);
+
+@import "bootstrap/variables";
+
+$brandbar-height: 35px;
+$brandbar-padding-vertical: (($brandbar-height - $line-height-computed) / 2);
