@@ -7,16 +7,15 @@
 
 .date-range {
   h2 {
-    color: $link-color;
     display: inline-block;
     margin: 0 3ch;
     padding-top: 0.5em;
   }
-  
+
   padding-bottom: 5px;
   padding-top: 5px;
-  
-  
+
+
   @media (max-width: 768px) {
     .date-pagination {
       margin-bottom: 1em;
