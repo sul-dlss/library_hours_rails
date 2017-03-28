@@ -1,7 +1,7 @@
 <table class="table weekly-hours">
   <thead>
     <tr>
-      <th class="location-name"></th>
+      <th class="location-name"><span class='sr-only'>Location</span></th>
       <% @range.to_a.each do |d| %>
         <th class="hours <%= 'holiday' if Term.holiday? d %>">
           <% if Term.holiday? d %>
