@@ -3,7 +3,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1><%= @location.name %> hours</h1>
-<%= link_to 'Location & Access', "https://library.stanford.edu/node/#{@location.node_id}", class: 'sul-i-arrow-left-3 location-and-access' if @location.node_id %>
+<%= link_to t(:'location_and_access'), "https://library.stanford.edu/node/#{@location.node_id}", class: 'sul-i-arrow-left-3 location-and-access' if @location.node_id %>
 <%= link_to 'Edit', edit_library_location_path(@location.library, @location), class: 'btn btn-default' if can? :edit, @location %>
 
 <div class="row">
@@ -14,4 +14,3 @@
 
 <%= render 'libraries/range' %>
 <%= render partial: 'libraries/location_hours', locals: { locations: [@location] } %>
-
