@@ -2,6 +2,7 @@ $gray-base: #000;
 $gray-dark: lighten($gray-base, 20%);
 $link-color: $gray-dark;
 $dark-orange: #925b20;
+$nav-color: #fbfbf9;
 
 $brand-primary: $color-cardinal-red;
 $pagination-active-bg: #696969;
@@ -44,12 +45,15 @@ $breadcrumb-color: inherit;
 $breadcrumb-padding-horizontal: 0;
 $breadcrumb-separator: '»';
 
-$navbar-inverse-bg: $brand-primary;
+$navbar-default-bg: $brand-primary;
 $navbar-inverse-border: $color-dark-red;
-$navbar-inverse-color: lighten($gray-base, 86%);
-$navbar-inverse-link-color: lighten($gray-base, 86%);
+$navbar-inverse-link-color: $link-color;
+$navbar-inverse-link-hover-color: $link-color;
+
 
 @import "bootstrap/variables";
 
-$brandbar-height: 35px;
+$top-nav-bar-height: 35px;
+$brandbar-collapsed-height: 50px;
+$brandbar-height: 100px;
 $brandbar-padding-vertical: (($brandbar-height - $line-height-computed) / 2);
