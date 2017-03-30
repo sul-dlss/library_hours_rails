@@ -8,8 +8,7 @@
   }
 
   a:hover, a:focus {
-    border-bottom: 1px dotted $sul-link-color-border;
-    text-decoration: none;
+    text-decoration: underline;
   }
 
   li {
