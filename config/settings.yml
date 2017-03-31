@@ -1,3 +1,4 @@
 super_admin_groups: []
 site_admin_groups: []
+pinned_library_slug: 'green'
 EMAIL_TO: libweb-feedback@lists.stanford.edu

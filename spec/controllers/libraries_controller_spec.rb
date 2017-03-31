@@ -60,6 +60,18 @@ RSpec.describe LibrariesController, type: :controller do
       expect(assigns(:libraries)).to eq([library])
     end
 
+    it 'sorts the libraries by the sort_key' do
+      library1 = Library.create!(valid_attributes).tap { |lib| lib.locations << create(:location, keeps_hours: true) }
+      library2 = Library.create!(name: 'Another New library').tap { |lib| lib.locations << create(:location, keeps_hours: true) }
+      library3 = Library.create!(name: 'Yet Another New library', slug: 'green').tap { |lib| lib.locations << create(:location, keeps_hours: true) }
+
+      get :index, {}, valid_session
+      libraries = assigns(:libraries)
+      expect(libraries[0].id).to eq library3.id
+      expect(libraries[1].id).to eq library2.id
+      expect(libraries[2].id).to eq library1.id
+    end
+
     describe '@range' do
       it 'defaults to the current week' do
         get :index, {}, valid_session

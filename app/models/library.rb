@@ -9,4 +9,9 @@ class Library < ActiveRecord::Base
 
   extend FriendlyId
   friendly_id :slug, use: [:slugged, :finders, :history]
+
+  def sort_key
+    return '0' if slug == Settings.pinned_library_slug
+    name
+  end
 end
