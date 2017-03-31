@@ -1,6 +1,7 @@
 $gray-base: #000;
 $gray-dark: lighten($gray-base, 20%);
 $link-color: $gray-dark;
+$dark-orange: #925b20;
 
 $brand-primary: $color-cardinal-red;
 $pagination-active-bg: #696969;
@@ -35,8 +36,13 @@ $navbar-default-link-color: $color-cardinal-red;
 
 $well-bg: $color-beige-10;
 $well-border: $color-beige-20;
+$well-link: $dark-orange;
+
+$breadcrumb-active-color: inherit;
 $breadcrumb-bg: inherit;
+$breadcrumb-color: inherit;
 $breadcrumb-padding-horizontal: 0;
+$breadcrumb-separator: '»';
 
 $navbar-inverse-bg: $brand-primary;
 $navbar-inverse-border: $color-dark-red;

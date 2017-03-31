@@ -33,7 +33,7 @@ en:
       hours_only: "%l%P"
       very_short: "%l:%M%P"
 
-  date:    
+  date:
     abbr_day_names:
     - Su
     - M
@@ -45,3 +45,4 @@ en:
     formats:
       short: "%b %d, %Y"
       very_short: "%a %d"
+  location_and_access: Location & access

@@ -7,16 +7,16 @@
 
 .date-range {
   h2 {
-    color: $link-color;
     display: inline-block;
     margin: 0 3ch;
     padding-top: 0.5em;
   }
-  
+
+  margin-top: 15px;
   padding-bottom: 5px;
   padding-top: 5px;
-  
-  
+
+
   @media (max-width: 768px) {
     .date-pagination {
       margin-bottom: 1em;
@@ -52,4 +52,8 @@ th.holiday {
 
 th small {
   font-size: 70%;
+}
+
+.well a {
+  color: $well-link;
 }
