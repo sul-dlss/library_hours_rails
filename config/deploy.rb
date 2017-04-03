@@ -1,6 +1,6 @@
 set :application, 'library_hours'
 set :repo_url, 'https://github.com/sul-dlss/library_hours_rails.git'
-
+set :user, 'library_hours'
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
