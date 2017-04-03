@@ -3,19 +3,59 @@
   margin-bottom: (($brandbar-height - $element-height) / 2);
 }
 
+#top-nav-bar {
+  height: $top-nav-bar-height;
+
+  ul {
+    float: right;
+    height: $top-nav-bar-height;
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    display: table-cell;
+    height: $top-nav-bar-height;
+    vertical-align: middle;
+  }
+}
+
 #topnav-container {
-  min-height: $brandbar-height;
+  height: $brandbar-height;
+
+  @media (max-width: $screen-xs-max) {
+    height: $brandbar-collapsed-height;
+  }
 
   .navbar-brand {
     @extend .text-hide;
 
-    background: transparent image-url("sul-logo.png") no-repeat center left;
     height: $brandbar-height;
     margin-left: 0;
+    padding: 0;
     width: 297px;
 
     @media (max-width: $screen-xs-max) {
+      height: $brandbar-collapsed-height;
+    }
+
+    img {
+      height: $brandbar-height;
+
+      @media (max-width: $screen-xs-max) {
+        height: $brandbar-collapsed-height;
+      }
+    }
+
+    @media (max-width: $screen-xs-max) {
       margin-left: 15px;
+    }
+  }
+
+  .navbar-collapse {
+    background-color: $navbar-default-bg;
+    a {
+      color: lighten($gray-base, 86%);;
     }
   }
 
@@ -28,10 +68,6 @@
         }
       }
     }
-  }
-
-  .navbar-toggle {
-    @include brandbar-vertical-align(34px);
   }
 
   .navbar-form {
