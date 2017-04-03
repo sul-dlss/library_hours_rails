@@ -66,7 +66,7 @@ end
 gem 'bootstrap-sass'
 gem 'sul_styles'
 gem 'hurley'
-gem 'nokogiri'
+gem 'nokogiri', '>= 1.7.1'
 gem 'friendly_id'
 gem 'bootstrap_form'
 gem 'bootstrap-editable-rails'
