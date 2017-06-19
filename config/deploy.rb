@@ -20,10 +20,10 @@ set :deploy_to, '/opt/app/library_hours/library_hours'
 # set :pty, true
 
 # Default value for :linked_files is []
-set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml', 'public/.htaccess', 'config/honeybadger.yml')
+set :linked_files, %w[config/database.yml config/secrets.yml public/.htaccess  config/honeybadger.yml]
 
 # Default value for linked_dirs is []
-set :linked_dirs, fetch(:linked_dirs, []).push('config/settings', 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'tmp/uploads', 'vendor/bundle', 'public/system')
+set :linked_dirs, %w[config/settings log tmp/pids tmp/cache tmp/sockets tmp/uploads vendor/bundle public/system]
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
