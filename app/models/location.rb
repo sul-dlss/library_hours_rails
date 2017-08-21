@@ -37,4 +37,8 @@ class Location < ActiveRecord::Base
 
     nil
   end
+
+  def node_id?
+    node_mapping && node_mapping.node_id?
+  end
 end
