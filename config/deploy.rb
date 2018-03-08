@@ -31,6 +31,10 @@ set :linked_dirs, %w[config/settings log tmp/pids tmp/cache tmp/sockets tmp/uplo
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
+# honeybadger_env otherwise defaults to rails_env
+# we want prod rather than production
+set :honeybadger_env, fetch(:stage)
+
 namespace :deploy do
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
