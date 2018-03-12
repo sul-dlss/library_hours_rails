@@ -133,9 +133,12 @@ class Calendar < ActiveRecord::Base
   end
 
   def self.week(str)
-    start = DateTime.strptime(str, '%GW%V').to_date - 1.day
+    start = DateTime.strptime(str.upcase, '%GW%V').to_date - 1.day
 
     start..(start + 6.days)
+  rescue ArgumentError
+    # strptime throws an ArgumentError when the date value isn't valid 
+    nil
   end
 
   def status_drupal

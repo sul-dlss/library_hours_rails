@@ -1,4 +1,5 @@
 class FeedbackFormsController < ApplicationController
+  skip_authorization_check
 
   def new
   end

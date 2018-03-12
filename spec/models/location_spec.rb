@@ -26,4 +26,15 @@ describe Location do
       end
     end
   end
+  
+  describe '#node_id?' do
+    it 'is false if the node_mapping is not set' do
+      expect(subject.node_id?).to be_falsey
+    end
+    
+    it 'is true if there is a node mapping' do
+      subject.build_node_mapping(node_id: '5')
+      expect(subject.node_id?).to eq true      
+    end
+  end
 end

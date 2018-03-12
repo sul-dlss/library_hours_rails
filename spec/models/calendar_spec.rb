@@ -30,6 +30,14 @@ RSpec.describe Calendar, type: :model do
     it 'parses an ISO 8601 week-based year and week number into a range' do
       expect(described_class.week('2015W05')).to eq Date.parse('2015-01-25')..Date.parse('2015-01-31')
     end
+
+    it 'parses an ISO 8601 week-based year with lower-case values' do
+      expect(described_class.week('2015w05')).to eq Date.parse('2015-01-25')..Date.parse('2015-01-31')
+    end
+    
+    it 'returns nil for invalid date formats' do
+      expect(described_class.week('xyz')).to be_nil
+    end
   end
 
   describe '#closed!' do
