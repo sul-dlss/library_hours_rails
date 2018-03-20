@@ -1,5 +1,5 @@
 json.links do
-  json.self url_for(params.merge(only_path: false))
+  json.self url_for(params.to_unsafe_h.merge(only_path: false))
   json.prev url_for(from: (@range.begin - @range.to_a.length.days), to: (@range.begin), only_path: false)
   json.next url_for(from: (@range.end), to: (@range.end + @range.to_a.length.days), only_path: false)
 end

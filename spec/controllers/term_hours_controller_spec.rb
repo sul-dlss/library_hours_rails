@@ -4,29 +4,29 @@ RSpec.describe TermHoursController, type: :controller do
   before do
     allow(controller).to receive(:current_user).and_return(user)
   end
-  
+
   describe 'with an anonymous user' do
     let(:user) { nil }
     let(:term_hour) { create(:term_hour) }
 
     it 'should deny access to #show' do
-      expect { get :show, id: term_hour, library_id: term_hour.library, location_id: term_hour.location }.to raise_error CanCan::AccessDenied
+      expect { get :show, params: { id: term_hour, library_id: term_hour.library, location_id: term_hour.location } }.to raise_error CanCan::AccessDenied
     end
 
     it 'should deny access to #new' do
-      expect { get :new, library_id: term_hour.library, location_id: term_hour.location }.to raise_error CanCan::AccessDenied
+      expect { get :new, params: { library_id: term_hour.library, location_id: term_hour.location } }.to raise_error CanCan::AccessDenied
     end
 
     it 'should deny access to #edit' do
-      expect { get :edit, id: term_hour, library_id: term_hour.library, location_id: term_hour.location }.to raise_error CanCan::AccessDenied
+      expect { get :edit, params: { id: term_hour, library_id: term_hour.library, location_id: term_hour.location } }.to raise_error CanCan::AccessDenied
     end
 
     it 'should deny access to #update' do
-      expect { post :update, id: term_hour, library_id: term_hour.library, location_id: term_hour.location }.to raise_error CanCan::AccessDenied
+      expect { post :update, params: { id: term_hour, library_id: term_hour.library, location_id: term_hour.location } }.to raise_error CanCan::AccessDenied
     end
 
     it 'should deny access to #destroy' do
-      expect { delete :destroy, id: term_hour, library_id: term_hour.library, location_id: term_hour.location }.to raise_error CanCan::AccessDenied
+      expect { delete :destroy, params: { id: term_hour, library_id: term_hour.library, location_id: term_hour.location } }.to raise_error CanCan::AccessDenied
     end
   end
 
@@ -53,7 +53,7 @@ RSpec.describe TermHoursController, type: :controller do
 
   describe 'GET #index' do
     it 'assigns all term_hours as @term_hours' do
-      get :index, { library_id: library, location_id: location }, valid_session
+      get :index, params: { library_id: library, location_id: location }, session: valid_session
       expect(assigns(:library)).to eq(library)
     end
   end
@@ -61,14 +61,14 @@ RSpec.describe TermHoursController, type: :controller do
   describe 'GET #show' do
     it 'assigns the requested term_hour as @term_hour' do
       term_hour = TermHour.create! valid_attributes
-      get :show, { id: term_hour.to_param, library_id: library, location_id: location }, valid_session
+      get :show, params: { id: term_hour.to_param, library_id: library, location_id: location }, session: valid_session
       expect(assigns(:term_hour)).to eq(term_hour)
     end
   end
 
   describe 'GET #new' do
     it 'assigns a new term_hour as @term_hour' do
-      get :new, { library_id: library, location_id: location }, valid_session
+      get :new, params: { library_id: library, location_id: location }, session: valid_session
       expect(assigns(:term_hour)).to be_a_new(TermHour)
     end
   end
@@ -76,7 +76,7 @@ RSpec.describe TermHoursController, type: :controller do
   describe 'GET #edit' do
     it 'assigns the requested term_hour as @term_hour' do
       term_hour = TermHour.create! valid_attributes
-      get :edit, { id: term_hour.to_param, library_id: library, location_id: location }, valid_session
+      get :edit, params: { id: term_hour.to_param, library_id: library, location_id: location }, session: valid_session
       expect(assigns(:term_hour)).to eq(term_hour)
     end
   end
@@ -85,30 +85,30 @@ RSpec.describe TermHoursController, type: :controller do
     context 'with valid params' do
       it 'creates a new TermHour' do
         expect do
-          post :create, { term: term, term_hour: valid_attributes, library_id: library, location_id: location }, valid_session
+          post :create, params: { term: term, term_hour: valid_attributes, library_id: library, location_id: location }, session: valid_session
         end.to change(TermHour, :count).by(1)
       end
 
       it 'assigns a newly created term_hour as @term_hour' do
-        post :create, { term: term, term_hour: valid_attributes, library_id: library, location_id: location }, valid_session
+        post :create, params: { term: term, term_hour: valid_attributes, library_id: library, location_id: location }, session: valid_session
         expect(assigns(:term_hour)).to be_a(TermHour)
         expect(assigns(:term_hour)).to be_persisted
       end
 
       it 'redirects to the created term_hour' do
-        post :create, { term: term, term_hour: valid_attributes, library_id: library, location_id: location }, valid_session
+        post :create, params: { term: term, term_hour: valid_attributes, library_id: library, location_id: location }, session: valid_session
         expect(response).to redirect_to(library_location_term_hours_path(library, location))
       end
     end
 
     context 'with invalid params' do
       it 'assigns a newly created but unsaved term_hour as @term_hour' do
-        post :create, { term: term, term_hour: invalid_attributes, library_id: library, location_id: location }, valid_session
+        post :create, params: { term: term, term_hour: invalid_attributes, library_id: library, location_id: location }, session: valid_session
         expect(assigns(:term_hour)).to be_a_new(TermHour)
       end
 
       it "re-renders the 'new' template" do
-        post :create, { term: term, term_hour: invalid_attributes, library_id: library, location_id: location }, valid_session
+        post :create, params: { term: term, term_hour: invalid_attributes, library_id: library, location_id: location }, session: valid_session
         expect(response).to render_template('new')
       end
     end
@@ -122,20 +122,20 @@ RSpec.describe TermHoursController, type: :controller do
 
       it 'updates the requested term_hour' do
         term_hour = TermHour.create! valid_attributes
-        put :update, { id: term_hour.to_param, term_hour: new_attributes, library_id: library, location_id: location }, valid_session
+        put :update, params: { id: term_hour.to_param, term_hour: new_attributes, library_id: library, location_id: location }, session: valid_session
         term_hour.reload
         expect(term_hour.monday).to eq 'closed'
       end
 
       it 'assigns the requested term_hour as @term_hour' do
         term_hour = TermHour.create! valid_attributes
-        put :update, { id: term_hour.to_param, term_hour: valid_attributes, library_id: library, location_id: location }, valid_session
+        put :update, params: { id: term_hour.to_param, term_hour: valid_attributes, library_id: library, location_id: location }, session: valid_session
         expect(assigns(:term_hour)).to eq(term_hour)
       end
 
       it 'redirects to the term_hour' do
         term_hour = TermHour.create! valid_attributes
-        put :update, { id: term_hour.to_param, term_hour: valid_attributes, library_id: library, location_id: location }, valid_session
+        put :update, params: { id: term_hour.to_param, term_hour: valid_attributes, library_id: library, location_id: location }, session: valid_session
         expect(response).to redirect_to(library_location_term_hours_path(library, location))
       end
     end
@@ -143,13 +143,13 @@ RSpec.describe TermHoursController, type: :controller do
     context 'with invalid params' do
       it 'assigns the term_hour as @term_hour' do
         term_hour = TermHour.create! valid_attributes
-        put :update, { id: term_hour.to_param, term_hour: invalid_attributes, library_id: library, location_id: location }, valid_session
+        put :update, params: { id: term_hour.to_param, term_hour: invalid_attributes, library_id: library, location_id: location }, session: valid_session
         expect(assigns(:term_hour)).to eq(term_hour)
       end
 
       it "re-renders the 'edit' template" do
         term_hour = TermHour.create! valid_attributes
-        put :update, { id: term_hour.to_param, term_hour: invalid_attributes, library_id: library, location_id: location }, valid_session
+        put :update, params: { id: term_hour.to_param, term_hour: invalid_attributes, library_id: library, location_id: location }, session: valid_session
         expect(response).to render_template('edit')
       end
     end
@@ -159,13 +159,13 @@ RSpec.describe TermHoursController, type: :controller do
     it 'destroys the requested term_hour' do
       term_hour = TermHour.create! valid_attributes
       expect do
-        delete :destroy, { id: term_hour.to_param, library_id: library, location_id: location }, valid_session
+        delete :destroy, params: { id: term_hour.to_param, library_id: library, location_id: location }, session: valid_session
       end.to change(TermHour, :count).by(-1)
     end
 
     it 'redirects to the term_hours list' do
       term_hour = TermHour.create! valid_attributes
-      delete :destroy, { id: term_hour.to_param, library_id: library, location_id: location }, valid_session
+      delete :destroy, params: { id: term_hour.to_param, library_id: library, location_id: location }, session: valid_session
       expect(response).to redirect_to(library_location_term_hours_path(library, location))
     end
   end

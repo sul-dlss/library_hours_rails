@@ -10,23 +10,23 @@ RSpec.describe TermsController, type: :controller do
     let(:term) { create(:term) }
 
     it 'should deny access to #show' do
-      expect { get :show, id: term, library_id: library, location_id: location }.to raise_error CanCan::AccessDenied
+      expect { get :show, params: { id: term, library_id: library, location_id: location } }.to raise_error CanCan::AccessDenied
     end
 
     it 'should deny access to #new' do
-      expect { get :new, library_id: library, location_id: location }.to raise_error CanCan::AccessDenied
+      expect { get :new, params: { library_id: library, location_id: location } }.to raise_error CanCan::AccessDenied
     end
 
     it 'should deny access to #edit' do
-      expect { get :edit, id: term, library_id: library, location_id: location }.to raise_error CanCan::AccessDenied
+      expect { get :edit, params: { id: term, library_id: library, location_id: location } }.to raise_error CanCan::AccessDenied
     end
 
     it 'should deny access to #update' do
-      expect { post :update, id: term, library_id: library, location_id: location }.to raise_error CanCan::AccessDenied
+      expect { post :update, params: { id: term, library_id: library, location_id: location } }.to raise_error CanCan::AccessDenied
     end
 
     it 'should deny access to #destroy' do
-      expect { delete :destroy, id: term, library_id: library, location_id: location }.to raise_error CanCan::AccessDenied
+      expect { delete :destroy, params: { id: term, library_id: library, location_id: location } }.to raise_error CanCan::AccessDenied
     end
   end
 
@@ -53,7 +53,7 @@ RSpec.describe TermsController, type: :controller do
   describe 'GET #index' do
     it 'assigns all terms as @terms' do
       term = Term.create! valid_attributes
-      get :index, {}, valid_session
+      get :index, params: {}, session: valid_session
       expect(assigns(:terms)).to eq([term])
     end
   end
@@ -61,14 +61,14 @@ RSpec.describe TermsController, type: :controller do
   describe 'GET #show' do
     it 'assigns the requested term as @term' do
       term = Term.create! valid_attributes
-      get :show, { id: term.to_param }, valid_session
+      get :show, params: { id: term.to_param }, session: valid_session
       expect(assigns(:term)).to eq(term)
     end
   end
 
   describe 'GET #new' do
     it 'assigns a new term as @term' do
-      get :new, {}, valid_session
+      get :new, params: {}, session: valid_session
       expect(assigns(:term)).to be_a_new(Term)
     end
   end
@@ -76,7 +76,7 @@ RSpec.describe TermsController, type: :controller do
   describe 'GET #edit' do
     it 'assigns the requested term as @term' do
       term = Term.create! valid_attributes
-      get :edit, { id: term.to_param }, valid_session
+      get :edit, params: { id: term.to_param }, session: valid_session
       expect(assigns(:term)).to eq(term)
     end
   end
@@ -85,30 +85,30 @@ RSpec.describe TermsController, type: :controller do
     context 'with valid params' do
       it 'creates a new Term' do
         expect do
-          post :create, { term: valid_attributes }, valid_session
+          post :create, params: { term: valid_attributes }, session: valid_session
         end.to change(Term, :count).by(1)
       end
 
       it 'assigns a newly created term as @term' do
-        post :create, { term: valid_attributes }, valid_session
+        post :create, params: { term: valid_attributes }, session: valid_session
         expect(assigns(:term)).to be_a(Term)
         expect(assigns(:term)).to be_persisted
       end
 
       it 'redirects to the created term' do
-        post :create, { term: valid_attributes }, valid_session
+        post :create, params: { term: valid_attributes }, session: valid_session
         expect(response).to redirect_to(Term.last)
       end
     end
 
     context 'with invalid params' do
       it 'assigns a newly created but unsaved term as @term' do
-        post :create, { term: invalid_attributes }, valid_session
+        post :create, params: { term: invalid_attributes }, session: valid_session
         expect(assigns(:term)).to be_a_new(Term)
       end
 
       it "re-renders the 'new' template" do
-        post :create, { term: invalid_attributes }, valid_session
+        post :create, params: { term: invalid_attributes }, session: valid_session
         expect(response).to render_template('new')
       end
     end
@@ -122,20 +122,20 @@ RSpec.describe TermsController, type: :controller do
 
       it 'updates the requested term' do
         term = Term.create! valid_attributes
-        put :update, { id: term.to_param, term: new_attributes }, valid_session
+        put :update, params: { id: term.to_param, term: new_attributes }, session: valid_session
         term.reload
         expect(term.name).to eq 'New Term Name'
       end
 
       it 'assigns the requested term as @term' do
         term = Term.create! valid_attributes
-        put :update, { id: term.to_param, term: valid_attributes }, valid_session
+        put :update, params: { id: term.to_param, term: valid_attributes }, session: valid_session
         expect(assigns(:term)).to eq(term)
       end
 
       it 'redirects to the term' do
         term = Term.create! valid_attributes
-        put :update, { id: term.to_param, term: valid_attributes }, valid_session
+        put :update, params: { id: term.to_param, term: valid_attributes }, session: valid_session
         expect(response).to redirect_to(term)
       end
     end
@@ -143,13 +143,13 @@ RSpec.describe TermsController, type: :controller do
     context 'with invalid params' do
       it 'assigns the term as @term' do
         term = Term.create! valid_attributes
-        put :update, { id: term.to_param, term: invalid_attributes }, valid_session
+        put :update, params: { id: term.to_param, term: invalid_attributes }, session: valid_session
         expect(assigns(:term)).to eq(term)
       end
 
       it "re-renders the 'edit' template" do
         term = Term.create! valid_attributes
-        put :update, { id: term.to_param, term: invalid_attributes }, valid_session
+        put :update, params: { id: term.to_param, term: invalid_attributes }, session: valid_session
         expect(response).to render_template('edit')
       end
     end
@@ -159,13 +159,13 @@ RSpec.describe TermsController, type: :controller do
     it 'destroys the requested term' do
       term = Term.create! valid_attributes
       expect do
-        delete :destroy, { id: term.to_param }, valid_session
+        delete :destroy, params: { id: term.to_param }, session: valid_session
       end.to change(Term, :count).by(-1)
     end
 
     it 'redirects to the terms list' do
       term = Term.create! valid_attributes
-      delete :destroy, { id: term.to_param }, valid_session
+      delete :destroy, params: { id: term.to_param }, session: valid_session
       expect(response).to redirect_to(terms_url)
     end
   end

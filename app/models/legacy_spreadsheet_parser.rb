@@ -3,7 +3,11 @@ class LegacySpreadsheetParser
   attr_reader :io
 
   def initialize(io)
-    @io = io
+    @io = if io.is_a? IO
+            io
+          else
+            StringIO.new(io)
+          end
   end
 
   def hours

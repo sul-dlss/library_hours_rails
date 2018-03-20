@@ -1,4 +1,4 @@
-class CreateSpreadsheets < ActiveRecord::Migration
+class CreateSpreadsheets < ActiveRecord::Migration[4.2]
   def change
     create_table :spreadsheets do |t|
       t.string :attachment_id

@@ -1,7 +1,7 @@
 class Spreadsheet < ActiveRecord::Base
-  attachment :attachment
+  has_one_attached :attachment
 
-  validates :attachment, presence: true
+  validate :attachment_validation
 
   delegate :bad_data, to: :parser
 
@@ -33,6 +33,13 @@ class Spreadsheet < ActiveRecord::Base
   end
 
   def parser
-    @parser ||= LegacySpreadsheetParser.new(attachment)
+    @parser ||= LegacySpreadsheetParser.new(attachment.download)
   end
+
+  private
+
+  def attachment_validation
+    errors[:attachment] << 'Missing attachment' unless attachment.attached?
+  end
+
 end

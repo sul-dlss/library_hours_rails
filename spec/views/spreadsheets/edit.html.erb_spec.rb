@@ -3,10 +3,7 @@ require 'rails_helper'
 RSpec.describe 'spreadsheets/edit', type: :view do
   before(:each) do
     @spreadsheet = assign(:spreadsheet, Spreadsheet.create!(
-                                          attachment_id: 'MyString',
-                                          attachment_filename: 'MyString',
-                                          attachment_content_type: 'MyString',
-                                          attachment_size: 1,
+                                          attachment: StringIO.new('MyString'),
                                           status: 'MyString'
     ))
   end

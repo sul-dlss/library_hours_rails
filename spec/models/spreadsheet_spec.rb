@@ -4,16 +4,19 @@ RSpec.describe Spreadsheet, type: :model do
   let(:location) { create(:location) }
   describe '#import' do
     let(:content) do
-      <<-EOF
+      Tempfile.new.tap do |f|
+        f.puts <<-EOF.strip
 garbage,row,i,don't,even...
 ,,,,#{location.slug},
 Date,Day,Type,Notes,Open,Closed
 2015-05-22,Friday,Regular,Day,8:00 AM,9:00PM
-      EOF
+        EOF
+        f.rewind
+      end
     end
 
     before do
-      subject.attachment = StringIO.new(content.strip)
+      subject.attachment.attach io: content, filename: 'x.csv', content_type: 'text/plain'
     end
     it 'imports the spreadsheet hours into calendar events' do
       expect { subject.import }.to change(Calendar, :count).by(1)
