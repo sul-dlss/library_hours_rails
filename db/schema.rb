@@ -76,8 +76,8 @@ ActiveRecord::Schema.define(version: 2018_03_19_235103) do
 
   create_table "node_mappings", force: :cascade do |t|
     t.integer "node_id"
-    t.integer "mapped_id"
     t.string "mapped_type"
+    t.integer "mapped_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
