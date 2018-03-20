@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :term_hour do
     term
     location

@@ -1,10 +1,10 @@
 <div class="clearfix date-range well">
   <nav class="date-pagination col-md-7 col-xs-12">
-    <%= link_to params.merge(week: (@range.begin - 1.week + 1.day).strftime("%GW%V")), class: 'sul-i-arrow-left-3' do %>
+    <%= link_to params.to_unsafe_h.merge(week: (@range.begin - 1.week + 1.day).strftime("%GW%V")), class: 'sul-i-arrow-left-3' do %>
       <span class="sr-only">Previous</span>
     <% end %>
     <h2 class="h4"><%= l(@range.begin, format: :short) %> – <%= l(@range.end, format: :short) %></h2>
-    <%= link_to params.merge(week: (@range.begin + 1.week + 1.day).strftime("%GW%V")), class: 'sul-i-arrow-right-3' do %>
+    <%= link_to params.to_unsafe_h.merge(week: (@range.begin + 1.week + 1.day).strftime("%GW%V")), class: 'sul-i-arrow-right-3' do %>
       <span class="sr-only">Next</span>
     <% end %>
   </nav>
@@ -14,7 +14,7 @@
       <div class="col-md-7 col-sm-6">
       <label for="jump-date" class="control-label sr-only">Jump to:</label>
       <div class="input-group">
-        <input value="<%= Time.zone.today %>" name="date" type="date" class="form-control" id="jump-date" data-href="<%= url_for(params.merge(week: "%GW%V")) %>"/>
+        <input value="<%= Time.zone.today %>" name="date" type="date" class="form-control" id="jump-date" data-href="<%= url_for(params.to_unsafe_h.merge(week: "%GW%V")) %>"/>
         <span class="input-group-btn">
           <input value="Go" type="submit" class="btn btn-primary"/>
         </span>
@@ -34,7 +34,7 @@
               <h4><%= year %></h4>
             </li>
             <% terms.each do |t| %>
-              <li><%= link_to params.merge(week: t.dtstart.strftime("%GW%V")) do %>
+              <li><%= link_to params.to_unsafe_h.merge(week: t.dtstart.strftime("%GW%V")) do %>
                 <%= t.name %>
                 <small><%= l t.dtstart.to_date, format: :short %><%= "-" + l(t.dtend.to_date, format: :short) unless t.dtstart.to_date == t.dtend.to_date %></small>
               <% end %>

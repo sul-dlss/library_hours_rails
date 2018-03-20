@@ -1,4 +1,4 @@
-class CreateTermHours < ActiveRecord::Migration
+class CreateTermHours < ActiveRecord::Migration[4.2]
   def change
     create_table :term_hours do |t|
       t.references :term, index: true, foreign_key: true

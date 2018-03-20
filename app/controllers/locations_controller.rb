@@ -1,6 +1,6 @@
 class LocationsController < ApplicationController
   load_and_authorize_resource :library
-  before_filter :find_location_by_legacy_slug, only: :hours_v1
+  before_action :find_location_by_legacy_slug, only: :hours_v1
   load_and_authorize_resource through: :library
 
   before_action :set_range, only: [:show]

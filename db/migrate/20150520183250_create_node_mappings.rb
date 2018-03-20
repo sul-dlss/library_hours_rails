@@ -1,4 +1,4 @@
-class CreateNodeMappings < ActiveRecord::Migration
+class CreateNodeMappings < ActiveRecord::Migration[4.2]
   def change
     create_table :node_mappings do |t|
       t.integer :node_id, indexed: true
