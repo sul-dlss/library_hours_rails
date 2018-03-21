@@ -156,7 +156,7 @@ GEM
       activesupport (>= 4.2.0)
     gretel (3.0.9)
       rails (>= 3.1.0)
-    honeybadger (2.7.2)
+    honeybadger (3.3.0)
     hurley (0.2)
     i18n (0.9.5)
       concurrent-ruby (~> 1.0)
@@ -338,7 +338,7 @@ DEPENDENCIES
   factory_bot_rails
   friendly_id
   gretel
-  honeybadger (~> 2.0)
+  honeybadger
   hurley
   is_it_working
   jbuilder (~> 2.5)
