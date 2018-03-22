@@ -68,7 +68,7 @@ end
 
 group :production do
   gem 'therubyracer'
-  gem 'mysql2', '~> 0.4'
+  gem 'mysql2', '~> 0.4.0'
 end
 
 gem 'bootstrap-sass'
