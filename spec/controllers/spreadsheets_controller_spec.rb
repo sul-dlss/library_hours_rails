@@ -25,7 +25,12 @@ RSpec.describe SpreadsheetsController, type: :controller do
 
   describe 'with an anonymous user' do
     let(:user) { nil }
-    let(:spreadsheet) { Spreadsheet.create! attachment: StringIO.new('xyz') }
+
+    let(:spreadsheet) do
+      Spreadsheet.create! do |s|
+        s.attachment.attach io: tempfile, filename: 'x.csv', content_type: 'text/plain'
+      end
+    end
 
     it 'should deny access to #index' do
       expect { get :index }.to raise_error CanCan::AccessDenied
@@ -55,7 +60,12 @@ RSpec.describe SpreadsheetsController, type: :controller do
   let(:tempfile) do
     f = Tempfile.new('xyz')
     f.write('a,b,c')
+    f.rewind
     f
+  end
+
+  let(:uploaded_file) do
+    Rack::Test::UploadedFile.new(tempfile.path, 'text/plain')
   end
 
   after do
@@ -67,7 +77,7 @@ RSpec.describe SpreadsheetsController, type: :controller do
   # Spreadsheet. As you add validations to Spreadsheet, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) do
-    { attachment: Rack::Test::UploadedFile.new(tempfile.path, 'text/plain') }
+    { attachment: uploaded_file }
   end
 
   let(:invalid_attributes) do
