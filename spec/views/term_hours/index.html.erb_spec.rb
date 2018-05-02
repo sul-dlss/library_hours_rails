@@ -24,7 +24,7 @@ RSpec.describe 'term_hours/index', type: :view do
   it 'renders a list of term_hours' do
     render
 
-    expect(rendered).to have_selector 'h2', '2015'
-    expect(rendered).to have_selector 'h3', 'MyText'
+    expect(rendered).to have_selector 'h2', text: '2015'
+    expect(rendered).to have_selector 'h3', text: 'MyString'
   end
 end

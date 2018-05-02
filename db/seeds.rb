@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-client = Hurley::Client.new 'https://library.stanford.edu/'
+client = Faraday.new 'https://library.stanford.edu/'
 
 response = client.get('/libraries')
 

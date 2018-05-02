@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.2.0.rc1'
+gem 'rails', '~> 5.2.0'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use Puma as the app server
@@ -53,8 +53,9 @@ group :development, :test do
   gem 'capybara'
   gem 'rails-controller-testing'
 
-  # Poltergeist is a capybara driver to run integration tests using PhantomJS
-  gem 'poltergeist'
+  gem 'selenium-webdriver'
+  # Easy installation and use of chromedriver to run system tests with Chrome
+  gem 'chromedriver-helper'
 
   gem 'simplecov', require: false
 end
@@ -67,13 +68,12 @@ group :deployment do
 end
 
 group :production do
-  gem 'therubyracer'
-  gem 'mysql2', '~> 0.4.0'
+  gem 'mysql2'
 end
 
 gem 'bootstrap-sass'
 gem 'sul_styles'
-gem 'hurley'
+gem 'faraday'
 gem 'nokogiri', '>= 1.7.1'
 gem 'friendly_id'
 gem 'bootstrap_form'
