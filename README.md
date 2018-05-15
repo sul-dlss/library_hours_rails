@@ -1,5 +1,4 @@
-[![Build Status](https://travis-ci.org/sul-dlss/library_hours_rails.svg?branch=master)](https://travis-ci.org/sul-dlss/library_hours_rails) [![Coverage Status](https://coveralls.io/repos/sul-dlss/library_hours_rails/badge.png)](https://coveralls.io/r/sul-dlss/library_hours_rails) [![Dependency Status](https://gemnasium.com/sul-dlss/library_hours_rails.svg)](https://gemnasium.com/sul-dlss/library_hours_rails)
-
+[![Build Status](https://travis-ci.org/sul-dlss/library_hours_rails.svg?branch=master)](https://travis-ci.org/sul-dlss/library_hours_rails)
 
 # Library Hours
 
