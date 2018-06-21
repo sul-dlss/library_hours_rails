@@ -1,11 +1,19 @@
 class User
   include ActiveModel::Model
-  attr_accessor :id, :ldap_group_string
+  attr_accessor :id, :ldap_groups
 
   def self.from_env(env)
     return unless env['REMOTE_USER']
 
-    User.new(id: env['REMOTE_USER'], ldap_group_string: env['WEBAUTH_LDAPPRIVGROUP'])
+    ldap_groups = if env['WEBAUTH_LDAPPRIVGROUP'].present?
+      env['WEBAUTH_LDAPPRIVGROUP'].split('|')
+    elsif env['eduPersonEntitlement'].present?
+      env['eduPersonEntitlement'].split(';')
+    else
+      []
+    end
+
+    User.new(id: env['REMOTE_USER'], ldap_groups: ldap_groups)
   end
 
   def superadmin?
@@ -16,9 +24,5 @@ class User
   def site_admin?
     admin_groups = Settings.site_admin_groups || []
     superadmin? || (ldap_groups & admin_groups).present?
-  end
-
-  def ldap_groups
-    (@ldap_group_string || '').split('|')
   end
 end

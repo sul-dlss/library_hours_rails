@@ -12,6 +12,18 @@ describe User do
     end
   end
 
+  describe '.from_env from shibboleth' do
+    subject { User.from_env('REMOTE_USER' => 'jstanford', 'eduPersonEntitlement' => 'admin;user') }
+    it 'extracts user information from the given environment' do
+      expect(subject.id).to eq 'jstanford'
+    end
+
+    it 'extracts privgroup membership from the given environment' do
+      expect(subject.ldap_groups).to match_array %w(admin user)
+    end
+  end
+
+
   describe '#superadmin?' do
     it 'is a superadmin' do
       expect(build(:superadmin_user)).to be_superadmin
