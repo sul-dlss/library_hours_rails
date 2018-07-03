@@ -98,6 +98,13 @@ RSpec.describe LibrariesController, type: :controller do
         expect(assigns(:range)).to eq(Date.parse('2015-02-03')..Date.parse('2015-02-03'))
       end
     end
+
+    describe 'format' do
+      it 'exports a CSV' do
+        get :index, params: { format: :csv }, session: valid_session
+        expect(response.status).to eq 200
+      end
+    end
   end
 
   describe 'GET #hours_drupal' do

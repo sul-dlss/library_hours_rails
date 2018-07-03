@@ -12,7 +12,7 @@ class LibrariesController < ApplicationController
       format.html
       format.json
       format.drupal_xml
-      format.csv { render text: LegacySpreadsheetParser.generate(@libraries.select { |x| params[:ids].blank? || params[:ids].include?(x.id.to_s) }, @range) }
+      format.csv { render plain: LegacySpreadsheetParser.generate(@libraries.select { |x| params[:ids].blank? || params[:ids].include?(x.id.to_s) }, @range) }
     end
   end
 
