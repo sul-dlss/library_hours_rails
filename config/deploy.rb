@@ -20,7 +20,7 @@ set :deploy_to, '/opt/app/library_hours/library_hours'
 # set :pty, true
 
 # Default value for :linked_files is []
-set :linked_files, %w[config/database.yml config/secrets.yml public/.htaccess  config/honeybadger.yml]
+set :linked_files, %w[config/database.yml config/secrets.yml config/honeybadger.yml]
 
 # Default value for linked_dirs is []
 set :linked_dirs, %w[config/settings log tmp/pids tmp/cache tmp/sockets tmp/uploads vendor/bundle public/system]
