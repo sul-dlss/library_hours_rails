@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root to: 'libraries#index'
+  mount OkComputer::Engine, at: "/status"
 
   resources :terms
   resources :node_mappings
