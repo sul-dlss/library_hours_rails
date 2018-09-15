@@ -1,5 +1,5 @@
 class Library < ActiveRecord::Base
-  has_one :node_mapping, as: :mapped
+  has_one :node_mapping, as: :mapped, dependent: :destroy
   delegate :node_id, to: :node_mapping
   has_many :locations
   accepts_nested_attributes_for :locations
