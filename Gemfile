@@ -76,7 +76,7 @@ gem 'sul_styles'
 gem 'faraday'
 gem 'nokogiri', '>= 1.7.1'
 gem 'friendly_id'
-gem 'bootstrap_form'
+gem 'bootstrap_form', '< 4.0.0' # Pinned until we upgrade to Bootstrap 4
 gem 'bootstrap-editable-rails'
 gem 'nested_form'
 gem 'cancancan'
