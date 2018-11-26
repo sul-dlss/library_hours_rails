@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TermHoursController < ApplicationController
   load_and_authorize_resource :library
   load_and_authorize_resource :location, through: :library, except: [:index]
@@ -17,12 +19,10 @@ class TermHoursController < ApplicationController
   end
 
   # GET /term_hours/new
-  def new
-  end
+  def new; end
 
   # GET /term_hours/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /term_hours
   # POST /term_hours.json

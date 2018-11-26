@@ -1,16 +1,10 @@
+# frozen_string_literal: true
+
 class FeedbackMailer < ActionMailer::Base
   def submit_feedback(params, ip)
-    if params[:name].present?
-      @name = params[:name]
-    else
-      @name = 'No name given'
-    end
+    @name = params[:name].presence || 'No name given'
 
-    if params[:to].present?
-      @email = params[:to]
-    else
-      @email = 'No email given'
-    end
+    @email = params[:to].presence || 'No email given'
 
     @message = params[:message]
     @url = params[:url]
@@ -18,9 +12,9 @@ class FeedbackMailer < ActionMailer::Base
     @user_agent = params[:user_agent]
     @viewport = params[:viewport]
 
-    mail(:to => Settings.EMAIL_TO,
-         :subject => "Feedback from SearchWorks",
-         :from => "feedback@searchworks.stanford.edu",
-         :reply_to => Settings.EMAIL_TO)
+    mail(to: Settings.EMAIL_TO,
+         subject: 'Feedback from SearchWorks',
+         from: 'feedback@searchworks.stanford.edu',
+         reply_to: Settings.EMAIL_TO)
   end
 end

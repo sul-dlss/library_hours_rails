@@ -1,4 +1,6 @@
-class Spreadsheet < ActiveRecord::Base
+# frozen_string_literal: true
+
+class Spreadsheet < ApplicationRecord
   has_one_attached :attachment
 
   validate :attachment_validation
@@ -14,7 +16,7 @@ class Spreadsheet < ActiveRecord::Base
   end
 
   def find_location(location)
-    if location =~ %r{/}
+    if %r{/}.match?(location)
       lib, loc = location.split('/', 2).map(&:strip)
       Library.find(lib).locations.find(loc)
     else
@@ -41,5 +43,4 @@ class Spreadsheet < ActiveRecord::Base
   def attachment_validation
     errors[:attachment] << 'Missing attachment' unless attachment.attached?
   end
-
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'spreadsheets/new', type: :view do
@@ -8,7 +10,7 @@ RSpec.describe 'spreadsheets/new', type: :view do
                            attachment_content_type: 'MyString',
                            attachment_size: 1,
                            status: 'MyString'
-    ))
+                         ))
   end
 
   it 'renders new spreadsheet form' do

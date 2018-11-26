@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'locations/show', type: :view do
@@ -9,7 +11,7 @@ RSpec.describe 'locations/show', type: :view do
 
     params[:id] = location.id
     params[:library_id] = library.id
-  
+
     assign(:range, Calendar.week(Time.zone.now.strftime('%GW%V')))
 
     controller.singleton_class.class_eval do

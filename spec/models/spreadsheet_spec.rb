@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Spreadsheet, type: :model do
@@ -5,11 +7,11 @@ RSpec.describe Spreadsheet, type: :model do
   describe '#import' do
     let(:content) do
       Tempfile.new.tap do |f|
-        f.puts <<-EOF.strip
-garbage,row,i,don't,even...
-,,,,#{location.slug},
-Date,Day,Type,Notes,Open,Closed
-2015-05-22,Friday,Regular,Day,8:00 AM,9:00PM
+        f.puts <<~EOF.strip
+          garbage,row,i,don't,even...
+          ,,,,#{location.slug},
+          Date,Day,Type,Notes,Open,Closed
+          2015-05-22,Friday,Regular,Day,8:00 AM,9:00PM
         EOF
         f.rewind
       end

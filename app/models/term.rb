@@ -1,4 +1,6 @@
-class Term < ActiveRecord::Base
+# frozen_string_literal: true
+
+class Term < ApplicationRecord
   validates :name, presence: true
 
   before_save do
@@ -8,8 +10,8 @@ class Term < ActiveRecord::Base
 
   default_scope { order(dtstart: 'asc') }
 
-  scope :quarters_and_intersessions, ->() { where(holiday: false) }
-  scope :holidays, ->() { where(holiday: true) }
+  scope :quarters_and_intersessions, -> { where(holiday: false) }
+  scope :holidays, -> { where(holiday: true) }
 
   scope :current_and_upcoming, ->(range) { where('dtstart >= ? AND dtstart <= ?', Time.zone.now.beginning_of_year, (Time.zone.now + range).end_of_year) }
   scope :for_date, (lambda do |dt|

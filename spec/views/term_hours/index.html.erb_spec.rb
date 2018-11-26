@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'term_hours/index', type: :view do
@@ -8,17 +10,17 @@ RSpec.describe 'term_hours/index', type: :view do
     assign(:terms, '2015' => [term])
     assign(:library, location.library)
     assign(:term_hours, [
-      TermHour.create!(
-        term: term,
-        location: location,
-        data: 'MyText'
-      ),
-      TermHour.create!(
-        term: term,
-        location: location,
-        data: 'MyText'
-      )
-    ])
+             TermHour.create!(
+               term: term,
+               location: location,
+               data: 'MyText'
+             ),
+             TermHour.create!(
+               term: term,
+               location: location,
+               data: 'MyText'
+             )
+           ])
   end
 
   it 'renders a list of term_hours' do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -37,8 +39,8 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
-  gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'web-console', '>= 3.3.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
@@ -48,22 +50,24 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
-  gem 'rspec-rails'
-  gem 'factory_bot_rails'
   gem 'capybara'
+  gem 'factory_bot_rails'
   gem 'rails-controller-testing'
+  gem 'rspec-rails'
 
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
 
+  gem 'rubocop'
+  gem 'rubocop-rspec'
   gem 'simplecov', require: false
 end
 
 group :deployment do
   gem 'capistrano'
-  gem 'capistrano-rails'
   gem 'capistrano-passenger'
+  gem 'capistrano-rails'
   gem 'dlss-capistrano'
 end
 
@@ -71,18 +75,18 @@ group :production do
   gem 'mysql2'
 end
 
-gem 'bootstrap-sass'
-gem 'sul_styles'
-gem 'faraday'
-gem 'nokogiri', '>= 1.7.1'
-gem 'friendly_id'
-gem 'bootstrap_form', '< 4.0.0' # Pinned until we upgrade to Bootstrap 4
 gem 'bootstrap-editable-rails'
-gem 'nested_form'
+gem 'bootstrap-sass'
+gem 'bootstrap_form', '< 4.0.0' # Pinned until we upgrade to Bootstrap 4
 gem 'cancancan'
 gem 'config'
 gem 'dotenv'
-gem 'whenever'
-gem 'honeybadger'
-gem 'okcomputer'
+gem 'faraday'
+gem 'friendly_id'
 gem 'gretel'
+gem 'honeybadger'
+gem 'nested_form'
+gem 'nokogiri', '>= 1.7.1'
+gem 'okcomputer'
+gem 'sul_styles'
+gem 'whenever'

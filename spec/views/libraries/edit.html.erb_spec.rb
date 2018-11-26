@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'libraries/edit', type: :view do
@@ -5,7 +7,7 @@ RSpec.describe 'libraries/edit', type: :view do
     @library = assign(:library, Library.create!(
                                   name: 'MyString',
                                   slug: 'MyString'
-    ))
+                                ))
   end
 
   it 'renders the edit library form' do

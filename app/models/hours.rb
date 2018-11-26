@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Hours
   include Enumerable
 
@@ -28,6 +30,7 @@ class Hours
 
   def slice(index_or_range)
     return to_enum(:slice, index_or_range) unless block_given?
+
     case index_or_range
     when Date
       yield self[index_or_range]
@@ -41,24 +44,25 @@ class Hours
   def default_for_date(date)
     term_hours = defaults.detect { |x| x.term.dtstart <= date && x.term.dtend >= date }
 
-    r = case
-        when date.sunday?
-          term_hours.sunday
-        when date.monday?
-          term_hours.monday
-        when date.tuesday?
-          term_hours.tuesday
-        when date.wednesday?
-          term_hours.wednesday
-        when date.thursday?
-          term_hours.thursday
-        when date.friday?
-          term_hours.friday
-        when date.saturday?
-          term_hours.saturday
-        end if term_hours
+    r = if term_hours
+          if date.sunday?
+            term_hours.sunday
+          elsif date.monday?
+            term_hours.monday
+          elsif date.tuesday?
+            term_hours.tuesday
+          elsif date.wednesday?
+            term_hours.wednesday
+          elsif date.thursday?
+            term_hours.thursday
+          elsif date.friday?
+            term_hours.friday
+          elsif date.saturday?
+            term_hours.saturday
+          end
+        end
 
-    return MissingCalendar.new(dtstart: date, dtend: date) unless r && r.present?
+    return MissingCalendar.new(dtstart: date, dtend: date) unless r&.present?
 
     Calendar.new(dtstart: date).tap do |c|
       c.update_hours(r)

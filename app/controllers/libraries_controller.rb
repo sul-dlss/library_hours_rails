@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class LibrariesController < ApplicationController
   load_and_authorize_resource
 
-  before_action :set_range, only: [:show, :index]
+  before_action :set_range, only: %i[show index]
 
   # GET /libraries
   # GET /libraries.json
@@ -25,16 +27,13 @@ class LibrariesController < ApplicationController
     end
   end
 
-  def spreadsheet
-  end
+  def spreadsheet; end
 
   def hours_drupal
     month = Time.zone.parse(params[:month])
 
     # when the month is in the past (and the current week is wholely in the current month), use the following year
-    if month < Time.zone.now.beginning_of_week(:sunday).beginning_of_month
-      month += 1.year
-    end
+    month += 1.year if month < Time.zone.now.beginning_of_week(:sunday).beginning_of_month
 
     # when it is January, if we request December's hours and the current week starts in December, use the previous year
     if params[:month] == 'december' && Time.zone.now.beginning_of_week(:sunday) < Time.zone.now.beginning_of_year
@@ -49,12 +48,10 @@ class LibrariesController < ApplicationController
   end
 
   # GET /libraries/new
-  def new
-  end
+  def new; end
 
   # GET /libraries/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /libraries
   # POST /libraries.json

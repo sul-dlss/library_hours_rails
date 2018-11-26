@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe ApplicationHelper do
@@ -76,6 +78,5 @@ describe ApplicationHelper do
       rendered = helper.render_hours(calendar)
       expect(rendered).to have_content '2:43a-2p'
     end
-
   end
 end

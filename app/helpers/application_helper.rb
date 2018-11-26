@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ApplicationHelper
   def render_short_time(dt)
     if dt.min == 0
@@ -8,12 +10,11 @@ module ApplicationHelper
   end
 
   def render_hours(hours)
-    case
-    when hours.nil?, hours.is_a?(MissingCalendar)
+    if hours.nil? || hours.is_a?(MissingCalendar)
       content_tag :span, 'n/a'
-    when hours.closed?
+    elsif hours.closed?
       content_tag :span, 'closed', class: 'closed'
-    when hours.open_24h?
+    elsif hours.open_24h?
       content_tag :span, 'open 24h', class: 'open-24h'
     else
       render_open_hours_range(hours)
