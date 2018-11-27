@@ -1,4 +1,6 @@
-class Location < ActiveRecord::Base
+# frozen_string_literal: true
+
+class Location < ApplicationRecord
   belongs_to :library
   has_one :node_mapping, as: :mapped
   delegate :node_id, to: :node_mapping
@@ -6,13 +8,13 @@ class Location < ActiveRecord::Base
   has_many :term_hours
   accepts_nested_attributes_for :node_mapping
 
-  scope :with_hours, ->() { where(keeps_hours: true) }
-  scope :without_hours, ->() { where(keeps_hours: false) }
+  scope :with_hours, -> { where(keeps_hours: true) }
+  scope :without_hours, -> { where(keeps_hours: false) }
 
   validates :name, presence: true
 
   extend FriendlyId
-  friendly_id :name, use: [:slugged, :finders, :scoped, :history], scope: :library
+  friendly_id :name, use: %i[slugged finders scoped history], scope: :library
 
   def default_hours(range)
     term_hours.for_range(range)
@@ -39,6 +41,6 @@ class Location < ActiveRecord::Base
   end
 
   def node_id?
-    node_mapping && node_mapping.node_id?
+    node_mapping&.node_id?
   end
 end

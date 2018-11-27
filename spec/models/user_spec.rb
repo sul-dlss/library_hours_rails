@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe User do
@@ -8,7 +10,7 @@ describe User do
     end
 
     it 'extracts privgroup membership from the given environment' do
-      expect(subject.ldap_groups).to match_array %w(admin user)
+      expect(subject.ldap_groups).to match_array %w[admin user]
     end
   end
 
@@ -19,10 +21,9 @@ describe User do
     end
 
     it 'extracts privgroup membership from the given environment' do
-      expect(subject.ldap_groups).to match_array %w(admin user)
+      expect(subject.ldap_groups).to match_array %w[admin user]
     end
   end
-
 
   describe '#superadmin?' do
     it 'is a superadmin' do

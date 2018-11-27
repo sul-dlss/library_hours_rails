@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe LocationsController, type: :routing do
@@ -38,8 +40,7 @@ RSpec.describe LocationsController, type: :routing do
       expect(get: '/api/v1/library/1/location/1/hours/for/today').to route_to('locations#hours_v1',
                                                                               library_id: '1',
                                                                               id: '1',
-                                                                              when: 'today'
-                                                                             )
+                                                                              when: 'today')
     end
   end
 end

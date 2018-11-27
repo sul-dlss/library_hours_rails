@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LocationsController < ApplicationController
   load_and_authorize_resource :library
   before_action :find_location_by_legacy_slug, only: :hours_v1
@@ -5,7 +7,7 @@ class LocationsController < ApplicationController
 
   before_action :set_range, only: [:show]
 
-  before_action only: [:open, :hours] do
+  before_action only: %i[open hours] do
     set_range(default: Time.zone.now.to_date..Time.zone.now.end_of_day.to_date)
   end
 
@@ -17,8 +19,7 @@ class LocationsController < ApplicationController
 
   # GET /locations/1
   # GET /locations/1.json
-  def show
-  end
+  def show; end
 
   def open
     @hours = @location.hours(@range)
@@ -40,12 +41,10 @@ class LocationsController < ApplicationController
   end
 
   # GET /locations/new
-  def new
-  end
+  def new; end
 
   # GET /locations/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /locations
   # POST /locations.json

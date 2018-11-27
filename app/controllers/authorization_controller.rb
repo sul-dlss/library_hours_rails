@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 ###
 #  Controller for handling login/logout and redirecting with flash messages.
 ###
 class AuthorizationController < ApplicationController
-  skip_authorization_check only: [:login, :logout]
+  skip_authorization_check only: %i[login logout]
 
   def login
     flash[:success] = 'You have been successfully logged in.'

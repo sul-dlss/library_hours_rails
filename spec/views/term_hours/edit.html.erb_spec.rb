@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'term_hours/edit', type: :view do
@@ -6,7 +8,7 @@ RSpec.describe 'term_hours/edit', type: :view do
                                       term: create(:term),
                                       location: create(:location),
                                       data: 'MyText'
-    ))
+                                    ))
   end
 
   it 'renders the edit term_hour form' do

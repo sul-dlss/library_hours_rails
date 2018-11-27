@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SpreadsheetsController < ApplicationController
   load_and_authorize_resource
 
@@ -9,8 +11,7 @@ class SpreadsheetsController < ApplicationController
 
   # GET /spreadsheets/1
   # GET /spreadsheets/1.json
-  def show
-  end
+  def show; end
 
   # GET /spreadsheets/new
   def new
@@ -18,8 +19,7 @@ class SpreadsheetsController < ApplicationController
   end
 
   # GET /spreadsheets/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /spreadsheets/1/import
   def import

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :term do
     dtstart '2015-05-27 15:01:15'

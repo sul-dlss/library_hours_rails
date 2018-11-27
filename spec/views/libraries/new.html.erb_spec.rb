@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'libraries/new', type: :view do
@@ -5,7 +7,7 @@ RSpec.describe 'libraries/new', type: :view do
     assign(:library, Library.new(
                        name: 'MyString',
                        slug: 'MyString'
-    ))
+                     ))
   end
 
   it 'renders new library form' do

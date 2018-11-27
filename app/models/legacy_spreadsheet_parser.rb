@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'csv'
 class LegacySpreadsheetParser
   attr_reader :io
@@ -37,12 +39,12 @@ class LegacySpreadsheetParser
   end
 
   def self.generate(libraries, date_range = nil)
-    locations = Array(libraries).map(&:locations).flatten.select { |x| x.keeps_hours }
+    locations = Array(libraries).map(&:locations).flatten.select(&:keeps_hours)
     date_range ||= Time.zone.now.to_date..(Time.zone.now + 1.year).to_date
     CSV.generate do |csv|
       csv << ['library hours']
-      csv << ['', '', '', ''] + locations.map { |l| ["#{l.library.slug} / #{l.slug}", '']}.flatten
-      csv << ['Date', 'Day', 'Type', 'Notes'] + locations.map { ['Open', 'Close'] }.flatten
+      csv << ['', '', '', ''] + locations.map { |l| ["#{l.library.slug} / #{l.slug}", ''] }.flatten
+      csv << %w[Date Day Type Notes] + locations.map { %w[Open Close] }.flatten
 
       date_range.each do |d|
         c = Calendar.for_date(d).first || Calendar.new
@@ -50,10 +52,9 @@ class LegacySpreadsheetParser
         row = [d, d.strftime('%A'), c.summary, c.description]
         location_hours = locations.map do |l|
           c = l.hours(date_range)[d].first
-          case
-          when c.nil?, c.is_a?(MissingCalendar)
+          if c.nil? || c.is_a?(MissingCalendar)
             [nil, nil]
-          when c.closed?
+          elsif c.closed?
             ['closed', nil]
           else
             [c.dtstart.localtime.strftime('%I:%M %p'), c.dtend.localtime.strftime('%I:%M %p')]
@@ -74,7 +75,7 @@ class LegacySpreadsheetParser
 
       last = range.begin
       ranges = []
-      missing.each_with_object(ranges) do |d|
+      missing.each do |d|
         tmp = last
         last = d + 1
 
@@ -95,7 +96,11 @@ class LegacySpreadsheetParser
   end
 
   def dates
-    @dates ||= data.map(&:first).reject(&:blank?).map { |x| Date.parse(x) rescue nil }.compact
+    @dates ||= data.map(&:first).reject(&:blank?).map do |x|
+      Date.parse(x)
+               rescue StandardError
+                 nil
+    end .compact
   end
 
   def locations
@@ -144,7 +149,7 @@ class LegacySpreadsheetParser
   def fetch_location(location)
     @locations_cache = {}
 
-    @locations_cache[location] ||= if location =~ %r{/}
+    @locations_cache[location] ||= if %r{/}.match?(location)
                                      lib, loc = location.split('/', 2).map(&:strip)
                                      Library.find(lib).locations.find(loc)
                                    else

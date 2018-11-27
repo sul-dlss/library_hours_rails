@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'spreadsheets/edit', type: :view do
-
   let(:tempfile) do
     f = Tempfile.new('xyz')
     f.write('a,b,c')

@@ -1,4 +1,6 @@
-class Calendar < ActiveRecord::Base
+# frozen_string_literal: true
+
+class Calendar < ApplicationRecord
   belongs_to :location, required: true
   has_one :library, through: :location
   validates :dtstart, :dtend, presence: true
@@ -24,14 +26,14 @@ class Calendar < ActiveRecord::Base
     when /-/
       parse_time_range(range).is_a? Range
     end
-  rescue
+  rescue StandardError
     false
   end
 
   def self.parse_time_range(combo)
     range_begin, range_end = combo.split('-')
-    range_begin += 'm' if range_begin =~ (/[ap]$/)
-    range_end += 'm' if range_end =~ (/[ap]$/)
+    range_begin += 'm' if range_begin =~ /[ap]$/
+    range_end += 'm' if range_end =~ /[ap]$/
     Time.zone.parse(range_begin)..Time.zone.parse(range_end)
   end
 
@@ -64,7 +66,7 @@ class Calendar < ActiveRecord::Base
   def dtstart_unparsed=(value)
     @dtstart_unparsed = value
     self.dtstart = Time.zone.parse(value)
-  rescue => e
+  rescue StandardError => e
     parse_errors << "Unable to parse dtstart #{value}: #{e}"
   end
 
@@ -78,7 +80,7 @@ class Calendar < ActiveRecord::Base
     end
 
     self.dtend = parsed_val
-  rescue => e
+  rescue StandardError => e
     parse_errors << "Unable to parse dtend #{value}: #{e}"
   end
 
@@ -88,6 +90,7 @@ class Calendar < ActiveRecord::Base
 
   def no_parse_errors
     return if parse_errors.blank?
+
     parse_errors.each do |e|
       errors.add(:parse_errors, e)
     end
@@ -107,7 +110,7 @@ class Calendar < ActiveRecord::Base
     if dtend < dtstart
       next_date = dtstart.to_date + 1.day
       # Parse the time again, just in case daylight saving happened.
-      self.dtend = Time.zone.parse("#{next_date}" + range.end.strftime('T%T'))
+      self.dtend = Time.zone.parse(next_date.to_s + range.end.strftime('T%T'))
     end
   end
 
@@ -137,15 +140,14 @@ class Calendar < ActiveRecord::Base
 
     start..(start + 6.days)
   rescue ArgumentError
-    # strptime throws an ArgumentError when the date value isn't valid 
+    # strptime throws an ArgumentError when the date value isn't valid
     nil
   end
 
   def status_drupal
-    case
-    when closed?
+    if closed?
       0
-    when open_24h?
+    elsif open_24h?
       2
     else
       1

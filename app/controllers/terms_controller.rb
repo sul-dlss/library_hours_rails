@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TermsController < ApplicationController
   load_and_authorize_resource
 
@@ -9,16 +11,13 @@ class TermsController < ApplicationController
 
   # GET /terms/1
   # GET /terms/1.json
-  def show
-  end
+  def show; end
 
   # GET /terms/new
-  def new
-  end
+  def new; end
 
   # GET /terms/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /terms
   # POST /terms.json

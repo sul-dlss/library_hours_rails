@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'locations/edit', type: :view do
@@ -8,7 +10,7 @@ RSpec.describe 'locations/edit', type: :view do
                                     name: 'MyString',
                                     slug: 'MyString',
                                     library: library
-    ))
+                                  ))
   end
 
   it 'renders the edit location form' do
