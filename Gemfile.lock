@@ -348,7 +348,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap (>= 1.1.0)
   bootstrap-editable-rails
-  bootstrap-sass (= 3.3.7)
+  bootstrap-sass
   bootstrap_form (< 4.0.0)
   byebug
   cancancan

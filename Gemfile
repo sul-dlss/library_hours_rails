@@ -76,7 +76,7 @@ group :production do
 end
 
 gem 'bootstrap-editable-rails'
-gem 'bootstrap-sass', '3.3.7' # pin to 3.3.7 because our centos6 environment is incompatible with sassc
+gem 'bootstrap-sass'
 gem 'bootstrap_form', '< 4.0.0' # Pinned until we upgrade to Bootstrap 4
 gem 'cancancan'
 gem 'config'
