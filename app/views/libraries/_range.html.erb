@@ -29,7 +29,7 @@
           <% if can? :create, Term %>
             <li><%= link_to 'Manage Terms', terms_path %></li>
           <% end %>
-          <% Term.current_and_upcoming(2.years).group_by(&:year).each do |year, terms| %>
+          <% Term.upcoming(2.years).group_by(&:year).each do |year, terms| %>
             <li>
               <h4><%= year %></h4>
             </li>
