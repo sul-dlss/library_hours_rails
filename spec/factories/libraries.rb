@@ -2,6 +2,6 @@
 
 FactoryBot.define do
   factory :library do
-    name 'Some Library'
+    name { 'Some Library' }
   end
 end

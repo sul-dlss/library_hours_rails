@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :location do
-    name 'Some Location'
+    name { 'Some Location' }
     library
   end
 end
