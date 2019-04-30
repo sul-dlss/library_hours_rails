@@ -101,6 +101,6 @@ class LibrariesController < ApplicationController
   end
 
   def locations_params
-    [:id, :name, :slug, :keeps_hours, node_mapping_attributes: [:node_id]]
+    [:id, :name, :slug, :keeps_hours, :_destroy, node_mapping_attributes: [:node_id]]
   end
 end
