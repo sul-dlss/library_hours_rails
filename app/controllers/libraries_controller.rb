@@ -48,7 +48,9 @@ class LibrariesController < ApplicationController
   end
 
   # GET /libraries/new
-  def new; end
+  def new
+    @library.build_node_mapping
+  end
 
   # GET /libraries/1/edit
   def edit; end
@@ -99,6 +101,6 @@ class LibrariesController < ApplicationController
   end
 
   def locations_params
-    [:id, :name, :slug, :keeps_hours, node_mapping_attributes: [:node_id]]
+    [:id, :name, :slug, :keeps_hours, :_destroy, node_mapping_attributes: [:node_id]]
   end
 end
