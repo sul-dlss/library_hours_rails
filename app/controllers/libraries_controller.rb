@@ -48,7 +48,9 @@ class LibrariesController < ApplicationController
   end
 
   # GET /libraries/new
-  def new; end
+  def new
+    @library.build_node_mapping
+  end
 
   # GET /libraries/1/edit
   def edit; end
