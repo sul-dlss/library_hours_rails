@@ -22,6 +22,7 @@ sudo: false
 language: ruby
 
 before_install:
+  - gem update --system
   - export TZ=America/Los_Angeles
   - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
 
