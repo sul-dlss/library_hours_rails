@@ -59,6 +59,7 @@ group :development, :test do
   gem 'webdrivers'
 
   gem 'rubocop'
+  gem 'rubocop-performance'
   gem 'rubocop-rspec'
   gem 'simplecov', require: false
 end
