@@ -40,6 +40,7 @@ RSpec.describe LocationsController, type: :controller do
       it 'assigns the hours for the location' do
         get :hours_v1, format: :json, params: { when: 'today', id: location, library_id: location.library }
         expect(assigns(:hours).first.first).to be_a MissingCalendar
+        expect(assigns(:hours).first.first.location).to eq location
         expect(assigns(:hours).first.first.dtstart).to eq Time.zone.now.beginning_of_day
       end
     end
