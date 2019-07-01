@@ -3,6 +3,27 @@
 require 'rails_helper'
 
 RSpec.describe Term, type: :model do
+  subject { build(:term) }
+  describe 'validation' do
+    it 'validates the dtstart + dtend times' do
+      subject.dtstart = Date.new(2014, 2, 2)
+      subject.dtend = Date.new(2015, 2, 2)
+      expect(subject).to be_valid
+    end
+
+    it 'transforms the dtstart + dtend values from strings to times' do
+      subject.dtstart = '2014-02-02'
+      subject.dtend = '2014-03-02'
+      expect(subject).to be_valid
+    end
+
+    it 'handles invalid dates' do
+      subject.dtstart = '2020-03029'
+      subject.dtend = Date.new(2015, 2, 2)
+      expect(subject).not_to be_valid
+    end
+  end
+
   describe '#year' do
     it 'should extract the year for the term' do
       subject.dtstart = Time.zone.now
@@ -15,14 +36,14 @@ RSpec.describe Term, type: :model do
     it 'is not valid if the term overlaps with an existing term' do
       create(:term, dtstart: Date.new(2020, 2, 2), dtend: Date.new(2020, 3, 2))
 
-      t = Term.new(dtstart: Date.new(2020, 2, 15), dtend: Date.new(2020, 4, 15))
+      t = build(:term, dtstart: Date.new(2020, 2, 15), dtend: Date.new(2020, 4, 15))
       expect(t).not_to be_valid
     end
 
     it 'is not valid if the term overlaps with an existing term' do
       create(:term, dtstart: Date.new(2020, 2, 2), dtend: Date.new(2020, 3, 2))
 
-      t = Term.new(dtstart: Date.new(2020, 1, 1), dtend: Date.new(2020, 2, 5))
+      t = build(:term, dtstart: Date.new(2020, 1, 1), dtend: Date.new(2020, 2, 5))
       expect(t).not_to be_valid
     end
 
