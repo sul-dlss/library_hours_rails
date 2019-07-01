@@ -40,7 +40,7 @@ RSpec.describe TermsController, type: :controller do
   # Term. As you add validations to Term, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) do
-    { name: 'Some Term' }
+    { name: 'Some Term', dtstart: '2019-07-01', dtend: '2019-07-28' }
   end
 
   let(:invalid_attributes) do

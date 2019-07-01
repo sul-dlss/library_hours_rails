@@ -4,9 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'terms/edit', type: :view do
   before(:each) do
-    @term = assign(:term, Term.create!(
-                            name: 'MyString'
-                          ))
+    @term = assign(:term, create(:term))
   end
 
   it 'renders the edit term form' do

@@ -18,6 +18,7 @@ class Term < ApplicationRecord
     where('dtstart <= ? AND dtend >= ?', dt.to_time.midnight, dt.to_time.midnight)
   end)
 
+  validates :dtstart, :dtend, presence: true
   validate :terms_cannot_overlap, unless: :holiday?
   delegate :year, to: :dtstart
 

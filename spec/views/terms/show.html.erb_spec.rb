@@ -4,9 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'terms/show', type: :view do
   before(:each) do
-    @term = assign(:term, Term.create!(
-                            name: 'Name'
-                          ))
+    @term = assign(:term, create(:term, name: 'Name'))
   end
 
   it 'renders attributes in <p>' do
