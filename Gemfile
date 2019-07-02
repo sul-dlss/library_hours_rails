@@ -60,6 +60,7 @@ group :development, :test do
 
   gem 'rubocop'
   gem 'rubocop-performance'
+  gem 'rubocop-rails'
   gem 'rubocop-rspec'
   gem 'simplecov', require: false
 end
