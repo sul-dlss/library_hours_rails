@@ -3,7 +3,7 @@
 class Location < ApplicationRecord
   belongs_to :library
   has_one :node_mapping, as: :mapped
-  delegate :node_id, to: :node_mapping
+  delegate :node_id, to: :node_mapping, allow_nil: true
   has_many :calendars
   has_many :term_hours
   accepts_nested_attributes_for :node_mapping
