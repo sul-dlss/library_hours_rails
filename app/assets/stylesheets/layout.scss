@@ -1,7 +1,6 @@
 #outer-container,
 #topnav-container,
-#top-nav-bar,
-#sul-footer-container {
+#top-nav-bar {
   border: 0;
   margin: 0;
   padding: 0;
@@ -13,8 +12,7 @@
 }
 
 #topnav,
-#main-container,
-#sul-footer {
+#main-container {
   margin: 0 auto;
   text-align: left;
 }
@@ -32,24 +30,21 @@
 
 @media (min-width: 768px) {
   #topnav,
-  #main-container,
-  #sul-footer {
+  #main-container {
     width: 750px;
   }
 }
 
 @media (min-width: 980px) {
   #topnav,
-  #main-container,
-  #sul-footer {
+  #main-container {
     width: 970px;
   }
 }
 
 @media (min-width: 1200px) {
   #topnav,
-  #main-container,
-  #sul-footer {
+  #main-container {
     width: 1170px;
   }
 }
