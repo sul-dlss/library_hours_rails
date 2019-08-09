@@ -12,9 +12,9 @@ response = client.get('/libraries')
 
 doc = Nokogiri::HTML(response.body)
 
-doc.css('.views-row').each do |row|
-  title = row.css('.views-field-title').text.strip
-  slug = row.css('.views-field-field-branch-image').css('a').attr('href').value.gsub(%r{^/libraries/}, '').gsub(%r{/about$}, '').strip
+doc.css('li.views-row').each do |row|
+  title = row.css('.node-title').text.strip
+  slug = row.css('.node-title').css('a').attr('href').value.gsub(%r{^/libraries/}, '').gsub(%r{/about$}, '').strip
   library = Library.find_or_create_by(slug: slug, name: title)
 
   about_response = client.get("/libraries/#{slug}/about")
@@ -25,14 +25,14 @@ doc.css('.views-row').each do |row|
 
   NodeMapping.find_or_create_by(mapped: library, node_id: node_id)
 
-  about_doc.css('.view-sulair-places table tbody tr').each do |place_row|
-    place_title = place_row.css('.views-field-title')
+  about_doc.css('#block-system-main .view-library-location-hours .location-hours-row').each do |place_row|
+    place_title = place_row.css('a')
     place_name = place_title.text.strip
-    place_href = place_title.css('a').attr('href')
+    place_href = place_title.attr('href')
     place_slug = place_href.value.split('/').last.strip
     location = Location.find_or_create_by(library: library, slug: place_slug, name: place_name)
 
-    place_response = client.get(place_href)
+    place_response = client.get(place_href.to_s)
 
     place_doc = Nokogiri::HTML(place_response.body)
     node_id = place_doc.css('body').attr('class').value.scan(/page-node-(\d+)/).flatten.first
