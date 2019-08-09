@@ -99,6 +99,12 @@ RSpec.describe LibrariesController, type: :controller do
         get :index, params: { from: '2015-02-03' }, session: valid_session
         expect(assigns(:range)).to eq(Date.parse('2015-02-03')..Date.parse('2015-02-03'))
       end
+
+      it 'restricts the range to an 18 month period' do
+        expect do
+          get :index, params: { from: '2015-02-03', to: '2020-03-02' }, session: valid_session
+        end.to raise_error(ActionController::BadRequest)
+      end
     end
 
     describe 'format' do
