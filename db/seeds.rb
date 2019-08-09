@@ -12,9 +12,9 @@ response = client.get('/libraries')
 
 doc = Nokogiri::HTML(response.body)
 
-doc.css('.views-row').each do |row|
-  title = row.css('.views-field-title').text.strip
-  slug = row.css('.views-field-field-branch-image').css('a').attr('href').value.gsub(%r{^/libraries/}, '').gsub(%r{/about$}, '').strip
+doc.css('li.views-row').each do |row|
+  title = row.css('.node-title').text.strip
+  slug = row.css('.node-title').css('a').attr('href').value.gsub(%r{^/libraries/}, '').gsub(%r{/about$}, '').strip
   library = Library.find_or_create_by(slug: slug, name: title)
 
   about_response = client.get("/libraries/#{slug}/about")
