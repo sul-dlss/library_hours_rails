@@ -2,7 +2,7 @@
 
 class Library < ApplicationRecord
   has_one :node_mapping, as: :mapped, dependent: :destroy
-  delegate :node_id, to: :node_mapping
+  delegate :node_id, to: :node_mapping, allow_nil: true
   has_many :locations
   accepts_nested_attributes_for :locations, allow_destroy: true
   accepts_nested_attributes_for :node_mapping

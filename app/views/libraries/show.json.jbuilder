@@ -1,3 +1,11 @@
 # frozen_string_literal: true
 
-json.extract! @library, :id, :name, :slug, :created_at, :updated_at
+json.data do
+  json.partial! @library
+end
+
+json.included do
+  json.array!(@library.locations.with_hours) do |location|
+    json.partial! location
+  end
+end

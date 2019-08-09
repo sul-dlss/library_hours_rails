@@ -1,6 +1,12 @@
 # frozen_string_literal: true
+json.data do
+  json.array!(@libraries) do |library|
+    json.partial! library
+  end
+end
 
-json.array!(@libraries) do |library|
-  json.extract! library, :id, :name, :slug
-  json.url library_url(library, format: :json)
+json.included do
+  json.array!(@libraries.flat_map(&:locations)) do |location|
+    json.partial! location
+  end
 end
