@@ -33,5 +33,7 @@ class ApplicationController < ActionController::Base
 
     default ||= Calendar.week(Time.zone.now.strftime('%GW%V'))
     @range ||= default
+
+    @range.tap { |range| raise ActionController::BadRequest, 'Requested range is too big' if range.first + 18.months < range.last }
   end
 end
