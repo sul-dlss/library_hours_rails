@@ -55,11 +55,8 @@ class Calendar < ApplicationRecord
   def closed!(date = nil)
     self.closed = true
 
-    if date.present?
-      self.dtstart_unparsed = date
-      self.dtstart = dtstart.midnight if dtstart
-    end
-
+    self.dtstart_unparsed = date if date.present?
+    self.dtstart = dtstart.midnight if dtstart
     self.dtend = dtstart
   end
 
