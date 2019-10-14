@@ -49,6 +49,11 @@ RSpec.describe Calendar, type: :model do
       expect { subject.closed! }.to change(subject, :open?).to(false)
       expect(subject.dtstart).to eq subject.dtend
     end
+
+    it 'resets the dtstart + dtend' do
+      expect { subject.closed! }.to change(subject, :dtstart).to(Time.zone.now.beginning_of_day)
+      expect(subject.dtstart).to eq subject.dtend
+    end
   end
 
   describe '#open_24h!' do
