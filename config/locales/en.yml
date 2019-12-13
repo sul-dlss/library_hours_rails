@@ -46,3 +46,4 @@ en:
       short: "%b %d, %Y"
       very_short: "%a %d"
   location_and_access: Location & access
+  global_alert_html: The Stanford Libraries will be operating on a reduced schedule during the Stanford Winter Closure period (December 21, 2019 - January 5, 2020).<br /><a href="https://library.stanford.edu/winterclosure">More information about schedules and affected services</a>
