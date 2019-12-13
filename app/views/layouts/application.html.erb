@@ -27,6 +27,7 @@
           <%= render 'shared/top_navbar' %>
           <section id="main-container" role="main" class="container">
             <%= breadcrumbs style: :bootstrap %>
+            <%= render 'shared/global_alert' %>
             <%= render 'shared/flashes' %>
             <%= yield %>
           </section>
