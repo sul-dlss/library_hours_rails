@@ -73,7 +73,8 @@ group :deployment do
 end
 
 group :production do
-  gem 'mysql2'
+  # mysql 0.5.3 is not compatible with the version of ruby we are using
+  gem 'mysql2', '< 0.5.3'
 end
 
 gem 'bootstrap-editable-rails'
