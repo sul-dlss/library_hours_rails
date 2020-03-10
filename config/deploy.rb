@@ -35,6 +35,9 @@ set :linked_dirs, %w[config/settings log tmp/pids tmp/cache tmp/sockets tmp/uplo
 # we want prod rather than production
 set :honeybadger_env, fetch(:stage)
 
+# update shared_configs before restarting app
+before 'deploy:restart', 'shared_configs:update'
+
 namespace :deploy do
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
