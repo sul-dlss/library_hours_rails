@@ -25,14 +25,14 @@ RSpec.describe SpreadsheetsController, type: :controller do
     allow(controller).to receive(:current_user).and_return(user)
   end
 
+  let(:spreadsheet) do
+    Spreadsheet.create! do |s|
+      s.attachment.attach io: StringIO.new('x,y,z'), filename: 'x.csv', content_type: 'text/plain'
+    end
+  end
+
   describe 'with an anonymous user' do
     let(:user) { nil }
-
-    let(:spreadsheet) do
-      Spreadsheet.create! do |s|
-        s.attachment.attach io: tempfile, filename: 'x.csv', content_type: 'text/plain'
-      end
-    end
 
     it 'should deny access to #index' do
       expect { get :index }.to raise_error CanCan::AccessDenied
@@ -59,20 +59,8 @@ RSpec.describe SpreadsheetsController, type: :controller do
     end
   end
 
-  let(:tempfile) do
-    f = Tempfile.new('xyz')
-    f.write('a,b,c')
-    f.rewind
-    f
-  end
-
   let(:uploaded_file) do
-    Rack::Test::UploadedFile.new(tempfile.path, 'text/plain')
-  end
-
-  after do
-    tempfile.close
-    tempfile.unlink
+    Rack::Test::UploadedFile.new(Rails.root + 'spec/support/spreadsheet_fixture.csv', 'text/plain')
   end
 
   # This should return the minimal set of attributes required to create a valid
@@ -95,7 +83,7 @@ RSpec.describe SpreadsheetsController, type: :controller do
 
   describe 'GET #index' do
     it 'assigns all spreadsheets as @spreadsheets' do
-      spreadsheet = Spreadsheet.create! valid_attributes
+      spreadsheet
       get :index, params: {}, session: valid_session
       expect(assigns(:spreadsheets)).to eq([spreadsheet])
     end
@@ -103,7 +91,6 @@ RSpec.describe SpreadsheetsController, type: :controller do
 
   describe 'GET #show' do
     it 'assigns the requested spreadsheet as @spreadsheet' do
-      spreadsheet = Spreadsheet.create! valid_attributes
       get :show, params: { id: spreadsheet.to_param }, session: valid_session
       expect(assigns(:spreadsheet)).to eq(spreadsheet)
     end
@@ -118,7 +105,6 @@ RSpec.describe SpreadsheetsController, type: :controller do
 
   describe 'GET #edit' do
     it 'assigns the requested spreadsheet as @spreadsheet' do
-      spreadsheet = Spreadsheet.create! valid_attributes
       get :edit, params: { id: spreadsheet.to_param }, session: valid_session
       expect(assigns(:spreadsheet)).to eq(spreadsheet)
     end
@@ -159,14 +145,14 @@ RSpec.describe SpreadsheetsController, type: :controller do
 
   describe 'DELETE #destroy' do
     it 'destroys the requested spreadsheet' do
-      spreadsheet = Spreadsheet.create! valid_attributes
+      spreadsheet
+
       expect do
         delete :destroy, params: { id: spreadsheet.to_param }, session: valid_session
       end.to change(Spreadsheet, :count).by(-1)
     end
 
     it 'redirects to the spreadsheets list' do
-      spreadsheet = Spreadsheet.create! valid_attributes
       delete :destroy, params: { id: spreadsheet.to_param }, session: valid_session
       expect(response).to redirect_to(spreadsheets_url)
     end
