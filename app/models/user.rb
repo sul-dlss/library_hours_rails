@@ -5,7 +5,7 @@ class User
   attr_accessor :id, :ldap_groups
 
   def self.from_env(env)
-    return unless env['REMOTE_USER']
+    return unless env['REMOTE_USER'].present?
 
     ldap_groups = if env['WEBAUTH_LDAPPRIVGROUP'].present?
                     env['WEBAUTH_LDAPPRIVGROUP'].split('|')
