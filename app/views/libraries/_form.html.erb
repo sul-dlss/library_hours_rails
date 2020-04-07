@@ -13,7 +13,7 @@
 
   <%= f.text_field :name %>
   <%= f.text_field :slug %>
-  <%= f.fields_for :node_mapping do |n| %>
+  <%= f.fields_for :node_mapping, @library.node_mapping || @library.build_node_mapping do |n| %>
     <%= n.text_field :node_id %>
   <% end %>
 

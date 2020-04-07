@@ -10,10 +10,10 @@
       </ul>
     </div>
   <% end %>
-  
+
   <%= f.text_field :name %>
   <%= f.text_field :slug %>
-  <%= f.fields_for :node_mapping do |n| %>
+  <%= f.fields_for :node_mapping, @location.node_mapping || @location.build_node_mapping do |n| %>
     <%= n.text_field :node_id %>
   <% end %>
   <%= f.check_box :keeps_hours %>
