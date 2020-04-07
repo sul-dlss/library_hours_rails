@@ -5,7 +5,7 @@ class Library < ApplicationRecord
   delegate :node_id, to: :node_mapping, allow_nil: true
   has_many :locations
   accepts_nested_attributes_for :locations, allow_destroy: true
-  accepts_nested_attributes_for :node_mapping
+  accepts_nested_attributes_for :node_mapping, reject_if: :all_blank
 
   validates :name, presence: true
 
