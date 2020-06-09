@@ -97,10 +97,10 @@ class LibrariesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def library_params
-    params.require(:library).permit(:name, :slug, node_mapping_attributes: [:node_id], locations_attributes: locations_params)
+    params.require(:library).permit(:name, :slug, node_mapping_attributes: [:id, :node_id], locations_attributes: locations_params)
   end
 
   def locations_params
-    [:id, :name, :slug, :keeps_hours, :_destroy, node_mapping_attributes: [:node_id]]
+    [:id, :name, :slug, :keeps_hours, :_destroy, node_mapping_attributes: [:id, :node_id]]
   end
 end
