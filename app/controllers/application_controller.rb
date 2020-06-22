@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
     redirect_to week: Time.zone.parse(params[:date]).strftime('%GW%V'), date: nil if params[:date]
 
     @range = Time.zone.parse(params[:from]).to_date..Time.zone.parse(params[:to]).to_date if params[:from] && params[:to]
-    if params[:from] && params[:business_days] && instance_variable_defined?(:@location)
+    if params[:from].presence && params[:business_days].presence && instance_variable_defined?(:@location)
       @range ||= begin
         range_start = Time.zone.parse(params[:from])
         range_end = @location.business_days(range_start, params[:business_days].to_i)
