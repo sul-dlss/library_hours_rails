@@ -19,6 +19,7 @@ RSpec.describe Spreadsheet, type: :model do
 
     before do
       subject.attachment.attach io: content, filename: 'x.csv', content_type: 'text/plain'
+      subject.save
     end
     it 'imports the spreadsheet hours into calendar events' do
       expect { subject.import }.to change(Calendar, :count).by(1)
