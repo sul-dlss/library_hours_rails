@@ -13,7 +13,7 @@ class FeedbackMailer < ActionMailer::Base
     @viewport = params[:viewport]
 
     mail(to: Settings.EMAIL_TO,
-         subject: 'Feedback from SearchWorks',
+         subject: 'Feedback from Hours',
          from: 'feedback@searchworks.stanford.edu',
          reply_to: Settings.EMAIL_TO)
   end
