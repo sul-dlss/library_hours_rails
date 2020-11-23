@@ -184,7 +184,7 @@ GEM
       rake
     friendly_id (5.4.1)
       activerecord (>= 4.0.0)
-    global_alerts (0.1.0)
+    global_alerts (0.2.0)
       http
       rails (>= 5.0, < 7)
     globalid (0.4.2)
