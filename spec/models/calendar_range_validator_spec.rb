@@ -21,7 +21,7 @@ describe CalendarRangeValidator do
     end
 
     it 'validates open 24 hours' do
-      subject.validate_each(model, :monday, 'open 24h')
+      subject.validate_each(model, :monday, 'open_24h')
     end
 
     it 'validates time ranges' do
