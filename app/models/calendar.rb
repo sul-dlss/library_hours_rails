@@ -19,9 +19,7 @@ class Calendar < ApplicationRecord
 
   def self.valid_range?(range)
     case range
-    when 'closed'
-      true
-    when 'open 24h'
+    when 'closed', 'open_24h'
       true
     when /-/
       parse_time_range(range).is_a? Range

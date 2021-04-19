@@ -66,7 +66,6 @@ class LegacySpreadsheetParser
     end
   end
 
-  # rubocop:disable Metrics/MethodLength
   def date_ranges
     @date_ranges ||= begin
       missing = range.to_a - dates
@@ -89,7 +88,6 @@ class LegacySpreadsheetParser
       ranges
     end
   end
-  # rubocop:enable Metrics/MethodLength
 
   def range
     @range ||= dates.min..dates.max
@@ -119,7 +117,6 @@ class LegacySpreadsheetParser
     locations_row.index(location)
   end
 
-  # rubocop:disable Metrics/MethodLength
   def parse_hours(location, row)
     date = row[0]
     type = row[2]
@@ -144,7 +141,6 @@ class LegacySpreadsheetParser
 
     cal
   end
-  # rubocop:enable Metrics/MethodLength
 
   def fetch_location(location)
     @locations_cache = {}

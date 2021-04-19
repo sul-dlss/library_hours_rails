@@ -11,7 +11,8 @@ AllCops:
     - 'bin/*'
     - 'config/**/*'
     - 'db/**/*'
-  TargetRubyVersion: 2.5
+  NewCops: enable
+  TargetRubyVersion: 3.0
 
 Rails:
   Enabled: true
