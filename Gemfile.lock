@@ -428,7 +428,7 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   jquery-rails
   listen
-  mysql2 (< 0.5.3)
+  mysql2
   nested_form
   nokogiri (>= 1.7.1)
   okcomputer
