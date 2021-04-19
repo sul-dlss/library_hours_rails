@@ -111,18 +111,6 @@ class Calendar < ApplicationRecord
     end
   end
 
-  ##
-  # The library website can't handle end times that are in the next day; when
-  # we have that case, subtract a day from the end time to make it happen the same
-  # day
-  def dtend_drupal
-    if dtstart.end_of_day < dtend
-      dtend - 1.day
-    else
-      dtend
-    end
-  end
-
   def open?
     !closed?
   end
@@ -139,15 +127,5 @@ class Calendar < ApplicationRecord
   rescue ArgumentError
     # strptime throws an ArgumentError when the date value isn't valid
     nil
-  end
-
-  def status_drupal
-    if closed?
-      0
-    elsif open_24h?
-      2
-    else
-      1
-    end
   end
 end

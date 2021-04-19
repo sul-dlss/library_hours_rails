@@ -31,9 +31,5 @@ RSpec.describe LibrariesController, type: :routing do
     it 'routes to #destroy' do
       expect(delete: '/libraries/1').to route_to('libraries#destroy', id: '1')
     end
-
-    it 'routes to #hours_drupal' do
-      expect(get: '/drupal/hours_may.xml').to route_to('libraries#hours_drupal', month: 'may', format: 'xml')
-    end
   end
 end

@@ -7,13 +7,11 @@ class LibrariesController < ApplicationController
 
   # GET /libraries
   # GET /libraries.json
-  # GET /libraries.drupal_xml
   def index
     @libraries = @libraries.select { |x| x.locations.any?(&:keeps_hours) }.sort_by(&:sort_key)
     respond_to do |format|
       format.html
       format.json
-      format.drupal_xml
       format.csv { render plain: LegacySpreadsheetParser.generate(@libraries.select { |x| params[:ids].blank? || params[:ids].include?(x.id.to_s) }, @range) }
     end
   end
@@ -28,24 +26,6 @@ class LibrariesController < ApplicationController
   end
 
   def spreadsheet; end
-
-  def hours_drupal
-    month = Time.zone.parse(params[:month])
-
-    # when the month is in the past (and the current week is wholely in the current month), use the following year
-    month += 1.year if month < Time.zone.now.beginning_of_week(:sunday).beginning_of_month
-
-    # when it is January, if we request December's hours and the current week starts in December, use the previous year
-    if params[:month] == 'december' && Time.zone.now.beginning_of_week(:sunday) < Time.zone.now.beginning_of_year
-      month -= 1.year
-    end
-
-    @range = month.to_date..month.end_of_month.to_date
-
-    respond_to do |format|
-      format.xml
-    end
-  end
 
   # GET /libraries/new
   def new

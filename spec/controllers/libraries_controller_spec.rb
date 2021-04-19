@@ -115,48 +115,6 @@ RSpec.describe LibrariesController, type: :controller do
     end
   end
 
-  describe 'GET #hours_drupal' do
-    before do
-      allow(Time).to receive(:now).and_return(fake_time)
-    end
-
-    let(:fake_time) { Time.zone.parse('2015-06-01') }
-
-    describe '@range' do
-      it 'assigns the current month to the current year' do
-        get :hours_drupal, params: { month: 'june', format: :xml }, session: valid_session
-        expect(assigns(:range).begin).to eq Time.zone.parse('2015-06-01').to_date
-      end
-
-      it 'assigns upcoming months to the current year' do
-        get :hours_drupal, params: { month: 'december', format: :xml }, session: valid_session
-        expect(assigns(:range).begin).to eq Time.zone.parse('2015-12-01').to_date
-      end
-
-      it 'assigns past months to the next year' do
-        get :hours_drupal, params: { month: 'april', format: :xml }, session: valid_session
-        expect(assigns(:range).begin).to eq Time.zone.parse('2016-04-01').to_date
-      end
-
-      it 'assigns the previous month to the current year' do
-        get :hours_drupal, params: { month: 'may', format: :xml }, session: valid_session
-        expect(assigns(:range).begin).to eq Time.zone.parse('2015-05-01').to_date
-      end
-
-      it 'assigns the previous month to the next year when the current week is wholely in the month' do
-        allow(Time).to receive(:now).and_return(Time.zone.parse('2015-06-08'))
-        get :hours_drupal, params: { month: 'may', format: :xml }, session: valid_session
-        expect(assigns(:range).begin).to eq Time.zone.parse('2016-05-01').to_date
-      end
-
-      it 'assigns the previous month to the previous year when it is december' do
-        allow(Time).to receive(:now).and_return(Time.zone.parse('2016-01-01'))
-        get :hours_drupal, params: { month: 'december', format: :xml }, session: valid_session
-        expect(assigns(:range).begin).to eq Time.zone.parse('2015-12-01').to_date
-      end
-    end
-  end
-
   describe 'GET #show' do
     it 'assigns the requested library as @library' do
       library = Library.create! valid_attributes
