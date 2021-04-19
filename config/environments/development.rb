@@ -11,9 +11,6 @@ Rails.application.configure do
   # Do not eager load code on boot.
   config.eager_load = false
 
-  # Since our dev server runs in the rails "development" env, we need to add our host
-  config.hosts << 'sul-library-hours-dev.stanford.edu'
-
   # Show full error reports.
   config.consider_all_requests_local = true
 
