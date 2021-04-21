@@ -41,6 +41,6 @@ class Spreadsheet < ApplicationRecord
   private
 
   def attachment_validation
-    errors[:attachment] << 'Missing attachment' unless attachment.attached?
+    errors.add(:attachment, 'Missing attachment') unless attachment.attached?
   end
 end

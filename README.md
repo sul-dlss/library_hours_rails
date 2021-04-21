@@ -11,8 +11,6 @@ Library hours can be created in bulk by setting normal business hours for each q
 This application also provides API access to those hours for downstream consumers, including:
 
 - legacy JSON API, with routes like: `api/v1/library/:library_id/location/:id/hours/for/:when`
-- legacy drupal API, with routes like:
-`drupal/hours_:month`
 - JSON-API style API, with routes like:
 `library/:library_id/location/:id/hours.json`
 

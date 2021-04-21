@@ -96,37 +96,4 @@ RSpec.describe Calendar, type: :model do
       expect(subject.dtend).to eq Time.zone.now.noon
     end
   end
-
-  describe '#status_drupal' do
-    subject { described_class.new(dtstart: Time.zone.now.localtime) }
-
-    it 'is 0 when the location is closed' do
-      subject.closed = true
-      expect(subject.status_drupal).to eq 0
-    end
-
-    it 'is 1 when the location is open' do
-      expect(subject.status_drupal).to eq 1
-    end
-
-    it 'is 2 when the location is open 24 hours' do
-      subject.dtstart = subject.dtstart.beginning_of_day
-      subject.dtend = subject.dtstart.end_of_day
-      expect(subject.status_drupal).to eq 2
-    end
-  end
-
-  describe '#dtend_drupal' do
-    subject { described_class.new(dtstart: Time.zone.now.localtime) }
-
-    it 'passes through same-day dtends unchanged' do
-      subject.dtend = subject.dtstart.end_of_day
-      expect(subject.dtend_drupal).to eq subject.dtend
-    end
-
-    it 'moves next-day dtends into the current day' do
-      subject.dtend = subject.dtstart.beginning_of_day + 26.hours
-      expect(subject.dtend_drupal).to eq subject.dtstart.beginning_of_day + 2.hours
-    end
-  end
 end

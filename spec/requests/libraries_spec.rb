@@ -13,11 +13,4 @@ RSpec.describe 'Libraries', type: :request do
       expect(response).to have_http_status(200)
     end
   end
-
-  describe 'GET /drupal/hours_june.xml' do
-    it 'works! (now write some real specs)' do
-      get drupal_hours_path(month: 'june', format: 'xml')
-      expect(response).to have_http_status(200)
-    end
-  end
 end
