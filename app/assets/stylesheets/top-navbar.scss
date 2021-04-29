@@ -23,10 +23,6 @@
 #topnav-container {
   height: $brandbar-height;
 
-  @media (max-width: $screen-xs-max) {
-    height: $brandbar-collapsed-height;
-  }
-
   .navbar-brand {
     @extend .text-hide;
 
@@ -35,20 +31,9 @@
     padding: 0;
     width: 297px;
 
-    @media (max-width: $screen-xs-max) {
-      height: $brandbar-collapsed-height;
-    }
 
     img {
       height: $brandbar-height;
-
-      @media (max-width: $screen-xs-max) {
-        height: $brandbar-collapsed-height;
-      }
-    }
-
-    @media (max-width: $screen-xs-max) {
-      margin-left: 15px;
     }
   }
 
@@ -60,33 +45,14 @@
   }
 
   .navbar-nav {
-    @media (min-width: $grid-float-breakpoint) {
-      > li {
-        > a {
-          padding-bottom: $brandbar-padding-vertical;
-          padding-top: $brandbar-padding-vertical;
-        }
-      }
-    }
   }
 
   .navbar-form {
-    @include brandbar-vertical-align($input-height-base);
   }
 
   .navbar-btn {
-    @include brandbar-vertical-align($input-height-base);
-
-    &.btn-sm {
-      @include brandbar-vertical-align($input-height-small);
-    }
-
-    &.btn-xs {
-      @include brandbar-vertical-align(22);
-    }
   }
 
   .navbar-text {
-    @include brandbar-vertical-align($line-height-computed);
   }
 }
