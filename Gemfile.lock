@@ -70,10 +70,13 @@ GEM
     bindex (0.8.1)
     bootsnap (1.7.4)
       msgpack (~> 1.0)
-    bootstrap-sass (3.4.1)
-      autoprefixer-rails (>= 5.2.1)
-      sassc (>= 2.0.0)
-    bootstrap_form (2.7.0)
+    bootstrap (4.6.0)
+      autoprefixer-rails (>= 9.1.0)
+      popper_js (>= 1.14.3, < 2)
+      sassc-rails (>= 2.0.0)
+    bootstrap_form (4.5.0)
+      actionpack (>= 5.2)
+      activemodel (>= 5.2)
     builder (3.2.4)
     bundler-audit (0.8.0)
       bundler (>= 1.2.0, < 3)
@@ -225,7 +228,7 @@ GEM
     marcel (1.0.1)
     method_source (1.0.0)
     mini_mime (1.0.3)
-    mini_portile2 (2.5.0)
+    mini_portile2 (2.5.1)
     minitest (5.14.4)
     msgpack (1.4.2)
     multipart-post (2.1.1)
@@ -244,6 +247,7 @@ GEM
     parallel (1.20.1)
     parser (3.0.1.0)
       ast (~> 2.4.1)
+    popper_js (1.16.0)
     public_suffix (4.0.6)
     puma (5.2.2)
       nio4r (~> 2.0)
@@ -325,7 +329,7 @@ GEM
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 0.90.0, < 2.0)
-    rubocop-rspec (2.2.0)
+    rubocop-rspec (2.3.0)
       rubocop (~> 1.0)
       rubocop-ast (>= 1.1.0)
     ruby-progressbar (1.11.0)
@@ -399,8 +403,8 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap (>= 1.1.0)
-  bootstrap-sass
-  bootstrap_form (< 4.0.0)
+  bootstrap
+  bootstrap_form
   byebug
   cancancan
   capistrano

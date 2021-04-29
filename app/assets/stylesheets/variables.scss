@@ -8,7 +8,7 @@ $brand-primary: $color-cardinal-red;
 $pagination-active-bg: #696969;
 $pagination-active-border: #696969;
 
-$font-size-base: 15px;
+$font-size-base: 1rem;
 $line-height-base: 1.5;
 
 $btn-default-color: $color-gray;
@@ -52,11 +52,11 @@ $navbar-inverse-link-hover-color: $link-color;
 
 $global-alert-color: rgb(204, 0, 0);
 
-@import "bootstrap/variables";
+@import "bootstrap-reboot";
 
 $top-nav-bar-height: 35px;
 $brandbar-collapsed-height: 50px;
 $brandbar-height: 100px;
-$brandbar-padding-vertical: (($brandbar-height - $line-height-computed) / 2);
+$brandbar-padding-vertical: (($brandbar-height - $line-height-base) / 2);
 
 $sul-shadow-color: rgba(0, 0, 0, .2);
