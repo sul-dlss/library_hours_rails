@@ -30,6 +30,8 @@
   </div>
 </nav>
 
-<div id="feedback-form" class="feedback-form-container collapse">
-  <%= render "shared/feedback_forms/form" %>
-</div>
+<% unless current_page? feedback_path %>
+  <div id="feedback-form" class="feedback-form-container collapse">
+    <%= render "shared/feedback_forms/form" %>
+  </div>
+<% end %>
