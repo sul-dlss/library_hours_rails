@@ -3,3 +3,7 @@ site_admin_groups: []
 pinned_library_slug: 'green'
 EMAIL_TO: libweb-feedback@lists.stanford.edu
 GLOBAL_ALERT: <%= false %>
+
+RECAPTCHA:
+  SITE_KEY: 6Lc6BAAAAAAAAChqRbQZcn_yyyyyyyyyyyyyyyyy
+  SECRET_KEY: 6Lc6BAAAAAAAAKN3DRm6VA_xxxxxxxxxxxxxxxxx
