@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class FeedbackFormsController < ApplicationController
+  skip_authorization_check  # anyone can submit feedback
+
   def new; end
 
   def create
