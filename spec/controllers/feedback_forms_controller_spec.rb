@@ -3,12 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe FeedbackFormsController do
-  let(:mock_client) { instance_double(SymphonyClient, ping: true) }
-
-  before do
-    allow(SymphonyClient).to receive(:new).and_return(mock_client)
-  end
-
   context 'when the current user is anonymous' do
     context 'when they fill in the reCAPTCHA' do
       it 'sends an email (default scenario)' do
@@ -59,7 +53,7 @@ RSpec.describe FeedbackFormsController do
         message: '',
         email_address: ''
       }
-      expect(flash[:danger]).to eq 'A message is required'
+      expect(flash[:error]).to eq 'A message is required'
     end
 
     it 'block potential spam with a url in the message' do
@@ -68,7 +62,7 @@ RSpec.describe FeedbackFormsController do
         url: 'http://test.host/',
         email_address: ''
       }
-      expect(flash[:danger]).to eq 'Your message appears to be spam, and has not been sent. Please try sending your message again without any links in the comments.'
+      expect(flash[:error]).to eq 'Your message appears to be spam, and has not been sent. Please try sending your message again without any links in the comments.'
     end
 
     it 'block potential spam with a http:// in the user_agent field' do
@@ -77,7 +71,7 @@ RSpec.describe FeedbackFormsController do
         message: 'Legit message',
         url: 'http://test.host'
       }
-      expect(flash[:danger]).to eq 'Your message appears to be spam, and has not been sent.'
+      expect(flash[:error]).to eq 'Your message appears to be spam, and has not been sent.'
     end
 
     it 'block potential spam with a http:// in the viewport field' do
@@ -86,16 +80,16 @@ RSpec.describe FeedbackFormsController do
         message: 'Legit message',
         url: 'http://test.host'
       }
-      expect(flash[:danger]).to eq 'Your message appears to be spam, and has not been sent.'
+      expect(flash[:error]).to eq 'Your message appears to be spam, and has not been sent.'
     end
 
-    it 'return an error if a bot fills in the email_addrss field (email is correct field)' do
+    it 'return an error if a bot fills in the email_address field (email is correct field)' do
       post :create, params: {
         message: 'I am spamming you!',
         url: 'http://test.host/',
         email_address: 'spam!'
       }
-      expect(flash[:danger]).to eq 'You have filled in a field that makes you appear as a spammer.  Please follow the directions for the individual form fields.'
+      expect(flash[:error]).to eq 'You have filled in a field that makes you appear as a spammer.  Please follow the directions for the individual form fields.'
     end
   end
 end
