@@ -25,6 +25,9 @@ en:
       term:
         dtstart: "Start Date"
         dtend: "End Date"
+  library-hours:
+    feedback_form:
+      success: Thank you! Your feedback has been sent.
 
   time:
     am: 'a'
