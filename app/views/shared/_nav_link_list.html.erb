@@ -1,13 +1,13 @@
-<!-- if navbar_nav exists and is true, set the class to nav-item, otherwise set to list-inline-item -->
+<!-- item_class is passed down from parent template. BS4 list items use specific classes. -->
 
 <% if current_user %>
-  <li class=<%= defined?(navbar_nav) && navbar_nav ? 'nav-item' : 'list-inline-item' %>><%= link_to "#{current_user.id}: Logout", logout_path(referrer: root_path) %></li>
+  <li class=<%= local_assigns[:item_class] ? item_class : '' %>><%= link_to "#{current_user.id}: Logout", logout_path(referrer: root_path) %></li>
 
   <% if can? :manage, Spreadsheet %>
-    <li class=<%= defined?(navbar_nav) && navbar_nav ? 'nav-item' : 'list-inline-item' %>><%= link_to 'Export Hours', spreadsheet_libraries_url %></li>
-    <li class=<%= defined?(navbar_nav) && navbar_nav ? 'nav-item' : 'list-inline-item' %>><%= link_to 'Import Hours', new_spreadsheet_url %></li>
+    <li class=<%= local_assigns[:item_class] ? item_class : '' %>><%= link_to 'Export Hours', spreadsheet_libraries_url %></li>
+    <li class=<%= local_assigns[:item_class] ? item_class : '' %>><%= link_to 'Import Hours', new_spreadsheet_url %></li>
   <% end %>
 <% end %>
-<li class=<%= defined?(navbar_nav) && navbar_nav ? 'nav-item' : 'list-inline-item' %>>
+<li class=<%= local_assigns[:item_class] ? item_class : '' %>>
   <%= link_to 'Feedback', feedback_path, data: { toggle: 'collapse', target: '#feedback-form' } %>
 </li>

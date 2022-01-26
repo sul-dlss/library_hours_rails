@@ -1,7 +1,7 @@
 <nav id="top-nav-bar" class="d-none d-sm-block">
   <div class="container">
     <ul class="d-flex justify-content-end">
-      <%= render 'shared/nav_link_list' %>
+      <%= render 'shared/nav_link_list', item_class: "list-inline-item" %>
     </ul>
   </div>
 </nav>
@@ -18,7 +18,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <div class="d-block d-sm-none">
     <ul class="navbar-nav mr-auto">
-      <%= render "shared/nav_link_list", navbar_nav: true %>
+      <%= render "shared/nav_link_list", item_class: "nav-item" %>
     </ul>
     </div>
   </div>
