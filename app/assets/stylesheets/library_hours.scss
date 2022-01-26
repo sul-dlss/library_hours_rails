@@ -5,23 +5,26 @@
 @import 'top-navbar';
 @import 'sul-footer';
 
+
 .date-range {
-  h2 {
-    display: inline-block;
-    margin: 0 3ch;
-    padding-top: 0.5em;
+  background-color: $well-bg;
+
+  h4 {
+    padding: 0 ($spacer);
   }
 
-  margin-top: 15px;
-  padding-bottom: 5px;
-  padding-top: 5px;
-
-
-  @media (max-width: 768px) {
-    .date-pagination {
-      margin-bottom: 1em;
+  @include media-breakpoint-down(xs) {
+    h4 {
+      // same ps py-2 in BS4
+      padding: 0 ($spacer * .5);
     }
-  }
+
+    .pager {
+      justify-content: center;
+    }
+   }
+  
+
 }
 .closed {
   color: #dd2121;
@@ -39,7 +42,14 @@ th.location-name {
 td.hours,
 th.hours {
   width: 100px;
+  padding: .5rem;
 }
+
+th.location-name,
+th.hours {
+  border-top: none;
+}
+
 
 td.exceptions {
 //  @extend .alert-info;
