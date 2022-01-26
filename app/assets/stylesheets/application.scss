@@ -1,14 +1,16 @@
-@import 'bootstrap-sprockets';
 @import 'sul-styles';
 @import 'sul-icons-rails';
 @import 'sul-icons-aliases';
 @import 'sul-icons/helpers';
+// Custom bootstrap variables must be set or imported *before* bootstrap.
 @import 'variables';
 @import 'bootstrap';
 @import 'library_hours_mixins';
 @import 'library_hours';
 @import 'global_alert';
 @import 'bootstrap-editable';
+
+
 
 .compact-alerts {
   .alert {
@@ -21,13 +23,13 @@
     border-radius: 0;
 
     &:first-child {
-      padding-top: $alert-padding;
+      padding-top: $spacer;
       border-radius-top-left: $alert-border-radius;
       border-radius-top-right: $alert-border-radius;
     }
 
     &:last-child {
-      padding-bottom: $alert-padding;
+      padding-bottom: $spacer;
       border-radius-bottom-left: $alert-border-radius;
       border-radius-bottom-right: $alert-border-radius;
     }

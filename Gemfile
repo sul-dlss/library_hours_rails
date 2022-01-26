@@ -69,8 +69,8 @@ group :production do
   gem 'mysql2'
 end
 
-gem 'bootstrap-sass'
-gem 'bootstrap_form', '< 4.0.0' # Pinned until we upgrade to Bootstrap 4
+gem 'bootstrap', '~> 4.6.1'
+gem 'bootstrap_form', '~> 4.5.0'
 gem 'cancancan'
 gem 'config'
 gem 'dotenv'
