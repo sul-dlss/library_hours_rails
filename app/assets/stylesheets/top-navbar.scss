@@ -7,23 +7,22 @@
   height: $top-nav-bar-height;
 
   ul {
-    float: right;
-    height: $top-nav-bar-height;
     margin: 0;
     padding: 0;
   }
 
   li {
-    display: table-cell;
+    align-items: center;
+    display: flex;
     height: $top-nav-bar-height;
-    vertical-align: middle;
   }
 }
 
 #topnav-container {
+  background-color: $brand-primary;
   height: $brandbar-height;
 
-  @media (max-width: $screen-xs-max) {
+  @include media-breakpoint-down(xs) { 
     height: $brandbar-collapsed-height;
   }
 
@@ -35,32 +34,32 @@
     padding: 0;
     width: 297px;
 
-    @media (max-width: $screen-xs-max) {
+    @include media-breakpoint-down(xs) { 
       height: $brandbar-collapsed-height;
     }
 
     img {
       height: $brandbar-height;
 
-      @media (max-width: $screen-xs-max) {
+      @include media-breakpoint-down(xs) { 
         height: $brandbar-collapsed-height;
       }
     }
 
-    @media (max-width: $screen-xs-max) {
+    @include media-breakpoint-down(xs) { 
       margin-left: 15px;
     }
   }
 
   .navbar-collapse {
-    background-color: $navbar-default-bg;
+    background-color: $brand-primary;
     a {
       color: lighten($gray-base, 86%);;
     }
   }
 
   .navbar-nav {
-    @media (min-width: $grid-float-breakpoint) {
+    @include media-breakpoint-up(lg) {
       > li {
         > a {
           padding-bottom: $brandbar-padding-vertical;
@@ -78,7 +77,7 @@
     @include brandbar-vertical-align($input-height-base);
 
     &.btn-sm {
-      @include brandbar-vertical-align($input-height-small);
+      @include brandbar-vertical-align($input-height-sm);
     }
 
     &.btn-xs {
@@ -87,6 +86,6 @@
   }
 
   .navbar-text {
-    @include brandbar-vertical-align($line-height-computed);
+    @include brandbar-vertical-align($line-height-base);
   }
 }
