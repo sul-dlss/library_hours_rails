@@ -71,7 +71,7 @@ $(document).on('turbolinks:load', function(){
         var flashHtml = "<div class='alert alert-" + val[0] + "'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>" + val[1] + "</div>";
 
         // Show the flash message
-        $('div.flash_messages').html(flashHtml);
+        $('div.flashes').html(flashHtml);
       });
     }
 
