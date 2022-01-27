@@ -22,8 +22,16 @@
 
 
 $(document).on("turbolinks:load", function() {
-  $('.editable').editable();
-  $('[data-toggle="tooltip"]').tooltip();
+  
+  // Invoke the editable library
+  // Inline mode must be used to work with BS4
+  $('.editable').editable({
+    mode: 'inline'
+  });
+  
+  $('[data-toggle="tooltip"]').tooltip({
+    trigger: 'hover'
+  });
 
   //automatically show next editable
   $('.term-hours .editable').on('save', function(){
