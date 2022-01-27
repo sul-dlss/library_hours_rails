@@ -10,7 +10,7 @@
       <% end %>
     </div>
 
-    <div class="col-md-5 col-xs-12">
+    <div class="col-lg-5 col-xs-12">
       <form method="GET" class="form form-horizontal row">
         <div class="col-md-7 col-sm-6">
         <label for="jump-date" class="control-label sr-only">Jump to:</label>
@@ -21,30 +21,30 @@
           </div>
         </div>
       </div>
-        <div class="col-md-5 col-sm-6" id="jump-term-group">
-          <h3 class="sr-only">Jump to quarters &amp; holidays</h3>
-          <button id="jump-term" type="button" class="btn btn-default btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-            Quarters &amp; holidays <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu dropdown-menu-right" role="menu">
-            <% if can? :create, Term %>
-              <li class="dropdown-item"><%= link_to 'Manage Terms', terms_path %></li>
-            <% end %>
-            <% Term.upcoming(2.years).group_by(&:year).each do |year, terms| %>
-              <li class="dropdown-item">
-                <h4><%= year %></h4>
+      <div class="col-lg-5 col-xs-12 d-flex" id="jump-term-group">
+        <h3 class="sr-only">Jump to quarters &amp; holidays</h3>
+        <button id="jump-term" type="button" class="btn btn-default btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+          Quarters &amp; holidays <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-right" role="menu">
+          <% if can? :create, Term %>
+            <li class="dropdown-item"><%= link_to 'Manage Terms', terms_path %></li>
+          <% end %>
+          <% Term.upcoming(2.years).group_by(&:year).each do |year, terms| %>
+            <li class="dropdown-item">
+              <h4><%= year %></h4>
+            </li>
+            <% terms.each do |t| %>
+              <li class="dropdown-item"><%= link_to params.to_unsafe_h.merge(week: t.dtstart.strftime("%GW%V")) do %>
+                <%= t.name %>
+                <small><%= l t.dtstart.to_date, format: :short %><%= "-" + l(t.dtend.to_date, format: :short) unless t.dtstart.to_date == t.dtend.to_date %></small>
+              <% end %>
               </li>
-              <% terms.each do |t| %>
-                <li class="dropdown-item"><%= link_to params.to_unsafe_h.merge(week: t.dtstart.strftime("%GW%V")) do %>
-                  <%= t.name %>
-                  <small><%= l t.dtstart.to_date, format: :short %><%= "-" + l(t.dtend.to_date, format: :short) unless t.dtstart.to_date == t.dtend.to_date %></small>
-                <% end %>
-                </li>
-                <% end %>
-              <li role="separator" class="divider"></li>
-            <% end %>
-          </ul>
-        </div>
+              <% end %>
+            <li role="separator" class="divider"></li>
+          <% end %>
+        </ul>
+      </div>
       </form>
     </div>
 

@@ -8,20 +8,22 @@
 
 <nav id="topnav-container" class="navbar navbar-expand-sm navbar-light">
   <div class="container">
-  <%= link_to 'http://library.stanford.edu', class: 'navbar-brand' do %>
-        <%= image_tag 'logo.svg', alt: 'Stanford University Libraries' %>
-  <% end %>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+    <div class="row justify-content-between">
+      <%= link_to 'http://library.stanford.edu', class: 'navbar-brand' do %>
+            <%= image_tag 'logo.svg', alt: 'Stanford University Libraries' %>
+      <% end %>
+      <button class="btn-light navbar-toggler bg-light mr-1" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon mr-auto"></span>
+      </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <div class="d-block d-sm-none">
-    <ul class="navbar-nav mr-auto">
-      <%= render "shared/nav_link_list", item_class: "nav-item" %>
-    </ul>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="d-block d-sm-none">
+        <ul class="navbar-nav mr-auto pl-3">
+          <%= render "shared/nav_link_list", item_class: "nav-item" %>
+        </ul>
+        </div>
+      </div>
     </div>
-  </div>
   </div>
 </nav>
 
