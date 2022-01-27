@@ -67,3 +67,8 @@ th small {
 .well a {
   color: $well-link;
 }
+
+// Override editable library background images
+.editableform-loading, .editable-clear-x {  
+  background: none !important;  
+}
