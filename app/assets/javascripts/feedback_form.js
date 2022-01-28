@@ -3,6 +3,8 @@ $(document).on('turbolinks:load', function(){
   //Instantiates plugin for feedback form
 
   $("#feedback-form").feedbackForm();
+
+  console.log("instantiated feedback form");
 })
 
 
@@ -22,6 +24,15 @@ $(document).on('turbolinks:load', function(){
 
     var pluginName = "feedbackForm";
 
+    // convert error message level into bootstrap class names;
+    // should match mapping in _flashes.html.erb
+    var errorClassNames = {
+      alert: "danger",
+      error: "danger",
+      success: "success",
+      notice: "info",
+      warning: "warning",
+    }
     function Plugin( element, options ) {
         this.element = element;
         var $el, $form;
@@ -67,8 +78,9 @@ $(document).on('turbolinks:load', function(){
     }
 
     function renderFlashMessages(response){
+      console.log("rendering", response)
       $.each(response, function(i,val){
-        var flashHtml = "<div class='alert alert-" + val[0] + "'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>" + val[1] + "</div>";
+        var flashHtml = "<div class='alert alert-" + errorClassNames[val[0]] + "'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>" + val[1] + "</div>";
 
         // Show the flash message
         $('div.flashes').html(flashHtml);
