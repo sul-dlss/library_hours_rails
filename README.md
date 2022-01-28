@@ -50,6 +50,13 @@ Initial library hours can be seeded using a CSV export from the library hours we
 Location.select { |x| x.calendars.any? }.each { |x| x.update(keeps_hours: true) }
 ```
 
+## Logging in locally
+
+To run the app locally while logged in as an authorized user for the backend, run the following:
+```
+REMOTE_USER=username@stanford.edu eduPersonEntitlement=group bundle exec rails s
+```
+
 ## Running the tests
 
 ```
