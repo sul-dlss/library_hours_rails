@@ -3,44 +3,44 @@
 require 'rails_helper'
 
 RSpec.describe 'Feedback form', type: :feature, js: true do
-  before do
-    visit root_path
-  end
-
-  it 'is initially collapsed' do
-    expect(page).not_to have_css '#feedback-form.in'
-  end
-
-  it 'can be expanded' do
-    click_link 'Feedback', match: :first
-    expect(page).to have_css '#feedback-form.in'
-  end
-
-  it 'can be collapsed' do
-    click_link 'Feedback', match: :first
-    find('button.cancel-link').click
-    expect(page).not_to have_css '#feedback-form.in'
-  end
-
   context 'when not logged in' do
+    before do
+      visit root_path
+    end
+
+    it 'is initially collapsed' do
+      expect(page).not_to have_css '#feedback-form.in'
+    end
+
+    it 'can be expanded' do
+      click_link 'Feedback', match: :first
+      expect(page).to have_css '#feedback-form.in'
+    end
+
+    it 'can be collapsed' do
+      click_link 'Feedback', match: :first
+      find('button.cancel-link').click
+      expect(page).not_to have_css '#feedback-form.in'
+    end
+
     it 'shows the reCAPTCHA challenge' do
       click_link 'Feedback', match: :first
-      expect(page).to have_css '.library-hours-captcha'
+      expect(page).to have_css('.library-hours-captcha', visible: :all)
     end
   end
 
   context 'when logged in' do
     before do
       stub_current_user(build(:superadmin_user))
+      visit root_path
     end
 
     it 'does not show the reCAPTCHA challenge' do
       click_link 'Feedback', match: :first
-      expect(page).not_to have_css '.library-hours-captcha'
+      expect(page).not_to have_css('.library-hours-captcha', visible: :all)
     end
 
-    # FIXME form submits, but can't find success message?
-    xit 'shows a success message when submitted' do
+    it 'shows a success alert when submitted' do
       click_link 'Feedback', match: :first
       within 'form.feedback-form' do
         fill_in('message', with: 'This is only a test')
@@ -48,7 +48,7 @@ RSpec.describe 'Feedback form', type: :feature, js: true do
         fill_in('to', with: 'test@kittenz.eu')
         click_button 'Send'
       end
-      expect(page).to have_content 'Thank you! Your feedback has been sent.'
+      expect(page).to have_css('.alert-success', visible: :all)
     end
   end
 end
