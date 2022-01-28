@@ -70,12 +70,11 @@ group :production do
 end
 
 gem 'bootstrap', '~> 4.6.1'
-gem 'bootstrap_form', '~> 4.5.0'
-gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.8'
 gem 'cancancan'
 gem 'config'
 gem 'dotenv'
 gem 'faraday'
+gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.8'
 gem 'friendly_id'
 gem 'gretel'
 gem 'honeybadger'
