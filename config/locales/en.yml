@@ -28,6 +28,7 @@ en:
   library-hours:
     feedback_form:
       success: Thank you! Your feedback has been sent.
+      log_in_to_avoid_captcha: (Stanford users can avoid this Captcha by logging in.)
 
   time:
     am: 'a'
