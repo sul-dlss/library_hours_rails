@@ -32,5 +32,6 @@ RSpec.describe ApplicationController do
   end
 
   describe '#set_range' do
+    pending('Needs test for date range/parsing logic')
   end
 end
