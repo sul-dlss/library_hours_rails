@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  helper_method :current_user
+  helper_method :current_user, :current_user?
   check_authorization
 
   def current_user
@@ -14,6 +14,10 @@ class ApplicationController < ActionController::Base
                       else
                         User.from_env(request.env)
                       end
+  end
+
+  def current_user?
+    current_user.present?
   end
 
   def set_range(default: nil)
