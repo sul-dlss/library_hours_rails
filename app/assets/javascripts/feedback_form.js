@@ -3,8 +3,6 @@ $(document).on('turbolinks:load', function(){
   //Instantiates plugin for feedback form
 
   $("#feedback-form").feedbackForm();
-
-  console.log("instantiated feedback form");
 })
 
 
@@ -78,7 +76,6 @@ $(document).on('turbolinks:load', function(){
     }
 
     function renderFlashMessages(response){
-      console.log("rendering", response)
       $.each(response, function(i,val){
         var flashHtml = "<div class='alert alert-" + errorClassNames[val[0]] + "'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>" + val[1] + "</div>";
 
