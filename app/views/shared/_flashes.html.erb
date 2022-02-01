@@ -1,5 +1,5 @@
+<div class="flashes">
 <% if [flash[:success], flash[:notice], flash[:warning], flash[:error], flash[:alert]].any? %>
-  <div class="flashes">
     <% if flash[:success] %>
       <div class="alert alert-success alert-dismissible" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -40,5 +40,5 @@
         <%= flash[:alert] %>
       </div>
     <% end %>
-  </div>
 <% end %>
+</div>
