@@ -28,8 +28,8 @@ $(document).on("turbolinks:load", function() {
   $('.editable').editable({
     mode: 'inline',
     error: function(response, newValue) {
-      if(response.status === 500) {
-          return 'Server error. Please check you entered a valid time in the format e.g. "9a", "9am", "3p" or "3pm"';
+      if(response.status !== 200) {
+          return 'Server error. Please check you entered a valid time format (e.g. "9a" or "4pm"), and if so, please check the logs.';
       } else {
           return response.responseText;
       }
