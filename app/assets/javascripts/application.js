@@ -26,7 +26,14 @@ $(document).on("turbolinks:load", function() {
   // Invoke the editable library
   // Inline mode must be used to work with BS4
   $('.editable').editable({
-    mode: 'inline'
+    mode: 'inline',
+    error: function(response, newValue) {
+      if(response.status === 500) {
+          return 'Server error. Please check you entered a valid time in the format e.g. "9a", "9am", "3p" or "3pm"';
+      } else {
+          return response.responseText;
+      }
+    }
   });
   
   $('[data-toggle="tooltip"]').tooltip({

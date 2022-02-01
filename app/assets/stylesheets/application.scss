@@ -34,3 +34,10 @@
     }
   }
 }
+
+.editable-error-block {
+  // position: absolute;
+  background-color: $color-cardinal-red;
+  color: #fff;
+  z-index: 1000;
+}
