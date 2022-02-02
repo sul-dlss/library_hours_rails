@@ -9,6 +9,12 @@
 .date-range {
   background-color: $well-bg;
 
+  @include media-breakpoint-up(sm) {
+    .date-input {
+      padding-right: ($spacer * .75);
+    }
+  }
+
   h4 {
     padding: 0 $spacer;
   }
