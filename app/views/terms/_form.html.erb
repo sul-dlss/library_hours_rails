@@ -1,4 +1,4 @@
-<%= bootstrap_form_for(@term) do |f| %>
+<%= nested_form_for @term do |f| %>
   <% if @term.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@term.errors.count, "error") %> prohibited this term from being saved:</h2>
@@ -11,16 +11,25 @@
     </div>
   <% end %>
   
-  <%= f.text_field :name %>
-  <%= f.text_field :dtstart, type: 'date', value: (f.object.dtstart || Time.now).to_date %>
-  <%= f.text_field :dtend, type: 'date', value: (f.object.dtend || Time.now).to_date %>
+  <div class="form-group">
+    <%= f.label :name, "Name" %>  
+    <%= f.text_field :name, class: 'form-control' %>
+    <%= f.label :dtstart, "Start Date" %>  
+    <%= f.text_field :dtstart, type: 'date', value: (f.object.dtstart || Time.now).to_date, class: 'form-control col-6' %>
+    <%= f.label :dtend, "End Date" %>  
+    <%= f.text_field :dtend, type: 'date', value: (f.object.dtend || Time.now).to_date, class: 'form-control col-6' %>
+  </div>
 
-  <%= f.form_group :holiday, label: { text: "Type" } do %>
-    <%= f.radio_button :holiday, false, label: "Quarter or Intersession" %>
-    <%= f.radio_button :holiday, true, label: "Holiday" %>
-  <% end %>
+
+  <div class="form-check">
+    <p>Type</p>
+    <%= f.radio_button :holiday, false, class: "form-check-input"%>
+    <%= f.label "Quarter or Intersession" %>
+    <%= f.radio_button :holiday, true, class: "form-check-label" %>
+    <%= f.label "Holiday" %>
+  </div>
 
   <div class="actions">
-    <%= f.primary %>
+    <%= f.submit "Create Term", class: "btn btn-primary" %>
   </div>
 <% end %>

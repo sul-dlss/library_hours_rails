@@ -1,8 +1,7 @@
-<%= bootstrap_nested_form_for(@library) do |f| %>
+<%= nested_form_for @library do |form| %>
   <% if @library.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@library.errors.count, "error") %> prohibited this library from being saved:</h2>
-
       <ul>
       <% @library.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -11,39 +10,34 @@
     </div>
   <% end %>
 
-  <%= f.text_field :name %>
-  <%= f.text_field :slug %>
-  <%= f.fields_for :node_mapping, @library.node_mapping || @library.build_node_mapping do |n| %>
-    <%= n.text_field :node_id %>
-  <% end %>
+  <div class="form-group">
+    <%= form.label :name, "Name:" %>  
+    <%= form.text_field :name, class: 'form-control'%>
+    <%= form.label :slug, "Slug:" %>
+    <%= form.text_field :slug, class: 'form-control' %>
+    <%= form.fields_for :node_mapping, @library.node_mapping || @library.build_node_mapping do |n| %>
+      <%= form.label :node_id, "Node:" %>   
+      <%= n.text_field :node_id, class: 'form-control' %>
+    <% end %>
+  </div>
 
-  <h2>Locations</h2>
-  <table id="locations" class="table">
-    <thead>
-      <tr>
-        <th>Name</th><th>Keeps Hours</th><th></th>
-      </tr>
-    </thead>
-    <tbody id="locations-body">
-      <%= f.fields_for :locations do |l| %>
-        <tr class="fields">
-          <td>
-            <%= l.hidden_field :id %>
-            <%= l.text_field :name, hide_label: true %>
-          </td>
-          <td>
-            <%= l.check_box :keeps_hours, hide_label: true %>
-          </td>
-          <td>
-            <%= l.link_to_remove "Remove" %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-  <p><%= f.link_to_add "Add a location", :locations, data: { target: '#locations-body'} %></p>
+  <h4>Library's Locations:</h4>
+  <ul>
+    <%= form.fields_for :locations do |locations_form| %>
+      <li>
+        <%= locations_form.label :name, "Name:" %>  
+        <%= locations_form.text_field :name, class: 'form-control'%>
+        <div class="form-check">
+          <%= locations_form.check_box :keeps_hours, class: "form-check-input" %>
+          <%= locations_form.label :keeps_hours, "Keeps hours", class: "form-check-label" %>
+        </div>
+        <button class="btn btn-outline-danger remove-location"><%= locations_form.link_to_remove "Remove this Location" %></button>
+      </li>
+    <% end %>
+    <p><%= form.link_to_add "Add a Location", :locations, class: 'btn btn-outline-success add-location' %></p>
+  </ul>
 
   <div class="actions">
-    <%= f.primary %>
+    <%= form.submit "Create Library", class: "btn btn-primary" %>
   </div>
 <% end %>

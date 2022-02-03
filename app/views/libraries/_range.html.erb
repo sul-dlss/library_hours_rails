@@ -1,49 +1,55 @@
-<div class="clearfix date-range well">
-  <nav class="date-pagination col-md-7 col-xs-12">
-    <%= link_to params.to_unsafe_h.merge(week: (@range.begin - 1.week + 1.day).strftime("%GW%V")), class: 'sul-i-arrow-left-3' do %>
-      <span class="sr-only">Previous</span>
-    <% end %>
-    <h2 class="h4"><%= l(@range.begin, format: :short) %> – <%= l(@range.end, format: :short) %></h2>
-    <%= link_to params.to_unsafe_h.merge(week: (@range.begin + 1.week + 1.day).strftime("%GW%V")), class: 'sul-i-arrow-right-3' do %>
-      <span class="sr-only">Next</span>
-    <% end %>
-  </nav>
-
-  <div class="col-md-5 col-sm-12 col-xs-12">
-    <form method="GET" class="form form-horizontal row">
-      <div class="col-md-7 col-sm-6">
-      <label for="jump-date" class="control-label sr-only">Jump to:</label>
-      <div class="input-group">
-        <input value="<%= Time.zone.today %>" name="date" type="date" class="form-control" id="jump-date" data-href="<%= url_for(params.to_unsafe_h.merge(week: "%GW%V")) %>"/>
-        <span class="input-group-btn">
-          <input value="Go" type="submit" class="btn btn-primary"/>
-        </span>
-      </div>
+<div class="card date-range d-flex my-3">
+  <div class="card-body py-2 row">
+    <div class="align-items-center col-lg-6 col-xs-12 d-flex justify-content-lg-start justify-content-sm-center pager">
+      <%= link_to params.to_unsafe_h.merge(week: (@range.begin - 1.week + 1.day).strftime("%GW%V")), class: 'sul-i-arrow-left-3' do %>
+        <span class="sr-only">Previous</span>
+      <% end %>
+      <h4 class="font-weight-light mb-0"><%= l(@range.begin, format: :short) %> – <%= l(@range.end, format: :short) %></h4>
+      <%= link_to params.to_unsafe_h.merge(week: (@range.begin + 1.week + 1.day).strftime("%GW%V")), class: 'sul-i-arrow-right-3' do %>
+        <span class="sr-only">Next</span>
+      <% end %>
     </div>
-      <div class="btn-group col-md-5 col-sm-6" id="jump-term-group">
-        <h3 class="sr-only">Jump to quarters &amp; holidays</h3>
-        <button id="jump-term" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-          Quarters &amp; holidays <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu dropdown-menu-right" role="menu">
-          <% if can? :create, Term %>
-            <li><%= link_to 'Manage Terms', terms_path %></li>
-          <% end %>
-          <% Term.upcoming(2.years).group_by(&:year).each do |year, terms| %>
-            <li>
-              <h4><%= year %></h4>
-            </li>
-            <% terms.each do |t| %>
-              <li><%= link_to params.to_unsafe_h.merge(week: t.dtstart.strftime("%GW%V")) do %>
-                <%= t.name %>
-                <small><%= l t.dtstart.to_date, format: :short %><%= "-" + l(t.dtend.to_date, format: :short) unless t.dtstart.to_date == t.dtend.to_date %></small>
-              <% end %>
+
+    <div class="col-lg-6 col-xs-12">
+      <form method="GET" class="form form-horizontal row justify-content-lg-end justify-content-sm-center">
+        
+        <div class="date-input">
+          <label for="jump-date" class="control-label sr-only">Jump to:</label>
+          <div class="input-group">
+            <input value="<%= Time.zone.today %>" name="date" type="date" class="form-control" id="jump-date" data-href="<%= url_for(params.to_unsafe_h.merge(week: "%GW%V")) %>"/>
+            <div class="input-group-append">
+              <input value="Go" type="submit" class="btn btn-primary"/>
+            </div>
+          </div>
+        </div>
+      
+        <div class="col-xs-12 d-flex" id="jump-term-group">
+          <h3 class="sr-only">Jump to quarters &amp; holidays</h3>
+          <button id="jump-term" type="button" class="btn btn-default btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            Quarters &amp; holidays <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-right" role="menu">
+            <% if can? :create, Term %>
+              <li class="dropdown-item"><%= link_to 'Manage Terms', terms_path %></li>
+            <% end %>
+            <% Term.upcoming(2.years).group_by(&:year).each do |year, terms| %>
+              <li class="dropdown-item">
+                <h4><%= year %></h4>
               </li>
-              <% end %>
-            <li role="separator" class="divider"></li>
-          <% end %>
-        </ul>
-      </div>
-    </form>
+              <% terms.each do |t| %>
+                <li class="dropdown-item"><%= link_to params.to_unsafe_h.merge(week: t.dtstart.strftime("%GW%V")) do %>
+                  <%= t.name %>
+                  <small><%= l t.dtstart.to_date, format: :short %><%= "-" + l(t.dtend.to_date, format: :short) unless t.dtstart.to_date == t.dtend.to_date %></small>
+                <% end %>
+                </li>
+                <% end %>
+              <li role="separator" class="divider"></li>
+            <% end %>
+          </ul>
+        </div>
+      
+      </form>
+    </div>
+  
   </div>
 </div>

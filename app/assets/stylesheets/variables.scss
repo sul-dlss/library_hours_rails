@@ -8,7 +8,13 @@ $brand-primary: $color-cardinal-red;
 $pagination-active-bg: #696969;
 $pagination-active-border: #696969;
 
-$font-size-base: 15px;
+// BS4 syntax for changing primary theme colors
+$theme-colors: (
+  "primary": $color-cardinal-red,
+);
+
+// 1rem = 16px in BS4. .94 approximates the previous font size which was specified as 15px
+$font-size-base: .94rem;
 $line-height-base: 1.5;
 
 $btn-default-color: $color-gray;
@@ -45,18 +51,22 @@ $breadcrumb-color: inherit;
 $breadcrumb-padding-horizontal: 0;
 $breadcrumb-separator: '»';
 
-$navbar-default-bg: $brand-primary;
+//@at-root: $brand-primary;
 $navbar-inverse-border: $color-dark-red;
 $navbar-inverse-link-color: $link-color;
 $navbar-inverse-link-hover-color: $link-color;
 
 $global-alert-color: rgb(204, 0, 0);
 
+// Note: include functions before variables to have access to mixins
+@import "bootstrap/functions";
 @import "bootstrap/variables";
 
 $top-nav-bar-height: 35px;
 $brandbar-collapsed-height: 50px;
 $brandbar-height: 100px;
-$brandbar-padding-vertical: (($brandbar-height - $line-height-computed) / 2);
-
+$brandbar-padding-vertical: (($brandbar-height - $line-height-base) / 2);
 $sul-shadow-color: rgba(0, 0, 0, .2);
+
+$input-height-base: $input-height;
+

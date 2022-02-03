@@ -69,12 +69,12 @@ group :production do
   gem 'mysql2'
 end
 
-gem 'bootstrap-sass'
-gem 'bootstrap_form', '< 4.0.0' # Pinned until we upgrade to Bootstrap 4
+gem 'bootstrap', '~> 4.6.1'
 gem 'cancancan'
 gem 'config'
 gem 'dotenv'
 gem 'faraday'
+gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.8'
 gem 'friendly_id'
 gem 'gretel'
 gem 'honeybadger'

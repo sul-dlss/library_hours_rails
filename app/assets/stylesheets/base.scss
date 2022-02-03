@@ -24,26 +24,6 @@ h4 {
   font-weight: 400;
 }
 
-dl {
-  margin-bottom: 15px;
-}
-
-dt {
-  color: $gray-41-percent;
-  font-size: 0.9em;
-  font-weight: normal;
-  padding-right: 1em;
-  padding-top: 0.15em;
-  text-transform: uppercase !important;
-  width: 12em;
-}
-
-dd {
-  margin-bottom: 0.5em;
-  margin-left: 2em;
-  max-width: 45em;
-}
-
 label {
   font-weight: normal;
 }
@@ -73,4 +53,22 @@ textarea:focus {
   .divider:last-child {
     display: none;
   }
+}
+
+// This application was originally build with Bootstrap 3 which shipped with its own icon class, .glyphicon
+// The "editable" library we use has "approve" (check mark) and "reject" (x mark) BS3 glyphicon buttons
+// After updating to BS4, which has no native icons, we import font-awesome and specify the old .glyphicon class to use their icons
+.glyphicon-ok::before {
+  content: "\f00c";
+}
+.glyphicon-remove::before {
+  content: "\f00d";
+}
+.glyphicon {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
