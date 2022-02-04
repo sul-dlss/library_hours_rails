@@ -8,10 +8,10 @@
 <%= link_to t(:'location_and_access'), "https://library.stanford.edu/node/#{@library.node_id}", class: 'sul-i-arrow-left-3 location-and-access' if @library.node_id %>
 
 <% if current_user && current_user.superadmin? %>
-<%= link_to 'Edit library', edit_library_path(@library), class: 'btn btn-default' if can? :edit, @library %>
-<%= link_to 'Edit hours', library_term_hours_path(@library), class: 'btn btn-default' if can? :edit, @library %>
+<%= link_to 'Edit library', edit_library_path(@library), class: 'btn btn-secondary' if can? :edit, @library %>
+<%= link_to 'Edit hours', library_term_hours_path(@library), class: 'btn btn-secondary' if can? :edit, @library %>
 <% else %>
-<%= link_to 'Edit', library_term_hours_path(@library), class: 'btn btn-default' if can? :edit, @library %>
+<%= link_to 'Edit', library_term_hours_path(@library), class: 'btn btn-secondary' if can? :edit, @library %>
 <% end %>
 
 <%= render 'range' %>
