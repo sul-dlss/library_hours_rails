@@ -42,7 +42,7 @@ class Hours
   end
 
   def default_for_date(date)
-    term_hours = defaults.detect { |x| x.term.dtstart <= date && x.term.dtend >= date }
+    term_hours = defaults.detect { |x| x.term.dtstart <= date.beginning_of_day && x.term.dtend >= date.end_of_day }
 
     r = if term_hours
           if date.sunday?

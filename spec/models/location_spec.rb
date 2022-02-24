@@ -29,6 +29,24 @@ describe Location do
     end
   end
 
+  describe '#hours' do
+    context 'with a term' do
+      let(:term) { create(:term, dtstart: Time.zone.parse('2022-06-20').beginning_of_day, dtend: Time.zone.parse('2022-08-12').end_of_day) }
+
+      before do
+        subject.term_hours.create(term: term, monday: '9a-12p', tuesday: '10a-1p', wednesday: '11a-2p', thursday: '12p-3p', friday: '1p-4p')
+      end
+
+      it 'has the expected hours on the first day of the term' do
+        expect(subject.hours(term.dtstart.to_date..term.dtend.to_date)[Date.parse('2022-06-20')].first.dtstart.hour).to eq 9
+      end
+
+      it 'has the expected hours on the last day of the term' do
+        expect(subject.hours(term.dtstart.to_date..term.dtend.to_date)[Date.parse('2022-08-12')].first.dtstart.hour).to eq 13
+      end
+    end
+  end
+
   describe '#node_id?' do
     it 'is false if the node_mapping is not set' do
       expect(subject.node_id?).to be_falsey
