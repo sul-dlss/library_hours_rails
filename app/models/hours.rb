@@ -67,5 +67,9 @@ class Hours
     Calendar.new(dtstart: date, location: location).tap do |c|
       c.update_hours(r.strip)
     end
+  rescue StandardError => e
+    Honeybadger.warn(e)
+
+    MissingCalendar.new(dtstart: date, dtend: date, location: location)
   end
 end
