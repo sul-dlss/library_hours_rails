@@ -29,7 +29,7 @@ class Calendar < ApplicationRecord
   end
 
   def self.parse_time_range(combo)
-    range_begin, range_end = combo.split('-')
+    range_begin, range_end = combo.split('-').map(&:strip)
     range_begin += 'm' if range_begin =~ /[ap]$/
     range_end += 'm' if range_end =~ /[ap]$/
     Time.zone.parse(range_begin)..Time.zone.parse(range_end)

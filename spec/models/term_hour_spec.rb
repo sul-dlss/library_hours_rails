@@ -10,4 +10,11 @@ RSpec.describe TermHour, type: :model do
       expect(subject.year).to eq 2015
     end
   end
+
+  describe '#sunday' do
+    it 'removes any extra whitespace' do
+      subject.sunday = ' 9a-5p  '
+      expect(subject.sunday).to eq '9a-5p'
+    end
+  end
 end

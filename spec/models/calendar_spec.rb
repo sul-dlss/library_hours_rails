@@ -95,5 +95,11 @@ RSpec.describe Calendar, type: :model do
       expect(subject.dtstart).to eq Time.zone.now.midnight
       expect(subject.dtend).to eq Time.zone.now.noon
     end
+
+    it 'handles a little extra whitespace' do
+      subject.update_hours('   12a -  12p   ')
+      expect(subject.dtstart).to eq Time.zone.now.midnight
+      expect(subject.dtend).to eq Time.zone.now.noon
+    end
   end
 end
