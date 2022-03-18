@@ -3,7 +3,7 @@
 
 <%= render 'range' %>
 <% @libraries.each do |library| %>
-  <div class="row" itemscope itemtype="http://schema.org/Place">
+  <div class="row library-row" itemscope itemtype="http://schema.org/Place">
     <div class="col-xs-12 col-md-3">
       <h3 itemprop="name"><%= link_to library.name, library %></h3>
     </div>
