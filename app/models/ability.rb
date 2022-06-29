@@ -10,7 +10,7 @@ class Ability
     if user.superadmin? || user.site_admin?
       can :manage, :all
     else
-      can :read, Library
+      can :read, Library, public: true
       can :read, Location
       can :read, Calendar
     end
