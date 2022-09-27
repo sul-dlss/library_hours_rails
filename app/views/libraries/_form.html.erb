@@ -11,21 +11,25 @@
   <% end %>
 
   <div class="form-group">
-    <%= form.label :name, "Name:" %>  
+    <%= form.label :name, "Name:" %>
     <%= form.text_field :name, class: 'form-control'%>
     <%= form.label :slug, "Slug:" %>
     <%= form.text_field :slug, class: 'form-control' %>
     <%= form.fields_for :node_mapping, @library.node_mapping || @library.build_node_mapping do |n| %>
-      <%= form.label :node_id, "Node:" %>   
+      <%= form.label :node_id, "Node:" %>
       <%= n.text_field :node_id, class: 'form-control' %>
     <% end %>
+    <div class="form-check">
+      <%= form.check_box :public, class: "form-check-input" %>
+      <%= form.label :public, "Display on home page", class: "form-check-label" %>
+    </div>
   </div>
 
   <h4>Library's Locations:</h4>
   <ul>
     <%= form.fields_for :locations do |locations_form| %>
       <li>
-        <%= locations_form.label :name, "Name:" %>  
+        <%= locations_form.label :name, "Name:" %>
         <%= locations_form.text_field :name, class: 'form-control'%>
         <div class="form-check">
           <%= locations_form.check_box :keeps_hours, class: "form-check-input" %>
