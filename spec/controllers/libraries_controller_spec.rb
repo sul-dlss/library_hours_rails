@@ -100,6 +100,11 @@ RSpec.describe LibrariesController, type: :controller do
         expect(assigns(:range)).to eq(Date.parse('2015-02-03')..Date.parse('2015-02-03'))
       end
 
+      it 'assigns using from' do
+        get :index, params: { date: '2022-09-18' }, session: valid_session
+        expect(subject).to redirect_to 'http://test.host/?week=2022W38'
+      end
+
       it 'restricts the range to an 18 month period' do
         expect do
           get :index, params: { from: '2015-02-03', to: '2020-03-02' }, session: valid_session
