@@ -10,7 +10,10 @@ class LibrariesController < ApplicationController
   def index
     @libraries = @libraries.select { |x| x.locations.any?(&:keeps_hours) }.sort_by(&:sort_key)
     respond_to do |format|
-      format.html
+      format.html do
+        @libraries = @libraries.select(&:public) unless current_user&.site_admin? || current_user&.superadmin?
+      end
+
       format.json
       format.csv { render plain: LegacySpreadsheetParser.generate(@libraries.select { |x| params[:ids].blank? || params[:ids].include?(x.id.to_s) }, @range) }
     end
@@ -77,7 +80,7 @@ class LibrariesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def library_params
-    params.require(:library).permit(:name, :slug, node_mapping_attributes: [:id, :node_id], locations_attributes: locations_params)
+    params.require(:library).permit(:name, :slug, :public, node_mapping_attributes: [:id, :node_id], locations_attributes: locations_params)
   end
 
   def locations_params
