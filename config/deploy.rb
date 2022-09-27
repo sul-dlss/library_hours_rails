@@ -23,7 +23,7 @@ set :deploy_to, '/opt/app/library_hours/library_hours'
 set :linked_files, %w[config/database.yml config/secrets.yml config/honeybadger.yml]
 
 # Default value for linked_dirs is []
-set :linked_dirs, %w[config/settings log tmp/pids tmp/cache tmp/sockets tmp/uploads vendor/bundle public/system]
+set :linked_dirs, %w[config/settings log storage tmp/pids tmp/cache tmp/sockets tmp/uploads vendor/bundle public/system]
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
