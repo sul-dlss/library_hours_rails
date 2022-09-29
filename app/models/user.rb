@@ -7,14 +7,7 @@ class User
   def self.from_env(env)
     return unless env['REMOTE_USER'].present?
 
-    ldap_groups = if env['WEBAUTH_LDAPPRIVGROUP'].present?
-                    env['WEBAUTH_LDAPPRIVGROUP'].split('|')
-                  elsif env['eduPersonEntitlement'].present?
-                    env['eduPersonEntitlement'].split(';')
-                  else
-                    []
-    end
-
+    ldap_groups = env['eduPersonEntitlement']&.split(';') || []
     User.new(id: env['REMOTE_USER'], ldap_groups: ldap_groups)
   end
 
