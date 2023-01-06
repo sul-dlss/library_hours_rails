@@ -1,11 +1,8 @@
 @import 'sul-styles';
-@import 'sul-icons-rails';
-@import 'sul-icons-aliases';
-@import 'sul-icons/helpers';
+
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import 'variables';
 @import 'bootstrap';
-@import 'font-awesome';
 @import 'library_hours_mixins';
 @import 'library_hours';
 @import 'global_alert';

@@ -5,7 +5,13 @@
 
 
 <h1><%= @library.name %> hours</h1>
-<%= link_to t(:'location_and_access'), "https://library.stanford.edu/node/#{@library.node_id}", class: 'sul-i-arrow-left-3 location-and-access' if @library.node_id %>
+
+<% if @library.node_id %>
+  <%= link_to "https://library.stanford.edu/node/#{@library.node_id}", class: 'location-and-access' do %>
+    <span class="fas fa-arrow-left" aria-hidden="true"></span>
+    <%= t(:'location_and_access') %>
+  <% end %>
+<% end %>
 
 <% if current_user && current_user.superadmin? %>
 <%= link_to 'Edit library', edit_library_path(@library), class: 'btn btn-secondary' if can? :edit, @library %>
