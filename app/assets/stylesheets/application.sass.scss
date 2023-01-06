@@ -1,8 +1,10 @@
-@import 'sul-styles';
+// Entry point for your Sass build
+
+@import 'palette';
 
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import 'variables';
-@import 'bootstrap';
+@import 'bootstrap/scss/bootstrap';
 @import 'library_hours_mixins';
 @import 'library_hours';
 @import 'global_alert';

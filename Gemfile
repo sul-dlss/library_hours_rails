@@ -12,8 +12,6 @@ gem "sprockets-rails"
 gem 'sqlite3', '~> 1.4'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
-# Use SCSS for stylesheets
-gem 'sassc-rails'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails'
@@ -21,9 +19,6 @@ gem 'coffee-rails'
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
-
-# Use jquery as the JavaScript library
-gem 'jquery-rails'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
@@ -66,7 +61,6 @@ group :production do
   gem 'mysql2'
 end
 
-gem 'bootstrap', '~> 4.6.1'
 gem 'cancancan'
 gem 'config'
 gem 'dotenv'
@@ -77,8 +71,9 @@ gem 'honeybadger'
 gem 'nested_form'
 gem 'nokogiri', '>= 1.7.1'
 gem 'okcomputer'
-gem 'sul_styles'
 gem 'global_alerts'
 gem 'tophat'
 gem 'recaptcha'
 gem 'rack-attack'
+
+gem "cssbundling-rails", "~> 1.1"

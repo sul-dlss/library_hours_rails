@@ -1,3 +1,5 @@
+$sul-footer-bg-color: $color-beige-10;
+
 $gray-base: #000;
 $gray-dark: lighten($gray-base, 20%);
 $link-color: $gray-dark;
@@ -59,8 +61,8 @@ $navbar-inverse-link-hover-color: $link-color;
 $global-alert-color: rgb(204, 0, 0);
 
 // Note: include functions before variables to have access to mixins
-@import "bootstrap/functions";
-@import "bootstrap/variables";
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
 
 $top-nav-bar-height: 35px;
 $brandbar-collapsed-height: 50px;
