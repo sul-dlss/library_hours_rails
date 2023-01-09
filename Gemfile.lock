@@ -214,9 +214,6 @@ GEM
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
     json (2.6.3)
-    listen (3.7.1)
-      rb-fsevent (~> 0.10, >= 0.10.3)
-      rb-inotify (~> 0.9, >= 0.9.10)
     llhttp-ffi (0.4.0)
       ffi-compiler (~> 1.0)
       rake (~> 13.0)
@@ -303,9 +300,6 @@ GEM
       zeitwerk (~> 2.5)
     rainbow (3.1.1)
     rake (13.0.6)
-    rb-fsevent (0.11.2)
-    rb-inotify (0.10.1)
-      ffi (~> 1.0)
     recaptcha (5.12.3)
       json
     regexp_parser (2.6.1)
@@ -442,7 +436,6 @@ DEPENDENCIES
   honeybadger
   jbuilder (~> 2.7)
   jquery-rails
-  listen (~> 3.3)
   mysql2
   nested_form
   nokogiri (>= 1.7.1)
