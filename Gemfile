@@ -30,7 +30,6 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
-  gem 'listen', '~> 3.3'
   gem 'web-console', '>= 4.1'
   # Display performance information such as SQL time and flame graphs for each request in your browser.
   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
