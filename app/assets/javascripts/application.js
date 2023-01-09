@@ -11,14 +11,14 @@
 // about supported directives.
 //
 //= require rails-ujs
-//= require turbolinks
+// require turbolinks
 //= require jquery_nested_form
-//= require bootstrap-editable
+// require bootstrap-editable
 //= require bootstrap-editable-rails
 //= require_tree .
 
 
-$(document).on("turbolinks:load", function() {
+window.addEventListener("load", function() {
   
   // Invoke the editable library
   // Inline mode must be used to work with BS4

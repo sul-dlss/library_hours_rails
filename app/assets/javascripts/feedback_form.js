@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function(){
+window.addEventListener("load", function(){
 
   //Instantiates plugin for feedback form
 

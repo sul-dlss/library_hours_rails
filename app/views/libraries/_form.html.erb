@@ -1,4 +1,4 @@
-<%= nested_form_for @library do |form| %>
+<%= form_with model: @library, data: { controller: 'nested_form' } do |form| %>
   <% if @library.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@library.errors.count, "error") %> prohibited this library from being saved:</h2>
@@ -42,7 +42,7 @@
         <button class="btn btn-outline-danger remove-location"><%= locations_form.link_to_remove "Remove this Location" %></button>
       </li>
     <% end %>
-    <p><%= form.link_to_add "Add a Location", :locations, class: 'btn btn-outline-success add-location' %></p>
+    <p><%= button_tag "Add a Location", :locations, class: 'btn btn-outline-success add-location' %></p>
   </ul>
 
   <div class="actions">

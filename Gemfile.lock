@@ -194,6 +194,9 @@ GEM
     http-form_data (2.3.0)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
+    importmap-rails (1.1.5)
+      actionpack (>= 6.0.0)
+      railties (>= 6.0.0)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
@@ -354,6 +357,8 @@ GEM
     sshkit (1.21.3)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
+    stimulus-rails (1.2.1)
+      railties (>= 6.0.0)
     thor (1.2.1)
     timeout (0.3.1)
     tophat (2.3.1)
@@ -406,6 +411,7 @@ DEPENDENCIES
   global_alerts
   gretel
   honeybadger
+  importmap-rails (~> 1.1)
   jbuilder (~> 2.7)
   mysql2
   nested_form
@@ -426,6 +432,7 @@ DEPENDENCIES
   simplecov
   sprockets-rails
   sqlite3 (~> 1.4)
+  stimulus-rails (~> 1.2)
   tophat
   turbolinks (~> 5)
   web-console (>= 4.1)

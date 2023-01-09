@@ -75,3 +75,5 @@ gem 'recaptcha'
 gem 'rack-attack'
 
 gem "cssbundling-rails", "~> 1.1"
+gem "importmap-rails", "~> 1.1"
+gem "stimulus-rails", "~> 1.2"
