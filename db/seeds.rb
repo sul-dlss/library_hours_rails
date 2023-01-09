@@ -83,22 +83,20 @@ end
   80 => 'sal12_library',
   81 => 'tanner_lib_circ'
 }.each do |location_id, old_slug|
-  location = Location.find(location_id)
+  # I believe that looking up by an ID is a mistake, so we guard against it not being found.
+  location = Location.find_by(id: location_id)
+  next unless location
   FriendlyId::Slug.find_or_create_by slug: old_slug, sluggable: location
 end
 
 {
-  'falconer' => 'Biology Library (Falconer)',
-  'swain' => 'Chemistry & Chemical Engineering Library (Swain)',
   'classics-library' => 'Classics Library',
   'branner' => 'Earth Sciences Library & Map Collections (Branner)',
   'eal' => 'East Asia Library',
   'cubberley' => 'Education Library (Cubberley)',
   'englib' => 'Engineering Library (Terman)',
-  'hila' => 'Hoover Institution Archives',
-  'hoover' => 'Hoover Institution Library',
+  'hila' => 'Hoover Institution Library & Archives',
   'hopkins' =>  'Marine Biology Library (Harold A. Miller) at Hopkins Marine Station',
-  'mathstat' => 'Mathematics & Statistics Library',
   'lane' => 'Medical Library (Lane)',
   'spc' => 'Special Collections & University Archives',
   'sal' => 'Stanford Auxiliary Library 1&2 (SAL1&2)',
