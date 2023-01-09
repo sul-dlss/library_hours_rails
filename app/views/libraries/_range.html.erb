@@ -1,11 +1,13 @@
 <div class="card date-range d-flex my-3">
   <div class="card-body py-2 row">
     <div class="align-items-center col-lg-6 col-xs-12 d-flex justify-content-lg-start justify-content-sm-center pager">
-      <%= link_to params.to_unsafe_h.merge(week: (@range.begin - 1.week + 1.day).strftime("%GW%V")), class: 'sul-i-arrow-left-3' do %>
+      <%= link_to params.to_unsafe_h.merge(week: (@range.begin - 1.week + 1.day).strftime("%GW%V")) do %>
+        <span class="fas fa-arrow-left" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
       <% end %>
       <h4 class="font-weight-light mb-0"><%= l(@range.begin, format: :short) %> – <%= l(@range.end, format: :short) %></h4>
-      <%= link_to params.to_unsafe_h.merge(week: (@range.begin + 1.week + 1.day).strftime("%GW%V")), class: 'sul-i-arrow-right-3' do %>
+      <%= link_to params.to_unsafe_h.merge(week: (@range.begin + 1.week + 1.day).strftime("%GW%V")) do %>
+        <span class="fas fa-arrow-right" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
       <% end %>
     </div>

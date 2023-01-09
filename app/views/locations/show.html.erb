@@ -4,7 +4,13 @@
 <p id="notice"><%= notice %></p>
 
 <h1><%= @location.name %> hours</h1>
-<%= link_to t(:'location_and_access'), "https://library.stanford.edu/node/#{@location.node_id}", class: 'sul-i-arrow-left-3 location-and-access' if @location.node_id? %>
+
+<% if @location.node_id? %>
+  <%= link_to "https://library.stanford.edu/node/#{@location.node_id}", class: 'location-and-access' do %>
+    <span class="fas fa-arrow-left" aria-hidden="true"></span>
+    <%= t(:'location_and_access') %>
+  <% end %>
+<% end %>
 <%= link_to 'Edit', edit_library_location_path(@location.library, @location), class: 'btn btn-secondary' if can? :edit, @location %>
 
 <div class="row">

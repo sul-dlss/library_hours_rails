@@ -185,8 +185,6 @@ GEM
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
       rake
-    font-awesome-rails (4.7.0.8)
-      railties (>= 3.2, < 8.0)
     friendly_id (5.5.0)
       activerecord (>= 4.0.0)
     global_alerts (0.4.0)
@@ -438,7 +436,6 @@ DEPENDENCIES
   dotenv
   factory_bot_rails
   faraday
-  font-awesome-rails (~> 4.7, >= 4.7.0.8)
   friendly_id
   global_alerts
   gretel
