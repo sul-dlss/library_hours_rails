@@ -1,4 +1,4 @@
-<%= nested_form_for [@term_hour.library, @term_hour.location, @term_hour] do |f| %>
+<%= form_with model: [@term_hour.library, @term_hour.location, @term_hour] do |f| %>
   <% if @term_hour.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@term_hour.errors.count, "error") %> prohibited this term_hour from being saved:</h2>
