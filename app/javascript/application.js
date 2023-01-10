@@ -7,4 +7,4 @@ window.$ = jquery
 
 import "bootstrap"
 // import "bootstrap-editable"
-import "@rails/ujs"
+import "@hotwired/turbo-rails"
