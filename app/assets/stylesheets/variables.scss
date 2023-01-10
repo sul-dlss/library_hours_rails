@@ -67,7 +67,7 @@ $global-alert-color: rgb(204, 0, 0);
 $top-nav-bar-height: 35px;
 $brandbar-collapsed-height: 50px;
 $brandbar-height: 100px;
-$brandbar-padding-vertical: (($brandbar-height - $line-height-base) / 2);
+$brandbar-padding-vertical: (($brandbar-height - $line-height-base) * 0.5);
 $sul-shadow-color: rgba(0, 0, 0, .2);
 
 $input-height-base: $input-height;
