@@ -1,4 +1,4 @@
-<%= form_with model: @library, data: { controller: 'nested_form' } do |form| %>
+<%= form_with model: @library, data: { controller: 'nested-form', nested_form_selector_value: '.inner-container' } do |form| %>
   <% if @library.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@library.errors.count, "error") %> prohibited this library from being saved:</h2>
@@ -26,10 +26,32 @@
   </div>
 
   <h4>Library's Locations:</h4>
-  <ul>
+
+  <ul data-nested-form-target="addItem">
     <%= form.fields_for :locations do |locations_form| %>
-      <li>
-        <%= locations_form.label :name, "Name:" %>
+        <li class="inner-container">
+          <%= locations_form.label :name, "Name:", required: true %>
+          <%= locations_form.text_field :name, class: 'form-control'%>
+          <div class="form-check">
+            <%= locations_form.check_box :keeps_hours, class: "form-check-input" %>
+            <%= locations_form.label :keeps_hours, "Keeps hours", class: "form-check-label" %>
+          </div>
+          <div class="form-check">
+            <%= locations_form.check_box :primary, class: "form-check-input" %>
+            <%= locations_form.label :primary, "Use location for library hours", class: "form-check-label" %>
+          </div>
+          <%= button_tag type: 'button', class: 'btn btn-outline-danger', aria: { label: "Remove this Location" },
+                  data: { action: "click->nested-form#removeAssociation" } do %>
+            Remove this Location
+          <% end %>
+          <%= locations_form.hidden_field :_destroy %>
+        </li>
+    <% end %>
+  </ul>
+  <template data-nested-form-target='template'>
+    <%= form.fields_for :locations, Location.new, child_index: 'TEMPLATE_RECORD' do |locations_form| %>
+      <li class="inner-container">
+        <%= locations_form.label :name, "Name:", required: true %>
         <%= locations_form.text_field :name, class: 'form-control'%>
         <div class="form-check">
           <%= locations_form.check_box :keeps_hours, class: "form-check-input" %>
@@ -40,12 +62,18 @@
           <%= locations_form.label :primary, "Use location for library hours", class: "form-check-label" %>
         </div>
         <button class="btn btn-outline-danger remove-location"><%= locations_form.link_to_remove "Remove this Location" %></button>
+        <%= button_tag type: 'button', class: 'btn btn-outline-danger', aria: { label: "Remove this Location" },
+                data: { action: "click->nested-form#removeAssociation" } do %>
+          Remove this Location
+        <% end %>
+        <%= locations_form.hidden_field :_destroy %>
       </li>
     <% end %>
-    <p><%= button_tag "Add a Location", :locations, class: 'btn btn-outline-success add-location' %></p>
-  </ul>
+  </template>
+  <%= button_tag "Add a Location", class: 'btn btn-outline-success',
+                  data: { action: 'nested-form#addAssociation' } %>
 
-  <div class="actions">
+  <div class="actions mt-3">
     <%= form.submit "Create Library", class: "btn btn-primary" %>
   </div>
 <% end %>
