@@ -6,5 +6,4 @@ import jquery from 'jquery'
 window.$ = jquery
 
 import "bootstrap"
-// import "bootstrap-editable"
 import "@hotwired/turbo-rails"

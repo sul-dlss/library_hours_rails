@@ -2,11 +2,7 @@
 
 module ApplicationHelper
   def render_short_time(dt)
-    if dt.min == 0
-      l(dt, format: :hours_only).strip
-    else
-      l(dt, format: :very_short).strip
-    end
+    ShortTime.render(dt)
   end
 
   def render_hours(hours)

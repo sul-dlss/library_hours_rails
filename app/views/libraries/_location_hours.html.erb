@@ -24,13 +24,7 @@
             <span itemprop="validThrough" content="<%= l calendars.first.date %>" aria-hidden="true"></span>
             <% calendars.each do |d|  %>
             <span data-toggle="tooltip" data-placement="left" title="<%= [d.summary, d.description].reject(&:blank?).compact.join(" / ") %>">
-              <% if can? :edit, d %>
-                <%= link_to '#', class: 'editable', data: { type: 'text', resource: 'date', name: 'time', url: d.persisted? ? library_location_calendar_path(d.library, d.location, d) : library_location_calendars_path(l.library, l, day: d.date)} do %>
-                  <%= render_hours(d) %>
-                <% end %>
-              <% else %>
-                <%= render_hours(d) %>
-              <% end %>
+              <%= render 'calendars/time', calendar: d%>
             </span>
             <% end %>
           </td>
