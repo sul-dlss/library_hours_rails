@@ -220,7 +220,6 @@ GEM
     minitest (5.17.0)
     msgpack (1.6.0)
     mysql2 (0.5.5)
-    nested_form (0.3.2)
     net-imap (0.3.4)
       date
       net-protocol
@@ -415,7 +414,6 @@ DEPENDENCIES
   importmap-rails (~> 1.1)
   jbuilder (~> 2.7)
   mysql2
-  nested_form
   nokogiri (>= 1.7.1)
   okcomputer
   puma (~> 5.0)

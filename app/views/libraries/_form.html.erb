@@ -61,7 +61,6 @@
           <%= locations_form.check_box :primary, class: "form-check-input" %>
           <%= locations_form.label :primary, "Use location for library hours", class: "form-check-label" %>
         </div>
-        <button class="btn btn-outline-danger remove-location"><%= locations_form.link_to_remove "Remove this Location" %></button>
         <%= button_tag type: 'button', class: 'btn btn-outline-danger', aria: { label: "Remove this Location" },
                 data: { action: "click->nested-form#removeAssociation" } do %>
           Remove this Location
