@@ -7,3 +7,9 @@ window.$ = jquery
 
 import "bootstrap"
 import "@hotwired/turbo-rails"
+
+window.addEventListener("load", function() {
+  jquery('[data-toggle="tooltip"]').tooltip({
+    trigger: 'hover'
+  });
+});
