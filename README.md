@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/sul-dlss/library_hours_rails.svg?branch=master)](https://travis-ci.org/sul-dlss/library_hours_rails)
-
 # Library Hours
 
 This application allows stakeholders to create and maintain library and location hours for the Stanford University Libraries.
