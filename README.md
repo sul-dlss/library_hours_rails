@@ -54,7 +54,7 @@ Location.select { |x| x.calendars.any? }.each { |x| x.update(keeps_hours: true) 
 
 To run the app locally while logged in as an authorized user for the backend, run the following:
 ```
-REMOTE_USER=username@stanford.edu eduPersonEntitlement=group bundle exec rails s
+REMOTE_USER=username@stanford.edu eduPersonEntitlement=group bin/dev
 ```
 
 ## Running the tests
