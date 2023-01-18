@@ -10,20 +10,24 @@
       </ul>
     </div>
   <% end %>
-  
+
   <div class="form-group">
-    <%= f.label :name, "Name:" %>  
+    <%= f.label :name, "Name:" %>
     <%= f.text_field :name, class: 'form-control'%>
     <%= f.label :slug, "Slug:" %>
     <%= f.text_field :slug, class: 'form-control' %>
     <%= f.fields_for :node_mapping, @location.node_mapping || @location.build_node_mapping do |n| %>
-    <%= f.label :node_id, "Node:" %>   
+    <%= f.label :node_id, "Node:" %>
       <%= n.text_field :node_id, class: 'form-control' %>
     <% end %>
   </div>
   <div class="form-check">
     <%= f.check_box :keeps_hours, class: "form-check-input" %>
     <%= f.label :keeps_hours, "Keeps hours", class: "form-check-label" %>
+  </div>
+  <div class="form-check">
+    <%= f.check_box :primary, class: "form-check-input" %>
+    <%= f.label :primary, "Use location for library hours", class: "form-check-label" %>
   </div>
 
   <div class="actions">

@@ -3,6 +3,7 @@ json.id library.slug
 
 json.attributes do
   json.extract! library, :name
+  json.primary_location "#{library.slug}/#{library.primary_location.slug}" if library.primary_location
 end
 
 json.relationships do
