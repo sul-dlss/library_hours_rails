@@ -35,6 +35,10 @@
           <%= locations_form.check_box :keeps_hours, class: "form-check-input" %>
           <%= locations_form.label :keeps_hours, "Keeps hours", class: "form-check-label" %>
         </div>
+        <div class="form-check">
+          <%= locations_form.check_box :primary, class: "form-check-input" %>
+          <%= locations_form.label :primary, "Use location for library hours", class: "form-check-label" %>
+        </div>
         <button class="btn btn-outline-danger remove-location"><%= locations_form.link_to_remove "Remove this Location" %></button>
       </li>
     <% end %>

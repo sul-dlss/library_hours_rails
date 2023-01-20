@@ -2,7 +2,7 @@ json.type 'locations'
 json.id "#{location.library.slug}/#{location.slug}"
 
 json.attributes do
-  json.extract! location, :name
+  json.extract! location, :name, :primary
   json.hours do
     json.array!(location.hours(@range)) do |hours|
       c = hours.first

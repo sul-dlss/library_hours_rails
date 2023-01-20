@@ -17,4 +17,8 @@ class Library < ApplicationRecord
 
     name
   end
+
+  def primary_location
+    @primary_location ||= locations.find(&:primary)
+  end
 end

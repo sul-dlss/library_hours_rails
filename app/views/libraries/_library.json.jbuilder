@@ -3,6 +3,26 @@ json.id library.slug
 
 json.attributes do
   json.extract! library, :name
+  if library.primary_location
+    json.primary_location "#{library.slug}/#{library.primary_location.slug}"
+
+    json.hours do
+      json.array!(library.primary_location.hours(@range)) do |hours|
+        c = hours.first
+        json.day c.dtstart.to_date
+        json.weekday c.dtstart.strftime('%A')
+
+        unless c.closed?
+          json.opens_at c.dtstart.localtime
+          json.closes_at c.dtend.localtime
+        end
+
+        json.type c.summary.to_s if c.summary
+        json.notes c.description.to_s if c.description
+        json.closed c.closed?
+      end
+    end
+  end
 end
 
 json.relationships do
