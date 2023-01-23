@@ -1,0 +1,3 @@
+<%= turbo_frame_tag [@calendar.location_id, @calendar.date] do %>
+  <%= render "form", calendar: @calendar %>
+<% end %>

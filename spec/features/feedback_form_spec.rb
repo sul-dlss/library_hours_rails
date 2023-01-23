@@ -18,13 +18,13 @@ RSpec.describe 'Feedback form', type: :feature, js: true do
     end
 
     it 'can be collapsed' do
-      click_link 'Feedback', match: :first
-      find('button.cancel-link').click
+      click_link 'Feedback'
+      click_link 'Cancel'
       expect(page).not_to have_css '#feedback-form.show'
     end
 
     it 'shows the reCAPTCHA challenge' do
-      click_link 'Feedback', match: :first
+      click_link 'Feedback'
       expect(page).to have_css('.library-hours-captcha', visible: :all)
     end
   end

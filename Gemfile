@@ -13,8 +13,6 @@ gem 'sqlite3', '~> 1.4'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 
-# Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
 
@@ -66,7 +64,6 @@ gem 'faraday'
 gem 'friendly_id'
 gem 'gretel'
 gem 'honeybadger'
-gem 'nested_form'
 gem 'nokogiri', '>= 1.7.1'
 gem 'okcomputer'
 gem 'global_alerts'
@@ -75,3 +72,6 @@ gem 'recaptcha'
 gem 'rack-attack'
 
 gem "cssbundling-rails", "~> 1.1"
+gem "importmap-rails", "~> 1.1"
+gem "stimulus-rails", "~> 1.2"
+gem "turbo-rails", "~> 1.3"

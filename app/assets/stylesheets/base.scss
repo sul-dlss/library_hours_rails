@@ -54,24 +54,3 @@ textarea:focus {
     display: none;
   }
 }
-
-// This application was originally build with Bootstrap 3 which shipped with its own icon class, .glyphicon
-// The "editable" library we use has "approve" (check mark) and "reject" (x mark) BS3 glyphicon buttons
-// After updating to BS4, which has no native icons, we import font-awesome and specify the old .glyphicon class to use their icons
-.glyphicon-ok::before {
-  content: "\f00c"; // .fa-check
-}
-.glyphicon-remove::before {
-  content: "\f00d"; // .fa-times
-}
-.glyphicon {
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  display: inline-block;
-  font-style: normal;
-  font-variant: normal;
-  text-rendering: auto;
-  line-height: 1;
-}

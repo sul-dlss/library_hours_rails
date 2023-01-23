@@ -46,6 +46,14 @@ class Calendar < ApplicationRecord
     end
   end
 
+  def to_text
+    return '' unless persisted?
+    return 'closed' if closed?
+    return 'open 24h' if open_24h?
+
+    "#{ShortTime.render(dtstart.localtime)}-#{ShortTime.render(dtend.localtime)}"
+  end
+
   def date
     dtstart.to_date
   end

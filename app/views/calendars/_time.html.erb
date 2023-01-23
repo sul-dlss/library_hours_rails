@@ -1,0 +1,10 @@
+<% if can? :edit, calendar %>
+  <%= turbo_frame_tag [calendar.location_id, calendar.date] do %>
+    <% url = calendar.persisted? ? edit_library_location_calendar_path(calendar.library, calendar.location, calendar) : new_library_location_calendar_path(calendar.location.library, calendar.location, day: calendar.date) %>
+    <%= link_to url, class: 'editable' do %>
+      <%= render_hours(calendar) %>
+    <% end %>
+  <% end %>
+<% else %>
+  <%= render_hours(calendar) %>
+<% end %>
