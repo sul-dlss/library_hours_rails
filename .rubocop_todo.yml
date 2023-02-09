@@ -166,18 +166,6 @@ RSpec/EmptyLineAfterSubject:
     - 'spec/models/term_spec.rb'
     - 'spec/models/user_spec.rb'
 
-# Offense count: 7
-# Configuration parameters: Max.
-RSpec/ExampleLength:
-  Exclude:
-    - 'spec/controllers/libraries_controller_spec.rb'
-    - 'spec/models/spreadsheet_spec.rb'
-    - 'spec/views/libraries/edit.html.erb_spec.rb'
-    - 'spec/views/locations/edit.html.erb_spec.rb'
-    - 'spec/views/locations/new.html.erb_spec.rb'
-    - 'spec/views/term_hours/edit.html.erb_spec.rb'
-    - 'spec/views/term_hours/new.html.erb_spec.rb'
-
 # Offense count: 28
 # Cop supports --auto-correct.
 # Configuration parameters: CustomTransform, IgnoredWords.
