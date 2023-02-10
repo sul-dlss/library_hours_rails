@@ -16,3 +16,7 @@ AllCops:
 
 Rails:
   Enabled: true
+
+# Configuration parameters: Max.
+RSpec/ExampleLength:
+  Max: 8
