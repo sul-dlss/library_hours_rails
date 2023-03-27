@@ -34,9 +34,8 @@ class ApplicationController < ActionController::Base
     @range ||= Time.zone.parse(params[:from]).to_date..Time.zone.parse(params[:from]).to_date if params[:from]
     @range ||= Time.zone.parse(params[:when]).to_date..Time.zone.parse(params[:when]).to_date if params[:when]
     @range ||= Calendar.week(params[:week]) if params[:week]
-
-    default ||= Calendar.week(Time.zone.now.strftime('%GW%V'))
     @range ||= default
+    @range ||= Time.zone.now.beginning_of_week(:sunday).to_date..(Time.zone.now.beginning_of_week(:sunday) + 6.days).to_date
 
     @range.tap { |range| raise ActionController::BadRequest, 'Requested range is too big' if range.first + 18.months < range.last }
   end
