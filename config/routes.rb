@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   mount OkComputer::Engine, at: "/status"
 
   resources :terms
-  resources :node_mappings
 
   resources :spreadsheets do
     member do
