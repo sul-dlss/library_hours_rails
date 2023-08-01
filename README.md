@@ -15,7 +15,7 @@ This application also provides API access to those hours for downstream consumer
 
 ## Requirements
 
-* Ruby 2
+* Ruby 3
 
 ## Installation
 
@@ -23,13 +23,13 @@ This application also provides API access to those hours for downstream consumer
 $ git clone https://github.com/sul-dlss/library_hours_rails.git
 $ cd library_hours_rails
 $ bundle install
-$ rake db:migrate
-$ rails server
+$ bin/rake db:migrate
+$ bin/dev
 ```
 
 ## Configuration
 
-This project uses `rails_config` to manage environment-specific configuration. Default configuration is available in `config/settings.yml` and includes:
+This project uses the `config` gem to manage environment-specific configuration. Default configuration is available in `config/settings.yml` and includes:
 
 - `super_admin_groups`, groups who are able to modify library and location data
 - `site_admin_groups`, groups who are able to modify library hours data
@@ -39,7 +39,7 @@ This project uses `rails_config` to manage environment-specific configuration. D
 You can import libraries and locations from the libraries.stanford.edu website and initial Stanford quarter, intersession and holiday data using the `db:seed` rake task:
 
 ```
-$ rake db:seed # load libraries and locations from libraries.stanford.edu
+$ bin/rake db:seed # load libraries and locations from libraries.stanford.edu
 ```
 
 Initial library hours can be seeded using a CSV export from the library hours website. After importing the CSV spreadsheet, you also need to mark relevant locations as "keeping hours", e.g.:
@@ -58,5 +58,5 @@ REMOTE_USER=username@stanford.edu eduPersonEntitlement=group bin/dev
 ## Running the tests
 
 ```
-$ rake
+$ bin/rake
 ```
