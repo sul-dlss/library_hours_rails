@@ -31,9 +31,7 @@ class LibrariesController < ApplicationController
   def spreadsheet; end
 
   # GET /libraries/new
-  def new
-    @library.build_node_mapping
-  end
+  def new; end
 
   # GET /libraries/1/edit
   def edit; end
@@ -80,10 +78,10 @@ class LibrariesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def library_params
-    params.require(:library).permit(:name, :slug, :public, node_mapping_attributes: [:id, :node_id], locations_attributes: locations_params)
+    params.require(:library).permit(:name, :slug, :about_url, :public, locations_attributes: locations_params)
   end
 
   def locations_params
-    [:id, :name, :slug, :keeps_hours, :primary, :_destroy, node_mapping_attributes: [:id, :node_id]]
+    [:id, :name, :slug, :keeps_hours, :primary, :_destroy]
   end
 end

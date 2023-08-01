@@ -17,7 +17,6 @@ RSpec.describe 'libraries/edit', type: :view do
       assert_select 'input#library_name[name=?]', 'library[name]'
 
       assert_select 'input#library_slug[name=?]', 'library[slug]'
-      assert_select 'input#library_node_mapping_attributes_node_id[name=?]', 'library[node_mapping_attributes][node_id]'
     end
   end
 end
