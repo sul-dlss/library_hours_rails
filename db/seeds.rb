@@ -6,107 +6,26 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-client = Faraday.new 'https://library.stanford.edu/'
+Library.find_or_create_by(slug: "green", name: 'Cecil H. Green Library', about_url: "https://library.stanford.edu/libraries/cecil-h-green-library",
+                          locations: [Location.new(name: 'Access Services Department', slug: 'access-services-department')])
+Library.find_or_create_by(slug: "ars", name: 'Archive of Recorded Sound', about_url: "https://library.stanford.edu/libraries/archive-recorded-sound")
+Library.find_or_create_by(slug: "art", name: 'Art & Architecture Library (Bowes)', about_url: "https://library.stanford.edu/libraries/bowes-art-architecture-library")
+Library.find_or_create_by(slug: "business", name: 'Business Library', about_url: "https://www.gsb.stanford.edu/library")
+Library.find_or_create_by(slug: "eal", name: 'East Asia Library', about_url: "https://library.stanford.edu/libraries/east-asia-library")
+Library.find_or_create_by(slug: "cubberley", name: 'Cubberley Education Library', about_url: "https://library.stanford.edu/libraries/cubberley-education-library")
+Library.find_or_create_by(slug: "englib", name: 'Terman Engineering Library', about_url: "https://library.stanford.edu/libraries/terman-engineering-library")
+Library.find_or_create_by(slug: "hila", name: 'Hoover Institution Library & Archives', about_url: "https://www.hoover.org/library-archives")
+Library.find_or_create_by(slug: "hoover", name: 'Hoover Institution Library & Archives', about_url: "https://www.hoover.org/library-archives")
+Library.find_or_create_by(slug: "law", name: 'Robert Crown Law Library', about_url: "https://law.stanford.edu/robert-crown-law-library/")
+Library.find_or_create_by(slug: "hopkins", name: 'Harold A. Miller Library at Hopkins Marine Station', about_url: "https://library.stanford.edu/libraries/harold-miller-library-hopkins-marine-station")
+Library.find_or_create_by(slug: "lane", name: 'Lane Medical Library', about_url: "https://lane.stanford.edu/index.html")
+Library.find_or_create_by(slug: "music", name: 'Music Library', about_url: "https://library.stanford.edu/libraries/music-library")
+Library.find_or_create_by(slug: "spc", name: 'Special Collections', about_url: "https://library.stanford.edu/libraries/special-collections")
+Library.find_or_create_by(slug: "philosophy", name: 'Tanner Philosophy Library', about_url: "https://library.stanford.edu/libraries/tanner-philosophy-library")
+Library.find_or_create_by(slug: "Rumsey", name: 'David Rumsey Map Center', about_url: "https://library.stanford.edu/libraries/david-rumsey-map-center")
+Library.find_or_create_by(slug: "science", name: 'Robin Li and Melissa Ma Science Library', about_url: "https://library.stanford.edu/libraries/robin-li-and-melissa-ma-science-library")
+Library.find_or_create_by(slug: "srwc", name: 'Academy Hall (SRWC)', about_url: "https://library.stanford.edu/libraries/academy-hall-redwood-city-campus")
 
-response = client.get('/libraries')
-
-doc = Nokogiri::HTML(response.body)
-
-doc.css('li.views-row').each do |row|
-  title = row.css('.node-title').text.strip
-  slug = row.css('.node-title').css('a').attr('href').value.gsub(%r{^/libraries/}, '').gsub(%r{/about$}, '').strip
-  library = Library.find_or_create_by(slug: slug, name: title)
-
-  about_response = client.get("/libraries/#{slug}/about")
-
-  about_doc = Nokogiri::HTML(about_response.body)
-
-  node_id = about_doc.css('body').attr('class').value.scan(/page-node-(\d+)/).flatten.first
-
-  NodeMapping.find_or_create_by(mapped: library, node_id: node_id)
-
-  about_doc.css('#block-system-main .view-library-location-hours .location-hours-row').each do |place_row|
-    place_title = place_row.css('a')
-    place_name = place_title.text.strip
-    place_href = place_title.attr('href')
-    place_slug = place_href.value.split('/').last.strip
-    location = Location.find_or_create_by(library: library, slug: place_slug, name: place_name)
-
-    place_response = client.get(place_href.to_s)
-
-    place_doc = Nokogiri::HTML(place_response.body)
-    node_id = place_doc.css('body').attr('class').value.scan(/page-node-(\d+)/).flatten.first
-    NodeMapping.find_or_create_by(mapped: location, node_id: node_id)
-  end
-end
-
-{
-  7 => 'information_center',
-  12 => 'green_library',
-  14 => 'media_microtext',
-  15 => 'green_loan',
-  20 => 'ssds_walk_in',
-  21 => 'ssds_velma',
-  22 => '24_hour_study_room',
-  24 => 'digital_language_lab',
-  27 => 'tech_lounge_circulation',
-  28 => 'ars_archive',
-  32 => 'art_library',
-  33 => 'art_ref',
-  34 => 'art_vrc',
-  37 => 'biology_library',
-  38 => 'biology_ref',
-  39 => 'business_library',
-  41 => 'chemistry_library',
-  42 => 'chemistry_ref',
-  43 => 'classics_lib_circ',
-  48 => 'earth_sciences_library',
-  49 => 'earth_sciences_ref',
-  51 => 'east_asia_library',
-  52 => 'east_asia_ref',
-  56 => 'education_library',
-  57 => 'education_ref',
-  60 => 'engineering_library',
-  61 => 'engineering_ref',
-  62 => 'hv_archives',
-  63 => 'hv_library',
-  64 => 'law_library',
-  65 => 'law_ref',
-  67 => 'marine_biology_library',
-  69 => 'math_stats_library',
-  72 => 'math_stats_ref',
-  73 => 'medical_library',
-  74 => 'music_library',
-  77 => 'music_ref',
-  78 => 'slac_library',
-  79 => 'spec_coll_reading',
-  80 => 'sal12_library',
-  81 => 'tanner_lib_circ'
-}.each do |location_id, old_slug|
-  # I believe that looking up by an ID is a mistake, so we guard against it not being found.
-  location = Location.find_by(id: location_id)
-  next unless location
-  FriendlyId::Slug.find_or_create_by slug: old_slug, sluggable: location
-end
-
-{
-  'classics-library' => 'Classics Library',
-  'branner' => 'Earth Sciences Library & Map Collections (Branner)',
-  'eal' => 'East Asia Library',
-  'cubberley' => 'Education Library (Cubberley)',
-  'englib' => 'Engineering Library (Terman)',
-  'hila' => 'Hoover Institution Library & Archives',
-  'hopkins' =>  'Marine Biology Library (Harold A. Miller) at Hopkins Marine Station',
-  'lane' => 'Medical Library (Lane)',
-  'spc' => 'Special Collections & University Archives',
-  'sal' => 'Stanford Auxiliary Library 1&2 (SAL1&2)',
-  'sal3' => 'Stanford Auxiliary Library 3 (SAL3)',
-  'newark' => 'Stanford Auxiliary Library, off-campus Newark',
-  'philosophy' => 'Tanner Philosophy Library'
-}.each do |library_slug, old_slug|
-  library = Library.find(library_slug)
-  FriendlyId::Slug.find_or_create_by slug: old_slug, sluggable: library
-end
 
 [
   { term: 'Fall 2014',   quarter: 'Fall',   start_date: Date.new(2014, 1, 1), end_date: Date.new(2014, 12, 12) },
