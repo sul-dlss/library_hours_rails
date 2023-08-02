@@ -37,7 +37,6 @@ group :development, :test do
   gem 'rspec-rails'
 
   gem 'selenium-webdriver'
-  gem 'webdrivers'
 
   gem 'rubocop'
   gem 'rubocop-performance'
