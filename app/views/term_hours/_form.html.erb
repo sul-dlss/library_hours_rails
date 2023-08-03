@@ -1,21 +1,18 @@
-<%= form_with model: [@term_hour.library, @term_hour.location, @term_hour] do |f| %>
-  <% if @term_hour.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@term_hour.errors.count, "error") %> prohibited this term_hour from being saved:</h2>
+<% url = term_hour.persisted? ? library_location_term_hour_path(term_hour.location.library_id, term_hour.location, term_hour, day_of_week: params[:day_of_week]) : library_location_term_hours_path(term_hour.location.library_id, term_hour.location, term_id: term_hour.term_id, day_of_week: params[:day_of_week]) %>
 
-      <ul>
-      <% @term_hour.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
+<%= form_with model: term_hour, 
+    url: url,
+    class: 'form-inline' do |f| %>
+  <% if f.object.errors.any? %>
+    <p class="alert alert-danger"><%= to_sentence f.object.errors.full_messages %></p>
   <% end %>
-
-  <% f.object.class.stored_attributes[:data].each do |a| %>
-    <%= f.text_field a %>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit %>
+  <div class="row" style="width: 14em; white-space:nobreak">
+    <%= f.text_field day_of_week, class: 'form-control', style: 'width: 8em' %>
+    <%= button_tag class: 'btn btn-primary' do %>
+      <i class="fas fa-check"></i>
+    <% end %>
+    <%= link_to url, class: 'btn btn-outline-secondary' do %>
+      <i class="fas fa-times"></i>
+    <% end %>
   </div>
 <% end %>

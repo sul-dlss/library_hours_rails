@@ -12,14 +12,13 @@ class TermHoursController < ApplicationController
     @terms = Term.current_and_upcoming(1.year).quarters_and_intersessions.group_by(&:year)
   end
 
-  # GET /term_hours/1
-  # GET /term_hours/1.json
-  def show
-    redirect_to library_location_term_hours_url(@library, @location)
-  end
+  # GET /libraries/:library_id/locations/:location_id/term_hours/1
+  def show; end
 
-  # GET /term_hours/new
-  def new; end
+  # GET /libraries/:library_id/locations/:location_id/term_hours/new?term=<term_id>
+  def new
+    @term_hour.term = Term.find(params.require(:term_id))
+  end
 
   # GET /term_hours/1/edit
   def edit; end
@@ -27,8 +26,7 @@ class TermHoursController < ApplicationController
   # POST /term_hours
   # POST /term_hours.json
   def create
-    @term_hour.term = Term.find(params.require(:term))
-
+    @term_hour.term = Term.find(params.require(:term_id))
     if TermHour.exists?(term: @term_hour.term, location: @term_hour.location)
       @term_hour = TermHour.find_by(term: @term_hour.term, location: @term_hour.location)
       return update
@@ -36,7 +34,9 @@ class TermHoursController < ApplicationController
 
     respond_to do |format|
       if @term_hour.save
-        format.html { redirect_to library_location_term_hours_path(@library, @location), notice: 'Term hour was successfully created.' }
+        format.html do
+          redirect_to library_location_term_hour_path(@library, @location, @term_hour, day_of_week: params[:day_of_week]), notice: 'Term hour was successfully created.'
+        end
         format.json { head :no_content }
       else
         format.html { render :new }
@@ -50,7 +50,9 @@ class TermHoursController < ApplicationController
   def update
     respond_to do |format|
       if @term_hour.update(term_hour_params)
-        format.html { redirect_to library_location_term_hours_path(@library, @location), notice: 'Term hour was successfully updated.' }
+        format.html do
+          redirect_to library_location_term_hour_path(@library, @location, @term_hour, day_of_week: params[:day_of_week]), notice: 'Term hour was successfully updated.'
+        end
         format.json { head :no_content }
       else
         format.html { render :edit }

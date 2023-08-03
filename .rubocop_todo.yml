@@ -187,7 +187,7 @@ RSpec/ExpectInHook:
 # Cop supports --auto-correct.
 # Configuration parameters: Include.
 # Include: spec/factories.rb, spec/factories/**/*.rb, features/support/factories/**/*.rb
-RSpec/FactoryBot/FactoryClassName:
+FactoryBot/FactoryClassName:
   Exclude:
     - 'spec/factories/users.rb'
 

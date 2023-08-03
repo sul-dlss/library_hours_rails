@@ -7,7 +7,7 @@ RSpec.describe ApplicationController do
     before do
       stub_current_user(build(:user))
     end
-    
+
     it 'returns the current user' do
       expect(controller.current_user).to have_attributes id: 'normal-user'
     end
