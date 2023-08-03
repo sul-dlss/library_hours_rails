@@ -6,8 +6,8 @@
 
 <h1><%= @library.name %> hours</h1>
 
-<% if @library.node_id %>
-  <%= link_to "https://library.stanford.edu/node/#{@library.node_id}", class: 'location-and-access' do %>
+<% if @library.about_url %>
+  <%= link_to @library.about_url, class: 'location-and-access' do %>
     <span class="fas fa-arrow-left" aria-hidden="true"></span>
     <%= t(:'location_and_access') %>
   <% end %>

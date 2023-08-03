@@ -20,7 +20,6 @@ RSpec.describe 'locations/new', type: :view do
       assert_select 'input#location_name[name=?]', 'location[name]'
 
       assert_select 'input#location_slug[name=?]', 'location[slug]'
-      assert_select 'input#location_node_mapping_attributes_node_id[name=?]', 'location[node_mapping_attributes][node_id]'
     end
   end
 end

@@ -2,11 +2,8 @@
 
 class Location < ApplicationRecord
   belongs_to :library
-  has_one :node_mapping, as: :mapped
-  delegate :node_id, to: :node_mapping, allow_nil: true
   has_many :calendars
   has_many :term_hours
-  accepts_nested_attributes_for :node_mapping, reject_if: :all_blank
 
   scope :with_hours, -> { where(keeps_hours: true) }
   scope :without_hours, -> { where(keeps_hours: false) }
@@ -38,9 +35,5 @@ class Location < ApplicationRecord
     end
 
     nil
-  end
-
-  def node_id?
-    node_mapping&.node_id?
   end
 end
