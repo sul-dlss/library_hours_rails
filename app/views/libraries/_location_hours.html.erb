@@ -24,7 +24,7 @@
             <span itemprop="validThrough" content="<%= l calendars.first.date %>" aria-hidden="true"></span>
             <% calendars.each do |d|  %>
             <span data-toggle="tooltip" data-placement="left" title="<%= [d.summary, d.description].reject(&:blank?).compact.join(" / ") %>">
-              <%= render 'calendars/time', calendar: d%>
+              <%= render 'calendars/time', calendar: d %>
             </span>
             <% end %>
           </td>

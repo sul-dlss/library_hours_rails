@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Feedback form', type: :feature, js: true do
+RSpec.describe 'Feedback form', js: true, type: :feature do
   context 'when not logged in' do
     before do
       visit root_path

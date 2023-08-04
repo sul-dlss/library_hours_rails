@@ -27,3 +27,4 @@ config/environments/*.local.yml
 !/app/assets/builds/.keep
 
 /node_modules
+spec/examples.txt

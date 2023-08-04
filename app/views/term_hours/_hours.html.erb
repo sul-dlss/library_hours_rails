@@ -17,19 +17,11 @@
       <tr>
         <td class="location-name"><%= link_to l.name, library_location_path(l.library, l) %></td>
 
-        <% [:sunday, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday].each do |e| %>
+        <% [:sunday, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday].each do |day_of_week| %>
           <td class="hours" itemprop="openingHoursSpecification" itemscope itemtype="http://schema.org/OpeningHoursSpecification">
             <span itemprop="validFrom" content="<%= l term_hour.term.dtstart %>" aria-hidden="true"></span>
             <span itemprop="validThrough" content="<%= l term_hour.term.dtend %>" aria-hidden="true"></span>
-            <span>
-              <% if can? :edit, term_hour %>
-                <%= link_to '#', class: 'editable', data: { type: 'text', resource: 'term_hour', name: e, url: term_hour.persisted? ? library_location_term_hour_path(term_hour.library, term_hour.location, term_hour) : library_location_term_hours_path(term_hour.library, term_hour.location, term: term_hour.term.to_param) } do %>
-                  <%= term_hour.send(e) %>
-                <% end %>
-              <% else %>
-                <%= term_hour.send(e) %>
-              <% end %>
-            </span>
+            <%= render 'time', term_hour: term_hour, day_of_week: day_of_week %>
           </td>
         <% end %>
       </tr>

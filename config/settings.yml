@@ -1,5 +1,7 @@
-super_admin_groups: []
-site_admin_groups: []
+super_admin_groups:
+  - dlss:staff
+site_admin_groups:
+  - sul:library-hours-admins
 pinned_library_slug: 'green'
 EMAIL_TO: libweb-feedback@lists.stanford.edu
 GLOBAL_ALERT: <%= false %>

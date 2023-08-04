@@ -1,0 +1,10 @@
+<% if can? :edit, term_hour %>
+  <%= turbo_frame_tag [term_hour.location_id, term_hour.term.to_param, day_of_week] do %>
+    <% url = term_hour.persisted? ? edit_library_location_term_hour_path(term_hour.library, term_hour.location, term_hour, day_of_week: day_of_week) : new_library_location_term_hour_path(term_hour.library, term_hour.location_id, term_id: term_hour.term_id, day_of_week: day_of_week) %>
+    <%= link_to url, class: 'editable' do %>
+      <%= term_hour.public_send(day_of_week) || 'n/a' %>
+    <% end %>
+  <% end %>
+<% else %>
+  <%= term_hour.public_send(day_of_week) || 'n/a' %>
+<% end %>

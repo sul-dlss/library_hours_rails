@@ -1,5 +1,3 @@
-<h1>Editing Term Hour</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Back', library_location_term_hours_path(@term_hour.library, @term_hour.location) %>
+<%= turbo_frame_tag [@term_hour.location_id, @term_hour.term.to_param, params[:day_of_week]] do %>
+  <%= render "form", term_hour: @term_hour, day_of_week: params[:day_of_week] %>
+<% end %>
