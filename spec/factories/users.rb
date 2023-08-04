@@ -7,11 +7,11 @@ FactoryBot.define do
 
   factory :superadmin_user, class: User do
     id { 'test-super-admin' }
-    ldap_groups { ['super-admin'] }
+    ldap_groups { Settings.super_admin_groups }
   end
 
   factory :site_admin_user, class: User do
     id { 'test-admin' }
-    ldap_groups { ['site-admin'] }
+    ldap_groups { Settings.site_admin_groups }
   end
 end

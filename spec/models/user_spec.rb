@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe User do
+RSpec.describe User do
   describe '.from_env' do
     subject { User.from_env('REMOTE_USER' => 'jstanford', 'WEBAUTH_LDAPPRIVGROUP' => 'admin|user') }
     it 'extracts user information from the given environment' do
