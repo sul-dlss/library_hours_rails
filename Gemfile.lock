@@ -171,7 +171,7 @@ GEM
       faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
     faraday-net_http (3.0.2)
-    ffi (1.16.2)
+    ffi (1.16.3)
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
       rake
@@ -182,9 +182,9 @@ GEM
       rails (>= 5.0, < 7.1)
     globalid (1.2.1)
       activesupport (>= 6.1)
-    gretel (4.5.0)
-      actionview (>= 5.1, < 7.1)
-      railties (>= 5.1, < 7.1)
+    gretel (4.6.0)
+      actionview (>= 5.1, < 7.2)
+      railties (>= 5.1, < 7.2)
     honeybadger (5.2.1)
     http (5.1.1)
       addressable (~> 2.8)
@@ -223,7 +223,7 @@ GEM
     minitest (5.20.0)
     msgpack (1.7.2)
     mysql2 (0.5.5)
-    net-imap (0.3.7)
+    net-imap (0.4.0)
       date
       net-protocol
     net-pop (0.1.2)
@@ -243,7 +243,7 @@ GEM
       racc (~> 1.4)
     okcomputer (1.18.4)
     parallel (1.23.0)
-    parser (3.2.2.3)
+    parser (3.2.2.4)
       ast (~> 2.4.1)
       racc
     public_suffix (5.0.3)
