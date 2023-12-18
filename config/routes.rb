@@ -34,8 +34,8 @@ Rails.application.routes.draw do
   get 'api/v1/library/:library_id/location/:id/hours/for/:when' => 'locations#hours_v1'
 
   # Authorization routes
-  get 'webauth/login' => 'authorization#login', as: :login
-  get 'webauth/logout' => 'authorization#logout', as: :logout
+  get 'sso/login' => 'authorization#login', as: :login
+  get 'sso/logout' => 'authorization#logout', as: :logout
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

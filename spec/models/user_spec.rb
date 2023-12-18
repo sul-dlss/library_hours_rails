@@ -4,24 +4,24 @@ require 'rails_helper'
 
 RSpec.describe User do
   describe '.from_env' do
-    subject { User.from_env('REMOTE_USER' => 'jstanford', 'WEBAUTH_LDAPPRIVGROUP' => 'admin|user') }
-    it 'extracts user information from the given environment' do
-      expect(subject.id).to eq 'jstanford'
+    context 'when ldap groups are present' do
+      subject { User.from_env('REMOTE_USER' => 'jstanford', 'eduPersonEntitlement' => 'admin;user') }
+
+      it 'extracts user information from the given environment' do
+        expect(subject.id).to eq 'jstanford'
+      end
+
+      it 'extracts privgroup membership from the given environment' do
+        expect(subject.ldap_groups).to match_array %w[admin user]
+      end
     end
 
-    it 'extracts privgroup membership from the given environment' do
-      expect(subject.ldap_groups).to match_array %w[admin user]
-    end
-  end
+    context 'when ldap groups are not present' do
+      subject { User.from_env('REMOTE_USER' => 'jstanford') }
 
-  describe '.from_env from shibboleth' do
-    subject { User.from_env('REMOTE_USER' => 'jstanford', 'eduPersonEntitlement' => 'admin;user') }
-    it 'extracts user information from the given environment' do
-      expect(subject.id).to eq 'jstanford'
-    end
-
-    it 'extracts privgroup membership from the given environment' do
-      expect(subject.ldap_groups).to match_array %w[admin user]
+      it 'sets empty group list' do
+        expect(subject.ldap_groups).to match_array []
+      end
     end
   end
 
