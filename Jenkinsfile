@@ -13,7 +13,7 @@ pipeline {
       }
 
       when {
-        branch 'master'
+        branch 'main'
       }
 
       steps {
