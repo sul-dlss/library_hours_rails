@@ -38,4 +38,4 @@
     </ul>
 </p>
 
-<%= link_to 'Import', import_spreadsheet_path(@spreadsheet), method: :post, class: 'btn btn-primary' %>
+<%= link_to 'Import', import_spreadsheet_path(@spreadsheet), data: { turbo_method: "post" }, class: 'btn btn-primary' %>

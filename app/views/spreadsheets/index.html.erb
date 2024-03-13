@@ -22,7 +22,7 @@
         <td><%= spreadsheet.status %></td>
         <td><%= link_to 'Show', spreadsheet %></td>
         <td><%= link_to 'Edit', edit_spreadsheet_path(spreadsheet) %></td>
-        <td><%= link_to 'Destroy', spreadsheet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy', spreadsheet, data: { turbo_confirm: 'Are you sure?', turbo_method: 'delete' } %></td>
       </tr>
     <% end %>
   </tbody>
