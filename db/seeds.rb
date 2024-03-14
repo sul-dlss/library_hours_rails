@@ -6,25 +6,94 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Library.find_or_create_by(slug: "green", name: 'Cecil H. Green Library', about_url: "https://library.stanford.edu/libraries/cecil-h-green-library",
-                          locations: [Location.new(name: 'Access Services Department', slug: 'access-services-department')])
-Library.find_or_create_by(slug: "ars", name: 'Archive of Recorded Sound', about_url: "https://library.stanford.edu/libraries/archive-recorded-sound")
-Library.find_or_create_by(slug: "art", name: 'Art & Architecture Library (Bowes)', about_url: "https://library.stanford.edu/libraries/bowes-art-architecture-library")
-Library.find_or_create_by(slug: "business", name: 'Business Library', about_url: "https://www.gsb.stanford.edu/library")
-Library.find_or_create_by(slug: "eal", name: 'East Asia Library', about_url: "https://library.stanford.edu/libraries/east-asia-library")
-Library.find_or_create_by(slug: "cubberley", name: 'Cubberley Education Library', about_url: "https://library.stanford.edu/libraries/cubberley-education-library")
-Library.find_or_create_by(slug: "englib", name: 'Terman Engineering Library', about_url: "https://library.stanford.edu/libraries/terman-engineering-library")
-Library.find_or_create_by(slug: "hila", name: 'Hoover Institution Library & Archives', about_url: "https://www.hoover.org/library-archives")
-Library.find_or_create_by(slug: "hoover", name: 'Hoover Institution Library & Archives', about_url: "https://www.hoover.org/library-archives")
-Library.find_or_create_by(slug: "law", name: 'Robert Crown Law Library', about_url: "https://law.stanford.edu/robert-crown-law-library/")
-Library.find_or_create_by(slug: "hopkins", name: 'Harold A. Miller Library at Hopkins Marine Station', about_url: "https://library.stanford.edu/libraries/harold-miller-library-hopkins-marine-station")
-Library.find_or_create_by(slug: "lane", name: 'Lane Medical Library', about_url: "https://lane.stanford.edu/index.html")
-Library.find_or_create_by(slug: "music", name: 'Music Library', about_url: "https://library.stanford.edu/libraries/music-library")
-Library.find_or_create_by(slug: "spc", name: 'Special Collections', about_url: "https://library.stanford.edu/libraries/special-collections")
-Library.find_or_create_by(slug: "philosophy", name: 'Tanner Philosophy Library', about_url: "https://library.stanford.edu/libraries/tanner-philosophy-library")
-Library.find_or_create_by(slug: "Rumsey", name: 'David Rumsey Map Center', about_url: "https://library.stanford.edu/libraries/david-rumsey-map-center")
-Library.find_or_create_by(slug: "science", name: 'Robin Li and Melissa Ma Science Library', about_url: "https://library.stanford.edu/libraries/robin-li-and-melissa-ma-science-library")
-Library.find_or_create_by(slug: "srwc", name: 'Academy Hall (SRWC)', about_url: "https://library.stanford.edu/libraries/academy-hall-redwood-city-campus")
+library_data = [{"name"=>"Cecil H. Green Library",
+  "slug"=>"green",
+  "public"=>true,
+  "about_url"=>"https://library.stanford.edu/libraries/cecil-h-green-library",
+  "locations"=>
+   [{"name"=>"Reference", "slug"=>"reference", "keeps_hours"=>true, "primary"=>false},
+    {"name"=>"Library & circulation", "slug"=>"library-circulation", "keeps_hours"=>true, "primary"=>true},
+    {"name"=>"Media Center", "slug"=>"media-microtext-center", "keeps_hours"=>true, "primary"=>false}]},
+ {"name"=>"Lathrop Library", "slug"=>"lathrop", "public"=>true, "about_url"=>nil, "locations"=>[{"name"=>"Learning Hub", "slug"=>"tech-lounge", "keeps_hours"=>true, "primary"=>true}]},
+ {"name"=>"Archive of Recorded Sound",
+  "slug"=>"ars",
+  "public"=>true,
+  "about_url"=>"https://library.stanford.edu/libraries/archive-recorded-sound",
+  "locations"=>[{"name"=>"Reference & reading room", "slug"=>"archive-recorded-sound", "keeps_hours"=>true, "primary"=>true}]},
+ {"name"=>"Art & Architecture Library (Bowes)",
+  "slug"=>"art",
+  "public"=>true,
+  "about_url"=>"https://library.stanford.edu/libraries/bowes-art-architecture-library",
+  "locations"=>
+   [{"name"=>"Library & circulation", "slug"=>"library-circulation", "keeps_hours"=>true, "primary"=>true},
+    {"name"=>"Reference", "slug"=>"reference", "keeps_hours"=>true, "primary"=>false},
+    {"name"=>"Visual Resources Center", "slug"=>"visual-resources-center", "keeps_hours"=>true, "primary"=>false}]},
+ {"name"=>"Business Library",
+  "slug"=>"business",
+  "public"=>true,
+  "about_url"=>"https://www.gsb.stanford.edu/library",
+  "locations"=>[{"name"=>"Library & circulation", "slug"=>"library-i-desk", "keeps_hours"=>true, "primary"=>true}, {"name"=>"Reference", "slug"=>"virtual-support", "keeps_hours"=>true, "primary"=>false}]},
+ {"name"=>"Classics Library", "slug"=>"classics-library", "public"=>true, "about_url"=>nil, "locations"=>[{"name"=>"Library & circulation", "slug"=>"library-circulation", "keeps_hours"=>true, "primary"=>true}]},
+ {"name"=>"Earth Sciences Library & Map Collections (Branner)",
+  "slug"=>"branner",
+  "public"=>true,
+  "about_url"=>nil,
+  "locations"=>[{"name"=>"Library & circulation", "slug"=>"library-circulation", "keeps_hours"=>true, "primary"=>true}, {"name"=>"Reference", "slug"=>"reference", "keeps_hours"=>true, "primary"=>false}]},
+ {"name"=>"East Asia Library", "slug"=>"eal", "public"=>true, "about_url"=>"https://library.stanford.edu/libraries/east-asia-library", "locations"=>[{"name"=>"Library & circulation", "slug"=>"library-circulation", "keeps_hours"=>true, "primary"=>true}]},
+ {"name"=>"Education Library (Cubberley)",
+  "slug"=>"cubberley",
+  "public"=>true,
+  "about_url"=>"https://library.stanford.edu/libraries/cubberley-education-library",
+  "locations"=>[{"name"=>"Library & circulation", "slug"=>"library-circulation", "keeps_hours"=>true, "primary"=>true}]},
+ {"name"=>"Engineering Library (Terman)",
+  "slug"=>"englib",
+  "public"=>true,
+  "about_url"=>"https://library.stanford.edu/libraries/terman-engineering-library",
+  "locations"=>[{"name"=>"Library & circulation", "slug"=>"library-circulation", "keeps_hours"=>true, "primary"=>true}]},
+ {"name"=>"Hoover Institution Library & Archives", "slug"=>"hila", "public"=>true, "about_url"=>"https://www.hoover.org/library-archives", "locations"=>[{"name"=>"Reading Room, reservation required", "slug"=>"reference", "keeps_hours"=>true, "primary"=>true}]},
+ {"name"=>"Law Library (Robert Crown)",
+  "slug"=>"law",
+  "public"=>true,
+  "about_url"=>"https://law.stanford.edu/robert-crown-law-library/",
+  "locations"=>[{"name"=>"Library building", "slug"=>"library-circulation", "keeps_hours"=>true, "primary"=>true}, {"name"=>"Virtual support", "slug"=>"reference", "keeps_hours"=>true, "primary"=>false}]},
+ {"name"=>"Marine Biology Library (Harold A. Miller) at Hopkins Marine Station",
+  "slug"=>"hopkins",
+  "public"=>true,
+  "about_url"=>"https://library.stanford.edu/libraries/harold-miller-library-hopkins-marine-station",
+  "locations"=>[{"name"=>"Library & circulation", "slug"=>"library-circulation", "keeps_hours"=>true, "primary"=>true}]},
+ {"name"=>"Medical Library (Lane)", "slug"=>"lane", "public"=>true, "about_url"=>"https://lane.stanford.edu/index.html", "locations"=>[{"name"=>"Library & circulation", "slug"=>"library-circulation", "keeps_hours"=>true, "primary"=>true}]},
+ {"name"=>"Music Library", "slug"=>"music", "public"=>true, "about_url"=>"https://library.stanford.edu/libraries/music-library", "locations"=>[{"name"=>"Library & circulation", "slug"=>"library-circulation", "keeps_hours"=>true, "primary"=>true}]},
+ {"name"=>"SLAC National  Accelerator Lab Research Library", "slug"=>"slac", "public"=>false, "about_url"=>nil, "locations"=>[{"name"=>"Library & circulation", "slug"=>"library-circulation", "keeps_hours"=>true, "primary"=>true}]},
+ {"name"=>"Special Collections",
+  "slug"=>"spc",
+  "public"=>true,
+  "about_url"=>"https://library.stanford.edu/libraries/special-collections",
+  "locations"=>[{"name"=>"Field Reading Room, by appointment only", "slug"=>"field-reading-room", "keeps_hours"=>true, "primary"=>true}]},
+ {"name"=>"Stanford Auxiliary Library 1&2 (SAL1&2)", "slug"=>"sal", "public"=>false, "about_url"=>nil, "locations"=>[{"name"=>"Operations only, no access", "slug"=>"operations", "keeps_hours"=>true, "primary"=>true}]},
+ {"name"=>"Stanford Auxiliary Library 3 (SAL3)", "slug"=>"sal3", "public"=>false, "about_url"=>nil, "locations"=>[{"name"=>"Operations only, no access", "slug"=>"operations", "keeps_hours"=>true, "primary"=>true}]},
+ {"name"=>"Stanford Auxiliary Library, off-campus Newark", "slug"=>"newark", "public"=>false, "about_url"=>nil, "locations"=>[{"name"=>"Operations only, no access", "slug"=>"operations", "keeps_hours"=>true, "primary"=>true}]},
+ {"name"=>"Philosophy Library (Tanner)",
+  "slug"=>"philosophy",
+  "public"=>true,
+  "about_url"=>"https://library.stanford.edu/libraries/tanner-philosophy-library",
+  "locations"=>[{"name"=>"Library & circulation", "slug"=>"library-circulation", "keeps_hours"=>true, "primary"=>true}]},
+ {"name"=>"David Rumsey Map Center",
+  "slug"=>"Rumsey",
+  "public"=>true,
+  "about_url"=>"https://library.stanford.edu/libraries/david-rumsey-map-center",
+  "locations"=>[{"name"=>"Reference & circulation", "slug"=>"visitor-access", "keeps_hours"=>true, "primary"=>true}]},
+ {"name"=>"Science Library (Li and Ma)",
+  "slug"=>"science",
+  "public"=>true,
+  "about_url"=>"https://library.stanford.edu/libraries/robin-li-and-melissa-ma-science-library",
+  "locations"=>[{"name"=>"Library & circulation", "slug"=>"library-circulation", "keeps_hours"=>true, "primary"=>true}]},
+ {"name"=>"Academy Hall (SRWC)", "slug"=>"srwc", "public"=>true, "about_url"=>"https://library.stanford.edu/libraries/academy-hall-redwood-city-campus", "locations"=>[{"name"=>"Lobby desk", "slug"=>"lobby-desk", "keeps_hours"=>true, "primary"=>true}]}]
+
+library_data.each do |data|
+  Library.find_or_create_by(data.except('locations')) do |library|
+    data['locations'].map { |x| library.locations.find_or_initialize_by(x) }
+  end
+end
 
 
 [
