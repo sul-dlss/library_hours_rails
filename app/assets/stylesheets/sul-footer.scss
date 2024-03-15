@@ -1,27 +1,13 @@
-$stanford-footer-height: 250px;
-$stanford-footer-md-height: 140px;
 $sul-footer-height: 80px;
 
 #su-content {
-  padding-bottom: $stanford-footer-height + $sul-footer-height !important;
-
-  @media (min-width: 768px) {
-    padding-bottom: $stanford-footer-md-height + $sul-footer-height !important;
-  }
+  padding-bottom: 6rem;
 }
 
 #sul-footer-container {
   background-color: $sul-footer-bg-color;
   box-shadow: inset 0 4px 8px -8px $sul-shadow-color;
   clear: both;
-  margin-top: -1 * ($stanford-footer-height + $sul-footer-height);
-  min-height: $stanford-footer-height + $sul-footer-height;
-
-  @media (min-width: 768px) {
-    margin-top: -1 * ($stanford-footer-md-height + $sul-footer-height);
-    min-height: $stanford-footer-md-height + $sul-footer-height;
-  }
-
   padding: 0;
   position: relative;
 }
@@ -44,6 +30,10 @@ $sul-footer-height: 80px;
 	text-align: left;
 	padding-left: 15px;
 	font-size: small;
+
+  a {
+    color: $color-digital-blue;
+  }
 }
 
 #sul-footer {
@@ -75,14 +65,64 @@ $sul-footer-height: 80px;
     padding-left: 15px;
     text-align: left;
     vertical-align: middle;
+
+    @include media-breakpoint-up(xl) {
+      padding-left: 45px;
+    }
   }
 }
 
-#global-footer {max-width: 100%;}
-#global-footer p {max-width: 100%; width: auto;}
-#global-footer #bottom-text {margin-right: 6px;}
-#global-footer {
-  .vcard {
-    margin-left: 2rem;
+.global-footer {
+  background-color: $brand-primary;
+  color: $color-white;
+
+  a {
+    color: $color-white;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  ul {
+    padding-inline-start: 0;
+    list-style: none;
+
+    @include media-breakpoint-up(lg) {
+      justify-content: flex-start !important;
+    }
+  }
+
+  li a {
+    @include media-breakpoint-up(md) {
+      font-weight: 500;
+    }
+
+    @include media-breakpoint-up(lg) {
+      li a {
+        font-size: 17px;
+      }
+    }
+  }
+
+  .policy-links li a {
+    @include media-breakpoint-up(md) {
+      font-size: 14px;
+      font-weight: 300;
+    }
+  }
+
+  .copyright {
+    font-size: 13px;
+    font-weight: 300;
+
+    @include media-breakpoint-up(sm) {
+      font-size: 14px;
+      font-weight: 300;
+    }
+
+    @include media-breakpoint-up(lg) {
+      text-align: left !important;
+    }
   }
 }

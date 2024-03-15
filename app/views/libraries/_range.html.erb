@@ -5,7 +5,7 @@
         <span class="fas fa-arrow-left" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
       <% end %>
-      <h4 class="font-weight-light mb-0"><%= l(@range.begin, format: :short) %> – <%= l(@range.end, format: :short) %></h4>
+      <h2 class="font-weight-light mb-0"><%= l(@range.begin, format: :short) %> – <%= l(@range.end, format: :short) %></h2>
       <%= link_to params.to_unsafe_h.merge(week: (@range.begin + 1.week + 1.day).strftime("%GW%V")) do %>
         <span class="fas fa-arrow-right" aria-hidden="true"></span>
         <span class="sr-only">Next</span>

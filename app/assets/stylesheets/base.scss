@@ -1,5 +1,7 @@
 #main-container {
   a {
+    color: $color-dark-red;
+
     &.disabled {
       color: #ccc;
       cursor: not-allowed;

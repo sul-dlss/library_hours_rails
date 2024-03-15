@@ -12,15 +12,20 @@
   @include media-breakpoint-up(sm) {
     .date-input {
       padding-right: ($spacer * .75);
+      .form-control:focus {
+        border-color: $color-digital-blue-dark;
+        box-shadow: none;
+      }
     }
   }
 
-  h4 {
+  h2 {
     padding: 0 $spacer;
+    font-size: 22px;
   }
 
   @include media-breakpoint-down(xs) {
-    h4 {
+    h2 {
       // same ps py-2 in BS4
       padding: 0 ($spacer * .5);
     }
@@ -31,8 +36,12 @@
    }
 }
 
+.btn-outline-secondary {
+  color: $color-black;
+}
+
 .closed {
-  color: #dd2121;
+  color: $color-light-red;
 }
 
 .open-24h {
