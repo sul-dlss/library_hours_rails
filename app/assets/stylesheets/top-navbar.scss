@@ -12,13 +12,8 @@
     height: $top-nav-bar-height;
   }
 
-  a {
-    padding: 3px;
-    border-bottom: 3px solid transparent;
-    &:hover {
-      text-decoration: none;
-      border-bottom: 3px solid $brand-primary;
-    }
+  a:hover {
+    text-underline-position: under;
   }
 }
 

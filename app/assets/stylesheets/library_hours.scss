@@ -9,19 +9,20 @@
 .date-range {
   background-color: $well-bg;
 
+  .date-input .form-control:focus {
+    border-color: $color-digital-blue-dark;
+    box-shadow: none;
+  }
+
   @include media-breakpoint-up(sm) {
     .date-input {
       padding-right: ($spacer * .75);
-      .form-control:focus {
-        border-color: $color-digital-blue-dark;
-        box-shadow: none;
-      }
     }
   }
 
   h2 {
     padding: 0 $spacer;
-    font-size: 22px;
+    font-size: 1.375rem;
   }
 
   @include media-breakpoint-down(xs) {
