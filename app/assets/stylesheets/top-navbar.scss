@@ -11,6 +11,10 @@
     display: flex;
     height: $top-nav-bar-height;
   }
+
+  a:hover {
+    text-underline-position: under;
+  }
 }
 
 #topnav-container {
