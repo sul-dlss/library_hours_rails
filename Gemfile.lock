@@ -234,6 +234,11 @@ GEM
     parser (3.3.3.0)
       ast (~> 2.4.1)
       racc
+    propshaft (0.9.0)
+      actionpack (>= 7.0.0)
+      activesupport (>= 7.0.0)
+      rack
+      railties (>= 7.0.0)
     psych (5.1.2)
       stringio
     public_suffix (5.1.1)
@@ -348,13 +353,6 @@ GEM
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.12.3)
     simplecov_json_formatter (0.1.4)
-    sprockets (4.2.1)
-      concurrent-ruby (~> 1.0)
-      rack (>= 2.2.4, < 4)
-    sprockets-rails (3.5.1)
-      actionpack (>= 6.1)
-      activesupport (>= 6.1)
-      sprockets (>= 3.0.0)
     sqlite3 (1.7.3)
       mini_portile2 (~> 2.8.0)
     sqlite3 (1.7.3-x86_64-linux)
@@ -421,6 +419,7 @@ DEPENDENCIES
   mysql2
   nokogiri (>= 1.7.1)
   okcomputer
+  propshaft
   puma (~> 6.0)
   rack-attack
   rack-mini-profiler (~> 2.0)
@@ -434,7 +433,6 @@ DEPENDENCIES
   rubocop-rspec
   selenium-webdriver
   simplecov
-  sprockets-rails
   sqlite3 (~> 1.4)
   stimulus-rails (~> 1.2)
   tophat
