@@ -73,4 +73,4 @@ gem 'rack-attack'
 gem "cssbundling-rails", "~> 1.1"
 gem "importmap-rails", "~> 2.0"
 gem "stimulus-rails", "~> 1.2"
-gem "turbo-rails", "~> 1.4.0" # Pinned until https://github.com/hotwired/turbo-rails/pull/504 is merged/released
+gem "turbo-rails", "~> 2.0"
