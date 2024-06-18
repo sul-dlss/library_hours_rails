@@ -372,7 +372,7 @@ GEM
     timeout (0.4.1)
     tophat (2.3.1)
       actionpack (>= 3.0.0)
-    turbo-rails (1.4.0)
+    turbo-rails (2.0.5)
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
       railties (>= 6.0.0)
@@ -438,7 +438,7 @@ DEPENDENCIES
   sqlite3 (~> 1.4)
   stimulus-rails (~> 1.2)
   tophat
-  turbo-rails (~> 1.4.0)
+  turbo-rails (~> 2.0)
   web-console (>= 4.1)
 
 BUNDLED WITH
