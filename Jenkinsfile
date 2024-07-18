@@ -24,7 +24,7 @@ pipeline {
           export DEPLOY=1
 
           # Load RVM
-          rvm use 3.0.3@library-hours --create
+          rvm use 3.2.3@library-hours --create
           gem install bundler
 
           bundle config --global gems.contribsys.com $SIDEKIQ_PRO_SECRET
@@ -58,7 +58,7 @@ pipeline {
       }
 
       when {
-        tag "v*"
+        branch 'main'
       }
 
       steps {
@@ -70,7 +70,7 @@ pipeline {
           export REVISION=$TAG_NAME
 
           # Load RVM
-          rvm use 3.0.3@library-hours --create
+          rvm use 3.2.3@library-hours --create
           gem install bundler
 
           bundle config --global gems.contribsys.com $SIDEKIQ_PRO_SECRET
