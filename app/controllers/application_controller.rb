@@ -38,5 +38,7 @@ class ApplicationController < ActionController::Base
     @range ||= Time.zone.now.beginning_of_week(:sunday).to_date..(Time.zone.now.beginning_of_week(:sunday) + 6.days).to_date
 
     @range.tap { |range| raise ActionController::BadRequest, 'Requested range is too big' if range.first + 18.months < range.last }
+    @range.tap { |range| raise ActionController::BadRequest, 'Requested range is too old' if range.first.before? 48.months.ago }
+    @range.tap { |range| raise ActionController::BadRequest, 'Requested range is too new' if range.last.after? 24.months.from_now }
   end
 end

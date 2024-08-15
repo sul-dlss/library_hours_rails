@@ -75,39 +75,52 @@ RSpec.describe LibrariesController, type: :controller do
     end
 
     describe '@range' do
+      let(:year) { Time.zone.now.year }
       it 'defaults to the current week' do
         get :index, params: {}, session: valid_session
         expect(assigns(:range)).to eq(Time.zone.today.beginning_of_week(:sunday).to_date..(Time.zone.today.end_of_week(:sunday).to_date))
       end
 
       it 'assigns using the given week' do
-        get :index, params: { week: '2015W1' }, session: valid_session
-        expect(assigns(:range)).to eq(Calendar.week('2015W1'))
+        get :index, params: { week: "#{year}W1" }, session: valid_session
+        expect(assigns(:range)).to eq(Calendar.week("#{year}W1"))
       end
 
       it 'assigns using the given time' do
-        get :index, params: { when: '2015-04-05' }, session: valid_session
-        expect(assigns(:range)).to eq(Date.parse('2015-04-05')..Date.parse('2015-04-05'))
+        get :index, params: { when: "#{year}-04-05" }, session: valid_session
+        expect(assigns(:range)).to eq(Date.parse("#{year}-04-05")..Date.parse("#{year}-04-05"))
       end
 
       it 'assigns using from/to' do
-        get :index, params: { from: '2015-02-03', to: '2015-03-02' }, session: valid_session
-        expect(assigns(:range)).to eq(Date.parse('2015-02-03')..Date.parse('2015-03-02'))
+        get :index, params: { from: "#{year}-02-03", to: "#{year}-03-02" }, session: valid_session
+        expect(assigns(:range)).to eq(Date.parse("#{year}-02-03")..Date.parse("#{year}-03-02"))
       end
 
       it 'assigns using from' do
-        get :index, params: { from: '2015-02-03' }, session: valid_session
-        expect(assigns(:range)).to eq(Date.parse('2015-02-03')..Date.parse('2015-02-03'))
+        get :index, params: { from: "#{year}-02-03" }, session: valid_session
+        expect(assigns(:range)).to eq(Date.parse("#{year}-02-03")..Date.parse("#{year}-02-03"))
       end
 
       it 'assigns using from' do
-        get :index, params: { date: '2022-09-18' }, session: valid_session
-        expect(subject).to redirect_to 'http://test.host/?week=2022W38'
+        get :index, params: { date: "#{year}-09-18" }, session: valid_session
+        expect(subject).to redirect_to "http://test.host/?week=#{year}W38"
       end
 
       it 'restricts the range to an 18 month period' do
         expect do
-          get :index, params: { from: '2015-02-03', to: '2020-03-02' }, session: valid_session
+          get :index, params: { from: "#{year}-02-03", to: "#{year+4}-03-02" }, session: valid_session
+        end.to raise_error(ActionController::BadRequest)
+      end
+
+      it 'restricts the beginning of the range to an 48 month period' do
+        expect do
+          get :index, params: { from: "#{year-5}-02-03", to: "#{year-5}-03-02" }, session: valid_session
+        end.to raise_error(ActionController::BadRequest)
+      end
+
+      it 'restricts the end of the range to an 24 month period' do
+        expect do
+          get :index, params: { from: "#{year+3}-02-03", to: "#{year+3}-03-02" }, session: valid_session
         end.to raise_error(ActionController::BadRequest)
       end
     end
