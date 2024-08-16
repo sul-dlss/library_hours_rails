@@ -23,7 +23,6 @@ config/settings/*.local.yml
 config/environments/*.local.yml
 .env
 /coverage
-/.byebug_history
 
 /app/assets/builds/*
 !/app/assets/builds/.keep
