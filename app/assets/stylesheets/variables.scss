@@ -3,20 +3,22 @@ $sul-footer-bg-color: $color-beige-10;
 $gray-base: #000;
 $gray-dark: lighten($gray-base, 20%);
 $link-color: $gray-dark;
-$dark-orange: #925b20;
 $nav-color: #fbfbf9;
 
 $brand-primary: $color-cardinal-red;
 $pagination-active-bg: #696969;
 $pagination-active-border: #696969;
 
-// BS4 syntax for changing primary theme colors
-$theme-colors: (
+$primary: $color-cardinal-red;
+/* $theme-colors: (
   "primary": $color-cardinal-red,
-);
+  "secondary": #6c757d,
+  "success": #008566,
+  "danger": $color-cardinal-red,
+); */
 
 // 1rem = 16px in BS4. .94 approximates the previous font size which was specified as 15px
-$font-size-base: .94rem;
+$font-size-base: 0.94rem;
 $line-height-base: 1.5;
 
 $btn-default-color: $color-gray;
@@ -35,23 +37,14 @@ $font-size-h4: floor(($font-size-base * 1.2));
 $headings-font-weight: 100;
 
 $body-bg: $color-beige-05;
-$font-family-sans-serif: 'Source Sans Pro', 'Arial Unicode MS', Helvetica, sans-serif;
+$font-family-sans-serif: "Source Sans Pro", "Arial Unicode MS", Helvetica,
+  sans-serif;
 $txt-color: $gray-base;
 
 $gray-41-percent: #696969;
 $sul-focus-outline: #eaab00;
 
 $navbar-default-link-color: $color-cardinal-red;
-
-$well-bg: $color-beige-10;
-$well-border: $color-beige-20;
-$well-link: $dark-orange;
-
-$breadcrumb-active-color: inherit;
-$breadcrumb-bg: inherit;
-$breadcrumb-color: inherit;
-$breadcrumb-padding-horizontal: 0;
-$breadcrumb-separator: '»';
 
 //@at-root: $brand-primary;
 $navbar-inverse-border: $color-dark-red;
@@ -68,7 +61,6 @@ $top-nav-bar-height: 35px;
 $brandbar-collapsed-height: 50px;
 $brandbar-height: 100px;
 $brandbar-padding-vertical: (($brandbar-height - $line-height-base) * 0.5);
-$sul-shadow-color: rgba(0, 0, 0, .2);
+$sul-shadow-color: rgba(0, 0, 0, 0.2);
 
 $input-height-base: $input-height;
-

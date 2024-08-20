@@ -1,12 +1,12 @@
 <% url = calendar.persisted? ? library_location_calendar_path(calendar.library, calendar.location, calendar) : library_location_calendars_path(calendar.location.library, calendar.location, day: calendar.date) %>
 
-<%= form_with model: calendar, 
+<%= form_with model: calendar,
     url: url,
     class: 'form-inline' do |f| %>
   <% if f.object.errors.any? %>
     <p class="alert alert-danger"><%= to_sentence f.object.errors.full_messages %></p>
   <% end %>
-  <div class="row" style="width: 14em; white-space:nobreak">
+  <div class="input-group" style="width: 14em; white-space:nobreak">
     <%= text_field_tag 'date[time]', f.object.to_text, class: 'form-control', style: 'width: 8em' %>
     <%= f.hidden_field :date, name: 'day' %>
     <%= button_tag class: 'btn btn-primary' do %>

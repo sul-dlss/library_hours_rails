@@ -2,7 +2,7 @@
 <div class="editable-error-block"></div>
   <thead>
     <tr>
-      <th class="location-name"><span class='sr-only'>Location</span></th>
+      <th class="location-name"><span class='visually-hidden'>Location</span></th>
       <% @range.to_a.each do |d| %>
         <th class="hours <%= 'holiday' if Term.holiday? d %>">
           <% if Term.holiday? d %>
@@ -23,7 +23,7 @@
             <span itemprop="validFrom" content="<%= l calendars.first.date %>" aria-hidden="true"></span>
             <span itemprop="validThrough" content="<%= l calendars.first.date %>" aria-hidden="true"></span>
             <% calendars.each do |d|  %>
-            <span data-toggle="tooltip" data-placement="left" title="<%= [d.summary, d.description].reject(&:blank?).compact.join(" / ") %>">
+            <span data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="<%= [d.summary, d.description].reject(&:blank?).compact.join(" / ") %>">
               <%= render 'calendars/time', calendar: d %>
             </span>
             <% end %>
