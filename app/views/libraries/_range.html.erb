@@ -3,31 +3,30 @@
     <div class="align-items-center col-lg-6 col-xs-12 d-flex justify-content-lg-start justify-content-sm-center pager">
       <%= link_to params.to_unsafe_h.merge(week: (@range.begin - 1.week + 1.day).strftime("%GW%V")) do %>
         <span class="fas fa-arrow-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
+        <span class="visually-hidden">Previous</span>
       <% end unless @range.begin.before?(24.months.ago)%>
-      <h4 class="font-weight-light mb-0"><%= l(@range.begin, format: :short) %> – <%= l(@range.end, format: :short) %></h4>
+      <h4 class="fw-light mb-0"><%= l(@range.begin, format: :short) %> – <%= l(@range.end, format: :short) %></h4>
       <%= link_to params.to_unsafe_h.merge(week: (@range.begin + 1.week + 1.day).strftime("%GW%V")) do %>
         <span class="fas fa-arrow-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
+        <span class="visually-hidden">Next</span>
       <% end unless @range.end.after?(18.months.from_now) %>
     </div>
 
     <div class="col-lg-6 col-xs-12">
-      <form method="GET" class="form form-horizontal row justify-content-lg-end justify-content-sm-center">
-        
+      <form method="GET" class="form d-flex justify-content-lg-end justify-content-sm-center">
+
         <div class="date-input">
-          <label for="jump-date" class="control-label sr-only">Jump to:</label>
+          <label for="jump-date" class="visually-hidden">Jump to:</label>
           <div class="input-group">
             <input value="<%= Time.zone.today %>" name="date" type="date" class="form-control" id="jump-date" data-href="<%= url_for(params.to_unsafe_h.merge(week: "%GW%V")) %>"/>
-            <div class="input-group-append">
-              <input value="Go" type="submit" class="btn btn-primary"/>
-            </div>
+            <input value="Go" type="submit" class="btn btn-primary"/>
+
           </div>
         </div>
-      
+
         <div class="col-xs-12 d-flex" id="jump-term-group">
-          <h3 class="sr-only">Jump to quarters &amp; holidays</h3>
-          <button id="jump-term" type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+          <h3 class="visually-hidden">Jump to quarters &amp; holidays</h3>
+          <button id="jump-term" type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
             Quarters &amp; holidays <span class="caret"></span>
           </button>
           <ul class="dropdown-menu dropdown-menu-right" role="menu">
@@ -49,9 +48,9 @@
             <% end %>
           </ul>
         </div>
-      
+
       </form>
     </div>
-  
+
   </div>
 </div>

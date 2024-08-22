@@ -2,8 +2,7 @@
   "name": "app",
   "private": "true",
   "dependencies": {
-    "bootstrap": "^4.6.2",
-    "popper.js": "^1.16.1",
+    "bootstrap": "^5.3.3",
     "sass": "^1.57.1"
   },
   "scripts": {

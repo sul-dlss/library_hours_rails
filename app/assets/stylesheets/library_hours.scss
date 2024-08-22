@@ -1,17 +1,16 @@
 // Import all individual stylesheets here
-@import 'base';
-@import 'layout';
+@import "base";
+@import "layout";
 
-@import 'top-navbar';
-@import 'sul-footer';
-
+@import "top-navbar";
+@import "sul-footer";
 
 .date-range {
-  background-color: $well-bg;
+  background-color: $color-beige-10;
 
   @include media-breakpoint-up(sm) {
     .date-input {
-      padding-right: ($spacer * .75);
+      padding-right: ($spacer * 0.75);
     }
   }
 
@@ -22,13 +21,13 @@
   @include media-breakpoint-down(xs) {
     h4 {
       // same ps py-2 in BS4
-      padding: 0 ($spacer * .5);
+      padding: 0 ($spacer * 0.5);
     }
 
     .pager {
       justify-content: center;
     }
-   }
+  }
 }
 
 .closed {
@@ -47,7 +46,7 @@ th.location-name {
 td.hours,
 th.hours {
   width: 100px;
-  padding: .5rem;
+  padding: 0.5rem;
 }
 
 th.location-name,
@@ -56,7 +55,7 @@ th.hours {
 }
 
 td.exceptions {
-//  @extend .alert-info;
+  //  @extend .alert-info;
 }
 
 td.holiday,
@@ -68,13 +67,10 @@ th small {
   font-size: 70%;
 }
 
-.well a {
-  color: $well-link;
-}
-
 // Override editable library background images
-.editableform-loading, .editable-clear-x {  
-  background: none !important;  
+.editableform-loading,
+.editable-clear-x {
+  background: none !important;
 }
 
 .alert-link {

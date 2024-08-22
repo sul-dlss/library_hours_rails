@@ -16,35 +16,33 @@
 #topnav-container {
   background-color: $brand-primary;
   height: $brandbar-height;
-  
+
   .row {
     width: 100%;
   }
 
-  @include media-breakpoint-down(xs) { 
+  @include media-breakpoint-down(sm) {
     height: $brandbar-collapsed-height;
   }
 
   .navbar-brand {
-    @extend .text-hide;
-
     height: $brandbar-height;
     margin-left: 0;
     padding: 0;
 
-    @include media-breakpoint-down(xs) { 
+    @include media-breakpoint-down(sm) {
       height: $brandbar-collapsed-height;
     }
 
     img {
       height: $brandbar-height;
 
-      @include media-breakpoint-down(xs) { 
+      @include media-breakpoint-down(sm) {
         height: $brandbar-collapsed-height;
       }
     }
 
-    @include media-breakpoint-down(xs) { 
+    @include media-breakpoint-down(sm) {
       margin-left: 15px;
     }
   }
@@ -54,7 +52,7 @@
     z-index: $zindex-dropdown;
 
     a {
-      color: lighten($gray-base, 86%);;
+      color: lighten($gray-base, 86%);
     }
   }
 

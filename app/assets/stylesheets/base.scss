@@ -7,13 +7,15 @@
     }
   }
 
-  a:hover, a:focus {
+  a:hover,
+  a:focus {
     text-decoration: underline;
   }
 
   li {
     a {
-      &:hover, &:focus {
+      &:hover,
+      &:focus {
         border-bottom: 0;
       }
     }
@@ -35,10 +37,6 @@ object:focus,
 select:focus,
 textarea:focus {
   @include focus-outline;
-}
-
-#main-container {
-  padding-bottom: $form-group-margin-bottom;
 }
 
 .location-and-access {

@@ -9,5 +9,5 @@
   <% end %>
 <% end %>
 <li class=<%= local_assigns[:item_class] ? item_class : '' %>>
-  <%= link_to 'Feedback', feedback_path, data: { toggle: 'collapse', target: '#feedback-form' } %>
+  <%= link_to 'Feedback', feedback_path, data: { bs_toggle: 'collapse', bs_target: '#feedback-form' } %>
 </li>
