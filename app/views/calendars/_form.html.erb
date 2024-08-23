@@ -6,7 +6,7 @@
   <% if f.object.errors.any? %>
     <p class="alert alert-danger"><%= to_sentence f.object.errors.full_messages %></p>
   <% end %>
-  <div class="input-group" style="width: 14em; white-space:nobreak">
+  <div class="input-group" style="width: 14em;">
     <%= text_field_tag 'date[time]', f.object.to_text, class: 'form-control', style: 'width: 8em' %>
     <%= f.hidden_field :date, name: 'day' %>
     <%= button_tag class: 'btn btn-primary' do %>
