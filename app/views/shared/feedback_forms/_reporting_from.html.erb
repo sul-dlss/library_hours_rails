@@ -4,7 +4,7 @@
       Reporting from: <span class="reporting-from-field"><%= request.referer %></span>
       <%= hidden_field_tag :url, request.referer, class: 'reporting-from-field' %>
     </div>
-    <div class="col-sm-3 text-right">
+    <div class="col-sm-3 text-end">
       <%= link_to 'Check system status', 'http://library-status.stanford.edu', class: 'alert-link' %>
     </div>
   </div>
