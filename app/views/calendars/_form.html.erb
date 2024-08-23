@@ -1,8 +1,6 @@
 <% url = calendar.persisted? ? library_location_calendar_path(calendar.library, calendar.location, calendar) : library_location_calendars_path(calendar.location.library, calendar.location, day: calendar.date) %>
 
-<%= form_with model: calendar,
-    url: url,
-    class: 'form-inline' do |f| %>
+<%= form_with model: calendar, url: url do |f| %>
   <% if f.object.errors.any? %>
     <p class="alert alert-danger"><%= to_sentence f.object.errors.full_messages %></p>
   <% end %>

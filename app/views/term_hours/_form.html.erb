@@ -1,8 +1,6 @@
 <% url = term_hour.persisted? ? library_location_term_hour_path(term_hour.location.library_id, term_hour.location, term_hour, day_of_week: params[:day_of_week]) : library_location_term_hours_path(term_hour.location.library_id, term_hour.location, term_id: term_hour.term_id, day_of_week: params[:day_of_week]) %>
 
-<%= form_with model: term_hour, 
-    url: url,
-    class: 'form-inline' do |f| %>
+<%= form_with model: term_hour, url: url do |f| %>
   <% if f.object.errors.any? %>
     <p class="alert alert-danger"><%= to_sentence f.object.errors.full_messages %></p>
   <% end %>
