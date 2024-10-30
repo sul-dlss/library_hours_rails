@@ -1,15 +1,9 @@
-$sul-footer-bg-color: $color-beige-10;
-
 $gray-base: #000;
-$gray-dark: lighten($gray-base, 20%);
-$link-color: $gray-dark;
 $nav-color: #fbfbf9;
 
-$brand-primary: $color-cardinal-red;
 $pagination-active-bg: #696969;
 $pagination-active-border: #696969;
 
-$primary: $color-cardinal-red;
 /* $theme-colors: (
   "primary": $color-cardinal-red,
   "secondary": #6c757d,
@@ -21,14 +15,7 @@ $primary: $color-cardinal-red;
 $font-size-base: 0.94rem;
 $line-height-base: 1.5;
 
-$btn-default-color: $color-gray;
-$btn-default-bg: $color-beige-10;
-$btn-default-border: $color-beige-30;
-
-$link-color: #a26624;
-$link-hover-color: #a26624;
 $link-hover-decoration: none;
-$sul-link-color-border: #a26624;
 
 $font-size-h1: floor(($font-size-base * 2.986));
 $font-size-h2: floor(($font-size-base * 2.074));
@@ -36,31 +23,18 @@ $font-size-h3: floor(($font-size-base * 1.728));
 $font-size-h4: floor(($font-size-base * 1.2));
 $headings-font-weight: 100;
 
-$body-bg: $color-beige-05;
 $font-family-sans-serif: "Source Sans Pro", "Arial Unicode MS", Helvetica,
   sans-serif;
 $txt-color: $gray-base;
 
 $gray-41-percent: #696969;
-$sul-focus-outline: #eaab00;
-
-$navbar-default-link-color: $color-cardinal-red;
 
 //@at-root: $brand-primary;
-$navbar-inverse-border: $color-dark-red;
-$navbar-inverse-link-color: $link-color;
-$navbar-inverse-link-hover-color: $link-color;
 
 $global-alert-color: rgb(204, 0, 0);
 
 // Note: include functions before variables to have access to mixins
 @import "bootstrap/scss/functions";
 @import "bootstrap/scss/variables";
-
-$top-nav-bar-height: 35px;
-$brandbar-collapsed-height: 50px;
-$brandbar-height: 100px;
-$brandbar-padding-vertical: (($brandbar-height - $line-height-base) * 0.5);
-$sul-shadow-color: rgba(0, 0, 0, 0.2);
 
 $input-height-base: $input-height;

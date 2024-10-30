@@ -2,12 +2,7 @@
 @import "base";
 @import "layout";
 
-@import "top-navbar";
-@import "sul-footer";
-
 .date-range {
-  background-color: $color-beige-10;
-
   @include media-breakpoint-up(sm) {
     .date-input {
       padding-right: ($spacer * 0.75);
