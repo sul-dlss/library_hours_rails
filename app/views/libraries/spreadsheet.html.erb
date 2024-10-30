@@ -1,11 +1,13 @@
-<% title 'Upload spreadsheet' %>
+<h1>Download library spreadsheet</h1>
+<% title 'Download spreadsheet' %>
 <form class="form" action="<%= libraries_path(format: 'csv') %>" method="GET">
   <div class="mb-3">
-    <label class="form-label">Libraries</label>
+    <label class="form-label" for="ids">Libraries</label>
     <%= select_tag 'ids', options_from_collection_for_select(Library.all, :id, :name), multiple: true, class: 'form-select' %>
   </div>
   <div class="mb-3">
-    <%= date_field_tag 'from' %> to <%= date_field_tag 'to' %>
+    <label class="form-label" id="to-from">Date range: </label>
+    <%= date_field_tag 'from', nil, aria: { 'labelledby': 'to-from' } %> to <%= date_field_tag 'to', nil, aria: { 'labelledby': 'to-from' } %>
   </div>
   <input value="Download" type="submit" class="btn btn-primary" />
 </form>
