@@ -3,15 +3,15 @@
 
 <%= render 'range' %>
 <% @libraries.each do |library| %>
-  <div class="row library-row" itemscope itemtype="http://schema.org/Place">
+  <section class="row library-row" itemscope itemtype="http://schema.org/Place">
     <div class="col-xs-12 col-md-3">
-      <h3 itemprop="name"><%= link_to library.name, library %></h3>
+      <header class="h3" itemprop="name"><%= link_to library.name, library %></header>
     </div>
 
     <div class="col-xs-12 col-md-9">
       <%= render partial: 'location_hours', locals: { locations: library.locations } %>
     </div>
-  </div>
+  </section>
 <% end %>
 
 <%= link_to 'New Library', new_library_path if can? :create, Library %>
