@@ -1,34 +1,42 @@
-<% unless current_page? feedback_path %>
-<div id="feedback-form" class="feedback-form-container collapse">
-  <%= render "shared/feedback_forms/form" %>
-</div>
-<% end %>
-
-<nav id="top-nav-bar" class="d-none d-sm-block">
-  <div class="container">
-    <ul class="d-flex justify-content-end">
-      <%= render 'shared/nav_link_list', item_class: "list-inline-item" %>
-    </ul>
+<nav id="skip-link" role="navigation" aria-label="Skip links">
+  <div class="container-xl">
+    <a class="visually-hidden-focusable element-invisible element-focusable d-inline-flex m-1 py-2 px-3"
+      data-turbolinks="false" href="#main-container">Skip to main content</a>
   </div>
 </nav>
-
-<nav id="topnav-container" class="navbar navbar-expand-sm navbar-light">
+<header>
   <div class="container">
-    <%= link_to 'http://library.stanford.edu', class: 'navbar-brand' do %>
-    <%= image_tag 'logo.svg', alt: 'Stanford University Libraries' %>
-    <% end %>
-    <button class="btn-light navbar-toggler bg-light me-1" type="button" data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-      aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon me-auto"></span>
-    </button>
+    <a class="su-brand-bar__logo" href="https://www.stanford.edu">Stanford University</a>
+  </div>
+  <nav class="navbar navbar-expand-md bg-dark" role="navigation">
+    <div class="container">
+      <a class="mb-0 navbar-brand navbar-logo" href="https://library.stanford.edu">Stanford Libraries</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-bs-toggle="collapse"
+        data-target="#user-util-collapse" data-bs-target="#user-util-collapse" aria-controls="user-util-collapse"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <div class="d-block d-sm-none">
-        <ul class="navbar-nav me-auto ps-3">
-          <%= render "shared/nav_link_list", item_class: "nav-item" %>
+      <div class="collapse navbar-collapse justify-content-md-end" id="user-util-collapse">
+        <ul class="navbar-nav">
+          <%= render 'shared/nav_link_list' %>
         </ul>
       </div>
     </div>
+  </nav>
+
+  <div class="masthead bg-dark">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-8 d-flex justify-content-center justify-content-md-start">
+          <div class="h1 my-3"><a href="/">Library Hours</a></div>
+        </div>
+      </div>
+    </div>
   </div>
-</nav>
+  <% unless current_page? feedback_path %>
+    <div id="feedback-form" class="feedback-form-container collapse">
+      <%= render "shared/feedback_forms/form" %>
+    </div>
+  <% end %>
+</header>

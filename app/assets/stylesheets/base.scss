@@ -30,15 +30,6 @@ label {
   font-weight: normal;
 }
 
-button:focus,
-embed:focus,
-input:focus,
-object:focus,
-select:focus,
-textarea:focus {
-  @include focus-outline;
-}
-
 .location-and-access {
   padding-right: 1ch;
 }

@@ -14,6 +14,7 @@
     <%= csrf_meta_tags %>
     <%= content_for(:head) %>
     <%= stylesheet_link_tag "application" %>
+    <%= stylesheet_link_tag "https://cdn.jsdelivr.net/gh/sul-dlss/component-library@v2024-09-04/styles/sul.css" %>
     <%= javascript_importmap_tags %>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-B544ZKTH0M"></script>
@@ -29,19 +30,13 @@
   </head>
 
   <body>
-    <div id="su-wrap"> <!-- #su-wrap start -->
-      <div id="su-content"> <!-- #su-content start -->
-        <div id="outer-container" class="container-fluid">
-          <%= render 'shared/top_navbar' %>
-          <section id="main-container" role="main" class="container pt-2 pb-3">
-            <%= breadcrumbs style: :bootstrap5 %>
-            <%= render 'shared/global_alert' %>
-            <%= render 'shared/flashes' %>
-            <%= yield %>
-          </section>
-        </div>
-      </div>
-    </div>
+    <%= render 'shared/top_navbar' %>
+    <main id="main-container" class="container pt-2 pb-3">
+      <%= breadcrumbs style: :bootstrap5 %>
+      <%= render 'shared/global_alert' %>
+      <%= render 'shared/flashes' %>
+      <%= yield %>
+    </main>
     <%= render 'shared/sul_footer' %>
   </body>
 </html>

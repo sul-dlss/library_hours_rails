@@ -1,11 +1,8 @@
 // Entry point for your Sass build
 
-@import 'palette';
-
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import 'variables';
 @import 'bootstrap/scss/bootstrap';
-@import 'library_hours_mixins';
 @import 'library_hours';
 @import 'global_alert';
 
@@ -35,7 +32,6 @@
 
 .editable-error-block {
   // position: absolute;
-  background-color: $color-cardinal-red;
   color: #fff;
   z-index: 1000;
 }
@@ -44,4 +40,8 @@
   border-bottom: 1px dotted $gray-base;
   padding-top: 1rem;
   padding-bottom: 1rem;
+}
+
+header {
+  --bs-dark-rgb: 130, 0, 0;
 }
