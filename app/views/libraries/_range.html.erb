@@ -5,7 +5,7 @@
         <span class="fas fa-arrow-left" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
       <% end unless @range.begin.before?(24.months.ago)%>
-      <h4 class="fw-light mb-0"><%= l(@range.begin, format: :short) %> – <%= l(@range.end, format: :short) %></h4>
+      <h2 class="fw-light mb-0 h4"><%= l(@range.begin, format: :short) %> – <%= l(@range.end, format: :short) %></h2>
       <%= link_to params.to_unsafe_h.merge(week: (@range.begin + 1.week + 1.day).strftime("%GW%V")) do %>
         <span class="fas fa-arrow-right" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
@@ -25,7 +25,7 @@
         </div>
 
         <div class="col-xs-12 d-flex" id="jump-term-group">
-          <h3 class="visually-hidden">Jump to quarters &amp; holidays</h3>
+          <h2 class="visually-hidden">Jump to quarters &amp; holidays</h2>
           <button id="jump-term" type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
             Quarters &amp; holidays <span class="caret"></span>
           </button>
