@@ -1,10 +1,2 @@
-#!/usr/bin/env sh
-
-yarn build:css
-
-if ! gem list foreman -i --silent; then
-  echo "Installing foreman..."
-  gem install foreman
-fi
-
-exec foreman start -f Procfile.dev "$@"
+#!/usr/bin/env ruby
+exec "./bin/rails", "server", *ARGV
