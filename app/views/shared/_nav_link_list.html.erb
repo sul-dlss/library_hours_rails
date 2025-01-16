@@ -1,19 +1,20 @@
 <!-- item_class is passed down from parent template. BS4 list items use specific classes. -->
 
+<% additional_classes ||= '' %>
 <% if current_user %>
-  <li class="nav-item">
+  <li class="nav-item <%= additional_classes %>">
     <%= link_to "#{current_user.id}: Logout", logout_path(referrer: root_path), class: "nav-link" %>
   </li>
 
   <% if can? :manage, Spreadsheet %>
-    <li class="nav-item">
+    <li class="nav-item <%= additional_classes %>">
       <%= link_to 'Export Hours', spreadsheet_libraries_url, class: "nav-link" %>
     </li>
-    <li class="nav-item">
+    <li class="nav-item <%= additional_classes %>">
       <%= link_to 'Import Hours', new_spreadsheet_url, class: "nav-link" %>
     </li>
   <% end %>
 <% end %>
-<li class="nav-item">
+<li class="nav-item <%= additional_classes %>">
   <%= link_to 'Feedback', feedback_path, data: { bs_toggle: 'collapse', bs_target: '#feedback-form' }, class: "nav-link" %>
 </li>
