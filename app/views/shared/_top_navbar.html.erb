@@ -15,7 +15,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="collapse navbar-collapse justify-content-md-end" id="user-util-collapse">
+      <div class="d-md-block d-none">
         <ul class="navbar-nav">
           <%= render 'shared/nav_link_list' %>
         </ul>
@@ -29,6 +29,11 @@
         <div class="col-md-8 d-flex justify-content-center justify-content-md-start">
           <div class="h1 my-3"><a href="/">Library Hours</a></div>
         </div>
+      </div>
+      <div class="navbar collapse navbar-collapse" id="user-util-collapse">
+        <ul class="navbar-nav">
+          <%= render 'shared/nav_link_list', additional_classes: 'd-md-none' %>
+        </ul>
       </div>
     </div>
   </div>
