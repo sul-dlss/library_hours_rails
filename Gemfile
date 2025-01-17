@@ -73,3 +73,4 @@ gem "importmap-rails", "~> 2.0"
 gem 'propshaft'
 gem "stimulus-rails", "~> 1.2"
 gem "turbo-rails", "~> 2.0"
+gem "csv"
