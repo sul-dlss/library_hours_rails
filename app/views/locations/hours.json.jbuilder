@@ -18,6 +18,11 @@ json.data do
         json.type c.first.summary.to_s
         json.notes c.first.description.to_s
         json.open c.first.open?
+
+        if c.first.already_open_from_previous_day? || c.first.still_open_on_next_day?
+          json.already_open_from_previous_day c.first.already_open_from_previous_day?
+          json.still_open_on_next_day c.first.still_open_on_next_day?
+        end
       end
     end
   end
