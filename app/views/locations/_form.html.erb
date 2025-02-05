@@ -21,6 +21,11 @@
     <%= f.text_field :slug, class: 'form-control' %>
   </div>
 
+  <div class="mb-3">
+    <%= f.label :note, "Note:" %>
+    <%= f.text_field :note, class: 'form-control' %>
+  </div>
+
   <div class="form-check">
     <%= f.check_box :keeps_hours, class: "form-check-input" %>
     <%= f.label :keeps_hours, "Keeps hours", class: "form-check-label" %>

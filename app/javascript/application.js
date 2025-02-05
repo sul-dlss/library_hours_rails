@@ -8,5 +8,8 @@ import "@hotwired/turbo-rails"
   window.addEventListener(event, function() {
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"][title]')
     const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
+    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+    const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
   });
 });
