@@ -82,6 +82,6 @@ class LibrariesController < ApplicationController
   end
 
   def locations_params
-    [:id, :name, :slug, :keeps_hours, :primary, :_destroy]
+    [:id, :name, :note, :slug, :keeps_hours, :primary, :_destroy]
   end
 end

@@ -39,6 +39,10 @@
             <%= locations_form.label :name, "Name:", required: true, class: 'form-label'  %>
             <%= locations_form.text_field :name, class: 'form-control'%>
           </div>
+          <div class="mb-3">
+            <%= locations_form.label :note, "Note:", class: 'form-label'  %>
+            <%= locations_form.text_field :note, class: 'form-control'%>
+          </div>
           <div class="form-check">
             <%= locations_form.check_box :keeps_hours, class: "form-check-input" %>
             <%= locations_form.label :keeps_hours, "Keeps hours", class: "form-check-label" %>

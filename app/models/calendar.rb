@@ -126,6 +126,14 @@ class Calendar < ApplicationRecord
       dtend >= dtstart.end_of_day - 1.minute
   end
 
+  def already_open_from_previous_day?
+    previous_day_hours&.open? && previous_day_hours.dtend >= previous_day_hours.dtstart.end_of_day - 1.minute
+  end
+
+  def still_open_on_next_day?
+    next_day_hours&.open? && next_day_hours.dtstart == next_day_hours.dtstart.midnight
+  end
+
   def self.week(str)
     start = DateTime.strptime(str.upcase, '%GW%V').to_date - 1.day
 
@@ -133,5 +141,19 @@ class Calendar < ApplicationRecord
   rescue ArgumentError
     # strptime throws an ArgumentError when the date value isn't valid
     nil
+  end
+
+  private
+
+  def previous_day_hours
+    if dtstart == dtstart.midnight
+      @previous_day_hours ||= Hours.new(location, (dtstart - 1.day).to_date..(dtstart - 1.day).to_date).first&.first
+    end
+  end
+
+  def next_day_hours
+    if dtend >= dtstart.end_of_day - 1.minute
+      @next_day_hours ||= Hours.new(location, (dtstart + 1.day).to_date..(dtstart + 1.day).to_date).first&.first
+    end
   end
 end

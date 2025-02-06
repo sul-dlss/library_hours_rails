@@ -28,6 +28,43 @@ RSpec.describe Calendar, type: :model do
     end
   end
 
+  describe '#already_open_from_previous_day?' do
+    let(:location) { create(:location) }
+
+    subject { described_class.new(location:, dtstart: Time.zone.now.midnight, dtend: Time.zone.now.end_of_day) }
+
+    it 'is true if the library opens at midnight and was already open from the previous day' do
+      described_class.create(location:, dtstart: (Time.zone.now - 1.day), dtend: Time.zone.now.midnight)
+
+      expect(subject).to be_already_open_from_previous_day
+    end
+
+    it 'is false if library closed the previous day' do
+      described_class.create(location:, dtstart: (Time.zone.now - 1.day), dtend: Time.zone.now.midnight - 2.minutes)
+
+      expect(subject).not_to be_already_open_from_previous_day
+    end
+  end
+
+  describe '#still_open_on_next_day?' do
+    let(:location) { create(:location) }
+
+    subject { described_class.new(location:, dtstart: Time.zone.now.midnight, dtend: Time.zone.now.end_of_day) }
+
+    it 'is true if the library opens at midnight and was already open from the previous day' do
+      described_class.create(location:, dtstart: Time.zone.now.midnight + 1.day, dtend: Time.zone.now.end_of_day + 5.minutes)
+
+      expect(subject).to be_still_open_on_next_day
+    end
+
+    it 'is false if library closed the previous day' do
+      described_class.create(location:, dtstart: Time.zone.now.end_of_day + 5.hours, dtend: Time.zone.now.end_of_day + 8.hours)
+
+      expect(subject).not_to be_still_open_on_next_day
+    end
+  end
+
+
   describe '.week' do
     it 'parses an ISO 8601 week-based year and week number into a range' do
       expect(described_class.week('2015W05')).to eq Date.parse('2015-01-25')..Date.parse('2015-01-31')

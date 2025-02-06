@@ -17,6 +17,11 @@ json.attributes do
       json.type c.summary.to_s if c.summary
       json.notes c.description.to_s if c.description
       json.closed c.closed?
+
+      if c.already_open_from_previous_day? || c.still_open_on_next_day?
+        json.already_open_from_previous_day c.already_open_from_previous_day?
+        json.still_open_on_next_day c.still_open_on_next_day?
+      end
     end
   end
 end

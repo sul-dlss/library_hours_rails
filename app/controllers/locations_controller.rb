@@ -88,7 +88,7 @@ class LocationsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def location_params
-    params.require(:location).permit(:name, :slug, :library_id, :keeps_hours, :primary)
+    params.require(:location).permit(:name, :slug, :note, :library_id, :keeps_hours, :primary)
   end
 
   def find_location_by_legacy_slug
