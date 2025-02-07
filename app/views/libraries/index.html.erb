@@ -1,14 +1,17 @@
 <% breadcrumb :root %>
-<h1>Library hours</h1>
 
 <%= render 'range' %>
 <% @libraries.each do |library| %>
   <div class="row library-row" itemscope itemtype="http://schema.org/Place">
-    <div class="col-xs-12 col-md-3">
-      <h3 itemprop="name"><%= link_to library.name, library %></h3>
+    <div class="col-xs-12 col-lg-3">
+      <h2 class="h3" itemprop="name"><%= link_to_if library.about_url, library.name, library.about_url %></h2>
+      <div>
+        <%= link_to 'Edit', library, class: 'btn btn-outline-primary' if can?(:edit, library) %>
+        <%= link_to 'Edit hours', library_term_hours_path(library), class: 'btn btn-outline-primary' if can? :edit, @library %>
+      </div>
     </div>
 
-    <div class="col-xs-12 col-md-9">
+    <div class="col-xs-12 col-lg-9">
       <%= render partial: 'location_hours', locals: { locations: library.locations } %>
     </div>
   </div>

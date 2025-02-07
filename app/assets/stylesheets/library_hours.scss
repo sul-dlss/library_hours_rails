@@ -16,7 +16,7 @@
   @include media-breakpoint-down(xs) {
     h4 {
       // same ps py-2 in BS4
-      padding: 0 ($spacer * 0.5);
+      padding: 0;
     }
 
     .pager {
@@ -26,7 +26,7 @@
 }
 
 .closed {
-  color: #dd2121;
+  color: var(--stanford-digital-red);
 }
 
 .open-24h {
@@ -35,6 +35,7 @@
 
 td.location-name,
 th.location-name {
+  font-weight: 600;
   width: 200px;
 }
 
