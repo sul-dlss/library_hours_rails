@@ -9,8 +9,15 @@
     }
   }
 
-  h4 {
-    padding: 0 $spacer;
+  .dropdown-menu {
+    h4 {
+      font-weight: 400;
+      padding: 0 $spacer;
+    }
+
+    .divider:last-child {
+      display: none;
+    }
   }
 
   @include media-breakpoint-down(xs) {
