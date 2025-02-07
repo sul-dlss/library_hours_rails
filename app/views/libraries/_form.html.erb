@@ -30,14 +30,18 @@
     <%= form.label :public, "Display on home page", class: "form-check-label" %>
   </div>
 
-  <h2 class="h4">Library's Locations:</h2>
+  <h2 class="h3 mt-4">Library's Locations:</h2>
 
-  <ul data-nested-form-target="addItem">
+  <ul class="list-unstyled" data-nested-form-target="addItem">
     <%= form.fields_for :locations do |locations_form| %>
-        <li class="inner-container">
+        <li class="inner-container border-bottom border-dark-subtle my-3 py-3">
           <div class="mb-3">
             <%= locations_form.label :name, "Name:", required: true, class: 'form-label'  %>
             <%= locations_form.text_field :name, class: 'form-control'%>
+          </div>
+          <div class="mb-3">
+            <%= locations_form.label :slug, "Slug:", required: true, class: 'form-label'  %>
+            <%= locations_form.text_field :slug, class: 'form-control'%>
           </div>
           <div class="mb-3">
             <%= locations_form.label :note, "Note:", class: 'form-label'  %>

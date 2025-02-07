@@ -1,6 +1,6 @@
-<div class="card date-range d-flex my-3">
-  <div class="card-body py-2 row">
-    <div class="align-items-center col-lg-6 col-xs-12 d-flex justify-content-lg-start justify-content-sm-center pager">
+<div class="card bg-light date-range d-flex my-3">
+  <div class="card-body py-2 row gap-3 gap-lg-0">
+    <div class="align-items-center col-lg-6 col-12 d-flex justify-content-lg-start justify-content-center pager gap-2">
       <%= link_to params.to_unsafe_h.merge(week: (@range.begin - 1.week + 1.day).strftime("%GW%V")) do %>
         <span class="fas fa-arrow-left" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
@@ -12,8 +12,8 @@
       <% end unless @range.end.after?(18.months.from_now) %>
     </div>
 
-    <div class="col-lg-6 col-xs-12">
-      <form method="GET" class="form d-flex justify-content-lg-end justify-content-sm-center">
+    <div class="col-lg-6 col-12">
+      <form method="GET" class="form d-flex gap-1 gap-sm-0 justify-content-lg-end justify-content-center">
 
         <div class="date-input">
           <label for="jump-date" class="visually-hidden">Jump to:</label>
@@ -24,7 +24,7 @@
           </div>
         </div>
 
-        <div class="col-xs-12 d-flex" id="jump-term-group">
+        <div class="d-flex" id="jump-term-group">
           <h2 class="visually-hidden">Jump to quarters &amp; holidays</h2>
           <button id="jump-term" type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
             Quarters &amp; holidays <span class="caret"></span>

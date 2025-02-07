@@ -6,30 +6,6 @@
 @import 'library_hours';
 @import 'global_alert';
 
-.compact-alerts {
-  .alert {
-    padding-top: 0;
-    padding-bottom: 0;
-    margin-top: 0;
-    margin-bottom: 0;
-    border-bottom: none;
-    border-top: none;
-    border-radius: 0;
-
-    &:first-child {
-      padding-top: $spacer;
-      border-radius-top-left: $alert-border-radius;
-      border-radius-top-right: $alert-border-radius;
-    }
-
-    &:last-child {
-      padding-bottom: $spacer;
-      border-radius-bottom-left: $alert-border-radius;
-      border-radius-bottom-right: $alert-border-radius;
-    }
-  }
-}
-
 .editable-error-block {
   // position: absolute;
   color: #fff;
@@ -40,6 +16,18 @@
   border-bottom: 1px dotted $gray-base;
   padding-top: 1rem;
   padding-bottom: 1rem;
+}
+
+.library-row:last-child {
+  border-bottom: none;
+}
+
+.library-row h2 a {
+  text-underline-position: auto;
+}
+
+.library-row .table {
+  --bs-table-border-color: var(--stanford-30-black);
 }
 
 header {
