@@ -16,7 +16,7 @@
   <tbody>
     <% ((locations.with_hours if locations.respond_to? :with_hours) || locations).each do |l| %>
       <tr>
-        <td class="location-name"><%= render 'locations/note_popover', location: l if l.note %><%= l.name %></td>
+        <td class="location-name"><%= render 'locations/note_popover', location: l if l.note.present? %><%= l.name %></td>
 
         <% l.hours(@range).each do |calendars| %>
           <td class="hours <%= 'exceptions' if calendars.any?(&:persisted?) %> <%= 'holiday' if Term.holiday? calendars.first.date %>" itemprop="openingHoursSpecification" itemscope itemtype="http://schema.org/OpeningHoursSpecification">
