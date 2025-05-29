@@ -238,6 +238,7 @@ GEM
     mini_portile2 (2.8.9)
     minitest (5.25.5)
     msgpack (1.8.0)
+    mysql2 (0.5.6)
     net-http (0.6.0)
       uri
     net-imap (0.5.8)
@@ -266,7 +267,6 @@ GEM
     parser (3.3.8.0)
       ast (~> 2.4.1)
       racc
-    pg (1.5.9)
     pp (0.6.2)
       prettyprint
     prettyprint (0.2.0)
@@ -469,9 +469,9 @@ DEPENDENCIES
   honeybadger
   importmap-rails (~> 2.0)
   jbuilder (~> 2.7)
+  mysql2
   nokogiri (>= 1.7.1)
   okcomputer
-  pg
   propshaft
   puma (~> 6.0)
   rack-attack
