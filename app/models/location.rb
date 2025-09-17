@@ -5,6 +5,8 @@ class Location < ApplicationRecord
   has_many :calendars
   has_many :term_hours
 
+  default_scope { order(primary: :desc, name: :asc) }
+
   scope :with_hours, -> { where(keeps_hours: true) }
   scope :without_hours, -> { where(keeps_hours: false) }
 
