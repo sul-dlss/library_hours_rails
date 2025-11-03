@@ -1,19 +1,26 @@
-// Entry point for your Sass build
+@import url("variables.css");
+@import url("library_hours.css");
+@import url('global_alert.css');
 
-// Custom bootstrap variables must be set or imported *before* bootstrap.
-@import 'variables';
-@import 'bootstrap/scss/bootstrap';
-@import 'library_hours';
-@import 'global_alert';
+.dropdown-menu {
+  h4 {
+    font-weight: 400;
+    padding: 3px 20px;
+  }
+
+  .divider:last-child {
+    display: none;
+  }
+}
 
 .editable-error-block {
-  // position: absolute;
+  /* position: absolute; */
   color: #fff;
   z-index: 1000;
 }
 
 .library-row {
-  border-bottom: 1px dotted $gray-base;
+  border-bottom: 1px dotted #000;
   padding-top: 1rem;
   padding-bottom: 1rem;
 }

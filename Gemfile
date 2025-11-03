@@ -68,7 +68,6 @@ gem 'tophat'
 gem 'recaptcha'
 gem 'rack-attack'
 
-gem "cssbundling-rails", "~> 1.1"
 gem "importmap-rails", "~> 2.0"
 gem 'propshaft'
 gem "stimulus-rails", "~> 1.2"

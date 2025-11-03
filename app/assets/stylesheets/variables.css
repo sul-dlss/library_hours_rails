@@ -1,0 +1,14 @@
+/* 1rem = 16px in BS4. .94 approximates the previous font size which was specified as 15px */
+:root {
+  --bs-body-font-size: 0.94rem;
+
+  --bs-body-line-height: 1.5;
+
+  --bs-heading1-size: calc(var(--bs-body-font-size) * 2.986);
+  --bs-heading2-size: calc(var(--bs-body-font-size) * 2.074);
+  --bs-heading3-size: calc(var(--bs-body-font-size) * 1.728);
+  --bs-heading4-size: calc(var(--bs-body-font-size) * 1.2);
+  --bs-heading-font-weight: 100;
+
+  --bs-global-alert-color: rgb(204, 0, 0);
+}
