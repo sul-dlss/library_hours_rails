@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class FeedbackFormsController < ApplicationController
-  skip_authorization_check  # anyone can submit feedback
+  skip_authorization_check # anyone can submit feedback
 
   def new; end
 
@@ -10,7 +10,8 @@ class FeedbackFormsController < ApplicationController
 
     if validate
       FeedbackMailer.submit_feedback(params, request.remote_ip).deliver_now
-      flash[:success] = t('library-hours.feedback_form.success')
+      # Disabled this rubocop due to https://github.com/rubocop/rubocop-rails/issues/1243
+      flash[:success] = t('library-hours.feedback_form.success') # rubocop:disable Rails/ActionControllerFlashBeforeRender
     end
 
     respond_to do |format|

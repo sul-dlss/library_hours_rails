@@ -33,7 +33,6 @@ class SpreadsheetsController < ApplicationController
   # POST /spreadsheets
   # POST /spreadsheets.json
   def create
-    params['spreadsheet']['attachment'].rewind if params['spreadsheet'] && params['spreadsheet']['attachment']
     @spreadsheet = Spreadsheet.new(spreadsheet_params)
 
     respond_to do |format|
@@ -75,6 +74,6 @@ class SpreadsheetsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def spreadsheet_params
-    params.require(:spreadsheet).permit(:attachment)
+    params.expect(spreadsheet: [:attachment])
   end
 end

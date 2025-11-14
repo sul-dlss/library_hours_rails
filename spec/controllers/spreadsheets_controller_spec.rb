@@ -131,14 +131,9 @@ RSpec.describe SpreadsheetsController, type: :controller do
     end
 
     context 'with invalid params' do
-      it 'assigns a newly created but unsaved spreadsheet as @spreadsheet' do
-        post :create, params: { spreadsheet: invalid_attributes }, session: valid_session
-        expect(assigns(:spreadsheet)).to be_a_new(Spreadsheet)
-      end
-
-      it "re-renders the 'new' template" do
-        post :create, params: { spreadsheet: invalid_attributes }, session: valid_session
-        expect(response).to render_template('new')
+      it 'raises an error' do
+        expect { post :create, params: { spreadsheet: invalid_attributes }, session: valid_session }
+          .to raise_error ActionController::ParameterMissing
       end
     end
   end

@@ -146,14 +146,10 @@ class Calendar < ApplicationRecord
   private
 
   def previous_day_hours
-    if dtstart == dtstart.midnight
-      @previous_day_hours ||= Hours.new(location, (dtstart - 1.day).to_date..(dtstart - 1.day).to_date).first&.first
-    end
+    @previous_day_hours ||= Hours.new(location, (dtstart - 1.day).to_date..(dtstart - 1.day).to_date).first&.first if dtstart == dtstart.midnight
   end
 
   def next_day_hours
-    if dtend >= dtstart.end_of_day - 1.minute
-      @next_day_hours ||= Hours.new(location, (dtstart + 1.day).to_date..(dtstart + 1.day).to_date).first&.first
-    end
+    @next_day_hours ||= Hours.new(location, (dtstart + 1.day).to_date..(dtstart + 1.day).to_date).first&.first if dtend >= dtstart.end_of_day - 1.minute
   end
 end

@@ -1,18 +1,19 @@
 inherit_from:
   - .rubocop_todo.yml
 
-require:
+plugins:
   - rubocop-rails
   - rubocop-rspec
   - rubocop-performance
 
 AllCops:
   Exclude:
-    - 'bin/*'
-    - 'config/**/*'
-    - 'db/**/*'
+    - "bin/*"
+    - "config/**/*"
+    - "db/**/*"
+    - "vendor/**/*"
   NewCops: enable
-  TargetRubyVersion: 3.0
+  TargetRubyVersion: 3.4
 
 Rails:
   Enabled: true

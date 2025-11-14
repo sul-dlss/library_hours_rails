@@ -40,11 +40,11 @@ class LegacySpreadsheetParser
 
   def self.generate(libraries, date_range = nil)
     locations = Array(libraries).map(&:locations).flatten.select(&:keeps_hours)
-    date_range ||= Time.zone.now.to_date..(Time.zone.now + 1.year).to_date
+    date_range ||= Time.zone.now.to_date..1.year.from_now.to_date
     CSV.generate do |csv|
       csv << ['library hours']
-      csv << ['', '', '', ''] + locations.map { |l| ["#{l.library.slug} / #{l.slug}", ''] }.flatten
-      csv << %w[Date Day Type Notes] + locations.map { %w[Open Close] }.flatten
+      csv << (['', '', '', ''] + locations.map { |l| ["#{l.library.slug} / #{l.slug}", ''] }.flatten)
+      csv << (%w[Date Day Type Notes] + locations.map { %w[Open Close] }.flatten)
 
       date_range.each do |d|
         c = Calendar.for_date(d).first || Calendar.new
@@ -61,7 +61,7 @@ class LegacySpreadsheetParser
           end
         end
 
-        csv << row + location_hours.flatten
+        csv << (row + location_hours.flatten)
       end
     end
   end
@@ -94,15 +94,15 @@ class LegacySpreadsheetParser
   end
 
   def dates
-    @dates ||= data.map(&:first).reject(&:blank?).map do |x|
+    @dates ||= data.map(&:first).compact_blank.filter_map do |x|
       Date.parse(x)
                rescue StandardError
                  nil
-    end .compact
+    end
   end
 
   def locations
-    locations_row.reject(&:blank?)
+    locations_row.compact_blank
   end
 
   def locations_row
@@ -145,7 +145,7 @@ class LegacySpreadsheetParser
   def fetch_location(location)
     @locations_cache = {}
 
-    @locations_cache[location] ||= if %r{/}.match?(location)
+    @locations_cache[location] ||= if location.include?('/')
                                      lib, loc = location.split('/', 2).map(&:strip)
                                      Library.find(lib).locations.find(loc)
                                    else

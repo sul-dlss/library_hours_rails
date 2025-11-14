@@ -76,6 +76,7 @@ RSpec.describe LibrariesController, type: :controller do
 
     describe '@range' do
       let(:year) { Time.zone.now.year }
+
       it 'defaults to the current week' do
         get :index, params: {}, session: valid_session
         expect(assigns(:range)).to eq(Time.zone.today.beginning_of_week(:sunday).to_date..(Time.zone.today.end_of_week(:sunday).to_date))
@@ -108,19 +109,19 @@ RSpec.describe LibrariesController, type: :controller do
 
       it 'restricts the range to an 18 month period' do
         expect do
-          get :index, params: { from: "#{year}-02-03", to: "#{year+4}-03-02" }, session: valid_session
+          get :index, params: { from: "#{year}-02-03", to: "#{year + 4}-03-02" }, session: valid_session
         end.to raise_error(ActionController::BadRequest)
       end
 
       it 'restricts the beginning of the range to an 48 month period' do
         expect do
-          get :index, params: { from: "#{year-5}-02-03", to: "#{year-5}-03-02" }, session: valid_session
+          get :index, params: { from: "#{year - 5}-02-03", to: "#{year - 5}-03-02" }, session: valid_session
         end.to raise_error(ActionController::BadRequest)
       end
 
       it 'restricts the end of the range to an 24 month period' do
         expect do
-          get :index, params: { from: "#{year+3}-02-03", to: "#{year+3}-03-02" }, session: valid_session
+          get :index, params: { from: "#{year + 3}-02-03", to: "#{year + 3}-03-02" }, session: valid_session
         end.to raise_error(ActionController::BadRequest)
       end
     end

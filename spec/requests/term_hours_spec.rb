@@ -58,7 +58,6 @@ RSpec.describe 'TermHours', type: :request do
     end
   end
 
-
   describe 'updating an existing object' do
     let(:term_hour) { create(:term_hour, term:, location:) }
 

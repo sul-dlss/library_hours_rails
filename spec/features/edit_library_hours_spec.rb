@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Edit library hours', js: true do
+RSpec.describe 'Edit library hours', :js do
   context 'when logged in' do
     let(:library) { create(:location, keeps_hours: true).library }
 

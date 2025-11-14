@@ -61,6 +61,6 @@ class TermsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def term_params
-    params.require(:term).permit(:dtstart, :dtend, :name, :holiday)
+    params.expect(term: %i[dtstart dtend name holiday])
   end
 end

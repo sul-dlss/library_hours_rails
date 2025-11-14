@@ -37,7 +37,7 @@ RSpec.describe Library, type: :model do
       let(:location) { build(:location) }
 
       it 'is nil' do
-        expect(subject.primary_location).to eq nil
+        expect(subject.primary_location).to be_nil
       end
     end
   end

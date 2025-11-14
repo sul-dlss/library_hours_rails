@@ -5,22 +5,20 @@ class CalendarsController < ApplicationController
   load_and_authorize_resource :location, through: :library
   load_and_authorize_resource through: :location
 
-  def new
-    @calendar.dtstart = Time.zone.parse(params[:day])
-  end
-
-  def edit
-  end
-
-  def show
-  end
-
   # This operates as the show route for the non-persisted calendar entry
   def index
     day = Time.zone.parse(params[:day]).to_date
     @calendar = @location.hours(day..day).default_for_date(day)
     render 'show'
   end
+
+  def show; end
+
+  def new
+    @calendar.dtstart = Time.zone.parse(params[:day])
+  end
+
+  def edit; end
 
   def create
     @calendar.dtstart = Time.zone.parse(params[:day])
@@ -32,9 +30,9 @@ class CalendarsController < ApplicationController
 
     @calendar.update_hours(date_params[:time])
 
-    unless @calendar.save
-      render :new
-    end
+    return if @calendar.save
+
+    render :new
   end
 
   def update
@@ -44,14 +42,14 @@ class CalendarsController < ApplicationController
 
     @calendar.update_hours(date_params[:time])
 
-    unless @calendar.save
-      render :edit
-    end
+    return if @calendar.save
+
+    render :edit
   end
 
   private
 
   def date_params
-    params.require(:date).permit(:day, :time)
+    params.expect(date: %i[day time])
   end
 end

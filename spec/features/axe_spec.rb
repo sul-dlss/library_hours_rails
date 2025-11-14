@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 require 'axe-rspec'
 RSpec.describe 'Accessibility testing', :js do
