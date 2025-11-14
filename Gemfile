@@ -27,7 +27,7 @@ end
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug", platforms: %i[ mri mswin mswin64 mingw x64_mingw ], require: "debug/prelude"
+  gem 'debug', require: 'debug/prelude'
 
   gem 'capybara', '>= 3.26'
   gem 'factory_bot_rails'
@@ -68,8 +68,8 @@ gem 'tophat'
 gem 'recaptcha'
 gem 'rack-attack'
 
-gem "importmap-rails", "~> 2.0"
+gem 'importmap-rails', '~> 2.0'
 gem 'propshaft'
-gem "stimulus-rails", "~> 1.2"
-gem "turbo-rails", "~> 2.0"
-gem "csv"
+gem 'stimulus-rails', '~> 1.2'
+gem 'turbo-rails', '~> 2.0'
+gem 'csv'
