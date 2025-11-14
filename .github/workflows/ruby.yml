@@ -2,28 +2,28 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   tests:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ruby: ['3.3', '3.4']
+        ruby: ["3.4"]
     steps:
-    - uses: actions/checkout@v5
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        bundler-cache: true
-        ruby-version: ${{ matrix.ruby }}
-    # Add or replace database setup steps here
-    - name: Set up database schema
-      run: bin/rails db:schema:load
-    # Add or replace test runners here
-    - name: Run tests
-      run: bin/rake
-      env:
-        TZ: America/Los_Angeles
+      - uses: actions/checkout@v5
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+          ruby-version: ${{ matrix.ruby }}
+      # Add or replace database setup steps here
+      - name: Set up database schema
+        run: bin/rails db:schema:load
+      # Add or replace test runners here
+      - name: Run tests
+        run: bin/rake
+        env:
+          TZ: America/Los_Angeles
