@@ -1,21 +1,17 @@
-// Import all individual stylesheets here
-@import "base";
-@import "layout";
-
 .date-range {
-  @include media-breakpoint-up(sm) {
+  @media (min-width: 576px) {
     .date-input {
-      padding-right: ($spacer * 0.75);
+      padding-right: (var(--bs-spacer) * 0.75);
     }
   }
 
   h4 {
-    padding: 0 $spacer;
+    padding: 0 var(--bs-spacer);
   }
 
-  @include media-breakpoint-down(xs) {
+  @media (max-width: 575.98px) {
     h4 {
-      // same ps py-2 in BS4
+      /* same ps py-2 in BS4 */
       padding: 0;
     }
 
@@ -50,20 +46,22 @@ th.hours {
   border-top: none;
 }
 
-td.exceptions {
-  //  @extend .alert-info;
-}
+/* td.exceptions {
+  @extend .alert-info;
+} */
 
 td.holiday,
 th.holiday {
-  @extend .alert-danger;
+  color: var(--bs-danger-text);
+  background-color: var(--bs-danger-bg);
+  border-color: var(--bs-danger-border);
 }
 
 th small {
   font-size: 70%;
 }
 
-// Override editable library background images
+/* Override editable library background images */
 .editableform-loading,
 .editable-clear-x {
   background: none !important;
@@ -75,5 +73,5 @@ th small {
 
 .table .holiday {
   background-color: var(--stanford-fog-light);
-  font-weight: semi-bold;
+  font-weight: var(--bs-font-weight-semi-bold);
 }

@@ -138,8 +138,6 @@ GEM
       ostruct
     connection_pool (2.5.4)
     crass (1.0.6)
-    cssbundling-rails (1.4.3)
-      railties (>= 6.0.0)
     csv (3.3.5)
     date (3.5.0)
     debug (1.11.0)
@@ -459,7 +457,6 @@ DEPENDENCIES
   capistrano-rails
   capybara (>= 3.26)
   config
-  cssbundling-rails (~> 1.1)
   csv
   debug
   dlss-capistrano
