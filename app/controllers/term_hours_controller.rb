@@ -75,6 +75,6 @@ class TermHoursController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def term_hour_params
-    params.require(:term_hour).permit(:term_id, :sunday, :monday, :tuesday, :wednesday, :thursday, :friday, :saturday)
+    params.expect(term_hour: %i[term_id sunday monday tuesday wednesday thursday friday saturday])
   end
 end

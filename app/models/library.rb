@@ -7,6 +7,7 @@ class Library < ApplicationRecord
   validates :name, presence: true
 
   extend FriendlyId
+
   friendly_id :slug, use: %i[slugged finders history]
 
   def sort_key
@@ -14,7 +15,7 @@ class Library < ApplicationRecord
 
     name
   end
-  
+
   def primary_location
     @primary_location ||= locations.find(&:primary)
   end

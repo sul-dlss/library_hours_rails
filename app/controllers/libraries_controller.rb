@@ -78,7 +78,7 @@ class LibrariesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def library_params
-    params.require(:library).permit(:name, :slug, :about_url, :public, locations_attributes: locations_params)
+    params.expect(library: [:name, :slug, :about_url, :public, locations_attributes: locations_params])
   end
 
   def locations_params

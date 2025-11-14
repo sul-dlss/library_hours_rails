@@ -60,10 +60,10 @@ RSpec.describe Term, type: :model do
       create(:holiday, dtstart: Date.new(2015, 2, 2).to_time.beginning_of_day,
                        dtend: Date.new(2015, 2, 2).to_time.end_of_day)
 
-      expect(Term.holiday?(Date.new(2015, 2, 2))).to eq true
+      expect(Term.holiday?(Date.new(2015, 2, 2))).to be true
 
-      expect(Term.holiday?(Date.new(2015, 2, 1))).to eq false
-      expect(Term.holiday?(Date.new(2015, 2, 3))).to eq false
+      expect(Term.holiday?(Date.new(2015, 2, 1))).to be false
+      expect(Term.holiday?(Date.new(2015, 2, 3))).to be false
     end
   end
 end

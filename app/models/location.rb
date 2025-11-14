@@ -13,6 +13,7 @@ class Location < ApplicationRecord
   validates :name, presence: true
 
   extend FriendlyId
+
   friendly_id :name, use: %i[slugged finders scoped history], scope: :library
 
   def default_hours(range)

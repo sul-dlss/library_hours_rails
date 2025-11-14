@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Edit hours for terms', js: true do
+RSpec.describe 'Edit hours for terms', :js do
   context 'when logged in' do
     let(:location) { create(:location, keeps_hours: true) }
     let(:library) { location.library }

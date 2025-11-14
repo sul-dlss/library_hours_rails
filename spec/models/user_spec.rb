@@ -20,7 +20,7 @@ RSpec.describe User do
       subject { User.from_env('REMOTE_USER' => 'jstanford') }
 
       it 'sets empty group list' do
-        expect(subject.ldap_groups).to match_array []
+        expect(subject.ldap_groups).to be_empty
       end
     end
   end

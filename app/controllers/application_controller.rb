@@ -31,11 +31,10 @@ class ApplicationController < ActionController::Base
         range_start.to_date..range_end.date if range_end
       end
     end
-    @range ||= begin
-      if params[:from] && from = Time.zone.parse(params[:from])
-        from.to_date..from.to_date
-      end
-    end
+    @range ||= if params[:from] && (from = Time.zone.parse(params[:from]))
+                 from.to_date..from.to_date
+               end
+
     @range ||= Time.zone.parse(params[:when]).to_date..Time.zone.parse(params[:when]).to_date if params[:when]
     @range ||= Calendar.week(params[:week]) if params[:week]
     @range ||= default

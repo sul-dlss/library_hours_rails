@@ -16,7 +16,7 @@ class Spreadsheet < ApplicationRecord
   end
 
   def find_location(location)
-    if %r{/}.match?(location)
+    if location.include?('/')
       lib, loc = location.split('/', 2).map(&:strip)
       Library.find(lib).locations.find(loc)
     else

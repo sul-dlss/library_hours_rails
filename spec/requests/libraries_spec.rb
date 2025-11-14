@@ -26,7 +26,7 @@ RSpec.describe 'Libraries', type: :request do
       get libraries_path(format: :json)
       expect(response).to have_http_status(200)
 
-      data = JSON.parse(response.body).with_indifferent_access
+      data = response.parsed_body.with_indifferent_access
 
       expect(data.dig(:data, 0, :attributes, :primary_location)).to eq("green/#{location.slug}")
     end
@@ -35,7 +35,7 @@ RSpec.describe 'Libraries', type: :request do
       get libraries_path(format: :json)
       expect(response).to have_http_status(200)
 
-      data = JSON.parse(response.body).with_indifferent_access
+      data = response.parsed_body.with_indifferent_access
 
       expect(data.dig(:data, 0, :attributes, :hours)).to include(hash_including(type: 'Open'))
     end
@@ -44,7 +44,7 @@ RSpec.describe 'Libraries', type: :request do
       get libraries_path(format: :json)
       expect(response).to have_http_status(200)
 
-      data = JSON.parse(response.body).with_indifferent_access
+      data = response.parsed_body.with_indifferent_access
 
       expect(data.dig(:included, 0, :id)).to eq(data.dig(:data, 0, :attributes, :primary_location))
       expect(data.dig(:included, 0, :attributes)).to include(name: location.name, primary: true)

@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe Location do
   subject { create(:location) }
-  let(:term) { create(:term, dtend: Time.zone.now + 1.year) }
+  let(:term) { create(:term, dtend: 1.year.from_now) }
 
   describe '#next_open_hours' do
     before do
