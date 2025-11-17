@@ -40,7 +40,7 @@ class TermHoursController < ApplicationController
         format.json { head :no_content }
       else
         format.html { render :new }
-        format.json { render json: @term_hour.errors, status: :unprocessable_entity }
+        format.json { render json: @term_hour.errors, status: :unprocessable_content }
       end
     end
   end
@@ -56,7 +56,7 @@ class TermHoursController < ApplicationController
         format.json { head :no_content }
       else
         format.html { render :edit }
-        format.json { render json: @term_hour.errors, status: :unprocessable_entity }
+        format.json { render json: @term_hour.errors, status: :unprocessable_content }
       end
     end
   end

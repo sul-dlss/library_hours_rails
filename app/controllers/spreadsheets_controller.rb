@@ -41,7 +41,7 @@ class SpreadsheetsController < ApplicationController
         format.json { render :show, status: :created, location: @spreadsheet }
       else
         format.html { render :new }
-        format.json { render json: @spreadsheet.errors, status: :unprocessable_entity }
+        format.json { render json: @spreadsheet.errors, status: :unprocessable_content }
       end
     end
   end
@@ -55,7 +55,7 @@ class SpreadsheetsController < ApplicationController
         format.json { render :show, status: :ok, location: @spreadsheet }
       else
         format.html { render :edit }
-        format.json { render json: @spreadsheet.errors, status: :unprocessable_entity }
+        format.json { render json: @spreadsheet.errors, status: :unprocessable_content }
       end
     end
   end
