@@ -28,7 +28,7 @@ class TermsController < ApplicationController
         format.json { render :show, status: :created, location: @term }
       else
         format.html { render :new }
-        format.json { render json: @term.errors, status: :unprocessable_entity }
+        format.json { render json: @term.errors, status: :unprocessable_content }
       end
     end
   end
@@ -42,7 +42,7 @@ class TermsController < ApplicationController
         format.json { render :show, status: :ok, location: @term }
       else
         format.html { render :edit }
-        format.json { render json: @term.errors, status: :unprocessable_entity }
+        format.json { render json: @term.errors, status: :unprocessable_content }
       end
     end
   end

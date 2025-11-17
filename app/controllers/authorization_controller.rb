@@ -8,7 +8,7 @@ class AuthorizationController < ApplicationController
 
   def login
     flash[:success] = 'You have been successfully logged in.'
-    redirect_back(fallback_location: params[:referrer] || root_url)
+    redirect_back_or_to(params[:referrer] || root_url)
   end
 
   def logout
