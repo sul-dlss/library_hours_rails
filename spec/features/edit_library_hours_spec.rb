@@ -12,7 +12,7 @@ RSpec.describe 'Edit library hours', :js do
     end
 
     it 'updates the hours' do
-      within('td.hours:nth-of-type(2)') do
+      within('.desktop-hours td.hours:nth-of-type(2)') do
         click_link 'n/a'
         fill_in 'date_time', with: '9AM-4PM'
         click_button 'button'

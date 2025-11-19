@@ -1,4 +1,4 @@
-<table class="table table-responsive weekly-hours">
+<table class="table table-responsive weekly-hours d-none d-md-block desktop-hours">
 <div class="editable-error-block"></div>
   <thead>
     <tr>
@@ -33,3 +33,4 @@
     <% end %>
   </tbody>
 </table>
+<%= render partial: 'libraries/location_hours_mobile', locals: { locations: } %>

@@ -1,0 +1,40 @@
+<% ((locations.with_hours if locations.respond_to? :with_hours) || locations).each do |l| %>
+  <h3 class="location-name h4 d-lg-none"><%= render 'locations/note_popover', location: l if l.note.present? %><%= l.name %></h3>
+  <table class="table table-responsive mobile-hours weekly-hours d-lg-none">
+    <div class="editable-error-block"></div>
+    <thead>
+      <tr>
+        <% @range.to_a.each do |d| %>
+          <th class="hours <%= 'holiday' if Term.holiday? d %>">
+            <% if Term.holiday? d %>
+              <div class="holiday-text"><small><%= Term.holidays.for_date(d).first.name %></small></div>
+            <% end %>
+            <%= l(d, format: :very_short) %>
+          </th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <% l.hours(@range).each do |calendars| %>
+            <td class="hours <%= 'exceptions' if calendars.any?(&:persisted?) %> <%= 'holiday' if Term.holiday? calendars.first.date %>" itemprop="openingHoursSpecification" itemscope itemtype="http://schema.org/OpeningHoursSpecification">
+                <div class="d-flex justify-space-between gap-5">
+                  <div>
+                    <span itemprop="validFrom" content="<%= l calendars.first.date %>" aria-hidden="true"></span>
+                    <span itemprop="validThrough" content="<%= l calendars.first.date %>" aria-hidden="true"></span>
+                    <% calendars.each do |d|  %>
+                    <span data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="<%= [d.summary, d.description].reject(&:blank?).compact.join(" / ") %>">
+                      <%= render 'calendars/time', calendar: d %>
+                    </span>
+                  </div>
+                  <% if Term.holiday? calendars.first.date %>
+                    <div class="mobile-holiday fw-semibold"><%= Term.holidays.for_date(calendars.first.date).first.name %></div>
+                  <% end %>
+                </div>
+              <% end %>
+            </td>
+          <% end %>
+        </tr>
+    </tbody>
+  </table>
+<% end %>
