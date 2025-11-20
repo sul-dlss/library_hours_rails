@@ -75,3 +75,32 @@ th small {
   background-color: var(--stanford-fog-light);
   font-weight: var(--bs-font-weight-semi-bold);
 }
+
+.mobile-holiday {
+  display: none;
+}
+
+@media (max-width: 432px) {
+  td.hours,
+  th.hours {
+    display: block;
+  }
+
+  .holiday-text {
+    display: none;
+  }
+
+  .mobile-holiday {
+    display: block;
+  }
+
+  .table {
+    display: flex;
+    flex-direction: row;
+    --bs-border-width: 0;
+  }
+
+  td.hours {
+    width: auto;
+  }
+}
