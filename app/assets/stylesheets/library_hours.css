@@ -32,12 +32,12 @@
 td.location-name,
 th.location-name {
   font-weight: 600;
-  width: 200px;
+  width: 12.5rem;
 }
 
 td.hours,
 th.hours {
-  width: 100px;
+  width: 6.25rem;
   padding: 0.5rem;
 }
 
