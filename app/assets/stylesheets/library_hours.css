@@ -37,7 +37,7 @@ th.location-name {
 
 td.hours,
 th.hours {
-  width: 100px;
+  width: 6.25rem;
   padding: 0.5rem;
 }
 
@@ -84,6 +84,7 @@ th small {
   td.hours,
   th.hours {
     display: block;
+    width: 5rem;
   }
 
   .holiday-text {
