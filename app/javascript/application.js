@@ -6,7 +6,7 @@ import "@hotwired/turbo-rails"
 
 ['load', 'turbo:load'].forEach(event => {
   window.addEventListener(event, function() {
-    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"][title]')
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"][data-bs-title]:not([data-bs-title=""]')
     const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 
     const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
