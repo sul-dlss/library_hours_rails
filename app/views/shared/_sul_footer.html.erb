@@ -38,6 +38,9 @@
                 >My Account <i class="bi bi-arrow-right-short"></i
               ></a>
             </li>
+            <li>
+              <%= link_to "Staff login", login_path(referrer: request.original_url) %>
+            </li>
           </ul>
         </section>
 
