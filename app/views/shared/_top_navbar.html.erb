@@ -1,24 +1,44 @@
 <nav id="skip-link" role="navigation" aria-label="Skip links">
-  <a class="visually-hidden-focusable rounded-bottom m-1 py-2 px-3"
-     href="#main-container">Skip to main content</a>
+  <a
+    class="visually-hidden-focusable rounded-bottom m-1 py-2 px-3"
+    href="#main-container"
+  >
+    Skip to main content
+  </a>
 </nav>
+
 <header>
   <div class="container">
-    <a class="su-brand-bar__logo" href="https://www.stanford.edu">Stanford University</a>
+    <a class="su-brand-bar__logo" href="https://www.stanford.edu">
+      Stanford University
+    </a>
   </div>
+
   <nav class="navbar navbar-expand-md bg-dark" role="navigation">
     <div class="container">
-      <a class="mb-0 navbar-brand navbar-logo" href="https://library.stanford.edu">Stanford University Libraries</a>
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-bs-toggle="collapse"
-        data-target="#user-util-collapse" data-bs-target="#user-util-collapse" aria-controls="user-util-collapse"
-        aria-expanded="false" aria-label="Toggle navigation">
+      <a
+        class="mb-0 navbar-brand navbar-logo"
+        href="https://library.stanford.edu"
+      >
+        Stanford University Libraries
+      </a>
+
+      <button
+        class="navbar-toggler navbar-toggler-right"
+        type="button"
+        data-toggle="collapse"
+        data-bs-toggle="collapse"
+        data-target="#user-util-collapse"
+        data-bs-target="#user-util-collapse"
+        aria-controls="user-util-collapse"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="d-md-block d-none">
-        <ul class="navbar-nav">
-          <%= render 'shared/nav_link_list' %>
-        </ul>
+        <ul class="navbar-nav"><%= render 'shared/nav_link_list' %></ul>
       </div>
     </div>
   </nav>
@@ -30,13 +50,18 @@
           <h1 class="my-3"><a href="/">Library Hours</a></h1>
         </div>
       </div>
-      <div class="navbar collapse navbar-collapse" id="user-util-collapse">
+
+      <div
+        class="navbar collapse navbar-collapse bg-dark"
+        id="user-util-collapse"
+      >
         <ul class="navbar-nav">
           <%= render 'shared/nav_link_list', additional_classes: 'd-md-none' %>
         </ul>
       </div>
     </div>
   </div>
+
   <% unless current_page? feedback_path %>
     <div id="feedback-form" class="feedback-form-container collapse">
       <%= render "shared/feedback_forms/form" %>
