@@ -8,8 +8,16 @@ require 'rspec/rails'
 require 'capybara/rails'
 require 'selenium-webdriver'
 
+Capybara.register_driver :selenium_chrome_headless do |app|
+  browser_options = Selenium::WebDriver::Chrome::Options.new.tap do |opts|
+    opts.args << '--window-size=1920,1080' # Set your desired width and height
+    opts.args << '--headless'
+    opts.args << '--disable-gpu'
+    # Add other necessary arguments here
+  end
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options: browser_options)
+end
 Capybara.javascript_driver = :selenium_chrome_headless
-
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
