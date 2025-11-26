@@ -1,9 +1,4 @@
 <div class="container">
-  <% if Settings.FEEDBACK_ALERT %>
-  <p class="feedback-alert">
-    <%= t('blacklight.feedback_form.feedback_alert_html', href: mail_to('infocenter@stanford.edu')) %>
-  </p>
-  <% end %>
   <%= form_tag feedback_form_path, method: :post, class:"feedback-form" do %>
   <div class="row mt-4">
     <div class="offset-md-2 col-md-8 mb-2">
