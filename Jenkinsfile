@@ -28,7 +28,8 @@ pipeline {
           gem install bundler
 
           bundle config --global gems.contribsys.com $SIDEKIQ_PRO_SECRET
-          bundle install --without production
+          bundle config set without 'production'
+          bundle install
 
           # Deploy it
           bundle exec cap $DEPLOY_ENVIRONMENT deploy
@@ -74,7 +75,8 @@ pipeline {
           gem install bundler
 
           bundle config --global gems.contribsys.com $SIDEKIQ_PRO_SECRET
-          bundle install --without production
+          bundle config set without 'production'
+          bundle install
 
           # Deploy it
           bundle exec cap $DEPLOY_ENVIRONMENT deploy
