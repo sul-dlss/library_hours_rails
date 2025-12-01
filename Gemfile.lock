@@ -455,6 +455,7 @@ PLATFORMS
 DEPENDENCIES
   axe-core-rspec
   bootsnap (>= 1.1.0)
+  bundler-audit
   cancancan
   capistrano
   capistrano-passenger

@@ -22,6 +22,8 @@ jobs:
       # Add or replace database setup steps here
       - name: Set up database schema
         run: bin/rails db:schema:load
+      - name: Audit dependencies
+        run: bin/bundler-audit
       # Add or replace test runners here
       - name: Run tests
         run: bin/rake
