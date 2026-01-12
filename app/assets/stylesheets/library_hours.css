@@ -1,12 +1,12 @@
 .date-range {
   @media (min-width: 576px) {
     .date-input {
-      padding-right: (var(--bs-spacer) * 0.75);
+      padding-right: 0.75rem;
     }
   }
 
   h4 {
-    padding: 0 var(--bs-spacer);
+    padding: 0 1rem;
   }
 
   @media (max-width: 575.98px) {
