@@ -7,17 +7,19 @@
 <h1><%= @library.name %> hours</h1>
 
 <% if @library.about_url %>
-  <%= link_to @library.about_url, class: 'location-and-access' do %>
+  <%= link_to root_url, class: 'location-and-access' do %>
     <span class="fas fa-arrow-left" aria-hidden="true"></span>
-    <%= t(:'location_and_access') %>
+    All library hours
   <% end %>
 <% end %>
 
-<% if current_user && current_user.superadmin? %>
-<%= link_to 'Edit library', edit_library_path(@library), class: 'btn btn-secondary' if can? :edit, @library %>
-<%= link_to 'Edit hours', library_term_hours_path(@library), class: 'btn btn-secondary' if can? :edit, @library %>
-<% else %>
-<%= link_to 'Edit', library_term_hours_path(@library), class: 'btn btn-secondary' if can? :edit, @library %>
+<% if can?(:edit, @library) %>
+  <div class="float-end">
+    <% if current_user && current_user.superadmin? %>
+      <%= link_to 'Edit library', edit_library_path(@library), class: 'btn btn-outline-secondary' %>
+    <% end %>
+    <%= link_to 'Edit hours', library_term_hours_path(@library), class: 'btn btn-outline-secondary'%>
+  </div>
 <% end %>
 
 <%= render 'range' %>
