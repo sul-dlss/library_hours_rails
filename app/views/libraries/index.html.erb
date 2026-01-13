@@ -5,10 +5,12 @@
   <div class="row library-row" itemscope itemtype="http://schema.org/Place">
     <div class="col-xs-12 col-lg-3">
       <h2 class="h3" itemprop="name"><%= link_to_if library.about_url, library.name, library.about_url %></h2>
-      <div>
-        <%= link_to 'Edit', library, class: 'btn btn-outline-secondary btn-sm' if can?(:edit, library) %>
-        <%= link_to 'Edit hours', library_term_hours_path(library), class: 'btn btn-outline-secondary btn-sm' if can? :edit, @library %>
-      </div>
+      <% if can?(:edit, library) %>
+        <div>
+          <%= link_to 'Edit', library, class: 'btn btn-outline-secondary btn-sm' %>
+          <%= link_to 'Edit hours', library_term_hours_path(library), class: 'btn btn-outline-secondary btn-sm' %>
+        </div>
+      <% end %>
     </div>
 
     <div class="col-xs-12 col-lg-9">
