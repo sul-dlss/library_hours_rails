@@ -186,7 +186,7 @@ GEM
     gretel (5.1.0)
       actionview (>= 6.1)
       railties (>= 6.1)
-    honeybadger (6.2.0)
+    honeybadger (6.2.1)
       logger
       ostruct
     http (5.3.1)
