@@ -61,10 +61,42 @@
       </div>
     </div>
   </div>
-
-  <% unless current_page? feedback_path %>
-    <div id="feedback-form" class="feedback-form-container collapse">
-      <%= render "shared/feedback_forms/form" %>
-    </div>
-  <% end %>
 </header>
+
+<% unless current_page? feedback_path %>
+  <dialog id="feedback-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title fw-normal">Send Feedback</h2>
+
+        <button
+          type="button"
+          class="btn-close"
+          onclick="this.closest('dialog').close();"
+          aria-label="Close"
+        ></button>
+      </div>
+
+      <div class="bg-dark-subtle py-1 px-4 border-top">
+        Reporting from
+        <span class="reporting-from-field"><%= request.original_url %></span>
+      </div>
+
+      <div class="modal-body"><%= render "shared/feedback_forms/form" %></div>
+
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-outline-primary me-2 close"
+          onclick="this.closest('dialog').close();"
+        >
+          Close
+        </button>
+
+        <button type="submit" form="feedback-form" class="btn btn-primary">
+          Send
+        </button>
+      </div>
+    </div>
+  </dialog>
+<% end %>
