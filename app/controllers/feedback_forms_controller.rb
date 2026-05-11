@@ -33,6 +33,7 @@ class FeedbackFormsController < ApplicationController
   def validate
     errors = []
     errors << 'You must pass the reCAPTCHA challenge' if !current_user? && !verify_recaptcha
+    # rubocop:disable Rails/StrongParametersExpect
     errors << 'A message is required' if params[:message].blank?
     if params[:email_address].present?
       errors << 'You have filled in a field that makes you appear as a spammer.  Please follow the directions for the individual form fields.'
@@ -40,10 +41,8 @@ class FeedbackFormsController < ApplicationController
     if params[:message]&.match?(url_regex)
       errors << 'Your message appears to be spam, and has not been sent. Please try sending your message again without any links in the comments.'
     end
-    if params[:user_agent] =~ url_regex ||
-       params[:viewport]   =~ url_regex
-      errors << 'Your message appears to be spam, and has not been sent.'
-    end
+    errors << 'Your message appears to be spam, and has not been sent.' if params[:user_agent] =~ url_regex || params[:viewport] =~ url_regex
+    # rubocop:enable Rails/StrongParametersExpect
     flash[:error] = errors.join('<br/>') unless errors.empty?
     flash[:error].nil?
   end

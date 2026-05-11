@@ -92,6 +92,6 @@ class LocationsController < ApplicationController
   end
 
   def find_location_by_legacy_slug
-    @location ||= @library.locations.friendly.find(params[:id])
+    @location ||= @library.locations.friendly.find(params[:id]) # rubocop:disable Rails/StrongParametersExpect
   end
 end

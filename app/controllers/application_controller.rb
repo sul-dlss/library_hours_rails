@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
     if params[:from].presence && params[:business_days].presence && instance_variable_defined?(:@location)
       @range ||= begin
         range_start = Time.zone.parse(params[:from])
-        range_end = @location.business_days(range_start, params[:business_days].to_i)
+        range_end = @location.business_days(range_start, params[:business_days].to_i) # rubocop:disable Rails/StrongParametersExpect
         range_start.to_date..range_end.date if range_end
       end
     end
