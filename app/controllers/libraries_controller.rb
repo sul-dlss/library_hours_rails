@@ -16,9 +16,7 @@ class LibrariesController < ApplicationController
 
       format.json
       format.csv do
-        # rubocop:disable Rails/StrongParametersExpect
         render plain: LegacySpreadsheetParser.generate(@libraries.select { |x| params[:ids].blank? || params[:ids].include?(x.id.to_s) }, @range)
-        # rubocop:enable Rails/StrongParametersExpect
       end
     end
   end
