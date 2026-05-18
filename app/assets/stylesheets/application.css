@@ -1,6 +1,6 @@
 @import url("variables.css");
 @import url("library_hours.css");
-@import url('global_alert.css');
+@import url("global_alert.css");
 
 .dropdown-menu {
   h4 {
@@ -39,4 +39,30 @@
 
 header {
   --bs-dark-rgb: 130, 0, 0;
+}
+
+dialog#feedback-modal {
+  --bs-modal-header-padding: 1rem;
+  --bs-modal-padding: 1rem;
+  z-index: 10;
+
+  border: none !important;
+  border-radius: 0.3125rem;
+  box-shadow:
+    0 0 #0000,
+    0 0 #0000,
+    0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  padding: 0;
+  max-width: 800px;
+
+  h2 {
+    font-size: 1.5rem;
+  }
+  .modal-footer {
+    padding: var(--bs-modal-padding);
+  }
+
+  &::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
 }
