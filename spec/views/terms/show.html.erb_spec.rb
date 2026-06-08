@@ -9,6 +9,6 @@ RSpec.describe 'terms/show', type: :view do
 
   it 'renders attributes in <p>' do
     render
-    expect(rendered).to match(/Name/)
+    expect(rendered).to include('Name')
   end
 end
