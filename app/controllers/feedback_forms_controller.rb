@@ -19,7 +19,7 @@ class FeedbackFormsController < ApplicationController
         render json: flash
       end
       format.html do
-        redirect_to params[:url]
+        redirect_to url_from(params[:url]) || feedback_path
       end
     end
   end
