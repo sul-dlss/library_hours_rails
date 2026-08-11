@@ -43,6 +43,27 @@ RSpec.describe FeedbackFormsController do
         message: 'Hello Kittenz'
       }
       expect(flash[:success]).to eq 'Thank you! Your feedback has been sent.'
+      expect(response).to redirect_to('http://test.host/')
+    end
+
+    it 'redirects to the feedback form when the return URL is missing' do
+      allow(controller).to receive(:verify_recaptcha).and_return(false)
+
+      post :create, params: {
+        message: 'Spam message',
+        email_address: 'spam!'
+      }
+
+      expect(response).to redirect_to(feedback_path)
+    end
+
+    it 'redirects to the feedback form when the return URL is external' do
+      post :create, params: {
+        url: 'https://example.com/',
+        message: 'Hello Kittenz'
+      }
+
+      expect(response).to redirect_to(feedback_path)
     end
   end
 
