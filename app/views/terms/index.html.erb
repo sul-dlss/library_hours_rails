@@ -14,4 +14,4 @@
   <%= render terms.sort_by(&:dtstart) %>
 <% end %>
 
-<%= link_to 'New Term', new_term_path if can? :create, Term %>
+<%= link_to 'New Term', new_term_path, class: 'su-underline' if can? :create, Term %>
