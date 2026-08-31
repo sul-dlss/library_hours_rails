@@ -20,7 +20,7 @@ RSpec.describe LocationsController, type: :controller do
     end
 
     it 'should deny access to #edit' do
-      expect { get :edit, params:  { id: location, library_id: location.library } }.to raise_error CanCan::AccessDenied
+      expect { get :edit, params: { id: location, library_id: location.library } }.to raise_error CanCan::AccessDenied
     end
 
     it 'should deny access to #update' do

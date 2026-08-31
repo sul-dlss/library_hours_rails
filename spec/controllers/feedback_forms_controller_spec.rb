@@ -13,11 +13,10 @@ RSpec.describe FeedbackFormsController do
     end
 
     context 'when they do not fill in the reCAPTCHA' do
-      # rubocop:disable RSpec/AnyInstance
+      # rubocop:disable-next RSpec/AnyInstance
       before do
         allow_any_instance_of(described_class).to receive(:verify_recaptcha).and_return(false)
       end
-      # rubocop:enable RSpec/AnyInstance
 
       it 'does not send an email' do
         expect do
