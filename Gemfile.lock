@@ -89,7 +89,7 @@ GEM
     benchmark (0.5.0)
     bigdecimal (4.1.2)
     bindex (0.8.1)
-    bootsnap (1.25.0)
+    bootsnap (1.26.0)
       msgpack (~> 1.5)
     builder (3.3.0)
     bundler-audit (0.9.3)
@@ -139,7 +139,7 @@ GEM
       capistrano-one_time_key (>= 0.2.0)
       capistrano-shared_configs
       ed25519
-    domain_name (0.6.20260829)
+    domain_name (0.6.20260902)
     dotenv (3.2.0)
     drb (2.2.3)
     dumb_delegator (1.1.0)
@@ -190,7 +190,7 @@ GEM
     jbuilder (2.15.1)
       actionview (>= 7.0.0)
       activesupport (>= 7.0.0)
-    json (2.21.2)
+    json (3.0.0)
     language_server-protocol (3.17.0.6)
     lint_roller (1.1.0)
     llhttp (0.6.2)
@@ -237,7 +237,7 @@ GEM
     okcomputer (1.19.2)
       benchmark
     ostruct (0.6.3)
-    parallel (2.1.0)
+    parallel (2.2.0)
     parser (3.3.12.0)
       ast (~> 2.4.1)
       racc
@@ -363,7 +363,7 @@ GEM
       regexp_parser (>= 2.0)
       rubocop (~> 1.86, >= 1.86.2)
     ruby-progressbar (1.13.0)
-    rubyzip (3.5.0)
+    rubyzip (3.6.0)
     securerandom (0.4.1)
     selenium-webdriver (4.48.0)
       base64 (~> 0.2)
@@ -371,7 +371,7 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 4.0)
       websocket (~> 1.0)
-    simplecov (1.1.1)
+    simplecov (1.2.0)
     sqlite3 (2.9.6)
       mini_portile2 (~> 2.8.0)
     sqlite3 (2.9.6-x86_64-linux-gnu)
@@ -462,4 +462,4 @@ DEPENDENCIES
   web-console (>= 4.1)
 
 BUNDLED WITH
-  4.0.19
+  4.0.20
