@@ -74,3 +74,7 @@ gem 'propshaft'
 gem 'stimulus-rails', '~> 1.2'
 gem 'turbo-rails', '~> 2.0'
 gem 'csv'
+
+# json 3 dropped the positional options hash from JSON.parse, which
+# ActiveSupport::JSON.decode still passes (fixed on rails main, unreleased).
+gem 'json', '< 3'

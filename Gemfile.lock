@@ -190,7 +190,7 @@ GEM
     jbuilder (2.15.1)
       actionview (>= 7.0.0)
       activesupport (>= 7.0.0)
-    json (3.0.0)
+    json (2.21.2)
     language_server-protocol (3.17.0.6)
     lint_roller (1.1.0)
     llhttp (0.6.2)
@@ -438,6 +438,7 @@ DEPENDENCIES
   honeybadger
   importmap-rails (~> 2.0)
   jbuilder (~> 2.7)
+  json (< 3)
   nokogiri (>= 1.7.1)
   okcomputer
   pg
