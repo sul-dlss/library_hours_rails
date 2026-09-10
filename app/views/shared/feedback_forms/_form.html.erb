@@ -1,51 +1,47 @@
-<div class="container">
-  <%= form_tag feedback_form_path, method: :post, class:"feedback-form" do %>
-  <div class="row mt-4">
-    <div class="offset-md-2 col-md-8 mb-2">
-      <%= render 'shared/feedback_forms/reporting_from' %>
-    </div>
-  </div>
+<%= form_tag feedback_form_path, method: :post, id: "feedback-form", class:"feedback-form" do %>
   <div class="row">
     <span class="d-none">
-      <%= label_tag(:email_address, 'Ignore this text box. It is used to detect spammers. If you enter anything into this text box, your message will not be sent.') %><br />
-      <%= email_field_tag :email_address %><br />
+      <%= label_tag(:email_address, 'Ignore this text box. It is used to detect spammers. If you enter anything into this text box, your message will not be sent.') %>
+      <br>
+      <%= email_field_tag :email_address %>
+      <br>
       <%= hidden_field_tag :user_agent %>
       <%= hidden_field_tag :viewport %>
+      <%= hidden_field_tag :url, request.original_url, class: 'reporting-from-field' %>
     </span>
-    <div class="offset-md-2 col-md-7">
-      <div class="mb-3 row">
-        <%= label_tag(:message, 'Message', class: 'col-md-3 col-form-label text-end') %>
-        <div class="col-md-9">
-          <%= text_area_tag :message, '', rows: '5', class: 'form-control', required: true %>
-        </div>
+
+    <div class="mb-3 row">
+      <%= label_tag(:name, 'Name', class: 'col-form-label required fw-bold') %>
+
+      <div>
+        <%= text_field_tag :name, '', class: 'form-control', required: true %>
       </div>
-      <div class="mb-3 row">
-        <%= label_tag(:name, 'Your name', class: 'col-md-3 col-form-label text-end') %>
-        <div class="col-md-9">
-          <%= text_field_tag :name, '', class: 'form-control', required: true %>
-        </div>
+    </div>
+
+    <div class="mb-3 row">
+      <%= label_tag(:to, 'Email', class: 'col-form-label required fw-bold') %>
+
+      <div>
+        <%= email_field_tag :to, '', class: 'form-control', required: true %>
       </div>
-      <div class="mb-3 row">
-        <%= label_tag(:to, 'Your email', class: 'col-md-3 col-form-label text-end') %>
-        <div class="col-md-9">
-          <%= email_field_tag :to, '', class: 'form-control', required: true %>
-        </div>
+    </div>
+
+    <div class="mb-3 row">
+      <%= label_tag(:message, 'Message', class: 'col-form-label required fw-bold') %>
+
+      <div>
+        <%= text_area_tag :message, '', rows: '5', class: 'form-control', required: true %>
       </div>
-      <% unless current_user? %>
+    </div>
+
+    <% unless current_user? %>
       <div class="mb-3 row library-hours-captcha">
         <div class="col-md-9 offset-md-3">
           <%= recaptcha_tags %>
+
           <p>(Stanford users can avoid this Captcha by logging in.)</p>
         </div>
       </div>
-      <% end %>
-      <div class="mb-3 row">
-        <div class="col-md-9 offset-md-3">
-          <button type="submit" class="btn btn-primary">Send</button>
-          <%= link_to 'Cancel', :back, class: 'cancel-link', data: { bs_toggle: 'collapse', bs_target: '#feedback-form'} %>
-        </div>
-      </div>
-    </div>
+    <% end %>
   </div>
-  <% end %>
-</div>
+<% end %>
