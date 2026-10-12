@@ -4,7 +4,7 @@
 <% @libraries.each do |library| %>
   <div class="row library-row" itemscope itemtype="http://schema.org/Place">
     <div class="col-xs-12 col-lg-3">
-      <h2 class="h3" itemprop="name"><%= link_to_if library.about_url, library.name, library.about_url %></h2>
+      <h2 itemprop="name"><%= link_to_if library.about_url, library.name, library.about_url %></h2>
       <% if can?(:edit, library) %>
         <div>
           <%= link_to 'Edit', library, class: 'btn btn-outline-secondary btn-sm' %>
