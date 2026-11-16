@@ -167,7 +167,7 @@ GEM
     gretel (5.1.0)
       actionview (>= 6.1)
       railties (>= 6.1)
-    honeybadger (6.10.1)
+    honeybadger (6.10.2)
       logger
       ostruct
     http (6.0.4)
@@ -222,7 +222,7 @@ GEM
       net-protocol
     net-protocol (0.4.0)
       timeout
-    net-scp (4.2.1)
+    net-scp (4.2.2)
       net-ssh (>= 2.6.5, < 9.0.0)
     net-sftp (4.1.1)
       net-ssh (>= 5.0.0, < 9.0.0)
@@ -257,7 +257,7 @@ GEM
       activesupport (>= 7.0.0)
       rack
     public_suffix (7.0.5)
-    puma (8.0.2)
+    puma (8.1.1)
       nio4r (~> 2.0)
     racc (1.8.1)
     rack (3.2.8)
@@ -466,4 +466,4 @@ DEPENDENCIES
   web-console (>= 4.1)
 
 BUNDLED WITH
-  4.0.24
+  4.1.0
