@@ -55,6 +55,23 @@ RSpec.describe LibrariesController, type: :controller do
   let(:valid_session) { {} }
 
   describe 'GET #index' do
+    it 'redirects a valid date param to the corresponding week' do
+      get :index, params: { date: '2026-11-15' }
+      expect(response).to redirect_to(root_path(week: '2026W47'))
+    end
+
+    it 'rejects an out-of-range date param as a bad request' do
+      expect { get :index, params: { date: '1250dd2' } }.to raise_error ActionController::BadRequest
+    end
+
+    it 'rejects an unparseable date param as a bad request' do
+      expect { get :index, params: { date: 'garbage' } }.to raise_error ActionController::BadRequest
+    end
+
+    it 'rejects an invalid from param as a bad request' do
+      expect { get :index, params: { from: '1250dd2', to: '2026-11-15' } }.to raise_error ActionController::BadRequest
+    end
+
     it 'assigns all libraries as @libraries' do
       library = Library.create! valid_attributes
       library.locations << create(:location, keeps_hours: true)
