@@ -9,18 +9,18 @@ RSpec.describe 'Feedback form', :js, type: :feature do
     end
 
     it 'is initially collapsed' do
-      expect(page).not_to have_css '#feedback-form.show'
+      expect(page).not_to have_css '#feedback-form'
     end
 
     it 'can be expanded' do
       click_link 'Feedback', match: :first
-      expect(page).to have_css '#feedback-form.show'
+      expect(page).to have_css '#feedback-form'
     end
 
     it 'can be collapsed' do
       click_link 'Feedback'
-      click_link 'Cancel'
-      expect(page).not_to have_css '#feedback-form.show'
+      click_button 'Close'
+      expect(page).not_to have_css '#feedback-form'
     end
 
     it 'shows the reCAPTCHA challenge' do
@@ -46,8 +46,9 @@ RSpec.describe 'Feedback form', :js, type: :feature do
         fill_in('message', with: 'This is only a test')
         fill_in('name', with: 'Ronald McDonald')
         fill_in('to', with: 'test@kittenz.eu')
-        click_button 'Send'
       end
+      click_button 'Send'
+
       expect(page).to have_css('.alert-success', visible: :all)
     end
   end
